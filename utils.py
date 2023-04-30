@@ -23,7 +23,7 @@ def preprocess_observation(obs):
     return torch.from_numpy(obs).permute(2, 0, 1)/255.0
 
 
-def validate(model, render=False, nepisodes=1):
+def validate(model, render=False, nepisodes=5):
     assert hasattr(model, "get_action")
     torch.manual_seed(590060)
     np.random.seed(590060)
@@ -60,7 +60,9 @@ def validate(model, render=False, nepisodes=1):
                 env_output[0]).unsqueeze(0).unsqueeze(0)
             step += 1
         steps_alive.append(step)
-
+    logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
     logging.info("Steps taken over each of {:d} episodes: {}".format(
         nepisodes, ", ".join(str(step) for step in steps_alive)))
     logging.info("Total return after {:d} episodes: {:.3f}".format(nepisodes, total_reward))
+    logging.info(f"Mean return for each episode: {total_reward/nepisodes:.3f}")
+    logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
