@@ -1,7 +1,8 @@
 import logging
-import torch
-import numpy as np
+
 import gymnasium as gym
+import numpy as np
+import torch
 
 logging.basicConfig(format=(
         "[%(levelname)s:%(asctime)s] " "%(message)s"), level=logging.INFO)
@@ -23,34 +24,33 @@ def preprocess_observation(obs):
     return torch.from_numpy(obs).permute(2, 0, 1)/255.0
 
 
-def validate(model, render=False, nepisodes=5):
+def validate(model, render:bool=False, nepisodes=5):
     assert hasattr(model, "get_action")
     torch.manual_seed(590060)
     np.random.seed(590060)
-    model.eval()
-
+    
+    model.eval()        # turn into eval mode
     render = render and can_render
 
     if render:
         nepisodes = 1
         fig, ax = plt.subplots(1, 1)
 
-    total_reward = 0
-    steps_alive = []
+    steps_alive, reward_arr = [], []        # to store each episode's reward and steps taken
     for i in range(nepisodes):
         env = gym.make("ALE/MsPacman-v5")
-        obs = env.reset(seed=590060+i)[0]
+        obs = env.reset(seed=590060+i)[0]       # use a different seed for each separate episode
         if render:
             im = ax.imshow(obs)
         observation = preprocess_observation( # 1 x 1 x ic x iH x iW
             obs).unsqueeze(0).unsqueeze(0)
         prev_state = None
-        step = 0
+        step, ep_total_reward = 0, 0
         # play until the agent dies or we exceed 50000 observations
         while env.ale.lives() == 3 and step < 50000:
             action, prev_state = model.get_action(observation, prev_state)
             env_output = env.step(action)
-            total_reward += env_output[1]
+            ep_total_reward += env_output[1]
             if render:
                 img = env_output[0]
                 im.set_data(img)
@@ -60,9 +60,11 @@ def validate(model, render=False, nepisodes=5):
                 env_output[0]).unsqueeze(0).unsqueeze(0)
             step += 1
         steps_alive.append(step)
+        reward_arr.append(ep_total_reward)
+        
     logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
     logging.info("Steps taken over each of {:d} episodes: {}".format(
         nepisodes, ", ".join(str(step) for step in steps_alive)))
-    logging.info("Total return after {:d} episodes: {:.3f}".format(nepisodes, total_reward))
-    logging.info(f"Mean return for each episode: {total_reward/nepisodes:.3f}")
+    logging.info("Total return after {:d} episodes: {:.3f}".format(nepisodes, np.sum(reward_arr)))
+    logging.info(f"Mean return for each episode: {np.mean(reward_arr):.3f}, (std: {np.std(reward_arr):.3f})")
     logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
