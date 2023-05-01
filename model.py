@@ -6,8 +6,8 @@ from torch.nn import functional as F
 class PolicyNetwork(nn.Module):
     def __init__(self, naction, args):
         super().__init__()
-        self.iH, self.iW, self.iC = 210, 160, 3
-        self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)
+        self.iH, self.iW, self.iC = 210, 160, 3            # input dimensions (height, width, channels)
+        self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)        
         self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=3)
         self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1)
         # the flattened size is 8960 assuming dims and convs above
@@ -30,7 +30,9 @@ class PolicyNetwork(nn.Module):
         Z = F.gelu(self.fc1(Z.view(bsz*T, -1))) # bsz*T x hidden_dim
         Z = Z.view(bsz, T, -1)
         
-        return self.fc2(Z), prev_state
+        log_probs = F.log_softmax(self.fc2(Z), dim=-1)
+        
+        return log_probs, prev_state
     
     def get_action(self, x, prev_state):
         """
@@ -42,3 +44,31 @@ class PolicyNetwork(nn.Module):
         # take highest scoring action
         action = logits.argmax(-1).squeeze().item()
         return action, prev_state
+
+
+class ValueNetwork(nn.Module):
+    '''Value network to act as the critic in actor-critic algorithms'''
+    def __init__(self) -> None:
+        super().__init__()
+        self.iH, self.iW, self.iC = 210, 160, 3             # input dimensions (height, width, channels)
+        self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)        
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=3)
+        self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1)
+        self.fc1 = nn.Linear(8960, 256)
+        self.fc2 = nn.Linear(256, 1)            # output is a single value (value of state)
+    
+    def forward(self, X):
+        bsz, T = X.size()[:2]
+
+        Z = F.gelu(self.conv3( # bsz*T x hidden_dim x H3 x W3
+              F.gelu(self.conv2(
+                F.gelu(self.conv1(X.view(-1, self.iC, self.iH, self.iW)))))))
+
+        Z = F.gelu(self.fc1(Z.view(bsz*T, -1))) # bsz*T x hidden_dim
+        Z = Z.view(bsz, T, -1)
+        
+        return self.fc2(Z)
+    
+    
+    
+        
