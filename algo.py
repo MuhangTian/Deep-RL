@@ -10,7 +10,13 @@ import torch.nn.functional as F
 from torch.distributions import Categorical
 
 import utils
-from model import ValueNetwork
+from model import CriticNetworkSimple, ActorNetworkSimple
+
+try:        # use wandb to log stuff if we have it, else don't
+    import wandb
+    project_name = "RL-implementation"
+except:
+    wandb = False
 
 
 class AbstractAlgorithm(abc.ABC):
@@ -187,12 +193,18 @@ class VanillaPolicyGradient(AbstractAlgorithm):
 
 
 class ActorCritic(AbstractAlgorithm):
-    """Implementation for Actor-Critic algorithm"""
+    """
+    Implementation for Actor-Critic algorithm
+    
+    Reference
+    ---------
+        https://arxiv.org/pdf/1602.01783.pdf (see Algorithm S3 in Appendix)
+    """
     def __init__(self, args, model) -> None:
         super().__init__(args, model)
-        self.ValueNet = ValueNetwork()            # this is critic network, self.model is the actor network
-        self.value_optimizer = torch.optim.Adam(self.ValueNet.parameters(), lr=0.0001)
-        self.old_values = None
+        self.CriticNet = CriticNetworkSimple()            # this is critic network, self.model is the actor network
+        self.critic_optimizer = torch.optim.Adam(self.CriticNet.parameters(), lr=0.0001)
+        self.wandb = True
         
     def algo_step(self, stepidx, model, optimizer, scheduler, envs, observations, prev_state, bsz):
         args = self.args
@@ -202,64 +214,60 @@ class ActorCritic(AbstractAlgorithm):
             observations = torch.stack( # bsz x ic x iH x iW -> bsz x 1 x ic x iH x iW
                 [utils.preprocess_observation(obs) for obs in observations]).unsqueeze(1)
             prev_state = None
-
-        if stepidx == 0:        # initialize old values for the very first step
-            self.old_values = torch.full((bsz, args.unroll_length), 0)  # bsz x T
         
-        logits, rewards, actions, cur_values = [], [], [], []
+        log_probs, rewards, actions, cur_values = [], [], [], []
         not_terminated = torch.ones(bsz) # agent is still alive
         for t in range(args.unroll_length):     # collect samples for unroll_length steps
-            logits_t, prev_state = model(observations, prev_state) # logits are bsz x 1 x naction
-            values_t = self.ValueNet(observations) # values are bsz x 1
-            cur_values.append(values_t)
-            logits.append(logits_t)
+            # get forward values from neural networks
+            prob_t, prev_state = model(observations, prev_state) # get from actor network, prob_t is bsz x 1 x naction
+            values_t = self.CriticNet(observations) # values are bsz x 1 x 1
+            cur_values.append(values_t.squeeze())
+            
             # sample actions
-            actions_t = Categorical(logits=logits_t.squeeze(1)).sample()
+            actions_t = Categorical(probs=prob_t.squeeze(1)).sample()
+            log_prob = torch.log(prob_t)        # turn into log probability
+            selected_log_probs = log_prob.squeeze(1).gather(-1, actions_t.unsqueeze(1))     # get log probability of selected actions
             actions.append(actions_t.view(-1, 1)) # bsz x 1
+            log_probs.append(selected_log_probs)
+            
             # get outputs for each env, which are (observation, reward, terminated, truncated, info) tuples
             env_outputs = [env.step(actions_t[b].item()) for b, env in enumerate(envs)]
             rewards_t = torch.tensor([eo[1] for eo in env_outputs])
+            
             # if we lose a life, zero out all subsequent rewards
             still_alive = torch.tensor([env.ale.lives() == args.start_nlives for env in envs])
             not_terminated.mul_(still_alive.float())
             rewards.append(rewards_t*not_terminated)
             observations = torch.stack([utils.preprocess_observation(eo[0]) for eo in env_outputs]).unsqueeze(1)
 
-        # implement fitting value network with MSE
-        cur_values = torch.cat(cur_values, dim=1).squeeze()  # bsz x T
-        rewards = torch.stack(rewards).t()  # bsz x T
-        next_values = torch.cat([self.old_values[:, 1:], torch.zeros(bsz, 1)], dim=1)
-        td_targets = rewards + args.discounting * next_values
-        value_loss = F.mse_loss(cur_values, td_targets)
-        self.value_optimizer.zero_grad()
-        value_loss.backward()
-        nn.utils.clip_grad_norm_(self.ValueNet.parameters(), args.grad_norm_clipping)
-        self.value_optimizer.step()
-        self.old_values = cur_values.detach().clone()         # update old values
-
-        # compute advantages (using critic network)
-        next_values = torch.cat([cur_values[:, 1:], torch.zeros(bsz, 1)], dim=1)
-        td_targets = rewards + args.discounting * next_values
-        advantages = td_targets - cur_values
-        adv = advantages.detach()
-        
-        # calculate loss and do back propagation for policy network
-        logits = torch.cat(logits, dim=1) # bsz x T x naction
-        # TODO: check advantage function implementation, it should have same shape as logit (log probabilities returned by policy network)
-        # use the advantages to weight the loss
-        pg_loss = (logits * adv).mean()
-        total_loss = pg_loss
-
-        stats = {
-            "mean_return": sum(r.mean() for r in rewards)/len(rewards),
-            "pg_loss": pg_loss.item(),
-            "value_loss": value_loss.item(),
-        }
+        curr_return = cur_values[-1]    # bsz x 1 x 1, using the last value
+        policy_total_loss, value_total_loss = 0, 0
+        for t in range(args.unroll_length-2, -1, -1):
+            curr_return = rewards[t] + args.discounting * curr_return   # bsz x 1
+            log_prob, value = log_probs[t], cur_values[t]
+            policy_loss = -(log_prob * (curr_return.detach() - value.detach())).mean()       # perform gradient ascent
+            value_loss = F.mse_loss(curr_return, value)     # perform gradient descent
+            
+            # accumulate loss
+            policy_total_loss += policy_loss
+            value_total_loss += value_loss
+            
+        # update networks
+        self.critic_optimizer.zero_grad()
         optimizer.zero_grad()
-        total_loss.backward()
+        value_total_loss.backward()
+        policy_total_loss.backward()
+        nn.utils.clip_grad_norm_(self.CriticNet.parameters(), args.grad_norm_clipping)
+        self.critic_optimizer.step()
         nn.utils.clip_grad_norm_(model.parameters(), args.grad_norm_clipping)
         optimizer.step()
         scheduler.step()
+
+        stats = {
+            "mean_return": sum(r.mean() for r in rewards)/len(rewards),
+            "pg_loss": policy_total_loss,
+            "value_loss": value_total_loss,
+        }
 
         # reset any environments that have ended
         for b in range(bsz):
@@ -270,6 +278,8 @@ class ActorCritic(AbstractAlgorithm):
         return stats, envs, observations, prev_state
     
     def train(self):
+        if wandb:
+            wandb.init(project=project_name)
         args = self.args
         T = args.unroll_length
         B = args.batch_size
@@ -298,12 +308,11 @@ class ActorCritic(AbstractAlgorithm):
                         "scheduler_state_dict": scheduler.state_dict(),
                         "args": args}, args.save_path)
 
-
         timer = timeit.default_timer
         train_start_time = timer()
         last_checkpoint_time = timer()
         envs, observations, prev_state = None, None, None
-        frame = 0
+        frame, update = 0, 0
         while frame < args.total_frames:
             start_time = timer()
             start_frame = frame
@@ -311,14 +320,18 @@ class ActorCritic(AbstractAlgorithm):
                 frame, model, optimizer, scheduler, envs, observations, prev_state, bsz=B
             )
             frame += T*B # here steps means number of observations
+            update += 1
             
             if timer() - last_checkpoint_time > args.min_to_save * 60:      # checkpoint to store model
                 checkpoint()
                 last_checkpoint_time = timer()
 
             sps = (frame - start_frame) / (timer() - start_time)            # calculate frame per second
-            logging.info("Frame {:d} @ {:.1f} FPS: pg_loss {:.3f} | value_loss {:.3f} | mean_return {:.3f}".format(
-            frame, sps, stats['pg_loss'], stats['value_loss'], stats["mean_return"]))
+            if wandb:
+                wandb.log({"pg_loss": stats['pg_loss'], "value_loss": stats['value_loss'], "mean_return": stats["mean_return"], 'Updates': update})
+                
+            logging.info("Frame {:d} @ {:.1f} FPS | Updates {}: pg_loss {:.3f} | value_loss {:.3f} | mean_return {:.3f}".format(
+            frame, sps, update, stats['pg_loss'], stats['value_loss'], stats["mean_return"]))
             
             if frame > 0 and frame % (args.eval_every*T*B) == 0:        # perform validation step after some number of steps
                 utils.validate(model, args.render, nepisodes=5)

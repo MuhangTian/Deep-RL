@@ -23,7 +23,6 @@ def preprocess_observation(obs):
     """
     return torch.from_numpy(obs).permute(2, 0, 1)/255.0
 
-
 def validate(model, render:bool=False, nepisodes=5):
     assert hasattr(model, "get_action")
     torch.manual_seed(590060)
