@@ -10,10 +10,11 @@ import torch.nn.functional as F
 from torch.distributions import Categorical
 
 import utils
-from model import CriticNetworkSimple, ActorNetworkSimple
+from model import CriticNetworkCNN, CriticNetworkLSTM
 
 try:        # use wandb to log stuff if we have it, else don't
     import wandb
+    # wandb = False
     project_name = "RL-implementation"
 except:
     wandb = False
@@ -67,7 +68,6 @@ class AbstractAlgorithm(abc.ABC):
         Define training steps for the learning algorithm
         """
         pass
-
 
 class VanillaPolicyGradient(AbstractAlgorithm):
     """
@@ -202,25 +202,33 @@ class ActorCritic(AbstractAlgorithm):
     """
     def __init__(self, args, model) -> None:
         super().__init__(args, model)
-        self.CriticNet = CriticNetworkSimple()            # this is critic network, self.model is the actor network
+        self.CriticNet = CriticNetworkLSTM()            # this is critic network, self.model is the actor network
         self.critic_optimizer = torch.optim.Adam(self.CriticNet.parameters(), lr=0.0001)
-        self.wandb = True
+        self.previous_frame = True
         
-    def algo_step(self, stepidx, model, optimizer, scheduler, envs, observations, prev_state, bsz):
+    def algo_step(self, stepidx, model, optimizer, scheduler, envs, observations, prev_state, prev_state_value, bsz):
         args = self.args
         if envs is None:
             envs = [gym.make(args.env) for _ in range(bsz)]
             observations = [env.reset(seed=i)[0] for i, env in enumerate(envs)]
+            # NOTE: preprocess_shape() can be switched to other preprocess functions
             observations = torch.stack( # bsz x ic x iH x iW -> bsz x 1 x ic x iH x iW
                 [utils.preprocess_observation(obs) for obs in observations]).unsqueeze(1)
-            prev_state = None
+            prev_state, prev_state_value = None, None
         
         log_probs, rewards, actions, cur_values = [], [], [], []
         not_terminated = torch.ones(bsz) # agent is still alive
+        
+        if self.previous_frame:     # reset hidden state to zero at start of each episode (unroll_length of steps)
+            prev_state, prev_state_value = None, None
+        
         for t in range(args.unroll_length):     # collect samples for unroll_length steps
             # get forward values from neural networks
-            prob_t, prev_state = model(observations, prev_state) # get from actor network, prob_t is bsz x 1 x naction
-            values_t = self.CriticNet(observations) # values are bsz x 1 x 1
+            prob_t, prev_state = model(observations, prev_state)    # prob_t is bsz x 1 x naction
+            if self.previous_frame:
+                values_t, prev_state_value = self.CriticNet(observations, prev_state_value)
+            else:
+                values_t = self.CriticNet(observations) # values are bsz x 1 x 1
             cur_values.append(values_t.squeeze())
             
             # sample actions
@@ -245,8 +253,9 @@ class ActorCritic(AbstractAlgorithm):
         for t in range(args.unroll_length-2, -1, -1):
             curr_return = rewards[t] + args.discounting * curr_return   # bsz x 1
             log_prob, value = log_probs[t], cur_values[t]
-            policy_loss = -(log_prob * (curr_return.detach() - value.detach())).mean()       # perform gradient ascent
-            value_loss = F.mse_loss(curr_return, value)     # perform gradient descent
+            value_loss = F.mse_loss(curr_return, value)
+            advantage = curr_return - value    # bsz x 1
+            policy_loss = (log_prob * advantage.detach()).mean()       
             
             # accumulate loss
             policy_total_loss += policy_loss
@@ -255,7 +264,8 @@ class ActorCritic(AbstractAlgorithm):
         # update networks
         self.critic_optimizer.zero_grad()
         optimizer.zero_grad()
-        value_total_loss.backward()
+        value_total_loss.backward()         # perform gradient descent
+        policy_total_loss = -1*policy_total_loss    # perform gradient ascent
         policy_total_loss.backward()
         nn.utils.clip_grad_norm_(self.CriticNet.parameters(), args.grad_norm_clipping)
         self.critic_optimizer.step()
@@ -275,7 +285,7 @@ class ActorCritic(AbstractAlgorithm):
                 obs = envs[b].reset(seed=stepidx+b)[0]
                 observations[b].copy_(utils.preprocess_observation(obs))
 
-        return stats, envs, observations, prev_state
+        return stats, envs, observations, prev_state, prev_state_value
     
     def train(self):
         if wandb:
@@ -311,13 +321,13 @@ class ActorCritic(AbstractAlgorithm):
         timer = timeit.default_timer
         train_start_time = timer()
         last_checkpoint_time = timer()
-        envs, observations, prev_state = None, None, None
+        envs, observations, prev_state, prev_state_value = None, None, None, None
         frame, update = 0, 0
         while frame < args.total_frames:
             start_time = timer()
             start_frame = frame
-            stats, envs, observations, prev_state = self.algo_step(
-                frame, model, optimizer, scheduler, envs, observations, prev_state, bsz=B
+            stats, envs, observations, prev_state, prev_state_value = self.algo_step(
+                frame, model, optimizer, scheduler, envs, observations, prev_state, prev_state_value, bsz=B
             )
             frame += T*B # here steps means number of observations
             update += 1
@@ -334,7 +344,7 @@ class ActorCritic(AbstractAlgorithm):
             frame, sps, update, stats['pg_loss'], stats['value_loss'], stats["mean_return"]))
             
             if frame > 0 and frame % (args.eval_every*T*B) == 0:        # perform validation step after some number of steps
-                utils.validate(model, args.render, nepisodes=5)
+                utils.validate(model, args.render, nepisodes=5, wandb=wandb)
                 model.train()
         
         print(f"\n{'='*30} TRAINING FINISHED {'='*30}")
@@ -344,6 +354,7 @@ class ActorCritic(AbstractAlgorithm):
 class DQN(AbstractAlgorithm):
     def __init__(self, args, model) -> None:
         super().__init__(args, model)
+        self.replay_buffer = ReplayBuffer()
     
     def algo_step(self, stepidx: int, model: nn.Module, optimizer, scheduler, envs: list, observations: list, prev_state, bsz: int):
         pass
