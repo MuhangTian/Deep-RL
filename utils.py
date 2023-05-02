@@ -3,6 +3,7 @@ import logging
 import gymnasium as gym
 import numpy as np
 import torch
+import torchvision.transforms as T
 
 logging.basicConfig(format=(
         "[%(levelname)s:%(asctime)s] " "%(message)s"), level=logging.INFO)
@@ -15,15 +16,32 @@ except:
     can_render = False
 
 
-def preprocess_observation(obs):
+def preprocess_observation(obs, mode='simple', new_size=(84, 84)):
     """
     obs - a 210 x 160 x 3 ndarray representing an atari frame
     returns:
       a 3 x 210 x 160 normalized pytorch tensor
     """
-    return torch.from_numpy(obs).permute(2, 0, 1)/255.0
+    if mode == 'simple':
+        return torch.from_numpy(obs).permute(2, 0, 1)/255.0
+    elif mode == 'resize':
+        image_tensor = torch.tensor(obs).float()
+        image_tensor = image_tensor.permute(2, 0, 1)
 
-def validate(model, render:bool=False, nepisodes=5):
+        # Resize image using torch.nn.functional.interpolate
+        image_tensor = image_tensor.unsqueeze(0) # Add a batch dimension
+        transform = T.Compose([
+            T.Resize(new_size, interpolation=T.InterpolationMode.BILINEAR, antialias=True)
+        ])
+        resized_image_tensor = transform(image_tensor)
+        resized_image_tensor = resized_image_tensor.squeeze(0) # Remove the batch dimension
+
+        resized_image_tensor /= 255.0   # Normalize the pixel values to [0, 1] range
+
+        return resized_image_tensor
+        
+
+def validate(model, render:bool=False, nepisodes=5, wandb=False):
     assert hasattr(model, "get_action")
     torch.manual_seed(590060)
     np.random.seed(590060)
@@ -41,6 +59,7 @@ def validate(model, render:bool=False, nepisodes=5):
         obs = env.reset(seed=590060+i)[0]       # use a different seed for each separate episode
         if render:
             im = ax.imshow(obs)
+        # NOTE: this can be changed into preprocess_observation() which keeps the original dimensionality
         observation = preprocess_observation( # 1 x 1 x ic x iH x iW
             obs).unsqueeze(0).unsqueeze(0)
         prev_state = None
@@ -60,7 +79,11 @@ def validate(model, render:bool=False, nepisodes=5):
             step += 1
         steps_alive.append(step)
         reward_arr.append(ep_total_reward)
-        
+    
+    if wandb:           # log into wandb if using it
+        wandb.log({"validation/mean_return": np.mean(reward_arr),
+                   'validation/std_return': np.std(reward_arr)})
+    
     logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
     logging.info("Steps taken over each of {:d} episodes: {}".format(
         nepisodes, ", ".join(str(step) for step in steps_alive)))
