@@ -202,9 +202,9 @@ class ActorCritic(AbstractAlgorithm):
     """
     def __init__(self, args, model) -> None:
         super().__init__(args, model)
-        self.CriticNet = CriticNetworkLSTM()            # this is critic network, self.model is the actor network
+        self.CriticNet = CriticNetworkCNN()            # this is critic network, self.model is the actor network
         self.critic_optimizer = torch.optim.Adam(self.CriticNet.parameters(), lr=0.0001)
-        self.previous_frame = True
+        self.previous_frame = False
         
     def algo_step(self, stepidx, model, optimizer, scheduler, envs, observations, prev_state, prev_state_value, bsz):
         args = self.args
@@ -355,8 +355,15 @@ class DQN(AbstractAlgorithm):
     def __init__(self, args, model) -> None:
         super().__init__(args, model)
         self.replay_buffer = ReplayBuffer()
+        self.epsilon_start = 1
+        self.Q_network = model
+        self.optimizer = torch.optim.Adam(self.Q_network.parameters(), lr=args.learning_rate)
+        self.frame_skipping_interval = 4
     
-    def algo_step(self, stepidx: int, model: nn.Module, optimizer, scheduler, envs: list, observations: list, prev_state, bsz: int):
+    def preprocess(self):
+        pass
+    
+    def algo_step(self, stepidx: int, optimizer, scheduler, envs: list, observations: list, prev_state, bsz: int):
         pass
     
     def train(self):
