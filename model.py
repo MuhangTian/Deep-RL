@@ -180,17 +180,17 @@ class QNetwork(nn.Module):
         self.fc2 = nn.Linear(512, naction)
 
     def forward(self, X):
-        bsz = X.size(0)
+        bsz, T, S = X.size()[:3]
         X = X.view(-1, self.iC, self.iH, self.iW)
         X = F.relu(self.conv1(X))
         X = F.relu(self.conv2(X))
         X = F.relu(self.conv3(X))
 
-        X = X.view(bsz*4, -1)
+        X = X.view(bsz*S, -1)
         X = F.relu(self.fc1(X))
         X = self.fc2(X)
         
-        X = X.view(bsz, 4, -1)
+        X = X.view(bsz, S, -1)
         X = torch.mean(X, dim=1)
 
         return X

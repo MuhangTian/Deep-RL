@@ -393,7 +393,7 @@ class DeepQLearning(AbstractAlgorithm):
             return torch.randint(low=0, high=9, size=(1,)).item()
         else:
             with torch.no_grad():       # with 1-epsilon, taken greedy action
-                return self.Q_network(state).argmax(1).item()
+                return self.Q_network(state.unsqueeze(0)).argmax(1).item()
     
     def update_most_recent_observation(self, frame: torch.Tensor):
         '''store frames that are most recently observed'''
@@ -499,15 +499,16 @@ class DeepQLearning(AbstractAlgorithm):
                 if timer() - last_checkpoint_time > self.args.min_to_save * 60:      # checkpoint to store model
                     self.checkpoint()
                     last_checkpoint_time = timer()
+                
+                if network_updates > 0 and network_updates % self.args.eval_every == 0:        # perform validation step after some number of steps
+                    utils.validate(self.Q_network, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
+                    self.Q_network.train()
             
             logging.info(f"Episode: {episode+1} | Timesteps Played: {timestep} | Mean Loss: {loss_total/timestep:.3f} | Mean Reward: {reward_total/timestep:.3f} | Target Updates: {target_updates}")
             if wandb:
                 if not not_filled:
                     wandb.log({"Episode": episode+1, "Timesteps Played": timestep, "Mean Loss": loss_total/timestep, "Mean Reward": reward_total/timestep, "Target Updates": target_updates, "Epsilon": self.epsilon, "Network Updates": network_updates})
-            
-            if network_updates > 0 and network_updates % self.args.eval_every == 0:        # perform validation step after some number of steps
-                utils.validate(self.Q_network, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
-                self.Q_network.train()
+
                 
 
 class PPO(AbstractAlgorithm):

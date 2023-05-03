@@ -46,7 +46,7 @@ def preprocess_observation(obs, mode='simple', new_size=(84, 84)):
         resized_image_tensor = resized_image_tensor.squeeze() # Remove the extra dimension
         resized_image_tensor /= 255.0   # Normalize the pixel values to [0, 1] range
 
-        return resized_image_tensor
+        return resized_image_tensor.unsqueeze(0)
         
 
 def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
