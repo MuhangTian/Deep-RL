@@ -1,14 +1,14 @@
 import argparse
 import logging
+import os
 
 import gymnasium as gym
 import numpy as np
 import torch
-import os
 
 import utils
-from algo import VanillaPolicyGradient, ActorCritic, DeepQLearning
-from model import PolicyNetwork, ActorNetworkCNN, ActorNetworkLSTM, QNetwork
+from algo import ActorCritic, DeepQLearning, VanillaPolicyGradient
+from model import ActorNetworkCNN, ActorNetworkLSTM, PolicyNetwork, QNetwork
 
 num_threads = os.cpu_count()
 ALGO = {

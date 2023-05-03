@@ -1,11 +1,11 @@
 import logging
+import random
+from collections import deque, namedtuple
 
 import gymnasium as gym
 import numpy as np
 import torch
 import torchvision.transforms as T
-import random
-from collections import deque, namedtuple
 
 logging.basicConfig(format=(
         "[%(levelname)s:%(asctime)s] " "%(message)s"), level=logging.INFO)
