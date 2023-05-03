@@ -4,12 +4,13 @@ import logging
 import gymnasium as gym
 import numpy as np
 import torch
+import os
 
 import utils
 from algo import VanillaPolicyGradient, ActorCritic, DeepQLearning
 from model import PolicyNetwork, ActorNetworkCNN, ActorNetworkLSTM, QNetwork
 
-num_threads = torch.get_num_threads()
+num_threads = os.cpu_count()
 ALGO = {
     'vpg': VanillaPolicyGradient,
     'a2c': ActorCritic,
@@ -43,7 +44,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_path", type=str, default='trained/dql.pt', help="save model here")
     parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
-    parser.add_argument("--eval_every", default=2000, type=int, help="eval every this many updates")
+    parser.add_argument("--eval_every", default=50, type=int, help="eval every this many updates")
     parser.add_argument("--render", action="store_true", default=False, help="render game-play at validation time")
     # ---------------------------------- DQN specific ----------------------------------
     parser.add_argument("--episodes", type=int, default=10000, help="episodes to train for")

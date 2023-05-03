@@ -500,9 +500,9 @@ class DeepQLearning(AbstractAlgorithm):
                     self.checkpoint()
                     last_checkpoint_time = timer()
                 
-                if network_updates > 0 and network_updates % self.args.eval_every == 0:        # perform validation step after some number of steps
-                    utils.validate(self.Q_network, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
-                    self.Q_network.train()
+            if not not_filled and episode > 0 and episode % self.args.eval_every == 0:        # perform validation step after some number of episodes
+                utils.validate(self.Q_network, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
+                self.Q_network.train()
             
             logging.info(f"Episode: {episode+1} | Timesteps Played: {timestep} | Mean Loss: {loss_total/timestep:.3f} | Mean Reward: {reward_total/timestep:.3f} | Target Updates: {target_updates}")
             if wandb:
