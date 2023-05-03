@@ -41,7 +41,7 @@ if __name__ == "__main__":
     parser.add_argument("--learning_rate", default=0.00025, type=float, help="Learning rate")
     parser.add_argument("--grad_norm_clipping", default=10.0, type=float, help="Global gradient norm clip.")
     parser.add_argument("--save_path", type=str, default='trained/dql.pt', help="save model here")
-    parser.add_argument("--load_path", type=str, default='trained/a2c.pt', help="load model from here")
+    parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
     parser.add_argument("--eval_every", default=50, type=int, help="eval every this many updates")
     parser.add_argument("--render", action="store_true", default=False, help="render game-play at validation time")
@@ -71,4 +71,4 @@ if __name__ == "__main__":
         model.load_state_dict(checkpoint["model_state_dict"])       # load model weights
         model = model
 
-        utils.validate(model, render=args.render, nepisodes=100)      # evaluate with 100 episodes
+        utils.validate(model, render=args.render, nepisodes=100, mode='resize')      # evaluate with 100 episodes

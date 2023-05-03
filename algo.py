@@ -456,6 +456,7 @@ class DeepQLearning(AbstractAlgorithm):
                 # store experience in replay buffer
                 experience = utils.Transition(state=state, action=action, next_state=next_state, reward=reward, done=done)
                 self.replay_buffer.push(experience)
+                state = next_state
                 
                 # sample random minibatch from replay buffer
                 if len(self.replay_buffer) < self.args.replay_start_size:
@@ -465,23 +466,22 @@ class DeepQLearning(AbstractAlgorithm):
                     minibatch = self.replay_buffer.sample(self.args.batch_size)
                     not_filled = False
                     
-                states, next_states, rewards, dones, actions, states = [], [], [], [], [], []
+                replay_states, replay_next_states, replay_rewards, replay_dones, replay_actions = [], [], [], [], []
                 for experience in minibatch:
-                    states.append(experience.state)
-                    next_states.append(experience.next_state)
-                    rewards.append(experience.reward)
-                    dones.append(experience.done)
-                    actions.append(experience.action)
-                states = torch.stack(states)
-                next_states = torch.stack(next_states)
-                rewards = torch.tensor(rewards, dtype=torch.float)
-                dones = torch.tensor(dones, dtype=torch.float)
-                actions = torch.tensor(actions, dtype=torch.long)
-                
+                    replay_states.append(experience.state)
+                    replay_next_states.append(experience.next_state)
+                    replay_rewards.append(experience.reward)
+                    replay_dones.append(experience.done)
+                    replay_actions.append(experience.action)
+                replay_states = torch.stack(replay_states)
+                replay_next_states = torch.stack(replay_next_states)
+                replay_rewards = torch.tensor(replay_rewards, dtype=torch.float)
+                replay_dones = torch.tensor(replay_dones, dtype=torch.float)
+                replay_actions = torch.tensor(replay_actions, dtype=torch.long)
                 # calculate loss
-                q_next_values = self.Q_target(next_states).max(dim=1).values.detach()
-                y = rewards + self.args.discounting * q_next_values * (1 - dones)
-                q_values = self.Q_network(states).gather(1, actions.unsqueeze(1)).squeeze()
+                q_next_values = self.Q_target(replay_next_states).max(dim=1).values.detach()
+                y = replay_rewards + self.args.discounting * q_next_values * (1 - replay_dones)
+                q_values = self.Q_network(replay_states).gather(1, replay_actions.unsqueeze(1)).squeeze()
                 loss = F.mse_loss(y, q_values)
 
                 loss_total += loss.item()
