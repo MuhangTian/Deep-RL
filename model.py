@@ -167,3 +167,56 @@ class CriticNetworkLSTM(nn.Module):
     
     def initialize_hidden_state(self):
         return torch.zeros(1, 8, 256), torch.zeros(1, 8, 256)
+
+
+class QNetwork(nn.Module):
+    def __init__(self, naction, args) -> None:
+        super().__init__()
+        self.iH, self.iW, self.iC = 84, 84, 1
+        self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=2)
+        self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1)
+        self.fc1 = nn.Linear(3136, 512)
+        self.fc2 = nn.Linear(512, naction)
+
+    def forward(self, X):
+        bsz = X.size(0)
+        X = X.view(-1, self.iC, self.iH, self.iW)
+        X = F.relu(self.conv1(X))
+        X = F.relu(self.conv2(X))
+        X = F.relu(self.conv3(X))
+
+        X = X.view(bsz*4, -1)
+        X = F.relu(self.fc1(X))
+        X = self.fc2(X)
+        
+        X = X.view(bsz, 4, -1)
+        X = torch.mean(X, dim=1)
+
+        return X
+    
+    # def forward(self, X):
+    #     bsz = X.size(0)
+    #     X = X.view(bsz * self.iC, self.iH, self.iW)
+    #     X = X.unsqueeze(1)
+    #     X = F.relu(self.conv1(X))
+    #     X = F.relu(self.conv2(X))
+    #     X = F.relu(self.conv3(X))
+
+    #     X = X.view(bsz, -1)
+    #     X = F.relu(self.fc1(X))
+    #     X = self.fc2(X)
+    #     # Average the output values across the batch dimension
+    #     X = torch.mean(X, dim=0)
+        
+    #     return X
+
+    def get_action(self, x, prev_state):
+        logits = self(x)
+        if torch.rand(1).item() < 0.05:     # epsilon-greedy with epsilon=0.05
+            action = torch.randint(low=0, high=9, size=(1,)).item()
+        else:
+            action = logits.argmax().item()
+        
+        return action, prev_state
+        
