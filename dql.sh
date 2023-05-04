@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=DQL
+#SBATCH --job-name=DQL-DECAY
 #SBATCH --time=90-00:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
@@ -14,4 +14,4 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate RL
 
-srun python train.py
+srun python train.py --epsilon_decay_frames 500000 --frame_skipping_interval 5
