@@ -68,7 +68,7 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
         obs = env.reset(seed=590060+i)[0]       # use a different seed for each separate episode
         if render:
             im = ax.imshow(obs)
-        # NOTE: this can be changed into preprocess_observation() which keeps the original dimensionality
+        
         observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0)      # 1 x 1 x ic x iH x iW
         prev_state = None
         step, ep_total_reward = 0, 0

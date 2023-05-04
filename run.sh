@@ -5,9 +5,9 @@
 #SBATCH --cpus-per-task=40
 #SBATCH --partition=compsci
 #SBATCH --exclude=linux[1-40]
-#SBATCH --mem=100G
+#SBATCH --mem=200G
 #SBATCH --mail-user=muhang.tian@duke.edu
-#SBATCH --output=log/dql.out
+#SBATCH --output=None
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
