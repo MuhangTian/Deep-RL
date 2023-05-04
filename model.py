@@ -3,6 +3,7 @@ import random
 
 import torch
 from torch import nn
+from torch.distributions import Categorical
 from torch.nn import functional as F
 
 
@@ -71,11 +72,18 @@ class ActorNetworkCNN(nn.Module):
 
         return Z, prev_state
 
-    def get_action(self, x, prev_state):
-        logits, prev_state = self(x, prev_state)
-        action = logits.argmax(-1).squeeze().item()
+    # def get_action(self, x, prev_state):
+    #     logits, prev_state = self(x, prev_state)
+    #     action = logits.argmax(-1).squeeze().item()
         
-        return action, prev_state
+    #     return action, prev_state
+    
+    def get_action(self, x, prev_state):
+        # NOTE: try with stochastic action selection
+        logits, prev_state = self(x, prev_state)
+        action = Categorical(probs=logits.squeeze(1)).sample()
+        
+        return action, prev_state 
 
 
 class CriticNetworkCNN(nn.Module):
