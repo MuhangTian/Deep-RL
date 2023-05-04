@@ -41,3 +41,4 @@ LOGS/
 *.swp
 
 wandb
+try.py

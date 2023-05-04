@@ -1,4 +1,6 @@
 '''To store models (which are building blocks for learning algorithms)'''
+import random
+
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -194,27 +196,11 @@ class QNetwork(nn.Module):
         X = torch.mean(X, dim=1)
 
         return X
-    
-    # def forward(self, X):
-    #     bsz = X.size(0)
-    #     X = X.view(bsz * self.iC, self.iH, self.iW)
-    #     X = X.unsqueeze(1)
-    #     X = F.relu(self.conv1(X))
-    #     X = F.relu(self.conv2(X))
-    #     X = F.relu(self.conv3(X))
-
-    #     X = X.view(bsz, -1)
-    #     X = F.relu(self.fc1(X))
-    #     X = self.fc2(X)
-    #     # Average the output values across the batch dimension
-    #     X = torch.mean(X, dim=0)
-        
-    #     return X
 
     def get_action(self, x, prev_state):
         logits = self(x)
         if torch.rand(1).item() < 0.05:     # epsilon-greedy with epsilon=0.05
-            action = torch.randint(low=0, high=9, size=(1,)).item()
+            action = random.randint(0,8)
         else:
             action = logits.argmax().item()
         

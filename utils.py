@@ -3,6 +3,7 @@ import random
 from collections import deque, namedtuple
 
 import gymnasium as gym
+from gymnasium.core import Env
 import numpy as np
 import torch
 import torchvision.transforms as T
@@ -47,12 +48,12 @@ def preprocess_observation(obs, mode='simple', new_size=(84, 84)):
         resized_image_tensor /= 255.0   # Normalize the pixel values to [0, 1] range
 
         return resized_image_tensor.unsqueeze(0)
-        
 
 def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
     assert hasattr(model, "get_action")
     torch.manual_seed(590060)
     np.random.seed(590060)
+    # NOTE: don't reset seed for python's random library here since that would make experience replay repeat itself
     
     model.eval()        # turn into eval mode
     render = render and can_render
@@ -68,8 +69,7 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
         if render:
             im = ax.imshow(obs)
         # NOTE: this can be changed into preprocess_observation() which keeps the original dimensionality
-        observation = preprocess_observation( # 1 x 1 x ic x iH x iW
-            obs, mode=mode).unsqueeze(0).unsqueeze(0)
+        observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0)      # 1 x 1 x ic x iH x iW
         prev_state = None
         step, ep_total_reward = 0, 0
         # play until the agent dies or we exceed 50000 observations
@@ -82,15 +82,14 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
                 im.set_data(img)
                 fig.canvas.draw_idle()
                 plt.pause(0.1)
-            observation = preprocess_observation(
-                env_output[0], mode=mode).unsqueeze(0).unsqueeze(0)
+            observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0) 
             step += 1
         steps_alive.append(step)
         reward_arr.append(ep_total_reward)
     
     if wandb:           # log into wandb if using it
-        wandb.log({"validation/mean_return": np.mean(reward_arr),
-                   'validation/std_return': np.std(reward_arr)})
+        wandb.log({"Mean Reward (Validation)": np.mean(reward_arr),
+                   'std Reward (Validation)': np.std(reward_arr)})
     
     logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
     logging.info("Steps taken over each of {:d} episodes: {}".format(
@@ -98,17 +97,46 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
     logging.info("Total return after {:d} episodes: {:.3f}".format(nepisodes, np.sum(reward_arr)))
     logging.info(f"Mean return for each episode: {np.mean(reward_arr):.3f}, (std: {np.std(reward_arr):.3f})")
     logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
-    
+
 
 class ReplayBuffer:
-    def __init__(self, size) -> None:
+    '''a simple replay buffer implemented using deque'''
+    def __init__(self, size: int) -> None:
         self.memory = deque([], maxlen=size)
     
-    def push(self, transition):
+    def push(self, transition: Transition):
+        '''add transitions to the replay buffer'''
         self.memory.append(Transition(*transition))
     
-    def sample(self, bsz):
+    def sample(self, bsz: int):
+        '''sample bsz number of transitions from the replay buffer'''
         return random.sample(self.memory, bsz)
     
     def __len__(self):
         return len(self.memory)
+
+
+class SkipFrameWrapper(gym.Wrapper):
+    '''
+    Wrapper to skip frames (which is same as performing the same action for multiple frames)
+    This has two advantages:
+    - make more efficient use of frames, since most frames are redundant
+    - reduce computation need for forward pass, since we only need one forward pass (to decide an action) to play four times
+      (whereas doing four forward passes to decide separate actions need more computation)
+    '''
+    def __init__(self, env: Env, skip: int = 4):
+        super().__init__(env)
+        self.skip = skip
+    
+    def step(self, action):
+        total_reward = 0.0
+        done = False
+        for _ in range(self.skip):
+            env_output = self.env.step(action)
+            total_reward += env_output[1]
+            done = get_done(self.env)
+            obs = env_output[0]
+            if done:
+                break
+        return obs, total_reward, done
+        

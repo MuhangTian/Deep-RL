@@ -5,6 +5,7 @@ import os
 import gymnasium as gym
 import numpy as np
 import torch
+import random
 
 import utils
 from algo import ActorCritic, DeepQLearning, VanillaPolicyGradient
@@ -34,7 +35,7 @@ if __name__ == "__main__":
     parser.add_argument("--model", type=str, default="qn", help="model to use")
     parser.add_argument("--algo", type=str, default="dql", help="algorithm to use")
     parser.add_argument("--mode", default="train", choices=["train", "valid",], help="training or validation mode")
-    parser.add_argument("--total_frames", default=1000000, type=int, help="total environment frames to train for")
+    parser.add_argument("--total_frames", default=1_000_000, type=int, help="total environment frames to train for")
     parser.add_argument("--batch_size", default=32, type=int, help="learner batch size.")
     parser.add_argument("--unroll_length", default=150, type=int, help="unroll length (time dimension)")
     parser.add_argument("--hidden_dim", default=256, type=int, help="policy net hidden dim")
@@ -46,13 +47,20 @@ if __name__ == "__main__":
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
     parser.add_argument("--eval_every", default=50, type=int, help="eval every this many updates")
     parser.add_argument("--render", action="store_true", default=False, help="render game-play at validation time")
-    # ---------------------------------- DQN specific ----------------------------------
-    parser.add_argument("--episodes", type=int, default=10000, help="episodes to train for")
-    parser.add_argument("--replay_buffer_size", type=int, default=500000, help="size for replay buffer")
-    parser.add_argument("--replay_start_size", type=int, default=50000, help="number of experiences to store before training")
+    # -------------------------------------------- Deep Q Learning Specific --------------------------------------------
+    parser.add_argument("--episodes", type=int, default=250_000, help="episodes to train for")
+    parser.add_argument("--replay_buffer_size", type=int, default=1_000_000, help="size for replay buffer")
+    parser.add_argument("--replay_start_size", type=int, default=50_000, help="number of experiences to store before training")
+    parser.add_argument("--frame_skipping_interval", type=int, default=4, help="number of frames to skip")
+    parser.add_argument("--frames_per_state", type=int, default=4, help="number of consecutive frames that are treated as a state")
+    parser.add_argument("--epsilon_start", type=float, default=1.0, help="exploration rate at the beginning")
+    parser.add_argument("--epsilon_end", type=float, default=0.1, help="minimum exploration rate")
+    parser.add_argument("--epsilon_decay_frames", type=int, default=1_000_000, help="number of frames to decay epsilon from epsilon_start to epsilon_end (linearly)")
+    parser.add_argument("--target_update_frequency", type=int, default=10_000, help="number of learning network updates between target network updates")
     
     torch.manual_seed(59006)
     np.random.seed(59006)
+    random.seed(59006)   # python's random library, control randomness used in experience replay (only matter for DQL)
     args = parser.parse_args()
     logging.info(args)
     
