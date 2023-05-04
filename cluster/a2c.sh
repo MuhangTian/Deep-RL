@@ -14,4 +14,4 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate RL
 
-srun python train.py --model "an_cnn" --algo "a2c" --batch_size 8 --unroll_length 200 --learning_rate 0.0001 --save_path "a2c_stochastic_validation.pt"
+srun python train.py --model "an_cnn" --algo "a2c" --batch_size 8 --unroll_length 200 --learning_rate 0.0001 --save_path "trained/a2c_stochastic_validation.pt"
