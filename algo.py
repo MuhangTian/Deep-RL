@@ -213,8 +213,7 @@ class ActorCritic(AbstractAlgorithm):
     def algo_step(self, stepidx, model, optimizer, scheduler, envs, observations, prev_state, prev_state_value, bsz):
         args = self.args
         if envs is None:
-            # TODO: current best model is without frame skip, wait for results for frame skip to see whether it's better...
-            envs = [utils.SkipFrameWrapper(gym.make(args.env)) for _ in range(bsz)]
+            envs = [gym.make(args.env) for _ in range(bsz)]
             observations = [env.reset(seed=i)[0] for i, env in enumerate(envs)]
             # NOTE: preprocess_shape() can be switched to other preprocess functions
             observations = torch.stack( # bsz x ic x iH x iW -> bsz x 1 x ic x iH x iW
