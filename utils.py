@@ -16,9 +16,20 @@ Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward', 'done'))
 
 
-def get_done(env):
+def get_done(env, start_lives):
     '''to determine whether an episode is done'''
-    return env.ale.lives() != 3
+    return env.ale.lives() != start_lives
+
+def get_device():
+    if torch.cuda.is_available():
+        print('************* Using CUDA *************')
+        return torch.device('cuda')
+    elif torch.has_mps:
+        print('************* Using MPS *************')
+        return torch.device('mps')
+    else:
+        print('************* Using CPU *************')
+        return torch.device('cpu')
 
 def preprocess_observation(obs, mode='simple', new_size=(84, 84)):
     """
@@ -43,7 +54,7 @@ def preprocess_observation(obs, mode='simple', new_size=(84, 84)):
 
         return resized_image_tensor.unsqueeze(0)
 
-def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
+def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
     """
     Evaluates the performance of the given agent on the Ms. Pac-Man Atari game using a specified number of episodes, and returns the average reward and number of steps taken per episode.
 
@@ -51,6 +62,8 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
     ----------
     model : object
         A reinforcement learning model object with a `get_action` method.
+    args : argparse.Namespace
+        argumetns passed in from command line
     render : bool, optional
         Whether to render the game during validation. Defaults to False.
     nepisodes : int, optional
@@ -74,10 +87,10 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
     for i in range(nepisodes):
         logging.info(f"Validating episode {i+1}...")
         render_mode = "human"  if render else None
-        env = gym.make("ALE/MsPacman-v5", render_mode=render_mode)      # NOTE: modify render functionality for better graphics
+        env = gym.make(args.env, render_mode=render_mode)      # NOTE: modify render functionality for better graphics
         obs = env.reset(seed=590060+i)[0]       # use a different seed for each separate episode
         
-        observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0)      # 1 x 1 x ic x iH x iW
+        observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0).to(args.device)      # 1 x 1 x ic x iH x iW
         prev_state = None
         step, ep_total_reward = 0, 0
         # play until the agent dies or we exceed 50000 observations
@@ -85,7 +98,7 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
             action, prev_state = model.get_action(observation, prev_state)
             env_output = env.step(action)
             ep_total_reward += env_output[1]
-            observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0) 
+            observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0).to(args.device)
             step += 1
             if render:
                 time.sleep(0.02)        # sleep for 0.02 seconds to slow down the rendering
@@ -132,6 +145,7 @@ class SkipFrameWrapper(gym.Wrapper):
     def __init__(self, env: Env, skip: int = 4):
         super().__init__(env)
         self.skip = skip
+        self.start_lives = env.ale.lives()
     
     def step(self, action):
         total_reward = 0.0
@@ -139,7 +153,7 @@ class SkipFrameWrapper(gym.Wrapper):
         for _ in range(self.skip):
             env_output = self.env.step(action)
             total_reward += env_output[1]
-            done = get_done(self.env)
+            done = get_done(self.env, self.start_lives)
             obs = env_output[0]
             if done:
                 break
