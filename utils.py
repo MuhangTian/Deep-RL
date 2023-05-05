@@ -1,26 +1,20 @@
 import logging
 import random
+import time
 from collections import deque, namedtuple
 
 import gymnasium as gym
-from gymnasium.core import Env
 import numpy as np
 import torch
 import torchvision.transforms as T
+from gymnasium.core import Env
 
 logging.basicConfig(format=(
         "[%(levelname)s:%(asctime)s] " "%(message)s"), level=logging.INFO)
 
-
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward', 'done'))
 
-try:
-    import matplotlib.pyplot as plt
-    can_render = True
-except:
-    logging.warning("Cannot import matplotlib; will not attempt to render")
-    can_render = False
 
 def get_done(env):
     '''to determine whether an episode is done'''
@@ -54,20 +48,18 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
     torch.manual_seed(590060)
     np.random.seed(590060)
     # NOTE: don't reset seed for python's random library here since that would make experience replay repeat itself
+    # and since experience replay is not used in validation, it's fine to not reset the seed for python's random library
     
     model.eval()        # turn into eval mode
-    render = render and can_render
-
     if render:
-        nepisodes = 1
-        fig, ax = plt.subplots(1, 1)
+        nepisodes = 1       # only render one episode if render is True
 
     steps_alive, reward_arr = [], []        # to store each episode's reward and steps taken
     for i in range(nepisodes):
-        env = gym.make("ALE/MsPacman-v5")
+        logging.info(f"Validating episode {i+1}...")
+        render_mode = "human"  if render else None
+        env = gym.make("ALE/MsPacman-v5", render_mode=render_mode)      # NOTE: modify render functionality for better graphics
         obs = env.reset(seed=590060+i)[0]       # use a different seed for each separate episode
-        if render:
-            im = ax.imshow(obs)
         
         observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0)      # 1 x 1 x ic x iH x iW
         prev_state = None
@@ -77,13 +69,10 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
             action, prev_state = model.get_action(observation, prev_state)
             env_output = env.step(action)
             ep_total_reward += env_output[1]
-            if render:
-                img = env_output[0]
-                im.set_data(img)
-                fig.canvas.draw_idle()
-                plt.pause(0.1)
             observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0) 
             step += 1
+            if render:
+                time.sleep(0.02)        # sleep for 0.02 seconds to slow down the rendering
         steps_alive.append(step)
         reward_arr.append(ep_total_reward)
     
