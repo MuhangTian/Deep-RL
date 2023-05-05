@@ -44,11 +44,27 @@ def preprocess_observation(obs, mode='simple', new_size=(84, 84)):
         return resized_image_tensor.unsqueeze(0)
 
 def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
+    """
+    Evaluates the performance of the given agent on the Ms. Pac-Man Atari game using a specified number of episodes, and returns the average reward and number of steps taken per episode.
+
+    Parameters
+    ----------
+    model : object
+        A reinforcement learning model object with a `get_action` method.
+    render : bool, optional
+        Whether to render the game during validation. Defaults to False.
+    nepisodes : int, optional
+        The number of episodes to play for evaluation. Defaults to 5.
+    wandb : bool, optional
+        Whether to log results to Weights & Biases. Defaults to False.
+    mode : str, optional
+        The image preprocessing mode to use before feeding image to the model. Can be 'simple' or 'resize'. Defaults to 'simple'.
+    """
     assert hasattr(model, "get_action")
     torch.manual_seed(590060)
     np.random.seed(590060)
-    # NOTE: don't reset seed for python's random library here since that would make experience replay repeat itself
-    # and since experience replay is not used in validation, it's fine to not reset the seed for python's random library
+    # NOTE: seed for python's random library is set in train.py, it's not set in here since this function will be called
+    # during training, and I want to avoid to setting seeds since that may create patterns in samples generated in experience replay
     
     model.eval()        # turn into eval mode
     if render:
