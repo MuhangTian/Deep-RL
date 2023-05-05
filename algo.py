@@ -17,7 +17,7 @@ from model import CriticNetworkCNN, CriticNetworkLSTM
 
 try:        # use wandb to log stuff if we have it, else don't
     import wandb
-    wandb = False
+    # wandb = False
     project_name = "RL-implementation"
 except:
     wandb = False

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=A2C-SKIP4
+#SBATCH --job-name=AC-RESIZE
 #SBATCH --time=90-00:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
@@ -14,4 +14,4 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate RL
 
-srun python train.py --model "an_cnn" --algo "a2c" --batch_size 8 --unroll_length 200 --learning_rate 0.0001 --save_path "trained/a2c_stochastic_validation_skip4.pt" --total_frames 50_000_000
+srun python train.py --model "an_cnn" --algo "a2c" --batch_size 8 --unroll_length 200 --learning_rate 0.00025 --save_path "trained/actor_critic_skip4_resize.pt" --total_frames 50_000_000

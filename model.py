@@ -53,10 +53,10 @@ class ActorNetworkCNN(nn.Module):
         super().__init__()
         self.iH, self.iW, self.iC = 84, 84, 1
         self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=3)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=2)
         self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1)
-        self.fc1 = nn.Linear(1024, 256)
-        self.fc2 = nn.Linear(256, naction) 
+        self.fc1 = nn.Linear(3136, 512)
+        self.fc2 = nn.Linear(512, naction)
 
     def forward(self, X, prev_state=None):
         bsz, T = X.size()[:2]
@@ -85,10 +85,10 @@ class CriticNetworkCNN(nn.Module):
         super().__init__()
         self.iH, self.iW, self.iC = 84, 84, 1
         self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=3)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=2)
         self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1)
-        self.fc1 = nn.Linear(1024, 512)
-        self.fc2 = nn.Linear(512, 1) 
+        self.fc1 = nn.Linear(3136, 512)
+        self.fc2 = nn.Linear(512, )
 
     def forward(self, X):
         bsz, T = X.size()[:2]
