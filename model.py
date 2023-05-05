@@ -71,15 +71,9 @@ class ActorNetworkCNN(nn.Module):
         Z = F.softmax(Z, dim=-1)
 
         return Z, prev_state
-
-    # def get_action(self, x, prev_state):
-    #     logits, prev_state = self(x, prev_state)
-    #     action = logits.argmax(-1).squeeze().item()
-        
-    #     return action, prev_state
     
     def get_action(self, x, prev_state):
-        # NOTE: try with stochastic action selection
+        '''get action, since policy is pi(a|s), it's stochastic, so we call sample() based on parameterized distribution'''
         logits, prev_state = self(x, prev_state)
         action = Categorical(probs=logits.squeeze(1)).sample()
         
