@@ -212,7 +212,7 @@ class ActorCritic(AbstractAlgorithm):
             observations = [env.reset(seed=i)[0] for i, env in enumerate(envs)]
             # NOTE: preprocess_shape() can be switched to other preprocess functions
             observations = torch.stack( # bsz x ic x iH x iW -> bsz x 1 x ic x iH x iW
-                [utils.preprocess_observation(obs) for obs in observations]).unsqueeze(1)
+                [utils.preprocess_observation(obs, mode='resize') for obs in observations]).unsqueeze(1)
             prev_state, prev_state_value = None, None
         
         log_probs, rewards, actions, cur_values = [], [], [], []
@@ -245,7 +245,7 @@ class ActorCritic(AbstractAlgorithm):
             still_alive = torch.tensor([env.ale.lives() == args.start_nlives for env in envs])
             not_terminated.mul_(still_alive.float())
             rewards.append(rewards_t*not_terminated)
-            observations = torch.stack([utils.preprocess_observation(eo[0]) for eo in env_outputs]).unsqueeze(1)
+            observations = torch.stack([utils.preprocess_observation(eo[0], mode='resize') for eo in env_outputs]).unsqueeze(1)
 
         curr_return = cur_values[-1]    # bsz x 1 x 1, using the last value
         policy_total_loss, value_total_loss = 0, 0
@@ -283,7 +283,7 @@ class ActorCritic(AbstractAlgorithm):
         for b in range(bsz):
             if not_terminated[b].item() == 0:
                 obs = envs[b].reset(seed=stepidx+b)[0]
-                observations[b].copy_(utils.preprocess_observation(obs))
+                observations[b].copy_(utils.preprocess_observation(obs, mode='resize'))
 
         return stats, envs, observations, prev_state, prev_state_value
     

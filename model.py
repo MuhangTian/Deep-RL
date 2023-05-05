@@ -51,11 +51,11 @@ class PolicyNetwork(nn.Module):
 class ActorNetworkCNN(nn.Module):
     def __init__(self, naction, args):
         super().__init__()
-        self.iH, self.iW, self.iC = 210, 160, 3
+        self.iH, self.iW, self.iC = 84, 84, 1
         self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)
         self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=3)
         self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1)
-        self.fc1 = nn.Linear(8960, 256)
+        self.fc1 = nn.Linear(1024, 256)
         self.fc2 = nn.Linear(256, naction) 
 
     def forward(self, X, prev_state=None):
@@ -83,12 +83,12 @@ class ActorNetworkCNN(nn.Module):
 class CriticNetworkCNN(nn.Module):
     def __init__(self):
         super().__init__()
-        self.iH, self.iW, self.iC = 210, 160, 3
+        self.iH, self.iW, self.iC = 84, 84, 1
         self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)
         self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=3)
         self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1)
-        self.fc1 = nn.Linear(8960, 256)
-        self.fc2 = nn.Linear(256, 1) 
+        self.fc1 = nn.Linear(1024, 512)
+        self.fc2 = nn.Linear(512, 1) 
 
     def forward(self, X):
         bsz, T = X.size()[:2]
