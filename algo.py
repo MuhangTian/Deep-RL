@@ -17,7 +17,6 @@ from model import CriticNetworkCNN, CriticNetworkLSTM
 
 try:        # use wandb to log stuff if we have it, else don't
     import wandb
-
     # wandb = False
     project_name = "RL-implementation"
 except:
@@ -198,11 +197,7 @@ class VanillaPolicyGradient(AbstractAlgorithm):
 
 class ActorCritic(AbstractAlgorithm):
     """
-    Implementation for Actor-Critic algorithm
-    
-    Reference
-    ---------
-        https://arxiv.org/pdf/1602.01783.pdf (see Algorithm S3 in Appendix)
+    Implementation for Actor-Critic, some ideas are referenced from algorithm S3 in https://arxiv.org/pdf/1602.01783.pdf
     """
     def __init__(self, args, model) -> None:
         super().__init__(args, model)
@@ -252,24 +247,38 @@ class ActorCritic(AbstractAlgorithm):
             rewards.append(rewards_t*not_terminated)
             observations = torch.stack([utils.preprocess_observation(eo[0]) for eo in env_outputs]).unsqueeze(1)
 
-        curr_return = cur_values[-1]    # bsz x 1 x 1, using the last value
-        policy_total_loss, value_total_loss = 0, 0
-        for t in range(args.unroll_length-2, -1, -1):
-            curr_return = rewards[t] + args.discounting * curr_return   # bsz x 1
-            log_prob, value = log_probs[t], cur_values[t]
-            value_loss = F.mse_loss(curr_return, value)
-            advantage = curr_return - value    # bsz x 1
-            policy_loss = (log_prob * advantage.detach()).mean()       
+        # curr_return = cur_values[-1]    # bsz x 1 x 1, using the last value
+        # policy_total_loss, value_total_loss = 0, 0
+        # for t in range(args.unroll_length-2, -1, -1):
+        #     curr_return = rewards[t] + args.discounting * curr_return   # bsz x 1
+        #     log_prob, value = log_probs[t], cur_values[t]
+        #     value_loss = torch.sum((curr_return - value)**2)
+        #     advantage = curr_return - value    # bsz x 1
+        #     policy_loss = torch.sum(log_prob * advantage.detach()) 
             
-            # accumulate loss
-            policy_total_loss += policy_loss
-            value_total_loss += value_loss
+        #     # accumulate loss
+        #     policy_total_loss += policy_loss
+        #     value_total_loss += value_loss
+        
+        rewards = torch.stack(rewards[:-1])
+        cur_values = torch.stack(cur_values)
+        log_probs = torch.stack(log_probs)
+        curr_return = cur_values[-1]  # bsz x 1 x 1, using the last value
+        
+        discounts = torch.tensor([args.discounting ** i for i in range(args.unroll_length - 1)]).unsqueeze(1)
+        returns = torch.flip(rewards, [0]) * discounts  # bsz x (unroll_length - 1)
+        returns = torch.flip(returns.cumsum(dim=0), [0]) + curr_return.squeeze(-1)
+
+        advantages = returns - cur_values[:-1].squeeze(-1)  # bsz x (unroll_length - 1)
+        value_total_loss = F.mse_loss(returns, cur_values[:-1].squeeze(-1))
+        policy_losses = log_probs[:-1].squeeze(-1) * advantages.detach()
+
+        policy_total_loss = torch.mean(-policy_losses)
             
         # update networks
         self.critic_optimizer.zero_grad()
         optimizer.zero_grad()
-        value_total_loss.backward()         # perform gradient descent
-        policy_total_loss = -1*policy_total_loss    # perform gradient ascent
+        value_total_loss.backward()
         policy_total_loss.backward()
         nn.utils.clip_grad_norm_(self.CriticNet.parameters(), args.grad_norm_clipping)
         self.critic_optimizer.step()
