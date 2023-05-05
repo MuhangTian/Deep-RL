@@ -344,7 +344,7 @@ class ActorCritic(AbstractAlgorithm):
             frame, sps, update, stats['pg_loss'], stats['value_loss'], stats["mean_return"]))
             
             if frame > 0 and frame % (args.eval_every*T*B) == 0:        # perform validation step after some number of steps
-                utils.validate(model, args.render, nepisodes=5, wandb=wandb)
+                utils.validate(model, args.render, nepisodes=5, wandb=wandb, mode='resize')
                 model.train()
         
         print(f"\n{'='*30} TRAINING FINISHED {'='*30}")
