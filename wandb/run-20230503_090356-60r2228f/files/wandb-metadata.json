@@ -1,0 +1,42 @@
+{
+    "os": "macOS-10.16-x86_64-i386-64bit",
+    "python": "3.9.16",
+    "heartbeatAt": "2023-05-03T13:03:56.876651",
+    "startedAt": "2023-05-03T13:03:56.412815",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/Users/mt361/Desktop/RL-Bandits/train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "git@github.com:MuhangTian/Deep-RL.git",
+        "commit": "e9b4284cf0da9b766339973918511ae956a0901f"
+    },
+    "email": "mt361@duke.edu",
+    "root": "/Users/mt361/Desktop/RL-Bandits",
+    "host": "MacBook-Pro-73.local",
+    "username": "mt361",
+    "executable": "/usr/local/anaconda3/envs/RL/bin/python",
+    "cpu_count": 12,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2400,
+        "min": 2400,
+        "max": 2400
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2400,
+            "min": 2400,
+            "max": 2400
+        }
+    ],
+    "disk": {
+        "total": 926.3517189025879,
+        "used": 11.967166900634766
+    },
+    "memory": {
+        "total": 16.0
+    }
+}

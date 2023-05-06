@@ -1,0 +1,84 @@
+[INFO:2023-05-03 08:57:55,981] **FILLING BUFFER** | Episode: 1 | Timesteps Played: 167 | Mean Loss: 0.000 | Mean Reward: 0.599
+[INFO:2023-05-03 08:57:56,224] **FILLING BUFFER** | Episode: 2 | Timesteps Played: 207 | Mean Loss: 0.000 | Mean Reward: 0.773
+[INFO:2023-05-03 08:57:56,497] **FILLING BUFFER** | Episode: 3 | Timesteps Played: 207 | Mean Loss: 0.000 | Mean Reward: 0.773
+[INFO:2023-05-03 08:57:56,746] **FILLING BUFFER** | Episode: 4 | Timesteps Played: 179 | Mean Loss: 0.000 | Mean Reward: 0.559
+[INFO:2023-05-03 08:57:56,991] **FILLING BUFFER** | Episode: 5 | Timesteps Played: 203 | Mean Loss: 0.000 | Mean Reward: 0.640
+[INFO:2023-05-03 08:57:57,218] **FILLING BUFFER** | Episode: 6 | Timesteps Played: 185 | Mean Loss: 0.000 | Mean Reward: 0.541
+[INFO:2023-05-03 08:57:57,440] **FILLING BUFFER** | Episode: 7 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.785
+[INFO:2023-05-03 08:57:57,664] **FILLING BUFFER** | Episode: 8 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.628
+[INFO:2023-05-03 08:57:57,886] **FILLING BUFFER** | Episode: 9 | Timesteps Played: 193 | Mean Loss: 0.000 | Mean Reward: 0.518
+[INFO:2023-05-03 08:57:58,098] **FILLING BUFFER** | Episode: 10 | Timesteps Played: 175 | Mean Loss: 0.000 | Mean Reward: 0.343
+[INFO:2023-05-03 08:57:58,322] **FILLING BUFFER** | Episode: 11 | Timesteps Played: 193 | Mean Loss: 0.000 | Mean Reward: 0.466
+[INFO:2023-05-03 08:57:58,541] **FILLING BUFFER** | Episode: 12 | Timesteps Played: 179 | Mean Loss: 0.000 | Mean Reward: 0.559
+[INFO:2023-05-03 08:57:58,758] **FILLING BUFFER** | Episode: 13 | Timesteps Played: 173 | Mean Loss: 0.000 | Mean Reward: 0.405
+[INFO:2023-05-03 08:57:58,975] **FILLING BUFFER** | Episode: 14 | Timesteps Played: 179 | Mean Loss: 0.000 | Mean Reward: 0.615
+[INFO:2023-05-03 08:57:59,200] **FILLING BUFFER** | Episode: 15 | Timesteps Played: 171 | Mean Loss: 0.000 | Mean Reward: 0.643
+[INFO:2023-05-03 08:57:59,457] **FILLING BUFFER** | Episode: 16 | Timesteps Played: 177 | Mean Loss: 0.000 | Mean Reward: 0.339
+[INFO:2023-05-03 08:57:59,619] **FILLING BUFFER** | Episode: 17 | Timesteps Played: 111 | Mean Loss: 0.000 | Mean Reward: 0.541
+[INFO:2023-05-03 08:57:59,838] **FILLING BUFFER** | Episode: 18 | Timesteps Played: 173 | Mean Loss: 0.000 | Mean Reward: 0.347
+[INFO:2023-05-03 08:58:00,108] **FILLING BUFFER** | Episode: 19 | Timesteps Played: 169 | Mean Loss: 0.000 | Mean Reward: 0.710
+[INFO:2023-05-03 08:58:00,367] **FILLING BUFFER** | Episode: 20 | Timesteps Played: 199 | Mean Loss: 0.000 | Mean Reward: 0.603
+[INFO:2023-05-03 08:58:00,606] **FILLING BUFFER** | Episode: 21 | Timesteps Played: 193 | Mean Loss: 0.000 | Mean Reward: 0.570
+[INFO:2023-05-03 08:58:00,774] **FILLING BUFFER** | Episode: 22 | Timesteps Played: 123 | Mean Loss: 0.000 | Mean Reward: 0.488
+[INFO:2023-05-03 08:58:00,954] **FILLING BUFFER** | Episode: 23 | Timesteps Played: 127 | Mean Loss: 0.000 | Mean Reward: 0.551
+[INFO:2023-05-03 08:58:01,165] **FILLING BUFFER** | Episode: 24 | Timesteps Played: 165 | Mean Loss: 0.000 | Mean Reward: 0.606
+[INFO:2023-05-03 08:58:01,371] **FILLING BUFFER** | Episode: 25 | Timesteps Played: 169 | Mean Loss: 0.000 | Mean Reward: 0.355
+[INFO:2023-05-03 08:58:01,606] **FILLING BUFFER** | Episode: 26 | Timesteps Played: 193 | Mean Loss: 0.000 | Mean Reward: 0.570
+[INFO:2023-05-03 08:58:01,852] **FILLING BUFFER** | Episode: 27 | Timesteps Played: 195 | Mean Loss: 0.000 | Mean Reward: 0.564
+[INFO:2023-05-03 08:58:02,076] **FILLING BUFFER** | Episode: 28 | Timesteps Played: 183 | Mean Loss: 0.000 | Mean Reward: 0.765
+[INFO:2023-05-03 08:58:02,317] **FILLING BUFFER** | Episode: 29 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.733
+[INFO:2023-05-03 08:58:02,541] **FILLING BUFFER** | Episode: 30 | Timesteps Played: 183 | Mean Loss: 0.000 | Mean Reward: 0.492
+[INFO:2023-05-03 08:58:02,783] **FILLING BUFFER** | Episode: 31 | Timesteps Played: 193 | Mean Loss: 0.000 | Mean Reward: 0.622
+[INFO:2023-05-03 08:58:02,998] **FILLING BUFFER** | Episode: 32 | Timesteps Played: 171 | Mean Loss: 0.000 | Mean Reward: 0.468
+[INFO:2023-05-03 08:58:03,237] **FILLING BUFFER** | Episode: 33 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.576
+[INFO:2023-05-03 08:58:03,404] **FILLING BUFFER** | Episode: 34 | Timesteps Played: 129 | Mean Loss: 0.000 | Mean Reward: 0.388
+[INFO:2023-05-03 08:58:03,646] **FILLING BUFFER** | Episode: 35 | Timesteps Played: 181 | Mean Loss: 0.000 | Mean Reward: 0.552
+[INFO:2023-05-03 08:58:03,877] **FILLING BUFFER** | Episode: 36 | Timesteps Played: 179 | Mean Loss: 0.000 | Mean Reward: 0.447
+[INFO:2023-05-03 08:58:04,143] **FILLING BUFFER** | Episode: 37 | Timesteps Played: 223 | Mean Loss: 0.000 | Mean Reward: 0.717
+[INFO:2023-05-03 08:58:04,367] **FILLING BUFFER** | Episode: 38 | Timesteps Played: 173 | Mean Loss: 0.000 | Mean Reward: 0.405
+[INFO:2023-05-03 08:58:04,593] **FILLING BUFFER** | Episode: 39 | Timesteps Played: 177 | Mean Loss: 0.000 | Mean Reward: 0.452
+[INFO:2023-05-03 08:58:04,811] **FILLING BUFFER** | Episode: 40 | Timesteps Played: 189 | Mean Loss: 0.000 | Mean Reward: 0.847
+[INFO:2023-05-03 08:58:05,044] **FILLING BUFFER** | Episode: 41 | Timesteps Played: 189 | Mean Loss: 0.000 | Mean Reward: 0.529
+[INFO:2023-05-03 08:58:05,276] **FILLING BUFFER** | Episode: 42 | Timesteps Played: 189 | Mean Loss: 0.000 | Mean Reward: 0.635
+[INFO:2023-05-03 08:58:05,561] **FILLING BUFFER** | Episode: 43 | Timesteps Played: 233 | Mean Loss: 0.000 | Mean Reward: 0.687
+[INFO:2023-05-03 08:58:05,797] **FILLING BUFFER** | Episode: 44 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.576
+[INFO:2023-05-03 08:58:06,023] **FILLING BUFFER** | Episode: 45 | Timesteps Played: 173 | Mean Loss: 0.000 | Mean Reward: 0.462
+[INFO:2023-05-03 08:58:06,372] **FILLING BUFFER** | Episode: 46 | Timesteps Played: 307 | Mean Loss: 0.000 | Mean Reward: 0.684
+[INFO:2023-05-03 08:58:06,623] **FILLING BUFFER** | Episode: 47 | Timesteps Played: 207 | Mean Loss: 0.000 | Mean Reward: 0.773
+[INFO:2023-05-03 08:58:06,868] **FILLING BUFFER** | Episode: 48 | Timesteps Played: 199 | Mean Loss: 0.000 | Mean Reward: 0.603
+[INFO:2023-05-03 08:58:07,104] **FILLING BUFFER** | Episode: 49 | Timesteps Played: 189 | Mean Loss: 0.000 | Mean Reward: 0.582
+[INFO:2023-05-03 08:58:07,295] **FILLING BUFFER** | Episode: 50 | Timesteps Played: 159 | Mean Loss: 0.000 | Mean Reward: 0.692
+[INFO:2023-05-03 08:58:07,467] **FILLING BUFFER** | Episode: 51 | Timesteps Played: 125 | Mean Loss: 0.000 | Mean Reward: 0.320
+[INFO:2023-05-03 08:58:07,693] **FILLING BUFFER** | Episode: 52 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.681
+[INFO:2023-05-03 08:58:07,933] **FILLING BUFFER** | Episode: 53 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.628
+[INFO:2023-05-03 08:58:08,164] **FILLING BUFFER** | Episode: 54 | Timesteps Played: 183 | Mean Loss: 0.000 | Mean Reward: 0.656
+[INFO:2023-05-03 08:58:08,387] **FILLING BUFFER** | Episode: 55 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.419
+[INFO:2023-05-03 08:58:08,657] **FILLING BUFFER** | Episode: 56 | Timesteps Played: 219 | Mean Loss: 0.000 | Mean Reward: 0.639
+[INFO:2023-05-03 08:58:08,900] **FILLING BUFFER** | Episode: 57 | Timesteps Played: 189 | Mean Loss: 0.000 | Mean Reward: 0.899
+[INFO:2023-05-03 08:58:09,137] **FILLING BUFFER** | Episode: 58 | Timesteps Played: 169 | Mean Loss: 0.000 | Mean Reward: 0.414
+[INFO:2023-05-03 08:58:09,413] **FILLING BUFFER** | Episode: 59 | Timesteps Played: 211 | Mean Loss: 0.000 | Mean Reward: 0.995
+[INFO:2023-05-03 08:58:09,663] **FILLING BUFFER** | Episode: 60 | Timesteps Played: 201 | Mean Loss: 0.000 | Mean Reward: 0.498
+[INFO:2023-05-03 08:58:09,889] **FILLING BUFFER** | Episode: 61 | Timesteps Played: 175 | Mean Loss: 0.000 | Mean Reward: 0.857
+[INFO:2023-05-03 08:58:10,119] **FILLING BUFFER** | Episode: 62 | Timesteps Played: 183 | Mean Loss: 0.000 | Mean Reward: 0.710
+[INFO:2023-05-03 08:58:10,395] **FILLING BUFFER** | Episode: 63 | Timesteps Played: 223 | Mean Loss: 0.000 | Mean Reward: 0.717
+[INFO:2023-05-03 08:58:10,595] **FILLING BUFFER** | Episode: 64 | Timesteps Played: 155 | Mean Loss: 0.000 | Mean Reward: 0.581
+[INFO:2023-05-03 08:58:10,805] **FILLING BUFFER** | Episode: 65 | Timesteps Played: 161 | Mean Loss: 0.000 | Mean Reward: 0.807
+[INFO:2023-05-03 08:58:11,032] **FILLING BUFFER** | Episode: 66 | Timesteps Played: 185 | Mean Loss: 0.000 | Mean Reward: 0.865
+[INFO:2023-05-03 08:58:11,258] **FILLING BUFFER** | Episode: 67 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.576
+[INFO:2023-05-03 08:58:11,478] **FILLING BUFFER** | Episode: 68 | Timesteps Played: 163 | Mean Loss: 0.000 | Mean Reward: 0.675
+[INFO:2023-05-03 08:58:11,686] **FILLING BUFFER** | Episode: 69 | Timesteps Played: 157 | Mean Loss: 0.000 | Mean Reward: 0.573
+[INFO:2023-05-03 08:58:11,926] **FILLING BUFFER** | Episode: 70 | Timesteps Played: 185 | Mean Loss: 0.000 | Mean Reward: 0.703
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 61, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 431, in train
+    frame = self.preprocess(env.reset(seed=590060+episode)[0])
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/gymnasium/wrappers/order_enforcing.py", line 61, in reset
+    return self.env.reset(**kwargs)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/gymnasium/wrappers/env_checker.py", line 57, in reset
+    return self.env.reset(**kwargs)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/shimmy/atari_env.py", line 256, in reset
+    seeded_with = self.seed(seed)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/shimmy/atari_env.py", line 225, in seed
+    self.ale.loadROM(getattr(roms, self._game))
+KeyboardInterrupt

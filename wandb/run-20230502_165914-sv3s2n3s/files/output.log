@@ -1,0 +1,18 @@
+
+[INFO:2023-05-02 16:59:22,465] Frame 640 @ 131.2 FPS | Updates 1: pg_loss 2693.475 | value_loss 23275.943 | mean_return 0.312
+[INFO:2023-05-02 16:59:26,802] Frame 1280 @ 147.6 FPS | Updates 2: pg_loss 5156.767 | value_loss 121906.742 | mean_return 1.016
+[INFO:2023-05-02 16:59:31,223] Frame 1920 @ 144.8 FPS | Updates 3: pg_loss 513.323 | value_loss 7714.163 | mean_return 0.219
+[INFO:2023-05-02 16:59:35,275] Frame 2560 @ 158.0 FPS | Updates 4: pg_loss 2692.518 | value_loss 24327.812 | mean_return 0.297
+[INFO:2023-05-02 16:59:39,394] Frame 3200 @ 155.4 FPS | Updates 5: pg_loss 4902.125 | value_loss 103550.539 | mean_return 0.984
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 55, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 330, in train
+    stats, envs, observations, prev_state, prev_state_value = self.algo_step(
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 270, in algo_step
+    policy_total_loss.backward()
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

@@ -1,0 +1,300 @@
+[INFO:2023-05-03 22:23:48,957] Episode: 1 | Timesteps Played: 42 | Mean Loss: 0.000 | Mean Reward: 3.095 | Target Updates: 0
+[INFO:2023-05-03 22:23:49,106] Episode: 2 | Timesteps Played: 51 | Mean Loss: 0.000 | Mean Reward: 2.157 | Target Updates: 0
+[INFO:2023-05-03 22:23:49,245] Episode: 3 | Timesteps Played: 43 | Mean Loss: 0.000 | Mean Reward: 4.419 | Target Updates: 0
+[INFO:2023-05-03 22:23:49,352] Episode: 4 | Timesteps Played: 27 | Mean Loss: 0.000 | Mean Reward: 2.593 | Target Updates: 0
+[INFO:2023-05-03 22:23:49,479] Episode: 5 | Timesteps Played: 40 | Mean Loss: 0.000 | Mean Reward: 2.500 | Target Updates: 0
+[INFO:2023-05-03 22:23:49,638] Episode: 6 | Timesteps Played: 57 | Mean Loss: 0.000 | Mean Reward: 4.386 | Target Updates: 0
+[INFO:2023-05-03 22:23:49,754] Episode: 7 | Timesteps Played: 31 | Mean Loss: 0.000 | Mean Reward: 1.613 | Target Updates: 0
+[INFO:2023-05-03 22:23:49,882] Episode: 8 | Timesteps Played: 39 | Mean Loss: 0.000 | Mean Reward: 3.333 | Target Updates: 0
+[INFO:2023-05-03 22:23:50,027] Episode: 9 | Timesteps Played: 50 | Mean Loss: 0.000 | Mean Reward: 3.600 | Target Updates: 0
+[INFO:2023-05-03 22:23:50,140] Episode: 10 | Timesteps Played: 31 | Mean Loss: 0.000 | Mean Reward: 3.871 | Target Updates: 0
+[INFO:2023-05-03 22:23:50,290] Episode: 11 | Timesteps Played: 48 | Mean Loss: 0.000 | Mean Reward: 3.333 | Target Updates: 0
+[INFO:2023-05-03 22:23:50,422] Episode: 12 | Timesteps Played: 40 | Mean Loss: 0.000 | Mean Reward: 3.000 | Target Updates: 0
+[INFO:2023-05-03 22:23:55,798] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:23:55,799] Steps taken over each of 5 episodes: 169, 169, 169, 169, 181
+[INFO:2023-05-03 22:23:55,799] Total return after 5 episodes: 1050.000
+[INFO:2023-05-03 22:23:55,799] Mean return for each episode: 210.000, (std: 0.000)
+[INFO:2023-05-03 22:23:55,799] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:23:55,799] Episode: 13 | Timesteps Played: 49 | Mean Loss: 23.737 | Mean Reward: 3.878 | Target Updates: 0
+[INFO:2023-05-03 22:24:02,376] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:02,377] Steps taken over each of 5 episodes: 207, 223, 137, 277, 165
+[INFO:2023-05-03 22:24:02,377] Total return after 5 episodes: 490.000
+[INFO:2023-05-03 22:24:02,377] Mean return for each episode: 98.000, (std: 24.819)
+[INFO:2023-05-03 22:24:02,377] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:02,377] Episode: 14 | Timesteps Played: 49 | Mean Loss: 27.905 | Mean Reward: 3.673 | Target Updates: 0
+[INFO:2023-05-03 22:24:06,979] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:06,979] Steps taken over each of 5 episodes: 227, 193, 131, 191, 193
+[INFO:2023-05-03 22:24:06,979] Total return after 5 episodes: 590.000
+[INFO:2023-05-03 22:24:06,979] Mean return for each episode: 118.000, (std: 30.594)
+[INFO:2023-05-03 22:24:06,979] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:06,979] Episode: 15 | Timesteps Played: 27 | Mean Loss: 30.668 | Mean Reward: 2.222 | Target Updates: 0
+[INFO:2023-05-03 22:24:13,485] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:13,485] Steps taken over each of 5 episodes: 169, 169, 167, 169, 177
+[INFO:2023-05-03 22:24:13,485] Total return after 5 episodes: 900.000
+[INFO:2023-05-03 22:24:13,485] Mean return for each episode: 180.000, (std: 60.000)
+[INFO:2023-05-03 22:24:13,485] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:13,485] Episode: 16 | Timesteps Played: 53 | Mean Loss: 28.999 | Mean Reward: 4.151 | Target Updates: 0
+[INFO:2023-05-03 22:24:19,473] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:19,473] Steps taken over each of 5 episodes: 173, 365, 229, 207, 255
+[INFO:2023-05-03 22:24:19,473] Total return after 5 episodes: 1500.000
+[INFO:2023-05-03 22:24:19,473] Mean return for each episode: 300.000, (std: 41.952)
+[INFO:2023-05-03 22:24:19,473] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:19,474] Episode: 17 | Timesteps Played: 36 | Mean Loss: 30.874 | Mean Reward: 4.167 | Target Updates: 0
+[INFO:2023-05-03 22:24:25,083] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:25,083] Steps taken over each of 5 episodes: 151, 151, 177, 135, 177
+[INFO:2023-05-03 22:24:25,083] Total return after 5 episodes: 670.000
+[INFO:2023-05-03 22:24:25,083] Mean return for each episode: 134.000, (std: 33.823)
+[INFO:2023-05-03 22:24:25,084] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:25,084] Episode: 18 | Timesteps Played: 42 | Mean Loss: 30.166 | Mean Reward: 3.333 | Target Updates: 0
+[INFO:2023-05-03 22:24:31,431] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:31,432] Steps taken over each of 5 episodes: 143, 177, 213, 353, 177
+[INFO:2023-05-03 22:24:31,432] Total return after 5 episodes: 470.000
+[INFO:2023-05-03 22:24:31,432] Mean return for each episode: 94.000, (std: 47.159)
+[INFO:2023-05-03 22:24:31,432] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:31,432] Episode: 19 | Timesteps Played: 45 | Mean Loss: 28.693 | Mean Reward: 2.667 | Target Updates: 0
+[INFO:2023-05-03 22:24:37,451] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:37,451] Steps taken over each of 5 episodes: 177, 275, 195, 291, 187
+[INFO:2023-05-03 22:24:37,451] Total return after 5 episodes: 850.000
+[INFO:2023-05-03 22:24:37,451] Mean return for each episode: 170.000, (std: 111.714)
+[INFO:2023-05-03 22:24:37,451] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:37,451] Episode: 20 | Timesteps Played: 38 | Mean Loss: 27.567 | Mean Reward: 3.684 | Target Updates: 0
+[INFO:2023-05-03 22:24:43,425] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:43,426] Steps taken over each of 5 episodes: 207, 187, 215, 187, 171
+[INFO:2023-05-03 22:24:43,426] Total return after 5 episodes: 460.000
+[INFO:2023-05-03 22:24:43,426] Mean return for each episode: 92.000, (std: 29.257)
+[INFO:2023-05-03 22:24:43,426] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:43,426] Episode: 21 | Timesteps Played: 43 | Mean Loss: 28.420 | Mean Reward: 3.023 | Target Updates: 0
+[INFO:2023-05-03 22:24:50,713] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:50,713] Steps taken over each of 5 episodes: 177, 213, 213, 177, 197
+[INFO:2023-05-03 22:24:50,713] Total return after 5 episodes: 450.000
+[INFO:2023-05-03 22:24:50,714] Mean return for each episode: 90.000, (std: 24.495)
+[INFO:2023-05-03 22:24:50,714] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:50,714] Episode: 22 | Timesteps Played: 58 | Mean Loss: 29.923 | Mean Reward: 4.483 | Target Updates: 0
+[INFO:2023-05-03 22:24:57,281] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:24:57,281] Steps taken over each of 5 episodes: 151, 207, 273, 199, 193
+[INFO:2023-05-03 22:24:57,281] Total return after 5 episodes: 720.000
+[INFO:2023-05-03 22:24:57,281] Mean return for each episode: 144.000, (std: 38.262)
+[INFO:2023-05-03 22:24:57,282] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:24:57,282] Episode: 23 | Timesteps Played: 47 | Mean Loss: 28.015 | Mean Reward: 4.255 | Target Updates: 0
+[INFO:2023-05-03 22:25:02,918] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:02,918] Steps taken over each of 5 episodes: 207, 191, 199, 173, 181
+[INFO:2023-05-03 22:25:02,918] Total return after 5 episodes: 620.000
+[INFO:2023-05-03 22:25:02,918] Mean return for each episode: 124.000, (std: 68.877)
+[INFO:2023-05-03 22:25:02,918] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:02,918] Episode: 24 | Timesteps Played: 39 | Mean Loss: 31.541 | Mean Reward: 3.590 | Target Updates: 0
+[INFO:2023-05-03 22:25:08,456] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:08,456] Steps taken over each of 5 episodes: 169, 177, 207, 143, 209
+[INFO:2023-05-03 22:25:08,456] Total return after 5 episodes: 550.000
+[INFO:2023-05-03 22:25:08,456] Mean return for each episode: 110.000, (std: 16.733)
+[INFO:2023-05-03 22:25:08,456] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:08,456] Episode: 25 | Timesteps Played: 38 | Mean Loss: 29.385 | Mean Reward: 3.158 | Target Updates: 0
+[INFO:2023-05-03 22:25:13,606] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:13,607] Steps taken over each of 5 episodes: 213, 223, 223, 203, 309
+[INFO:2023-05-03 22:25:13,607] Total return after 5 episodes: 1260.000
+[INFO:2023-05-03 22:25:13,607] Mean return for each episode: 252.000, (std: 314.795)
+[INFO:2023-05-03 22:25:13,607] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:13,607] Episode: 26 | Timesteps Played: 27 | Mean Loss: 25.743 | Mean Reward: 2.593 | Target Updates: 0
+[INFO:2023-05-03 22:25:19,951] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:19,951] Steps taken over each of 5 episodes: 177, 207, 311, 213, 213
+[INFO:2023-05-03 22:25:19,951] Total return after 5 episodes: 600.000
+[INFO:2023-05-03 22:25:19,952] Mean return for each episode: 120.000, (std: 39.497)
+[INFO:2023-05-03 22:25:19,952] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:19,952] Episode: 27 | Timesteps Played: 43 | Mean Loss: 29.545 | Mean Reward: 4.651 | Target Updates: 0
+[INFO:2023-05-03 22:25:25,827] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:25,827] Steps taken over each of 5 episodes: 355, 453, 137, 205, 185
+[INFO:2023-05-03 22:25:25,828] Total return after 5 episodes: 670.000
+[INFO:2023-05-03 22:25:25,828] Mean return for each episode: 134.000, (std: 53.141)
+[INFO:2023-05-03 22:25:25,828] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:25,828] Episode: 28 | Timesteps Played: 32 | Mean Loss: 27.564 | Mean Reward: 3.125 | Target Updates: 0
+[INFO:2023-05-03 22:25:33,465] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:33,465] Steps taken over each of 5 episodes: 177, 281, 473, 183, 281
+[INFO:2023-05-03 22:25:33,465] Total return after 5 episodes: 1090.000
+[INFO:2023-05-03 22:25:33,465] Mean return for each episode: 218.000, (std: 101.666)
+[INFO:2023-05-03 22:25:33,465] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:33,466] Episode: 29 | Timesteps Played: 51 | Mean Loss: 28.698 | Mean Reward: 3.922 | Target Updates: 0
+[INFO:2023-05-03 22:25:40,721] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:40,721] Steps taken over each of 5 episodes: 341, 187, 177, 381, 191
+[INFO:2023-05-03 22:25:40,722] Total return after 5 episodes: 1330.000
+[INFO:2023-05-03 22:25:40,722] Mean return for each episode: 266.000, (std: 322.528)
+[INFO:2023-05-03 22:25:40,722] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:40,722] Episode: 30 | Timesteps Played: 49 | Mean Loss: 26.407 | Mean Reward: 5.510 | Target Updates: 0
+[INFO:2023-05-03 22:25:47,853] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:47,853] Steps taken over each of 5 episodes: 431, 199, 251, 323, 161
+[INFO:2023-05-03 22:25:47,853] Total return after 5 episodes: 1290.000
+[INFO:2023-05-03 22:25:47,853] Mean return for each episode: 258.000, (std: 61.774)
+[INFO:2023-05-03 22:25:47,853] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:47,853] Episode: 31 | Timesteps Played: 46 | Mean Loss: 26.297 | Mean Reward: 3.913 | Target Updates: 0
+[INFO:2023-05-03 22:25:54,119] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:25:54,119] Steps taken over each of 5 episodes: 209, 209, 199, 181, 181
+[INFO:2023-05-03 22:25:54,119] Total return after 5 episodes: 810.000
+[INFO:2023-05-03 22:25:54,119] Mean return for each episode: 162.000, (std: 24.819)
+[INFO:2023-05-03 22:25:54,119] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:25:54,119] Episode: 32 | Timesteps Played: 46 | Mean Loss: 24.561 | Mean Reward: 3.696 | Target Updates: 0
+[INFO:2023-05-03 22:26:00,250] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:00,251] Steps taken over each of 5 episodes: 201, 201, 201, 201, 193
+[INFO:2023-05-03 22:26:00,251] Total return after 5 episodes: 600.000
+[INFO:2023-05-03 22:26:00,251] Mean return for each episode: 120.000, (std: 52.154)
+[INFO:2023-05-03 22:26:00,251] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:00,251] Episode: 33 | Timesteps Played: 44 | Mean Loss: 24.864 | Mean Reward: 2.727 | Target Updates: 0
+[INFO:2023-05-03 22:26:09,463] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:09,463] Steps taken over each of 5 episodes: 143, 215, 327, 289, 223
+[INFO:2023-05-03 22:26:09,463] Total return after 5 episodes: 1040.000
+[INFO:2023-05-03 22:26:09,463] Mean return for each episode: 208.000, (std: 130.445)
+[INFO:2023-05-03 22:26:09,463] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:09,464] Episode: 34 | Timesteps Played: 75 | Mean Loss: 24.111 | Mean Reward: 4.000 | Target Updates: 0
+[INFO:2023-05-03 22:26:15,349] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:15,349] Steps taken over each of 5 episodes: 165, 159, 177, 151, 225
+[INFO:2023-05-03 22:26:15,349] Total return after 5 episodes: 750.000
+[INFO:2023-05-03 22:26:15,349] Mean return for each episode: 150.000, (std: 56.214)
+[INFO:2023-05-03 22:26:15,349] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:15,349] Episode: 35 | Timesteps Played: 43 | Mean Loss: 27.054 | Mean Reward: 3.256 | Target Updates: 0
+[INFO:2023-05-03 22:26:22,041] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:22,042] Steps taken over each of 5 episodes: 185, 167, 173, 133, 169
+[INFO:2023-05-03 22:26:22,042] Total return after 5 episodes: 490.000
+[INFO:2023-05-03 22:26:22,042] Mean return for each episode: 98.000, (std: 16.000)
+[INFO:2023-05-03 22:26:22,042] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:22,042] Episode: 36 | Timesteps Played: 54 | Mean Loss: 30.607 | Mean Reward: 2.963 | Target Updates: 0
+[INFO:2023-05-03 22:26:26,415] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:26,415] Steps taken over each of 5 episodes: 185, 135, 165, 185, 135
+[INFO:2023-05-03 22:26:26,415] Total return after 5 episodes: 490.000
+[INFO:2023-05-03 22:26:26,415] Mean return for each episode: 98.000, (std: 37.094)
+[INFO:2023-05-03 22:26:26,415] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:26,415] Episode: 37 | Timesteps Played: 27 | Mean Loss: 22.748 | Mean Reward: 2.963 | Target Updates: 0
+[INFO:2023-05-03 22:26:31,783] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:31,783] Steps taken over each of 5 episodes: 185, 333, 147, 185, 183
+[INFO:2023-05-03 22:26:31,784] Total return after 5 episodes: 810.000
+[INFO:2023-05-03 22:26:31,784] Mean return for each episode: 162.000, (std: 155.100)
+[INFO:2023-05-03 22:26:31,784] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:31,784] Episode: 38 | Timesteps Played: 33 | Mean Loss: 22.363 | Mean Reward: 2.121 | Target Updates: 0
+[INFO:2023-05-03 22:26:37,404] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:37,404] Steps taken over each of 5 episodes: 185, 367, 169, 309, 185
+[INFO:2023-05-03 22:26:37,404] Total return after 5 episodes: 1480.000
+[INFO:2023-05-03 22:26:37,404] Mean return for each episode: 296.000, (std: 301.171)
+[INFO:2023-05-03 22:26:37,404] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:37,404] Episode: 39 | Timesteps Played: 32 | Mean Loss: 24.102 | Mean Reward: 2.188 | Target Updates: 0
+[INFO:2023-05-03 22:26:44,755] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:44,755] Steps taken over each of 5 episodes: 207, 293, 345, 249, 323
+[INFO:2023-05-03 22:26:44,755] Total return after 5 episodes: 1150.000
+[INFO:2023-05-03 22:26:44,755] Mean return for each episode: 230.000, (std: 99.599)
+[INFO:2023-05-03 22:26:44,755] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:44,755] Episode: 40 | Timesteps Played: 46 | Mean Loss: 23.465 | Mean Reward: 2.391 | Target Updates: 0
+[INFO:2023-05-03 22:26:54,014] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:26:54,014] Steps taken over each of 5 episodes: 185, 341, 185, 177, 509
+[INFO:2023-05-03 22:26:54,014] Total return after 5 episodes: 970.000
+[INFO:2023-05-03 22:26:54,014] Mean return for each episode: 194.000, (std: 139.513)
+[INFO:2023-05-03 22:26:54,015] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:26:54,015] Episode: 41 | Timesteps Played: 73 | Mean Loss: 29.021 | Mean Reward: 6.438 | Target Updates: 0
+[INFO:2023-05-03 22:27:00,019] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:00,019] Steps taken over each of 5 episodes: 185, 225, 185, 333, 181
+[INFO:2023-05-03 22:27:00,019] Total return after 5 episodes: 880.000
+[INFO:2023-05-03 22:27:00,020] Mean return for each episode: 176.000, (std: 111.104)
+[INFO:2023-05-03 22:27:00,020] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:00,020] Episode: 42 | Timesteps Played: 39 | Mean Loss: 26.463 | Mean Reward: 5.128 | Target Updates: 0
+[INFO:2023-05-03 22:27:06,588] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:06,589] Steps taken over each of 5 episodes: 185, 329, 185, 161, 199
+[INFO:2023-05-03 22:27:06,589] Total return after 5 episodes: 890.000
+[INFO:2023-05-03 22:27:06,589] Mean return for each episode: 178.000, (std: 124.643)
+[INFO:2023-05-03 22:27:06,589] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:06,589] Episode: 43 | Timesteps Played: 47 | Mean Loss: 26.074 | Mean Reward: 3.617 | Target Updates: 0
+[INFO:2023-05-03 22:27:13,463] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:13,463] Steps taken over each of 5 episodes: 175, 351, 159, 215, 217
+[INFO:2023-05-03 22:27:13,463] Total return after 5 episodes: 970.000
+[INFO:2023-05-03 22:27:13,463] Mean return for each episode: 194.000, (std: 59.195)
+[INFO:2023-05-03 22:27:13,463] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:13,463] Episode: 44 | Timesteps Played: 51 | Mean Loss: 26.569 | Mean Reward: 5.686 | Target Updates: 0
+[INFO:2023-05-03 22:27:19,720] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:19,720] Steps taken over each of 5 episodes: 201, 209, 201, 201, 201
+[INFO:2023-05-03 22:27:19,720] Total return after 5 episodes: 520.000
+[INFO:2023-05-03 22:27:19,720] Mean return for each episode: 104.000, (std: 29.394)
+[INFO:2023-05-03 22:27:19,720] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:19,720] Episode: 45 | Timesteps Played: 46 | Mean Loss: 21.347 | Mean Reward: 4.348 | Target Updates: 0
+[INFO:2023-05-03 22:27:26,250] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:26,250] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-03 22:27:26,250] Total return after 5 episodes: 500.000
+[INFO:2023-05-03 22:27:26,250] Mean return for each episode: 100.000, (std: 10.954)
+[INFO:2023-05-03 22:27:26,250] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:26,250] Episode: 46 | Timesteps Played: 48 | Mean Loss: 27.767 | Mean Reward: 3.750 | Target Updates: 0
+[INFO:2023-05-03 22:27:33,659] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:33,659] Steps taken over each of 5 episodes: 201, 201, 201, 593, 249
+[INFO:2023-05-03 22:27:33,659] Total return after 5 episodes: 940.000
+[INFO:2023-05-03 22:27:33,659] Mean return for each episode: 188.000, (std: 134.670)
+[INFO:2023-05-03 22:27:33,659] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:33,660] Episode: 47 | Timesteps Played: 49 | Mean Loss: 27.288 | Mean Reward: 4.082 | Target Updates: 0
+[INFO:2023-05-03 22:27:39,860] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:39,860] Steps taken over each of 5 episodes: 375, 145, 201, 457, 217
+[INFO:2023-05-03 22:27:39,860] Total return after 5 episodes: 1460.000
+[INFO:2023-05-03 22:27:39,860] Mean return for each episode: 292.000, (std: 166.901)
+[INFO:2023-05-03 22:27:39,860] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:39,860] Episode: 48 | Timesteps Played: 36 | Mean Loss: 28.038 | Mean Reward: 2.778 | Target Updates: 0
+[INFO:2023-05-03 22:27:45,206] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:45,206] Steps taken over each of 5 episodes: 201, 223, 177, 201, 201
+[INFO:2023-05-03 22:27:45,206] Total return after 5 episodes: 510.000
+[INFO:2023-05-03 22:27:45,206] Mean return for each episode: 102.000, (std: 28.566)
+[INFO:2023-05-03 22:27:45,206] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:45,206] Episode: 49 | Timesteps Played: 34 | Mean Loss: 26.677 | Mean Reward: 3.824 | Target Updates: 0
+[INFO:2023-05-03 22:27:51,488] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:51,489] Steps taken over each of 5 episodes: 135, 135, 137, 143, 143
+[INFO:2023-05-03 22:27:51,489] Total return after 5 episodes: 550.000
+[INFO:2023-05-03 22:27:51,489] Mean return for each episode: 110.000, (std: 27.568)
+[INFO:2023-05-03 22:27:51,489] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:51,489] Episode: 50 | Timesteps Played: 55 | Mean Loss: 29.380 | Mean Reward: 4.727 | Target Updates: 0
+[INFO:2023-05-03 22:27:58,143] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:27:58,143] Steps taken over each of 5 episodes: 197, 173, 223, 191, 177
+[INFO:2023-05-03 22:27:58,143] Total return after 5 episodes: 660.000
+[INFO:2023-05-03 22:27:58,143] Mean return for each episode: 132.000, (std: 24.819)
+[INFO:2023-05-03 22:27:58,143] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:27:58,144] Episode: 51 | Timesteps Played: 52 | Mean Loss: 24.988 | Mean Reward: 3.462 | Target Updates: 0
+[INFO:2023-05-03 22:28:07,768] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:28:07,768] Steps taken over each of 5 episodes: 201, 201, 201, 547, 205
+[INFO:2023-05-03 22:28:07,768] Total return after 5 episodes: 950.000
+[INFO:2023-05-03 22:28:07,768] Mean return for each episode: 190.000, (std: 205.037)
+[INFO:2023-05-03 22:28:07,768] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:28:07,768] Episode: 52 | Timesteps Played: 74 | Mean Loss: 30.118 | Mean Reward: 3.784 | Target Updates: 0
+[INFO:2023-05-03 22:28:14,002] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:28:14,002] Steps taken over each of 5 episodes: 201, 217, 191, 201, 185
+[INFO:2023-05-03 22:28:14,002] Total return after 5 episodes: 750.000
+[INFO:2023-05-03 22:28:14,002] Mean return for each episode: 150.000, (std: 59.330)
+[INFO:2023-05-03 22:28:14,002] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:28:14,002] Episode: 53 | Timesteps Played: 45 | Mean Loss: 25.071 | Mean Reward: 1.556 | Target Updates: 0
+[INFO:2023-05-03 22:28:20,998] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:28:20,998] Steps taken over each of 5 episodes: 201, 195, 201, 217, 201
+[INFO:2023-05-03 22:28:20,998] Total return after 5 episodes: 560.000
+[INFO:2023-05-03 22:28:20,998] Mean return for each episode: 112.000, (std: 50.359)
+[INFO:2023-05-03 22:28:20,998] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:28:20,998] Episode: 54 | Timesteps Played: 55 | Mean Loss: 24.083 | Mean Reward: 2.909 | Target Updates: 0
+[INFO:2023-05-03 22:28:27,245] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:28:27,245] Steps taken over each of 5 episodes: 201, 151, 189, 165, 189
+[INFO:2023-05-03 22:28:27,245] Total return after 5 episodes: 670.000
+[INFO:2023-05-03 22:28:27,246] Mean return for each episode: 134.000, (std: 32.000)
+[INFO:2023-05-03 22:28:27,246] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:28:27,246] Episode: 55 | Timesteps Played: 44 | Mean Loss: 26.500 | Mean Reward: 3.409 | Target Updates: 0
+[INFO:2023-05-03 22:28:33,104] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:28:33,105] Steps taken over each of 5 episodes: 181, 217, 179, 205, 175
+[INFO:2023-05-03 22:28:33,105] Total return after 5 episodes: 430.000
+[INFO:2023-05-03 22:28:33,105] Mean return for each episode: 86.000, (std: 82.365)
+[INFO:2023-05-03 22:28:33,105] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:28:33,105] Episode: 56 | Timesteps Played: 38 | Mean Loss: 22.924 | Mean Reward: 3.158 | Target Updates: 0
+[INFO:2023-05-03 22:28:42,216] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:28:42,217] Steps taken over each of 5 episodes: 331, 601, 301, 329, 341
+[INFO:2023-05-03 22:28:42,217] Total return after 5 episodes: 2960.000
+[INFO:2023-05-03 22:28:42,217] Mean return for each episode: 592.000, (std: 629.012)
+[INFO:2023-05-03 22:28:42,217] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:28:42,217] Episode: 57 | Timesteps Played: 54 | Mean Loss: 26.171 | Mean Reward: 5.185 | Target Updates: 0
+[INFO:2023-05-03 22:28:45,320]
+*** Saving checkpoint to trained/dql.pt ***
+[INFO:2023-05-03 22:28:49,241] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 22:28:49,241] Steps taken over each of 5 episodes: 201, 183, 179, 185, 309
+[INFO:2023-05-03 22:28:49,241] Total return after 5 episodes: 1640.000
+[INFO:2023-05-03 22:28:49,241] Mean return for each episode: 328.000, (std: 324.062)
+[INFO:2023-05-03 22:28:49,241] ---------- END VALIDATION ----------
+[INFO:2023-05-03 22:28:49,241] Episode: 58 | Timesteps Played: 52 | Mean Loss: 27.134 | Mean Reward: 3.077 | Target Updates: 0
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 64, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 487, in train
+    loss.backward()
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

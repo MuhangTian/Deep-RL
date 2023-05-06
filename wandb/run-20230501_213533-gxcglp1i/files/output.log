@@ -1,0 +1,22 @@
+
+[INFO:2023-05-01 21:35:40,858] Frame 640 @ 146.9 FPS | Updates 1: pg_loss 2693.217 | value_loss 21686.846 | mean_return 0.312
+[INFO:2023-05-01 21:35:44,251] Frame 1280 @ 188.7 FPS | Updates 2: pg_loss 5225.418 | value_loss 119383.289 | mean_return 0.969
+[INFO:2023-05-01 21:35:48,209] Frame 1920 @ 161.7 FPS | Updates 3: pg_loss 249.926 | value_loss 3995.044 | mean_return 0.109
+[INFO:2023-05-01 21:35:51,740] Frame 2560 @ 181.3 FPS | Updates 4: pg_loss 2233.792 | value_loss 16370.589 | mean_return 0.266
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 54, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 320, in train
+    stats, envs, observations, prev_state = self.algo_step(
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 224, in algo_step
+    values_t = self.CriticNet(observations) # values are bsz x 1 x 1
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/mt361/Desktop/RL-Bandits/model.py", line 61, in forward
+    Z = F.gelu(self.conv3( # bsz*T x hidden_dim x H3 x W3
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/nn/modules/conv.py", line 463, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/nn/modules/conv.py", line 459, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,

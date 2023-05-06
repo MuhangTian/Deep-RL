@@ -1,0 +1,54 @@
+
+[INFO:2023-05-02 08:14:23,918] Frame 640 @ 132.1 FPS | Updates 1: pg_loss 2991.546 | value_loss 28976.494 | mean_return 0.375
+[INFO:2023-05-02 08:14:27,791] Frame 1280 @ 165.3 FPS | Updates 2: pg_loss 5015.082 | value_loss 92158.828 | mean_return 0.953
+[INFO:2023-05-02 08:14:32,035] Frame 1920 @ 150.8 FPS | Updates 3: pg_loss 447.359 | value_loss 9808.498 | mean_return 0.125
+[INFO:2023-05-02 08:14:35,744] Frame 2560 @ 172.6 FPS | Updates 4: pg_loss 2530.923 | value_loss 20068.916 | mean_return 0.312
+[INFO:2023-05-02 08:14:39,599] Frame 3200 @ 166.0 FPS | Updates 5: pg_loss 4825.472 | value_loss 101162.461 | mean_return 0.984
+[INFO:2023-05-02 08:14:43,828] Frame 3840 @ 151.4 FPS | Updates 6: pg_loss 134.104 | value_loss 1164.375 | mean_return 0.062
+[INFO:2023-05-02 08:14:47,691] Frame 4480 @ 165.7 FPS | Updates 7: pg_loss 2517.024 | value_loss 19989.566 | mean_return 0.328
+[INFO:2023-05-02 08:14:51,796] Frame 5120 @ 155.9 FPS | Updates 8: pg_loss 3123.714 | value_loss 55336.559 | mean_return 0.719
+[INFO:2023-05-02 08:14:56,013] Frame 5760 @ 151.8 FPS | Updates 9: pg_loss 858.277 | value_loss 6714.332 | mean_return 0.141
+[INFO:2023-05-02 08:14:59,850] Frame 6400 @ 166.8 FPS | Updates 10: pg_loss 4148.508 | value_loss 83661.438 | mean_return 0.625
+[INFO:2023-05-02 08:15:03,966] Frame 7040 @ 155.5 FPS | Updates 11: pg_loss 2205.413 | value_loss 39048.531 | mean_return 0.594
+[INFO:2023-05-02 08:15:08,151] Frame 7680 @ 152.9 FPS | Updates 12: pg_loss 1035.980 | value_loss 7005.000 | mean_return 0.156
+[INFO:2023-05-02 08:15:12,040] Frame 8320 @ 164.6 FPS | Updates 13: pg_loss 4013.696 | value_loss 78167.789 | mean_return 0.750
+[INFO:2023-05-02 08:15:16,045] Frame 8960 @ 159.8 FPS | Updates 14: pg_loss 1343.156 | value_loss 16091.632 | mean_return 0.438
+[INFO:2023-05-02 08:15:19,980] Frame 9600 @ 162.6 FPS | Updates 15: pg_loss 1666.866 | value_loss 20513.076 | mean_return 0.266
+[INFO:2023-05-02 08:15:23,925] Frame 10240 @ 162.3 FPS | Updates 16: pg_loss 2881.158 | value_loss 46208.441 | mean_return 0.531
+[INFO:2023-05-02 08:15:28,599] Frame 10880 @ 136.9 FPS | Updates 17: pg_loss 1816.990 | value_loss 24815.473 | mean_return 0.375
+[INFO:2023-05-02 08:15:32,513] Frame 11520 @ 163.5 FPS | Updates 18: pg_loss 3756.060 | value_loss 93086.633 | mean_return 0.625
+[INFO:2023-05-02 08:15:36,528] Frame 12160 @ 159.4 FPS | Updates 19: pg_loss 2596.865 | value_loss 35151.152 | mean_return 0.516
+[INFO:2023-05-02 08:15:40,718] Frame 12800 @ 152.8 FPS | Updates 20: pg_loss 732.289 | value_loss 14067.126 | mean_return 0.203
+[INFO:2023-05-02 08:15:44,617] Frame 13440 @ 164.1 FPS | Updates 21: pg_loss 2411.677 | value_loss 29182.553 | mean_return 0.359
+[INFO:2023-05-02 08:15:48,444] Frame 14080 @ 167.3 FPS | Updates 22: pg_loss 3560.765 | value_loss 73108.500 | mean_return 0.812
+[INFO:2023-05-02 08:15:52,513] Frame 14720 @ 157.3 FPS | Updates 23: pg_loss 1206.357 | value_loss 26155.688 | mean_return 0.438
+[INFO:2023-05-02 08:15:56,249] Frame 15360 @ 171.3 FPS | Updates 24: pg_loss 1840.311 | value_loss 13878.515 | mean_return 0.344
+[INFO:2023-05-02 08:16:00,087] Frame 16000 @ 166.8 FPS | Updates 25: pg_loss 2162.501 | value_loss 34324.840 | mean_return 0.594
+[INFO:2023-05-02 08:16:04,198] Frame 16640 @ 155.7 FPS | Updates 26: pg_loss 751.386 | value_loss 15067.822 | mean_return 0.234
+[INFO:2023-05-02 08:16:08,158] Frame 17280 @ 161.6 FPS | Updates 27: pg_loss 2193.023 | value_loss 36119.398 | mean_return 0.453
+[INFO:2023-05-02 08:16:12,060] Frame 17920 @ 164.0 FPS | Updates 28: pg_loss 2847.707 | value_loss 47766.457 | mean_return 0.641
+[INFO:2023-05-02 08:16:16,146] Frame 18560 @ 156.6 FPS | Updates 29: pg_loss 1482.997 | value_loss 28186.254 | mean_return 0.406
+[INFO:2023-05-02 08:16:20,076] Frame 19200 @ 162.8 FPS | Updates 30: pg_loss 1557.755 | value_loss 20104.379 | mean_return 0.328
+[INFO:2023-05-02 08:16:24,195] Frame 19840 @ 155.4 FPS | Updates 31: pg_loss 2520.836 | value_loss 45072.445 | mean_return 0.594
+[INFO:2023-05-02 08:16:28,396] Frame 20480 @ 152.4 FPS | Updates 32: pg_loss 143.966 | value_loss 4941.783 | mean_return 0.250
+[INFO:2023-05-02 08:16:32,319] Frame 21120 @ 163.2 FPS | Updates 33: pg_loss 2303.815 | value_loss 43368.742 | mean_return 0.578
+[INFO:2023-05-02 08:16:36,161] Frame 21760 @ 166.6 FPS | Updates 34: pg_loss 864.376 | value_loss 13970.267 | mean_return 0.359
+[INFO:2023-05-02 08:16:40,060] Frame 22400 @ 164.1 FPS | Updates 35: pg_loss 920.712 | value_loss 18268.512 | mean_return 0.438
+[INFO:2023-05-02 08:16:44,050] Frame 23040 @ 160.4 FPS | Updates 36: pg_loss 1100.984 | value_loss 15686.031 | mean_return 0.453
+[INFO:2023-05-02 08:16:48,089] Frame 23680 @ 158.4 FPS | Updates 37: pg_loss 522.384 | value_loss 15601.256 | mean_return 0.422
+[INFO:2023-05-02 08:16:52,213] Frame 24320 @ 155.2 FPS | Updates 38: pg_loss -186.054 | value_loss 10911.932 | mean_return 0.312
+[INFO:2023-05-02 08:16:56,196] Frame 24960 @ 160.7 FPS | Updates 39: pg_loss 980.273 | value_loss 18781.639 | mean_return 0.531
+[INFO:2023-05-02 08:17:00,415] Frame 25600 @ 151.7 FPS | Updates 40: pg_loss 28.127 | value_loss 20972.463 | mean_return 0.516
+[INFO:2023-05-02 08:17:04,306] Frame 26240 @ 164.5 FPS | Updates 41: pg_loss 116.776 | value_loss 7718.133 | mean_return 0.312
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 54, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 322, in train
+    stats, envs, observations, prev_state = self.algo_step(
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 260, in algo_step
+    value_total_loss.backward()         # perform gradient descent
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

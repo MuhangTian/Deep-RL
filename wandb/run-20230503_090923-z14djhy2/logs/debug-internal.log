@@ -1,0 +1,404 @@
+2023-05-03 09:09:23,085 INFO    StreamThr :84314 [internal.py:wandb_internal():86] W&B internal server running at pid: 84314, started at: 2023-05-03 09:09:23.084374
+2023-05-03 09:09:23,086 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status
+2023-05-03 09:09:23,088 INFO    WriterThread:84314 [datastore.py:open_for_write():85] open: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/run-z14djhy2.wandb
+2023-05-03 09:09:23,089 DEBUG   SenderThread:84314 [sender.py:send():375] send: header
+2023-05-03 09:09:23,109 DEBUG   SenderThread:84314 [sender.py:send():375] send: run
+2023-05-03 09:09:23,448 INFO    SenderThread:84314 [dir_watcher.py:__init__():219] watching files in: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files
+2023-05-03 09:09:23,449 INFO    SenderThread:84314 [sender.py:_start_run_threads():1124] run started: z14djhy2 with start time 1683119363.083382
+2023-05-03 09:09:23,449 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:09:23,449 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:09:23,452 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: check_version
+2023-05-03 09:09:23,453 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: check_version
+2023-05-03 09:09:23,787 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: run_start
+2023-05-03 09:09:23,805 DEBUG   HandlerThread:84314 [system_info.py:__init__():31] System info init
+2023-05-03 09:09:23,806 DEBUG   HandlerThread:84314 [system_info.py:__init__():46] System info init done
+2023-05-03 09:09:23,806 INFO    HandlerThread:84314 [system_monitor.py:start():181] Starting system monitor
+2023-05-03 09:09:23,806 INFO    SystemMonitor:84314 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-05-03 09:09:23,806 INFO    HandlerThread:84314 [system_monitor.py:probe():201] Collecting system info
+2023-05-03 09:09:23,807 INFO    SystemMonitor:84314 [interfaces.py:start():190] Started cpu monitoring
+2023-05-03 09:09:23,807 INFO    SystemMonitor:84314 [interfaces.py:start():190] Started disk monitoring
+2023-05-03 09:09:23,807 DEBUG   HandlerThread:84314 [system_info.py:probe():195] Probing system
+2023-05-03 09:09:23,808 INFO    SystemMonitor:84314 [interfaces.py:start():190] Started memory monitoring
+2023-05-03 09:09:23,809 INFO    SystemMonitor:84314 [interfaces.py:start():190] Started network monitoring
+2023-05-03 09:09:23,817 DEBUG   HandlerThread:84314 [system_info.py:_probe_git():180] Probing git
+2023-05-03 09:09:23,838 DEBUG   HandlerThread:84314 [system_info.py:_probe_git():188] Probing git done
+2023-05-03 09:09:23,838 DEBUG   HandlerThread:84314 [system_info.py:probe():240] Probing system done
+2023-05-03 09:09:23,838 DEBUG   HandlerThread:84314 [system_monitor.py:probe():210] {'os': 'macOS-10.16-x86_64-i386-64bit', 'python': '3.9.16', 'heartbeatAt': '2023-05-03T13:09:23.808396', 'startedAt': '2023-05-03T13:09:23.070929', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/Users/mt361/Desktop/RL-Bandits/train.py', 'codePath': 'train.py', 'git': {'remote': 'git@github.com:MuhangTian/Deep-RL.git', 'commit': 'e9b4284cf0da9b766339973918511ae956a0901f'}, 'email': 'mt361@duke.edu', 'root': '/Users/mt361/Desktop/RL-Bandits', 'host': 'MacBook-Pro-73.local', 'username': 'mt361', 'executable': '/usr/local/anaconda3/envs/RL/bin/python', 'cpu_count': 12, 'cpu_count_logical': 12, 'cpu_freq': {'current': 2400, 'min': 2400, 'max': 2400}, 'cpu_freq_per_core': [{'current': 2400, 'min': 2400, 'max': 2400}], 'disk': {'total': 926.3517189025879, 'used': 11.967166900634766}, 'memory': {'total': 16.0}}
+2023-05-03 09:09:23,838 INFO    HandlerThread:84314 [system_monitor.py:probe():211] Finished collecting system info
+2023-05-03 09:09:23,838 INFO    HandlerThread:84314 [system_monitor.py:probe():214] Publishing system info
+2023-05-03 09:09:23,839 DEBUG   HandlerThread:84314 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-05-03 09:09:23,839 DEBUG   HandlerThread:84314 [system_info.py:_save_pip():67] Saving pip packages done
+2023-05-03 09:09:23,839 DEBUG   HandlerThread:84314 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-05-03 09:09:24,456 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_created():278] file/dir created: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:09:24,456 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_created():278] file/dir created: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/requirements.txt
+2023-05-03 09:09:24,456 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_created():278] file/dir created: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/conda-environment.yaml
+2023-05-03 09:09:26,303 DEBUG   HandlerThread:84314 [system_info.py:_save_conda():86] Saving conda packages done
+2023-05-03 09:09:26,304 INFO    HandlerThread:84314 [system_monitor.py:probe():216] Finished publishing system info
+2023-05-03 09:09:26,307 DEBUG   SenderThread:84314 [sender.py:send():375] send: files
+2023-05-03 09:09:26,307 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-05-03 09:09:26,311 DEBUG   SenderThread:84314 [sender.py:send():375] send: telemetry
+2023-05-03 09:09:26,311 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:09:26,311 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:09:26,465 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/conda-environment.yaml
+2023-05-03 09:09:26,465 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_created():278] file/dir created: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-metadata.json
+2023-05-03 09:09:26,789 INFO    wandb-upload_0:84314 [upload_job.py:push():137] Uploaded file /var/folders/t0/wpl_qfjd5s3cczhlskc092xm0000gp/T/tmp98xqq1_bwandb/5ka24vti-wandb-metadata.json
+2023-05-03 09:09:27,467 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_created():278] file/dir created: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:28,298 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:09:29,477 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:31,487 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:33,490 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:09:33,498 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:35,508 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:37,514 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:38,575 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:09:39,524 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:41,315 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:09:41,315 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:09:41,535 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:43,545 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:43,635 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:09:45,556 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:47,566 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:48,739 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:09:49,578 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:51,586 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:53,597 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:53,764 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:09:54,602 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/config.yaml
+2023-05-03 09:09:55,607 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:56,320 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:09:56,320 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:09:57,617 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:09:59,208 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:09:59,628 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:01,638 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:03,648 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:04,426 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:05,659 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:07,669 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:09,637 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:09,679 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:11,359 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:10:11,359 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:10:11,690 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:13,700 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:14,648 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:15,710 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:17,721 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:19,728 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:19,882 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:21,738 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:23,748 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:23,812 DEBUG   SystemMonitor:84314 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-05-03 09:10:23,812 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:10:25,047 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:25,759 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:26,360 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:10:26,360 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:10:27,769 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:29,779 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:30,558 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:31,789 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:35,584 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:37,146 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:10:37,147 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:10:37,147 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:10:37,148 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:10:37,819 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:10:39,830 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:41,160 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:41,365 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:10:41,366 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:10:46,454 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:51,475 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:10:52,723 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:10:52,724 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:10:52,724 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:10:52,724 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:10:52,887 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:10:53,817 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:10:54,898 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:10:56,365 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:10:56,366 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:10:56,476 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:01,498 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:06,521 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:07,075 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:11:07,076 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:11:07,076 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:11:07,077 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:11:07,959 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:11:08,964 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:11:11,371 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:11:11,371 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:11:12,455 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:17,479 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:22,067 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:11:22,067 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:11:22,067 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:11:22,068 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:11:23,029 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:11:23,030 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:11:23,072 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:23,821 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:11:26,375 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:11:26,375 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:11:28,449 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:33,470 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:35,341 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:11:35,342 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:11:35,342 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:11:35,343 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:11:36,095 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:11:37,100 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:11:39,362 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:41,379 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:11:41,379 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:11:44,455 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:49,476 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:49,771 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:11:49,772 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:11:49,772 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:11:49,773 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:11:50,162 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:11:51,167 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:11:53,826 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:11:54,831 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:11:56,379 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:11:56,380 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:12:00,481 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:05,506 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:08,828 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:12:08,828 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:12:08,828 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:12:08,829 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:12:09,256 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:12:10,839 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:11,267 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:12:11,384 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:12:11,384 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:12:16,483 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:21,506 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:23,830 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:12:24,616 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:12:24,617 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:12:24,617 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:12:24,618 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:12:25,334 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:12:25,334 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:12:26,387 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:12:26,387 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:12:27,458 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:32,482 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:37,508 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:41,391 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:12:41,392 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:12:41,679 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:12:41,680 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:12:41,680 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:12:41,680 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:12:42,407 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:12:42,685 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:43,412 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:12:47,708 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:52,733 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:53,835 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:12:56,396 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:12:56,396 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:12:57,437 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:12:57,438 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:12:57,438 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:12:57,438 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:12:57,484 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:12:58,443 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:12:59,494 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:13:03,469 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:08,493 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:11,400 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:13:11,400 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:13:13,651 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:13:13,652 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:13:13,652 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:13,652 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:13:13,653 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:13:14,563 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:13:15,569 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:13:18,678 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:23,702 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:23,839 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:13:26,405 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:13:26,405 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:13:28,264 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:13:28,265 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:13:28,265 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:13:28,265 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:13:28,633 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:13:29,270 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:29,639 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:13:34,293 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:39,316 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:41,409 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:13:41,410 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:13:44,493 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:45,415 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:13:45,416 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:13:45,416 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:13:45,416 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:13:45,721 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:13:47,732 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:13:50,442 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:53,843 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:13:55,854 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:13:56,410 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:13:56,410 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:14:01,500 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:14:02,295 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:14:02,296 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:14:02,296 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:14:02,297 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:14:02,797 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:14:03,802 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:14:07,318 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:14:11,416 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: stop_status
+2023-05-03 09:14:11,416 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: stop_status
+2023-05-03 09:14:12,496 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:14:17,517 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:14:18,605 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: partial_history
+2023-05-03 09:14:18,605 DEBUG   SenderThread:84314 [sender.py:send():375] send: history
+2023-05-03 09:14:18,606 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 09:14:18,606 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:14:18,879 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:14:19,884 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:14:22,260 DEBUG   SenderThread:84314 [sender.py:send():375] send: exit
+2023-05-03 09:14:22,260 INFO    SenderThread:84314 [sender.py:send_exit():598] handling exit code: 1
+2023-05-03 09:14:22,260 INFO    SenderThread:84314 [sender.py:send_exit():600] handling runtime: 298
+2023-05-03 09:14:22,260 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:14:22,260 INFO    SenderThread:84314 [sender.py:send_exit():606] send defer
+2023-05-03 09:14:22,260 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:22,260 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 0
+2023-05-03 09:14:22,261 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:22,261 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 0
+2023-05-03 09:14:22,261 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 1
+2023-05-03 09:14:22,261 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:22,261 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 1
+2023-05-03 09:14:22,261 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:22,261 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 1
+2023-05-03 09:14:22,261 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 2
+2023-05-03 09:14:22,261 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:22,261 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 2
+2023-05-03 09:14:22,261 INFO    HandlerThread:84314 [system_monitor.py:finish():190] Stopping system monitor
+2023-05-03 09:14:22,261 INFO    HandlerThread:84314 [interfaces.py:finish():202] Joined cpu monitor
+2023-05-03 09:14:22,261 DEBUG   SystemMonitor:84314 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2023-05-03 09:14:22,261 INFO    HandlerThread:84314 [interfaces.py:finish():202] Joined disk monitor
+2023-05-03 09:14:22,261 DEBUG   SystemMonitor:84314 [system_monitor.py:_start():170] Publishing last batch of metrics
+2023-05-03 09:14:22,261 INFO    HandlerThread:84314 [interfaces.py:finish():202] Joined memory monitor
+2023-05-03 09:14:22,262 INFO    HandlerThread:84314 [interfaces.py:finish():202] Joined network monitor
+2023-05-03 09:14:22,262 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:22,262 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 2
+2023-05-03 09:14:22,262 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 3
+2023-05-03 09:14:22,262 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:22,262 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 3
+2023-05-03 09:14:22,262 DEBUG   SenderThread:84314 [sender.py:send():375] send: stats
+2023-05-03 09:14:22,263 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:22,263 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 3
+2023-05-03 09:14:22,263 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 4
+2023-05-03 09:14:22,263 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:22,263 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 4
+2023-05-03 09:14:22,263 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:22,263 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 4
+2023-05-03 09:14:22,263 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 5
+2023-05-03 09:14:22,263 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:22,263 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 5
+2023-05-03 09:14:22,263 DEBUG   SenderThread:84314 [sender.py:send():375] send: summary
+2023-05-03 09:14:22,264 INFO    SenderThread:84314 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 09:14:22,264 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:22,264 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 5
+2023-05-03 09:14:22,264 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 6
+2023-05-03 09:14:22,264 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:22,264 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 6
+2023-05-03 09:14:22,264 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:22,264 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 6
+2023-05-03 09:14:22,264 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 7
+2023-05-03 09:14:22,264 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:14:22,264 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:22,264 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 7
+2023-05-03 09:14:22,264 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:22,264 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 7
+2023-05-03 09:14:22,900 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:14:23,265 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: poll_exit
+2023-05-03 09:14:23,409 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 8
+2023-05-03 09:14:23,409 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: poll_exit
+2023-05-03 09:14:23,409 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:23,410 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 8
+2023-05-03 09:14:23,410 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:23,410 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 8
+2023-05-03 09:14:23,419 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 9
+2023-05-03 09:14:23,419 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:23,420 DEBUG   SenderThread:84314 [sender.py:send():375] send: artifact
+2023-05-03 09:14:23,420 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 9
+2023-05-03 09:14:23,901 INFO    Thread-12 :84314 [dir_watcher.py:_on_file_modified():295] file/dir modified: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:14:24,151 INFO    wandb-upload_0:84314 [upload_job.py:push():92] Skipped uploading /Users/mt361/Library/Application Support/wandb/artifacts/staging/tmpdwyljqw5
+2023-05-03 09:14:24,271 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: poll_exit
+2023-05-03 09:14:24,565 INFO    wandb-upload_1:84314 [upload_job.py:push():95] Uploaded file /Users/mt361/Library/Application Support/wandb/artifacts/staging/tmp3rx3ctgq
+2023-05-03 09:14:25,699 INFO    SenderThread:84314 [sender.py:send_artifact():1474] sent artifact job-git_github.com_MuhangTian_Deep-RL.git_train.py - {'id': 'QXJ0aWZhY3Q6NDQwNTAzODYw', 'digest': 'a33a0e141cb895755ce828b22acdd96f', 'state': 'PENDING', 'aliases': [], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjY1OTEzNDIz', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NDQwNDkwOTky', 'versionIndex': 6}}, 'version': 'latest'}
+2023-05-03 09:14:25,700 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:25,700 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 9
+2023-05-03 09:14:25,700 INFO    SenderThread:84314 [dir_watcher.py:finish():365] shutting down directory watcher
+2023-05-03 09:14:25,911 INFO    SenderThread:84314 [dir_watcher.py:finish():395] scan: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files
+2023-05-03 09:14:25,912 INFO    SenderThread:84314 [dir_watcher.py:finish():409] scan save: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/requirements.txt requirements.txt
+2023-05-03 09:14:25,912 INFO    SenderThread:84314 [dir_watcher.py:finish():409] scan save: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log output.log
+2023-05-03 09:14:25,917 INFO    SenderThread:84314 [dir_watcher.py:finish():409] scan save: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/config.yaml config.yaml
+2023-05-03 09:14:25,920 INFO    SenderThread:84314 [dir_watcher.py:finish():409] scan save: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json wandb-summary.json
+2023-05-03 09:14:25,924 INFO    SenderThread:84314 [dir_watcher.py:finish():409] scan save: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/conda-environment.yaml conda-environment.yaml
+2023-05-03 09:14:25,928 INFO    SenderThread:84314 [dir_watcher.py:finish():409] scan save: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-metadata.json wandb-metadata.json
+2023-05-03 09:14:25,928 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 10
+2023-05-03 09:14:25,928 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: poll_exit
+2023-05-03 09:14:25,931 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:25,931 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 10
+2023-05-03 09:14:25,931 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:25,931 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 10
+2023-05-03 09:14:25,931 INFO    SenderThread:84314 [file_pusher.py:finish():168] shutting down file pusher
+2023-05-03 09:14:26,511 INFO    wandb-upload_2:84314 [upload_job.py:push():137] Uploaded file /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/config.yaml
+2023-05-03 09:14:26,512 INFO    wandb-upload_3:84314 [upload_job.py:push():137] Uploaded file /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/wandb-summary.json
+2023-05-03 09:14:26,512 INFO    wandb-upload_4:84314 [upload_job.py:push():137] Uploaded file /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/conda-environment.yaml
+2023-05-03 09:14:26,512 INFO    wandb-upload_0:84314 [upload_job.py:push():137] Uploaded file /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/requirements.txt
+2023-05-03 09:14:27,735 INFO    wandb-upload_1:84314 [upload_job.py:push():137] Uploaded file /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/files/output.log
+2023-05-03 09:14:27,941 INFO    Thread-11 :84314 [sender.py:transition_state():626] send defer: 11
+2023-05-03 09:14:27,945 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:27,945 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 11
+2023-05-03 09:14:27,946 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:27,946 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 11
+2023-05-03 09:14:27,946 INFO    SenderThread:84314 [file_pusher.py:join():173] waiting for file pusher
+2023-05-03 09:14:27,946 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 12
+2023-05-03 09:14:27,947 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:27,947 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 12
+2023-05-03 09:14:27,947 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:27,948 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 12
+2023-05-03 09:14:28,488 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 13
+2023-05-03 09:14:28,489 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:28,489 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 13
+2023-05-03 09:14:28,489 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: status_report
+2023-05-03 09:14:28,490 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:28,490 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 13
+2023-05-03 09:14:28,490 INFO    SenderThread:84314 [sender.py:transition_state():626] send defer: 14
+2023-05-03 09:14:28,491 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: defer
+2023-05-03 09:14:28,491 DEBUG   SenderThread:84314 [sender.py:send():375] send: final
+2023-05-03 09:14:28,491 INFO    HandlerThread:84314 [handler.py:handle_request_defer():170] handle defer: 14
+2023-05-03 09:14:28,491 DEBUG   SenderThread:84314 [sender.py:send():375] send: footer
+2023-05-03 09:14:28,491 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: defer
+2023-05-03 09:14:28,491 INFO    SenderThread:84314 [sender.py:send_request_defer():622] handle sender defer: 14
+2023-05-03 09:14:28,492 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: poll_exit
+2023-05-03 09:14:28,493 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: poll_exit
+2023-05-03 09:14:28,493 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: server_info
+2023-05-03 09:14:28,493 DEBUG   SenderThread:84314 [sender.py:send_request():402] send_request: server_info
+2023-05-03 09:14:28,497 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: get_summary
+2023-05-03 09:14:28,497 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: sampled_history
+2023-05-03 09:14:28,570 INFO    MainThread:84314 [wandb_run.py:_footer_history_summary_info():3476] rendering history
+2023-05-03 09:14:28,571 INFO    MainThread:84314 [wandb_run.py:_footer_history_summary_info():3508] rendering summary
+2023-05-03 09:14:28,572 INFO    MainThread:84314 [wandb_run.py:_footer_sync_info():3434] logging synced files
+2023-05-03 09:14:28,572 DEBUG   HandlerThread:84314 [handler.py:handle_request():144] handle_request: shutdown
+2023-05-03 09:14:28,573 INFO    HandlerThread:84314 [handler.py:finish():845] shutting down handler
+2023-05-03 09:14:29,494 INFO    WriterThread:84314 [datastore.py:close():298] close: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_090923-z14djhy2/run-z14djhy2.wandb
+2023-05-03 09:14:29,574 INFO    SenderThread:84314 [sender.py:finish():1550] shutting down sender
+2023-05-03 09:14:29,574 INFO    SenderThread:84314 [file_pusher.py:finish():168] shutting down file pusher
+2023-05-03 09:14:29,575 INFO    SenderThread:84314 [file_pusher.py:join():173] waiting for file pusher

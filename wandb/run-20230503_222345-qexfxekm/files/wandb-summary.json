@@ -1,0 +1,1 @@
+{"Mean Reward (Validation)": 328.0, "std Reward (Validation)": 324.06172251594296, "_timestamp": 1683167329.2420428, "_runtime": 303.31819677352905, "_step": 91, "Episode": 58, "Timesteps Played": 52, "Mean Loss": 27.13391712995676, "Mean Reward": 3.076923076923077, "Target Updates": 0, "Epsilon": 0.9977095000000754, "Network Updates": 2046, "_wandb": {"runtime": 304}}

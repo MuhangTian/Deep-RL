@@ -1,0 +1,36 @@
+[INFO:2023-05-03 10:09:58,580] Episode: 1 | Timesteps Played: 167 | Mean Loss: 0.000 | Mean Reward: 0.599 | Target Updates: 0
+[INFO:2023-05-03 10:09:58,826] Episode: 2 | Timesteps Played: 207 | Mean Loss: 0.000 | Mean Reward: 0.773 | Target Updates: 0
+[INFO:2023-05-03 10:10:01,929] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 10:10:01,929] Steps taken over each of 5 episodes: 181, 167, 169, 169, 205
+[INFO:2023-05-03 10:10:01,930] Total return after 5 episodes: 1190.000
+[INFO:2023-05-03 10:10:01,930] Mean return for each episode: 238.000, (std: 46.648)
+[INFO:2023-05-03 10:10:01,930] ---------- END VALIDATION ----------
+[INFO:2023-05-03 10:10:04,820] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 10:10:04,820] Steps taken over each of 5 episodes: 181, 167, 169, 169, 205
+[INFO:2023-05-03 10:10:04,820] Total return after 5 episodes: 1190.000
+[INFO:2023-05-03 10:10:04,820] Mean return for each episode: 238.000, (std: 46.648)
+[INFO:2023-05-03 10:10:04,820] ---------- END VALIDATION ----------
+[INFO:2023-05-03 10:10:07,680] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 10:10:07,680] Steps taken over each of 5 episodes: 181, 167, 169, 169, 205
+[INFO:2023-05-03 10:10:07,680] Total return after 5 episodes: 1190.000
+[INFO:2023-05-03 10:10:07,680] Mean return for each episode: 238.000, (std: 46.648)
+[INFO:2023-05-03 10:10:07,680] ---------- END VALIDATION ----------
+[INFO:2023-05-03 10:10:10,675] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-03 10:10:10,675] Steps taken over each of 5 episodes: 181, 167, 169, 169, 205
+[INFO:2023-05-03 10:10:10,675] Total return after 5 episodes: 1190.000
+[INFO:2023-05-03 10:10:10,675] Mean return for each episode: 238.000, (std: 46.648)
+[INFO:2023-05-03 10:10:10,675] ---------- END VALIDATION ----------
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 61, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 504, in train
+    utils.validate(self.Q_network, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
+  File "/Users/mt361/Desktop/RL-Bandits/utils.py", line 78, in validate
+    env_output = env.step(action)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/gymnasium/wrappers/order_enforcing.py", line 56, in step
+    return self.env.step(action)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/gymnasium/wrappers/env_checker.py", line 49, in step
+    return self.env.step(action)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/shimmy/atari_env.py", line 294, in step
+    reward += self.ale.act(action)
+KeyboardInterrupt

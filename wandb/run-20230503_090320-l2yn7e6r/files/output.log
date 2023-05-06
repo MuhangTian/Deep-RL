@@ -1,0 +1,43 @@
+[INFO:2023-05-03 09:03:24,209] **FILLING BUFFER** | Episode: 1 | Timesteps Played: 167 | Mean Loss: 0.000 | Mean Reward: 0.599 | Target Updates: 0
+[INFO:2023-05-03 09:03:24,450] **FILLING BUFFER** | Episode: 2 | Timesteps Played: 207 | Mean Loss: 0.000 | Mean Reward: 0.773 | Target Updates: 0
+[INFO:2023-05-03 09:03:24,690] **FILLING BUFFER** | Episode: 3 | Timesteps Played: 207 | Mean Loss: 0.000 | Mean Reward: 0.773 | Target Updates: 0
+[INFO:2023-05-03 09:03:24,917] **FILLING BUFFER** | Episode: 4 | Timesteps Played: 179 | Mean Loss: 0.000 | Mean Reward: 0.559 | Target Updates: 0
+[INFO:2023-05-03 09:03:25,164] **FILLING BUFFER** | Episode: 5 | Timesteps Played: 203 | Mean Loss: 0.000 | Mean Reward: 0.640 | Target Updates: 0
+[INFO:2023-05-03 09:03:25,381] **FILLING BUFFER** | Episode: 6 | Timesteps Played: 185 | Mean Loss: 0.000 | Mean Reward: 0.541 | Target Updates: 0
+[INFO:2023-05-03 09:03:25,619] **FILLING BUFFER** | Episode: 7 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.785 | Target Updates: 0
+[INFO:2023-05-03 09:03:25,859] **FILLING BUFFER** | Episode: 8 | Timesteps Played: 191 | Mean Loss: 0.000 | Mean Reward: 0.628 | Target Updates: 0
+[INFO:2023-05-03 09:03:26,086] **FILLING BUFFER** | Episode: 9 | Timesteps Played: 193 | Mean Loss: 0.000 | Mean Reward: 0.518 | Target Updates: 0
+[INFO:2023-05-03 09:03:26,292] **FILLING BUFFER** | Episode: 10 | Timesteps Played: 175 | Mean Loss: 0.000 | Mean Reward: 0.343 | Target Updates: 0
+[INFO:2023-05-03 09:03:26,529] **FILLING BUFFER** | Episode: 11 | Timesteps Played: 193 | Mean Loss: 0.000 | Mean Reward: 0.466 | Target Updates: 0
+[INFO:2023-05-03 09:03:26,758] **FILLING BUFFER** | Episode: 12 | Timesteps Played: 179 | Mean Loss: 0.000 | Mean Reward: 0.559 | Target Updates: 0
+[INFO:2023-05-03 09:03:26,969] **FILLING BUFFER** | Episode: 13 | Timesteps Played: 173 | Mean Loss: 0.000 | Mean Reward: 0.405 | Target Updates: 0
+[INFO:2023-05-03 09:03:27,188] **FILLING BUFFER** | Episode: 14 | Timesteps Played: 179 | Mean Loss: 0.000 | Mean Reward: 0.615 | Target Updates: 0
+[INFO:2023-05-03 09:03:27,419] **FILLING BUFFER** | Episode: 15 | Timesteps Played: 171 | Mean Loss: 0.000 | Mean Reward: 0.643 | Target Updates: 0
+[INFO:2023-05-03 09:03:27,627] **FILLING BUFFER** | Episode: 16 | Timesteps Played: 177 | Mean Loss: 0.000 | Mean Reward: 0.339 | Target Updates: 0
+[INFO:2023-05-03 09:03:27,785] **FILLING BUFFER** | Episode: 17 | Timesteps Played: 111 | Mean Loss: 0.000 | Mean Reward: 0.541 | Target Updates: 0
+[INFO:2023-05-03 09:03:28,005] **FILLING BUFFER** | Episode: 18 | Timesteps Played: 173 | Mean Loss: 0.000 | Mean Reward: 0.347 | Target Updates: 0
+[INFO:2023-05-03 09:03:28,224] **FILLING BUFFER** | Episode: 19 | Timesteps Played: 169 | Mean Loss: 0.000 | Mean Reward: 0.710 | Target Updates: 0
+[INFO:2023-05-03 09:03:28,463] **FILLING BUFFER** | Episode: 20 | Timesteps Played: 199 | Mean Loss: 0.000 | Mean Reward: 0.603 | Target Updates: 0
+[INFO:2023-05-03 09:03:28,706] **FILLING BUFFER** | Episode: 21 | Timesteps Played: 193 | Mean Loss: 0.000 | Mean Reward: 0.570 | Target Updates: 0
+[INFO:2023-05-03 09:03:28,876] **FILLING BUFFER** | Episode: 22 | Timesteps Played: 123 | Mean Loss: 0.000 | Mean Reward: 0.488 | Target Updates: 0
+[INFO:2023-05-03 09:03:29,049] **FILLING BUFFER** | Episode: 23 | Timesteps Played: 127 | Mean Loss: 0.000 | Mean Reward: 0.551 | Target Updates: 0
+[INFO:2023-05-03 09:03:29,255] **FILLING BUFFER** | Episode: 24 | Timesteps Played: 165 | Mean Loss: 0.000 | Mean Reward: 0.606 | Target Updates: 0
+[INFO:2023-05-03 09:03:29,471] **FILLING BUFFER** | Episode: 25 | Timesteps Played: 169 | Mean Loss: 0.000 | Mean Reward: 0.355 | Target Updates: 0
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 61, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 444, in train
+    reward, next_frame, done = env_output[1], self.preprocess(env_output[0]), utils.get_done(env)
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 382, in preprocess
+    resized_image_tensor = transform(image_tensor)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torchvision/transforms/transforms.py", line 95, in __call__
+    img = t(img)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torchvision/transforms/transforms.py", line 1580, in forward
+    return F.rgb_to_grayscale(img, num_output_channels=self.num_output_channels)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torchvision/transforms/functional.py", line 1299, in rgb_to_grayscale
+    return F_t.rgb_to_grayscale(img, num_output_channels)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torchvision/transforms/_functional_tensor.py", line 158, in rgb_to_grayscale
+    l_img = (0.2989 * r + 0.587 * g + 0.114 * b).to(img.dtype)
+KeyboardInterrupt

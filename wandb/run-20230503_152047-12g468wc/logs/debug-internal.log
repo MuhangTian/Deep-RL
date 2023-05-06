@@ -1,0 +1,24 @@
+2023-05-03 15:20:47,432 INFO    StreamThr :2993 [internal.py:wandb_internal():86] W&B internal server running at pid: 2993, started at: 2023-05-03 15:20:47.432033
+2023-05-03 15:20:47,433 DEBUG   HandlerThread:2993 [handler.py:handle_request():144] handle_request: status
+2023-05-03 15:20:47,435 INFO    WriterThread:2993 [datastore.py:open_for_write():85] open: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/run-12g468wc.wandb
+2023-05-03 15:20:47,436 DEBUG   SenderThread:2993 [sender.py:send():375] send: header
+2023-05-03 15:20:47,457 DEBUG   SenderThread:2993 [sender.py:send():375] send: run
+2023-05-03 15:20:47,907 INFO    SenderThread:2993 [dir_watcher.py:__init__():219] watching files in: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/files
+2023-05-03 15:20:47,907 INFO    SenderThread:2993 [sender.py:_start_run_threads():1124] run started: 12g468wc with start time 1683141647.431002
+2023-05-03 15:20:47,907 DEBUG   SenderThread:2993 [sender.py:send_request():402] send_request: summary_record
+2023-05-03 15:20:47,907 INFO    SenderThread:2993 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-05-03 15:20:47,910 DEBUG   HandlerThread:2993 [handler.py:handle_request():144] handle_request: check_version
+2023-05-03 15:20:47,910 DEBUG   SenderThread:2993 [sender.py:send_request():402] send_request: check_version
+2023-05-03 15:20:48,245 DEBUG   HandlerThread:2993 [handler.py:handle_request():144] handle_request: shutdown
+2023-05-03 15:20:48,246 INFO    HandlerThread:2993 [handler.py:finish():845] shutting down handler
+2023-05-03 15:20:48,259 INFO    SenderThread:2993 [sender.py:finish():1550] shutting down sender
+2023-05-03 15:20:48,259 INFO    SenderThread:2993 [dir_watcher.py:finish():365] shutting down directory watcher
+2023-05-03 15:20:48,914 INFO    SenderThread:2993 [dir_watcher.py:_on_file_created():278] file/dir created: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/files/wandb-summary.json
+2023-05-03 15:20:48,915 INFO    SenderThread:2993 [dir_watcher.py:finish():395] scan: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/files
+2023-05-03 15:20:48,915 INFO    SenderThread:2993 [dir_watcher.py:finish():409] scan save: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/files/config.yaml config.yaml
+2023-05-03 15:20:48,915 INFO    WriterThread:2993 [datastore.py:close():298] close: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/run-12g468wc.wandb
+2023-05-03 15:20:48,916 INFO    SenderThread:2993 [dir_watcher.py:finish():409] scan save: /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/files/wandb-summary.json wandb-summary.json
+2023-05-03 15:20:48,916 INFO    SenderThread:2993 [file_pusher.py:finish():168] shutting down file pusher
+2023-05-03 15:20:48,918 INFO    SenderThread:2993 [file_pusher.py:join():173] waiting for file pusher
+2023-05-03 15:20:50,217 INFO    wandb-upload_0:2993 [upload_job.py:push():137] Uploaded file /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/files/config.yaml
+2023-05-03 15:20:50,444 INFO    wandb-upload_1:2993 [upload_job.py:push():137] Uploaded file /Users/mt361/Desktop/RL-Bandits/wandb/run-20230503_152047-12g468wc/files/wandb-summary.json

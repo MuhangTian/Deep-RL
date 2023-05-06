@@ -1,0 +1,39 @@
+
+[INFO:2023-05-02 02:31:55,551] Frame 640 @ 136.4 FPS | Updates 1: pg_loss 2693.217 | value_loss 21686.846 | mean_return 0.312
+[INFO:2023-05-02 02:31:59,123] Frame 1280 @ 179.2 FPS | Updates 2: pg_loss 5225.418 | value_loss 119383.289 | mean_return 0.969
+[INFO:2023-05-02 02:32:02,997] Frame 1920 @ 165.2 FPS | Updates 3: pg_loss 249.926 | value_loss 3995.044 | mean_return 0.109
+[INFO:2023-05-02 02:32:06,811] Frame 2560 @ 167.8 FPS | Updates 4: pg_loss 2233.792 | value_loss 16370.589 | mean_return 0.266
+[INFO:2023-05-02 02:32:10,543] Frame 3200 @ 171.5 FPS | Updates 5: pg_loss 6082.324 | value_loss 156875.984 | mean_return 1.188
+[INFO:2023-05-02 02:32:14,479] Frame 3840 @ 162.6 FPS | Updates 6: pg_loss 2095.245 | value_loss 157726.469 | mean_return 0.438
+[INFO:2023-05-02 02:32:17,989] Frame 4480 @ 182.4 FPS | Updates 7: pg_loss 2331.381 | value_loss 20710.090 | mean_return 0.312
+[INFO:2023-05-02 02:32:21,584] Frame 5120 @ 178.0 FPS | Updates 8: pg_loss 4860.695 | value_loss 117973.914 | mean_return 0.922
+[INFO:2023-05-02 02:32:25,538] Frame 5760 @ 161.9 FPS | Updates 9: pg_loss 1160.038 | value_loss 13960.412 | mean_return 0.266
+[INFO:2023-05-02 02:32:29,092] Frame 6400 @ 180.1 FPS | Updates 10: pg_loss 3339.468 | value_loss 40739.105 | mean_return 0.484
+[INFO:2023-05-02 02:32:32,761] Frame 7040 @ 174.4 FPS | Updates 11: pg_loss 4210.405 | value_loss 99163.797 | mean_return 0.844
+[INFO:2023-05-02 02:32:36,599] Frame 7680 @ 166.8 FPS | Updates 12: pg_loss 1122.398 | value_loss 10884.438 | mean_return 0.250
+[INFO:2023-05-02 02:32:40,162] Frame 8320 @ 179.6 FPS | Updates 13: pg_loss 1823.738 | value_loss 19071.021 | mean_return 0.406
+[INFO:2023-05-02 02:32:43,851] Frame 8960 @ 173.5 FPS | Updates 14: pg_loss 4554.869 | value_loss 104849.555 | mean_return 0.781
+[INFO:2023-05-02 02:32:47,788] Frame 9600 @ 162.6 FPS | Updates 15: pg_loss 2255.475 | value_loss 41708.797 | mean_return 0.406
+[INFO:2023-05-02 02:32:51,435] Frame 10240 @ 175.5 FPS | Updates 16: pg_loss 2096.539 | value_loss 22943.539 | mean_return 0.344
+[INFO:2023-05-02 02:32:55,090] Frame 10880 @ 175.1 FPS | Updates 17: pg_loss 3559.011 | value_loss 66945.945 | mean_return 0.750
+[INFO:2023-05-02 02:32:59,018] Frame 11520 @ 163.0 FPS | Updates 18: pg_loss 2630.167 | value_loss 55362.512 | mean_return 0.406
+[INFO:2023-05-02 02:33:02,606] Frame 12160 @ 178.4 FPS | Updates 19: pg_loss 2131.902 | value_loss 22606.264 | mean_return 0.344
+[INFO:2023-05-02 02:33:06,191] Frame 12800 @ 178.5 FPS | Updates 20: pg_loss 4417.379 | value_loss 109036.875 | mean_return 0.766
+[INFO:2023-05-02 02:33:09,827] Frame 13440 @ 176.1 FPS | Updates 21: pg_loss 3071.877 | value_loss 58472.930 | mean_return 0.594
+[INFO:2023-05-02 02:33:13,699] Frame 14080 @ 165.3 FPS | Updates 22: pg_loss 1532.649 | value_loss 17448.285 | mean_return 0.297
+[INFO:2023-05-02 02:33:17,437] Frame 14720 @ 171.2 FPS | Updates 23: pg_loss 3067.745 | value_loss 45820.230 | mean_return 0.578
+[INFO:2023-05-02 02:33:21,144] Frame 15360 @ 172.7 FPS | Updates 24: pg_loss 3070.685 | value_loss 65139.180 | mean_return 0.562
+[INFO:2023-05-02 02:33:24,783] Frame 16000 @ 175.9 FPS | Updates 25: pg_loss 1135.227 | value_loss 12889.716 | mean_return 0.266
+[INFO:2023-05-02 02:33:28,270] Frame 16640 @ 183.5 FPS | Updates 26: pg_loss 3901.722 | value_loss 65188.602 | mean_return 0.641
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 55, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 320, in train
+    stats, envs, observations, prev_state = self.algo_step(
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 259, in algo_step
+    value_total_loss.backward()
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

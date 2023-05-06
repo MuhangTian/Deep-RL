@@ -1,0 +1,4 @@
+[INFO:2023-05-03 21:34:48,836] Episode: 1 | Timesteps Played: 157 | Mean Loss: 0.000 | Mean Reward: 0.573 | Target Updates: 0
+[INFO:2023-05-03 21:34:49,054] Episode: 2 | Timesteps Played: 139 | Mean Loss: 0.000 | Mean Reward: 0.504 | Target Updates: 0
+[INFO:2023-05-03 21:34:49,316] Episode: 3 | Timesteps Played: 195 | Mean Loss: 0.000 | Mean Reward: 0.718 | Target Updates: 0
+Time to stack: 0.002741542000000763

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 55, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 321, in train
+    stats, envs, observations, prev_state = self.algo_step(
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 261, in algo_step
+    -policy_total_loss.backward()       # perform gradient ascent
+TypeError: bad operand type for unary -: 'NoneType'

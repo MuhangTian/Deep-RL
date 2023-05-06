@@ -1,0 +1,25 @@
+
+[INFO:2023-05-02 09:11:10,659] Frame 640 @ 141.6 FPS | Updates 1: pg_loss 2405.373 | value_loss 18965.801 | mean_return 0.297
+[INFO:2023-05-02 09:11:14,339] Frame 1280 @ 173.9 FPS | Updates 2: pg_loss 5067.435 | value_loss 114530.250 | mean_return 1.078
+[INFO:2023-05-02 09:11:18,561] Frame 1920 @ 151.7 FPS | Updates 3: pg_loss 212.931 | value_loss 913.382 | mean_return 0.062
+[INFO:2023-05-02 09:11:22,243] Frame 2560 @ 173.8 FPS | Updates 4: pg_loss 2721.136 | value_loss 32044.369 | mean_return 0.328
+[INFO:2023-05-02 09:11:26,054] Frame 3200 @ 168.0 FPS | Updates 5: pg_loss 6423.682 | value_loss 154674.531 | mean_return 1.125
+[INFO:2023-05-02 09:11:30,322] Frame 3840 @ 150.0 FPS | Updates 6: pg_loss 507.763 | value_loss 6515.719 | mean_return 0.125
+[INFO:2023-05-02 09:11:34,136] Frame 4480 @ 167.8 FPS | Updates 7: pg_loss 2825.333 | value_loss 25233.955 | mean_return 0.312
+[INFO:2023-05-02 09:11:37,853] Frame 5120 @ 172.2 FPS | Updates 8: pg_loss 4398.004 | value_loss 82998.125 | mean_return 0.906
+[INFO:2023-05-02 09:11:41,962] Frame 5760 @ 155.8 FPS | Updates 9: pg_loss 352.557 | value_loss 4026.763 | mean_return 0.188
+[INFO:2023-05-02 09:11:45,635] Frame 6400 @ 174.3 FPS | Updates 10: pg_loss 2644.065 | value_loss 23878.664 | mean_return 0.297
+[INFO:2023-05-02 09:11:49,626] Frame 7040 @ 160.3 FPS | Updates 11: pg_loss 4631.542 | value_loss 111843.609 | mean_return 0.938
+[INFO:2023-05-02 09:11:53,466] Frame 7680 @ 166.7 FPS | Updates 12: pg_loss 1485.119 | value_loss 12451.679 | mean_return 0.203
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 54, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 326, in train
+    stats, envs, observations, prev_state = self.algo_step(
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 264, in algo_step
+    value_total_loss.backward()         # perform gradient descent
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

@@ -1,0 +1,14 @@
+
+[INFO:2023-05-04 00:17:09,003] Frame 4800 @ 165.8 FPS | Updates 1: pg_loss 14727.531 | value_loss 2986361.250 | mean_return 1.446
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 70, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 333, in train
+    stats, envs, observations, prev_state, prev_state_value = self.algo_step(
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 273, in algo_step
+    policy_total_loss.backward()
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

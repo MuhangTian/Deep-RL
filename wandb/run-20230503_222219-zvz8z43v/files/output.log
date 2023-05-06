@@ -1,0 +1,31 @@
+[INFO:2023-05-03 22:22:21,997] Episode: 1 | Timesteps Played: 42 | Mean Loss: 0.000 | Mean Reward: 3.095 | Target Updates: 0
+[INFO:2023-05-03 22:22:22,149] Episode: 2 | Timesteps Played: 51 | Mean Loss: 0.000 | Mean Reward: 2.157 | Target Updates: 0
+[INFO:2023-05-03 22:22:22,281] Episode: 3 | Timesteps Played: 43 | Mean Loss: 0.000 | Mean Reward: 4.419 | Target Updates: 0
+[INFO:2023-05-03 22:22:22,384] Episode: 4 | Timesteps Played: 27 | Mean Loss: 0.000 | Mean Reward: 2.593 | Target Updates: 0
+[INFO:2023-05-03 22:22:22,515] Episode: 5 | Timesteps Played: 40 | Mean Loss: 0.000 | Mean Reward: 2.500 | Target Updates: 0
+[INFO:2023-05-03 22:22:22,677] Episode: 6 | Timesteps Played: 57 | Mean Loss: 0.000 | Mean Reward: 4.386 | Target Updates: 0
+[INFO:2023-05-03 22:22:22,787] Episode: 7 | Timesteps Played: 31 | Mean Loss: 0.000 | Mean Reward: 1.613 | Target Updates: 0
+[INFO:2023-05-03 22:22:22,916] Episode: 8 | Timesteps Played: 39 | Mean Loss: 0.000 | Mean Reward: 3.333 | Target Updates: 0
+[INFO:2023-05-03 22:22:23,065] Episode: 9 | Timesteps Played: 50 | Mean Loss: 0.000 | Mean Reward: 3.600 | Target Updates: 0
+[INFO:2023-05-03 22:22:23,180] Episode: 10 | Timesteps Played: 31 | Mean Loss: 0.000 | Mean Reward: 3.871 | Target Updates: 0
+[INFO:2023-05-03 22:22:23,323] Episode: 11 | Timesteps Played: 48 | Mean Loss: 0.000 | Mean Reward: 3.333 | Target Updates: 0
+[INFO:2023-05-03 22:22:23,451] Episode: 12 | Timesteps Played: 40 | Mean Loss: 0.000 | Mean Reward: 3.000 | Target Updates: 0
+[INFO:2023-05-03 22:22:26,511] Episode: 13 | Timesteps Played: 49 | Mean Loss: 23.737 | Mean Reward: 3.878 | Target Updates: 0
+[INFO:2023-05-03 22:22:29,662] Episode: 14 | Timesteps Played: 40 | Mean Loss: 28.225 | Mean Reward: 2.250 | Target Updates: 0
+[INFO:2023-05-03 22:22:34,414] Episode: 15 | Timesteps Played: 59 | Mean Loss: 29.698 | Mean Reward: 3.898 | Target Updates: 0
+[INFO:2023-05-03 22:22:41,178] Episode: 16 | Timesteps Played: 85 | Mean Loss: 45.524 | Mean Reward: 8.000 | Target Updates: 0
+[INFO:2023-05-03 22:22:45,190] Episode: 17 | Timesteps Played: 50 | Mean Loss: 55.403 | Mean Reward: 4.400 | Target Updates: 0
+Traceback (most recent call last):
+  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 64, in <module>
+    algo.train()
+  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 481, in train
+    q_values = self.Q_network(replay_states).gather(1, replay_actions.unsqueeze(1)).squeeze()
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/mt361/Desktop/RL-Bandits/model.py", line 193, in forward
+    X = self.fc2(X)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/anaconda3/envs/RL/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+KeyboardInterrupt

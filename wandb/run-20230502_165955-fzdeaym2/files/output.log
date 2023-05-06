@@ -1,0 +1,959 @@
+
+[INFO:2023-05-02 17:00:07,489] Frame 1200 @ 144.7 FPS | Updates 1: pg_loss 14995.669 | value_loss 401977.719 | mean_return 0.708
+[INFO:2023-05-02 17:00:15,559] Frame 2400 @ 148.7 FPS | Updates 2: pg_loss 803.034 | value_loss 13093.568 | mean_return 0.142
+[INFO:2023-05-02 17:00:23,186] Frame 3600 @ 157.3 FPS | Updates 3: pg_loss 13928.076 | value_loss 341680.469 | mean_return 0.667
+[INFO:2023-05-02 17:00:31,318] Frame 4800 @ 147.6 FPS | Updates 4: pg_loss 2662.561 | value_loss 65360.867 | mean_return 0.300
+[INFO:2023-05-02 17:00:39,335] Frame 6000 @ 149.7 FPS | Updates 5: pg_loss 12523.129 | value_loss 323954.281 | mean_return 0.600
+[INFO:2023-05-02 17:00:47,265] Frame 7200 @ 151.3 FPS | Updates 6: pg_loss 2912.916 | value_loss 47323.352 | mean_return 0.208
+[INFO:2023-05-02 17:00:55,583] Frame 8400 @ 144.3 FPS | Updates 7: pg_loss 9950.403 | value_loss 240888.266 | mean_return 0.558
+[INFO:2023-05-02 17:01:03,897] Frame 9600 @ 144.3 FPS | Updates 8: pg_loss 5577.380 | value_loss 143685.375 | mean_return 0.317
+[INFO:2023-05-02 17:01:12,290] Frame 10800 @ 143.0 FPS | Updates 9: pg_loss 10072.478 | value_loss 265170.406 | mean_return 0.467
+[INFO:2023-05-02 17:01:20,473] Frame 12000 @ 146.7 FPS | Updates 10: pg_loss 5317.475 | value_loss 117542.812 | mean_return 0.358
+[INFO:2023-05-02 17:01:28,551] Frame 13200 @ 148.6 FPS | Updates 11: pg_loss 5764.465 | value_loss 104358.039 | mean_return 0.308
+[INFO:2023-05-02 17:01:36,890] Frame 14400 @ 143.9 FPS | Updates 12: pg_loss 3472.648 | value_loss 59634.164 | mean_return 0.233
+[INFO:2023-05-02 17:01:44,595] Frame 15600 @ 155.7 FPS | Updates 13: pg_loss 7858.827 | value_loss 194011.688 | mean_return 0.417
+[INFO:2023-05-02 17:01:52,472] Frame 16800 @ 152.4 FPS | Updates 14: pg_loss 7657.921 | value_loss 248778.875 | mean_return 0.425
+[INFO:2023-05-02 17:02:00,118] Frame 18000 @ 156.9 FPS | Updates 15: pg_loss 8489.093 | value_loss 197406.500 | mean_return 0.433
+[INFO:2023-05-02 17:02:08,061] Frame 19200 @ 151.1 FPS | Updates 16: pg_loss 4892.064 | value_loss 113815.500 | mean_return 0.275
+[INFO:2023-05-02 17:02:15,845] Frame 20400 @ 154.2 FPS | Updates 17: pg_loss 7492.672 | value_loss 177917.891 | mean_return 0.417
+[INFO:2023-05-02 17:02:23,655] Frame 21600 @ 153.7 FPS | Updates 18: pg_loss 5281.080 | value_loss 134404.359 | mean_return 0.308
+[INFO:2023-05-02 17:02:31,432] Frame 22800 @ 154.3 FPS | Updates 19: pg_loss 6149.678 | value_loss 123674.625 | mean_return 0.350
+[INFO:2023-05-02 17:02:39,030] Frame 24000 @ 158.0 FPS | Updates 20: pg_loss 5023.564 | value_loss 90275.945 | mean_return 0.367
+[INFO:2023-05-02 17:02:46,555] Frame 25200 @ 159.5 FPS | Updates 21: pg_loss 10502.983 | value_loss 293452.062 | mean_return 0.542
+[INFO:2023-05-02 17:02:54,398] Frame 26400 @ 153.0 FPS | Updates 22: pg_loss 5396.075 | value_loss 133527.047 | mean_return 0.342
+[INFO:2023-05-02 17:03:02,119] Frame 27600 @ 155.4 FPS | Updates 23: pg_loss 7723.875 | value_loss 163759.031 | mean_return 0.475
+[INFO:2023-05-02 17:03:09,921] Frame 28800 @ 153.8 FPS | Updates 24: pg_loss 6523.353 | value_loss 163200.531 | mean_return 0.358
+[INFO:2023-05-02 17:03:17,736] Frame 30000 @ 153.5 FPS | Updates 25: pg_loss 7435.932 | value_loss 194926.672 | mean_return 0.433
+[INFO:2023-05-02 17:03:25,600] Frame 31200 @ 152.6 FPS | Updates 26: pg_loss 3474.801 | value_loss 68795.594 | mean_return 0.317
+[INFO:2023-05-02 17:03:33,362] Frame 32400 @ 154.6 FPS | Updates 27: pg_loss 10436.005 | value_loss 252096.562 | mean_return 0.608
+[INFO:2023-05-02 17:03:41,245] Frame 33600 @ 152.2 FPS | Updates 28: pg_loss 2666.336 | value_loss 65493.465 | mean_return 0.225
+[INFO:2023-05-02 17:03:48,887] Frame 34800 @ 157.0 FPS | Updates 29: pg_loss 21107.383 | value_loss 2223805.750 | mean_return 1.217
+[INFO:2023-05-02 17:03:56,829] Frame 36000 @ 151.1 FPS | Updates 30: pg_loss 4016.501 | value_loss 100528.414 | mean_return 0.317
+[INFO:2023-05-02 17:04:04,558] Frame 37200 @ 155.2 FPS | Updates 31: pg_loss 7053.691 | value_loss 158146.328 | mean_return 0.392
+[INFO:2023-05-02 17:04:12,342] Frame 38400 @ 154.1 FPS | Updates 32: pg_loss 7093.002 | value_loss 192085.453 | mean_return 0.417
+[INFO:2023-05-02 17:04:20,466] Frame 39600 @ 147.7 FPS | Updates 33: pg_loss 9407.548 | value_loss 458108.938 | mean_return 0.575
+[INFO:2023-05-02 17:04:28,491] Frame 40800 @ 149.5 FPS | Updates 34: pg_loss 4038.281 | value_loss 82326.477 | mean_return 0.308
+[INFO:2023-05-02 17:04:36,563] Frame 42000 @ 148.7 FPS | Updates 35: pg_loss 4558.287 | value_loss 85055.836 | mean_return 0.308
+[INFO:2023-05-02 17:04:44,399] Frame 43200 @ 153.2 FPS | Updates 36: pg_loss 5160.780 | value_loss 110757.086 | mean_return 0.333
+[INFO:2023-05-02 17:04:52,212] Frame 44400 @ 153.6 FPS | Updates 37: pg_loss 6080.527 | value_loss 138663.516 | mean_return 0.375
+[INFO:2023-05-02 17:05:00,004]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:05:00,044] Frame 45600 @ 153.2 FPS | Updates 38: pg_loss 6635.432 | value_loss 176836.047 | mean_return 0.417
+[INFO:2023-05-02 17:05:08,070] Frame 46800 @ 149.5 FPS | Updates 39: pg_loss 8520.841 | value_loss 252611.156 | mean_return 0.550
+[INFO:2023-05-02 17:05:16,066] Frame 48000 @ 150.1 FPS | Updates 40: pg_loss 7361.669 | value_loss 193721.469 | mean_return 0.475
+[INFO:2023-05-02 17:05:23,828] Frame 49200 @ 154.6 FPS | Updates 41: pg_loss 8721.679 | value_loss 227926.766 | mean_return 0.508
+[INFO:2023-05-02 17:05:31,726] Frame 50400 @ 151.9 FPS | Updates 42: pg_loss 4798.328 | value_loss 124169.930 | mean_return 0.333
+[INFO:2023-05-02 17:05:39,616] Frame 51600 @ 152.1 FPS | Updates 43: pg_loss 5868.713 | value_loss 109844.953 | mean_return 0.392
+[INFO:2023-05-02 17:05:47,520] Frame 52800 @ 151.8 FPS | Updates 44: pg_loss 3364.795 | value_loss 79471.688 | mean_return 0.300
+[INFO:2023-05-02 17:05:55,596] Frame 54000 @ 148.6 FPS | Updates 45: pg_loss 6163.820 | value_loss 127576.703 | mean_return 0.367
+[INFO:2023-05-02 17:06:03,590] Frame 55200 @ 150.1 FPS | Updates 46: pg_loss 5388.609 | value_loss 146964.766 | mean_return 0.383
+[INFO:2023-05-02 17:06:11,410] Frame 56400 @ 153.5 FPS | Updates 47: pg_loss 9356.618 | value_loss 235075.094 | mean_return 0.525
+[INFO:2023-05-02 17:06:19,442] Frame 57600 @ 149.4 FPS | Updates 48: pg_loss 4316.002 | value_loss 106586.914 | mean_return 0.342
+[INFO:2023-05-02 17:06:27,266] Frame 58800 @ 153.4 FPS | Updates 49: pg_loss 5567.796 | value_loss 114309.414 | mean_return 0.342
+[INFO:2023-05-02 17:06:35,232] Frame 60000 @ 150.7 FPS | Updates 50: pg_loss 3275.013 | value_loss 78966.383 | mean_return 0.258
+[INFO:2023-05-02 17:06:38,818] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:06:38,819] Steps taken over each of 5 episodes: 185, 185, 185, 185, 185
+[INFO:2023-05-02 17:06:38,819] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:06:38,819] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:06:38,819] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:06:46,594] Frame 61200 @ 154.4 FPS | Updates 51: pg_loss 3722.870 | value_loss 56435.340 | mean_return 0.275
+[INFO:2023-05-02 17:06:54,595] Frame 62400 @ 150.0 FPS | Updates 52: pg_loss 3914.015 | value_loss 89786.609 | mean_return 0.325
+[INFO:2023-05-02 17:07:02,601] Frame 63600 @ 149.9 FPS | Updates 53: pg_loss 7807.688 | value_loss 189952.141 | mean_return 0.500
+[INFO:2023-05-02 17:07:10,520] Frame 64800 @ 151.5 FPS | Updates 54: pg_loss 3883.709 | value_loss 103132.414 | mean_return 0.317
+[INFO:2023-05-02 17:07:18,248] Frame 66000 @ 155.3 FPS | Updates 55: pg_loss 6062.516 | value_loss 113328.453 | mean_return 0.392
+[INFO:2023-05-02 17:07:26,379] Frame 67200 @ 147.6 FPS | Updates 56: pg_loss 533.454 | value_loss 18915.266 | mean_return 0.125
+[INFO:2023-05-02 17:07:34,305] Frame 68400 @ 151.4 FPS | Updates 57: pg_loss 10402.901 | value_loss 256759.719 | mean_return 0.575
+[INFO:2023-05-02 17:07:42,268] Frame 69600 @ 150.7 FPS | Updates 58: pg_loss 4204.353 | value_loss 122727.172 | mean_return 0.342
+[INFO:2023-05-02 17:07:50,074] Frame 70800 @ 153.7 FPS | Updates 59: pg_loss 8488.713 | value_loss 225129.094 | mean_return 0.483
+[INFO:2023-05-02 17:07:58,136] Frame 72000 @ 148.9 FPS | Updates 60: pg_loss 3735.427 | value_loss 116472.078 | mean_return 0.267
+[INFO:2023-05-02 17:08:06,019] Frame 73200 @ 152.2 FPS | Updates 61: pg_loss 6406.703 | value_loss 116535.289 | mean_return 0.417
+[INFO:2023-05-02 17:08:14,026] Frame 74400 @ 149.9 FPS | Updates 62: pg_loss 2258.536 | value_loss 47554.246 | mean_return 0.217
+[INFO:2023-05-02 17:08:21,870] Frame 75600 @ 153.0 FPS | Updates 63: pg_loss 11284.768 | value_loss 330508.188 | mean_return 0.600
+[INFO:2023-05-02 17:08:29,915] Frame 76800 @ 149.2 FPS | Updates 64: pg_loss 1904.244 | value_loss 50822.797 | mean_return 0.217
+[INFO:2023-05-02 17:08:37,757] Frame 78000 @ 153.0 FPS | Updates 65: pg_loss 8888.158 | value_loss 177845.781 | mean_return 0.567
+[INFO:2023-05-02 17:08:45,806] Frame 79200 @ 149.1 FPS | Updates 66: pg_loss 859.098 | value_loss 28986.623 | mean_return 0.142
+[INFO:2023-05-02 17:08:53,578] Frame 80400 @ 154.4 FPS | Updates 67: pg_loss 9919.336 | value_loss 219191.234 | mean_return 0.550
+[INFO:2023-05-02 17:09:01,653] Frame 81600 @ 148.6 FPS | Updates 68: pg_loss 1094.581 | value_loss 47006.156 | mean_return 0.192
+[INFO:2023-05-02 17:09:09,404] Frame 82800 @ 154.8 FPS | Updates 69: pg_loss 8722.231 | value_loss 164406.922 | mean_return 0.517
+[INFO:2023-05-02 17:09:17,391] Frame 84000 @ 150.3 FPS | Updates 70: pg_loss 1137.926 | value_loss 68881.516 | mean_return 0.167
+[INFO:2023-05-02 17:09:25,281] Frame 85200 @ 152.1 FPS | Updates 71: pg_loss 9945.896 | value_loss 234049.953 | mean_return 0.550
+[INFO:2023-05-02 17:09:33,276] Frame 86400 @ 150.1 FPS | Updates 72: pg_loss 1956.111 | value_loss 60500.375 | mean_return 0.250
+[INFO:2023-05-02 17:09:41,233] Frame 87600 @ 150.8 FPS | Updates 73: pg_loss 7612.435 | value_loss 156623.031 | mean_return 0.442
+[INFO:2023-05-02 17:09:49,073] Frame 88800 @ 153.1 FPS | Updates 74: pg_loss 3586.372 | value_loss 117010.078 | mean_return 0.333
+[INFO:2023-05-02 17:09:56,690] Frame 90000 @ 157.6 FPS | Updates 75: pg_loss 8826.601 | value_loss 210586.766 | mean_return 0.508
+[INFO:2023-05-02 17:10:04,565]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:10:04,601] Frame 91200 @ 151.7 FPS | Updates 76: pg_loss 6629.753 | value_loss 188101.031 | mean_return 0.450
+[INFO:2023-05-02 17:10:12,416] Frame 92400 @ 153.6 FPS | Updates 77: pg_loss 3976.347 | value_loss 78399.016 | mean_return 0.350
+[INFO:2023-05-02 17:10:20,138] Frame 93600 @ 155.4 FPS | Updates 78: pg_loss 7819.411 | value_loss 194953.688 | mean_return 0.517
+[INFO:2023-05-02 17:10:27,933] Frame 94800 @ 154.0 FPS | Updates 79: pg_loss 9560.826 | value_loss 502483.125 | mean_return 0.625
+[INFO:2023-05-02 17:10:35,549] Frame 96000 @ 157.6 FPS | Updates 80: pg_loss 7090.285 | value_loss 284941.844 | mean_return 0.792
+[INFO:2023-05-02 17:10:43,502] Frame 97200 @ 150.9 FPS | Updates 81: pg_loss 5035.657 | value_loss 158174.984 | mean_return 0.325
+[INFO:2023-05-02 17:10:51,253] Frame 98400 @ 154.8 FPS | Updates 82: pg_loss 9077.106 | value_loss 237570.750 | mean_return 0.575
+[INFO:2023-05-02 17:10:59,220] Frame 99600 @ 150.6 FPS | Updates 83: pg_loss 2981.840 | value_loss 76261.109 | mean_return 0.258
+[INFO:2023-05-02 17:11:06,932] Frame 100800 @ 155.6 FPS | Updates 84: pg_loss 9630.674 | value_loss 214491.172 | mean_return 0.542
+[INFO:2023-05-02 17:11:14,816] Frame 102000 @ 152.2 FPS | Updates 85: pg_loss 1892.160 | value_loss 45778.062 | mean_return 0.250
+[INFO:2023-05-02 17:11:22,562] Frame 103200 @ 154.9 FPS | Updates 86: pg_loss 6892.456 | value_loss 146124.422 | mean_return 0.433
+[INFO:2023-05-02 17:11:30,585] Frame 104400 @ 149.6 FPS | Updates 87: pg_loss 3245.965 | value_loss 75463.336 | mean_return 0.300
+[INFO:2023-05-02 17:11:38,364] Frame 105600 @ 154.3 FPS | Updates 88: pg_loss 7720.683 | value_loss 163609.000 | mean_return 0.458
+[INFO:2023-05-02 17:11:46,389] Frame 106800 @ 149.5 FPS | Updates 89: pg_loss 2300.426 | value_loss 59153.512 | mean_return 0.233
+[INFO:2023-05-02 17:11:54,187] Frame 108000 @ 153.9 FPS | Updates 90: pg_loss 10448.927 | value_loss 265608.406 | mean_return 0.592
+[INFO:2023-05-02 17:12:02,243] Frame 109200 @ 149.0 FPS | Updates 91: pg_loss 3750.299 | value_loss 113707.453 | mean_return 0.383
+[INFO:2023-05-02 17:12:10,148] Frame 110400 @ 151.8 FPS | Updates 92: pg_loss 7434.854 | value_loss 157647.016 | mean_return 0.467
+[INFO:2023-05-02 17:12:18,092] Frame 111600 @ 151.1 FPS | Updates 93: pg_loss 6885.315 | value_loss 180494.266 | mean_return 0.442
+[INFO:2023-05-02 17:12:25,954] Frame 112800 @ 152.6 FPS | Updates 94: pg_loss 5202.016 | value_loss 110267.172 | mean_return 0.350
+[INFO:2023-05-02 17:12:33,912] Frame 114000 @ 150.8 FPS | Updates 95: pg_loss 4115.992 | value_loss 91671.578 | mean_return 0.317
+[INFO:2023-05-02 17:12:41,927] Frame 115200 @ 149.7 FPS | Updates 96: pg_loss 5477.277 | value_loss 117289.695 | mean_return 0.342
+[INFO:2023-05-02 17:12:49,850] Frame 116400 @ 151.5 FPS | Updates 97: pg_loss 5285.248 | value_loss 128830.336 | mean_return 0.358
+[INFO:2023-05-02 17:12:57,682] Frame 117600 @ 153.2 FPS | Updates 98: pg_loss 6912.397 | value_loss 138653.094 | mean_return 0.433
+[INFO:2023-05-02 17:13:05,617] Frame 118800 @ 151.2 FPS | Updates 99: pg_loss 5497.662 | value_loss 189688.516 | mean_return 0.450
+[INFO:2023-05-02 17:13:13,545] Frame 120000 @ 151.4 FPS | Updates 100: pg_loss 7273.276 | value_loss 170604.500 | mean_return 0.417
+[INFO:2023-05-02 17:13:17,246] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:13:17,246] Steps taken over each of 5 episodes: 185, 185, 185, 185, 185
+[INFO:2023-05-02 17:13:17,247] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:13:17,247] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:13:17,247] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:13:25,150] Frame 121200 @ 151.8 FPS | Updates 101: pg_loss 1979.254 | value_loss 46107.633 | mean_return 0.258
+[INFO:2023-05-02 17:13:33,093] Frame 122400 @ 151.1 FPS | Updates 102: pg_loss 4866.584 | value_loss 92500.688 | mean_return 0.367
+[INFO:2023-05-02 17:13:41,229] Frame 123600 @ 147.5 FPS | Updates 103: pg_loss 5370.395 | value_loss 125102.570 | mean_return 0.408
+[INFO:2023-05-02 17:13:49,035] Frame 124800 @ 153.7 FPS | Updates 104: pg_loss 5189.132 | value_loss 115942.594 | mean_return 0.383
+[INFO:2023-05-02 17:13:57,181] Frame 126000 @ 147.3 FPS | Updates 105: pg_loss 3679.800 | value_loss 67014.031 | mean_return 0.300
+[INFO:2023-05-02 17:14:04,881] Frame 127200 @ 155.9 FPS | Updates 106: pg_loss 6541.607 | value_loss 170503.703 | mean_return 0.425
+[INFO:2023-05-02 17:14:12,457] Frame 128400 @ 158.4 FPS | Updates 107: pg_loss 11393.845 | value_loss 505059.188 | mean_return 0.683
+[INFO:2023-05-02 17:14:20,600] Frame 129600 @ 147.4 FPS | Updates 108: pg_loss 3623.502 | value_loss 106425.555 | mean_return 0.292
+[INFO:2023-05-02 17:14:28,367] Frame 130800 @ 154.5 FPS | Updates 109: pg_loss 9496.186 | value_loss 254370.031 | mean_return 0.542
+[INFO:2023-05-02 17:14:36,254] Frame 132000 @ 152.2 FPS | Updates 110: pg_loss 4300.188 | value_loss 124454.938 | mean_return 0.342
+[INFO:2023-05-02 17:14:43,996] Frame 133200 @ 155.0 FPS | Updates 111: pg_loss 7266.807 | value_loss 169379.734 | mean_return 0.508
+[INFO:2023-05-02 17:14:51,661] Frame 134400 @ 156.6 FPS | Updates 112: pg_loss 5776.937 | value_loss 155181.000 | mean_return 0.433
+[INFO:2023-05-02 17:14:59,715] Frame 135600 @ 149.0 FPS | Updates 113: pg_loss 4307.035 | value_loss 118423.555 | mean_return 0.367
+[INFO:2023-05-02 17:15:07,640]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:15:07,672] Frame 136800 @ 150.8 FPS | Updates 114: pg_loss 5975.322 | value_loss 128822.039 | mean_return 0.392
+[INFO:2023-05-02 17:15:15,681] Frame 138000 @ 149.8 FPS | Updates 115: pg_loss 4866.659 | value_loss 134198.000 | mean_return 0.433
+[INFO:2023-05-02 17:15:23,390] Frame 139200 @ 155.7 FPS | Updates 116: pg_loss 4252.234 | value_loss 72967.969 | mean_return 0.325
+[INFO:2023-05-02 17:15:31,585] Frame 140400 @ 146.4 FPS | Updates 117: pg_loss 5098.396 | value_loss 136269.922 | mean_return 0.342
+[INFO:2023-05-02 17:15:39,415] Frame 141600 @ 153.3 FPS | Updates 118: pg_loss 5996.828 | value_loss 172520.516 | mean_return 0.375
+[INFO:2023-05-02 17:15:47,208] Frame 142800 @ 154.0 FPS | Updates 119: pg_loss 4939.546 | value_loss 125381.711 | mean_return 0.375
+[INFO:2023-05-02 17:15:55,084] Frame 144000 @ 152.4 FPS | Updates 120: pg_loss 3615.057 | value_loss 93773.242 | mean_return 0.333
+[INFO:2023-05-02 17:16:02,880] Frame 145200 @ 153.9 FPS | Updates 121: pg_loss 5641.516 | value_loss 112985.664 | mean_return 0.383
+[INFO:2023-05-02 17:16:10,810] Frame 146400 @ 151.3 FPS | Updates 122: pg_loss 3740.953 | value_loss 110022.773 | mean_return 0.292
+[INFO:2023-05-02 17:16:18,453] Frame 147600 @ 157.0 FPS | Updates 123: pg_loss 8069.598 | value_loss 197546.672 | mean_return 0.492
+[INFO:2023-05-02 17:16:26,198] Frame 148800 @ 155.0 FPS | Updates 124: pg_loss 2660.969 | value_loss 68320.555 | mean_return 0.250
+[INFO:2023-05-02 17:16:33,675] Frame 150000 @ 160.5 FPS | Updates 125: pg_loss 7710.681 | value_loss 161228.438 | mean_return 0.450
+[INFO:2023-05-02 17:16:41,751] Frame 151200 @ 148.6 FPS | Updates 126: pg_loss 2447.186 | value_loss 84670.945 | mean_return 0.250
+[INFO:2023-05-02 17:16:49,436] Frame 152400 @ 156.1 FPS | Updates 127: pg_loss 10386.570 | value_loss 248002.547 | mean_return 0.592
+[INFO:2023-05-02 17:16:57,352] Frame 153600 @ 151.6 FPS | Updates 128: pg_loss 2565.021 | value_loss 83108.211 | mean_return 0.283
+[INFO:2023-05-02 17:17:04,966] Frame 154800 @ 157.6 FPS | Updates 129: pg_loss 6038.803 | value_loss 98532.125 | mean_return 0.392
+[INFO:2023-05-02 17:17:13,013] Frame 156000 @ 149.1 FPS | Updates 130: pg_loss 1376.163 | value_loss 63192.723 | mean_return 0.225
+[INFO:2023-05-02 17:17:20,782] Frame 157200 @ 154.5 FPS | Updates 131: pg_loss 7593.917 | value_loss 185516.219 | mean_return 0.492
+[INFO:2023-05-02 17:17:28,653] Frame 158400 @ 152.5 FPS | Updates 132: pg_loss 3130.637 | value_loss 58878.180 | mean_return 0.275
+[INFO:2023-05-02 17:17:36,579] Frame 159600 @ 151.4 FPS | Updates 133: pg_loss 4494.691 | value_loss 119832.523 | mean_return 0.317
+[INFO:2023-05-02 17:17:44,436] Frame 160800 @ 152.7 FPS | Updates 134: pg_loss 7018.623 | value_loss 208949.641 | mean_return 0.442
+[INFO:2023-05-02 17:17:52,219] Frame 162000 @ 154.2 FPS | Updates 135: pg_loss 5904.997 | value_loss 160305.188 | mean_return 0.417
+[INFO:2023-05-02 17:18:00,022] Frame 163200 @ 153.8 FPS | Updates 136: pg_loss 5227.726 | value_loss 117376.438 | mean_return 0.358
+[INFO:2023-05-02 17:18:07,826] Frame 164400 @ 153.8 FPS | Updates 137: pg_loss 5322.160 | value_loss 119842.820 | mean_return 0.375
+[INFO:2023-05-02 17:18:15,570] Frame 165600 @ 155.0 FPS | Updates 138: pg_loss 5082.599 | value_loss 111770.633 | mean_return 0.358
+[INFO:2023-05-02 17:18:23,262] Frame 166800 @ 156.0 FPS | Updates 139: pg_loss 4847.428 | value_loss 114033.297 | mean_return 0.358
+[INFO:2023-05-02 17:18:31,056] Frame 168000 @ 154.0 FPS | Updates 140: pg_loss 4957.496 | value_loss 130732.734 | mean_return 0.367
+[INFO:2023-05-02 17:18:38,953] Frame 169200 @ 152.0 FPS | Updates 141: pg_loss 4341.371 | value_loss 98088.148 | mean_return 0.308
+[INFO:2023-05-02 17:18:46,756] Frame 170400 @ 153.8 FPS | Updates 142: pg_loss 4224.335 | value_loss 103234.148 | mean_return 0.333
+[INFO:2023-05-02 17:18:54,530] Frame 171600 @ 154.4 FPS | Updates 143: pg_loss 7145.347 | value_loss 176316.828 | mean_return 0.450
+[INFO:2023-05-02 17:19:02,399] Frame 172800 @ 152.5 FPS | Updates 144: pg_loss 3650.275 | value_loss 103712.625 | mean_return 0.317
+[INFO:2023-05-02 17:19:10,162] Frame 174000 @ 154.6 FPS | Updates 145: pg_loss 5901.135 | value_loss 124329.008 | mean_return 0.367
+[INFO:2023-05-02 17:19:17,992] Frame 175200 @ 153.3 FPS | Updates 146: pg_loss 2183.284 | value_loss 55791.984 | mean_return 0.233
+[INFO:2023-05-02 17:19:25,547] Frame 176400 @ 158.8 FPS | Updates 147: pg_loss 8499.445 | value_loss 211190.391 | mean_return 0.500
+[INFO:2023-05-02 17:19:33,509] Frame 177600 @ 150.7 FPS | Updates 148: pg_loss 2487.449 | value_loss 85992.492 | mean_return 0.300
+[INFO:2023-05-02 17:19:41,332] Frame 178800 @ 153.4 FPS | Updates 149: pg_loss 6424.324 | value_loss 126553.352 | mean_return 0.458
+[INFO:2023-05-02 17:19:49,234] Frame 180000 @ 151.9 FPS | Updates 150: pg_loss 2896.537 | value_loss 79287.961 | mean_return 0.275
+[INFO:2023-05-02 17:19:52,836] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:19:52,836] Steps taken over each of 5 episodes: 185, 185, 185, 185, 185
+[INFO:2023-05-02 17:19:52,836] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:19:52,837] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:19:52,837] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:20:00,840] Frame 181200 @ 149.9 FPS | Updates 151: pg_loss 6512.419 | value_loss 162140.453 | mean_return 0.450
+[INFO:2023-05-02 17:20:08,751]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:20:08,806] Frame 182400 @ 150.6 FPS | Updates 152: pg_loss 3838.694 | value_loss 121024.133 | mean_return 0.300
+[INFO:2023-05-02 17:20:16,632] Frame 183600 @ 153.3 FPS | Updates 153: pg_loss 3273.027 | value_loss 48165.387 | mean_return 0.292
+[INFO:2023-05-02 17:20:24,537] Frame 184800 @ 151.8 FPS | Updates 154: pg_loss 6396.970 | value_loss 180778.812 | mean_return 0.458
+[INFO:2023-05-02 17:20:32,508] Frame 186000 @ 150.6 FPS | Updates 155: pg_loss 6903.865 | value_loss 305609.688 | mean_return 0.508
+[INFO:2023-05-02 17:20:40,437] Frame 187200 @ 151.4 FPS | Updates 156: pg_loss 4888.006 | value_loss 129511.367 | mean_return 0.383
+[INFO:2023-05-02 17:20:48,230] Frame 188400 @ 154.0 FPS | Updates 157: pg_loss 4576.483 | value_loss 107663.211 | mean_return 0.367
+[INFO:2023-05-02 17:20:56,204] Frame 189600 @ 150.5 FPS | Updates 158: pg_loss 4622.641 | value_loss 124739.914 | mean_return 0.383
+[INFO:2023-05-02 17:21:04,094] Frame 190800 @ 152.1 FPS | Updates 159: pg_loss 4115.586 | value_loss 103006.156 | mean_return 0.308
+[INFO:2023-05-02 17:21:11,836] Frame 192000 @ 155.0 FPS | Updates 160: pg_loss 4909.229 | value_loss 131442.547 | mean_return 0.367
+[INFO:2023-05-02 17:21:19,701] Frame 193200 @ 152.6 FPS | Updates 161: pg_loss 4059.991 | value_loss 106094.328 | mean_return 0.350
+[INFO:2023-05-02 17:21:27,356] Frame 194400 @ 156.8 FPS | Updates 162: pg_loss 5933.176 | value_loss 125758.414 | mean_return 0.425
+[INFO:2023-05-02 17:21:35,314] Frame 195600 @ 150.8 FPS | Updates 163: pg_loss 2349.888 | value_loss 54569.922 | mean_return 0.275
+[INFO:2023-05-02 17:21:43,048] Frame 196800 @ 155.2 FPS | Updates 164: pg_loss 5677.228 | value_loss 123363.664 | mean_return 0.458
+[INFO:2023-05-02 17:21:50,937] Frame 198000 @ 152.1 FPS | Updates 165: pg_loss 1541.204 | value_loss 61331.543 | mean_return 0.250
+[INFO:2023-05-02 17:21:58,731] Frame 199200 @ 154.0 FPS | Updates 166: pg_loss 6752.420 | value_loss 145219.094 | mean_return 0.433
+[INFO:2023-05-02 17:22:06,591] Frame 200400 @ 152.7 FPS | Updates 167: pg_loss 2501.492 | value_loss 71812.602 | mean_return 0.242
+[INFO:2023-05-02 17:22:14,358] Frame 201600 @ 154.5 FPS | Updates 168: pg_loss 7612.202 | value_loss 227284.891 | mean_return 0.583
+[INFO:2023-05-02 17:22:22,264] Frame 202800 @ 151.8 FPS | Updates 169: pg_loss 3273.288 | value_loss 86673.320 | mean_return 0.400
+[INFO:2023-05-02 17:22:30,109] Frame 204000 @ 153.0 FPS | Updates 170: pg_loss 5953.227 | value_loss 143841.141 | mean_return 0.442
+[INFO:2023-05-02 17:22:37,910] Frame 205200 @ 153.8 FPS | Updates 171: pg_loss 3797.951 | value_loss 126834.875 | mean_return 0.325
+[INFO:2023-05-02 17:22:46,051] Frame 206400 @ 147.4 FPS | Updates 172: pg_loss 6034.342 | value_loss 149373.812 | mean_return 0.450
+[INFO:2023-05-02 17:22:53,899] Frame 207600 @ 152.9 FPS | Updates 173: pg_loss 3166.100 | value_loss 86565.680 | mean_return 0.275
+[INFO:2023-05-02 17:23:01,694] Frame 208800 @ 154.0 FPS | Updates 174: pg_loss 4705.270 | value_loss 106131.953 | mean_return 0.358
+[INFO:2023-05-02 17:23:09,469] Frame 210000 @ 154.3 FPS | Updates 175: pg_loss 3654.638 | value_loss 104073.266 | mean_return 0.317
+[INFO:2023-05-02 17:23:17,312] Frame 211200 @ 153.0 FPS | Updates 176: pg_loss 3630.299 | value_loss 115843.984 | mean_return 0.308
+[INFO:2023-05-02 17:23:25,152] Frame 212400 @ 153.1 FPS | Updates 177: pg_loss 6337.329 | value_loss 176927.047 | mean_return 0.558
+[INFO:2023-05-02 17:23:33,137] Frame 213600 @ 150.3 FPS | Updates 178: pg_loss 5019.011 | value_loss 176668.719 | mean_return 0.375
+[INFO:2023-05-02 17:23:40,990] Frame 214800 @ 152.8 FPS | Updates 179: pg_loss 5415.006 | value_loss 118670.070 | mean_return 0.433
+[INFO:2023-05-02 17:23:48,988] Frame 216000 @ 150.0 FPS | Updates 180: pg_loss 2413.142 | value_loss 66791.320 | mean_return 0.258
+[INFO:2023-05-02 17:23:56,971] Frame 217200 @ 150.3 FPS | Updates 181: pg_loss 4370.581 | value_loss 102337.742 | mean_return 0.350
+[INFO:2023-05-02 17:24:04,925] Frame 218400 @ 150.9 FPS | Updates 182: pg_loss 3321.915 | value_loss 91285.375 | mean_return 0.283
+[INFO:2023-05-02 17:24:12,872] Frame 219600 @ 151.0 FPS | Updates 183: pg_loss 4239.675 | value_loss 102652.086 | mean_return 0.342
+[INFO:2023-05-02 17:24:20,954] Frame 220800 @ 148.5 FPS | Updates 184: pg_loss 4499.311 | value_loss 125597.195 | mean_return 0.375
+[INFO:2023-05-02 17:24:29,081] Frame 222000 @ 147.7 FPS | Updates 185: pg_loss 5207.139 | value_loss 133166.453 | mean_return 0.400
+[INFO:2023-05-02 17:24:37,210] Frame 223200 @ 147.6 FPS | Updates 186: pg_loss 3589.390 | value_loss 103585.805 | mean_return 0.342
+[INFO:2023-05-02 17:24:44,880] Frame 224400 @ 156.5 FPS | Updates 187: pg_loss 6258.030 | value_loss 206731.750 | mean_return 0.458
+[INFO:2023-05-02 17:24:52,615] Frame 225600 @ 155.2 FPS | Updates 188: pg_loss 4144.667 | value_loss 119225.859 | mean_return 0.350
+[INFO:2023-05-02 17:25:00,664] Frame 226800 @ 149.1 FPS | Updates 189: pg_loss 3205.244 | value_loss 94787.680 | mean_return 0.342
+[INFO:2023-05-02 17:25:08,660] Frame 228000 @ 150.1 FPS | Updates 190: pg_loss 5681.736 | value_loss 160351.672 | mean_return 0.458
+[INFO:2023-05-02 17:25:16,739]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:25:16,783] Frame 229200 @ 147.7 FPS | Updates 191: pg_loss 5344.207 | value_loss 128876.320 | mean_return 0.417
+[INFO:2023-05-02 17:25:24,744] Frame 230400 @ 150.8 FPS | Updates 192: pg_loss 2047.821 | value_loss 67284.125 | mean_return 0.267
+[INFO:2023-05-02 17:25:32,668] Frame 231600 @ 151.4 FPS | Updates 193: pg_loss 5725.135 | value_loss 141153.875 | mean_return 0.467
+[INFO:2023-05-02 17:25:40,565] Frame 232800 @ 152.0 FPS | Updates 194: pg_loss 2178.312 | value_loss 75223.078 | mean_return 0.233
+[INFO:2023-05-02 17:25:48,404] Frame 234000 @ 153.1 FPS | Updates 195: pg_loss 4598.113 | value_loss 102863.727 | mean_return 0.367
+[INFO:2023-05-02 17:25:56,360] Frame 235200 @ 150.8 FPS | Updates 196: pg_loss 2565.198 | value_loss 77898.305 | mean_return 0.283
+[INFO:2023-05-02 17:26:03,978] Frame 236400 @ 157.5 FPS | Updates 197: pg_loss 4928.528 | value_loss 134164.234 | mean_return 0.425
+[INFO:2023-05-02 17:26:12,009] Frame 237600 @ 149.4 FPS | Updates 198: pg_loss 3006.774 | value_loss 118594.586 | mean_return 0.308
+[INFO:2023-05-02 17:26:21,066] Frame 238800 @ 132.5 FPS | Updates 199: pg_loss 4967.862 | value_loss 154546.672 | mean_return 0.425
+[INFO:2023-05-02 17:26:29,342] Frame 240000 @ 145.0 FPS | Updates 200: pg_loss 2996.783 | value_loss 78218.180 | mean_return 0.308
+[INFO:2023-05-02 17:26:33,518] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:26:33,519] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 17:26:33,519] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:26:33,519] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:26:33,519] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:26:41,482] Frame 241200 @ 150.7 FPS | Updates 201: pg_loss 5408.716 | value_loss 133107.141 | mean_return 0.500
+[INFO:2023-05-02 17:26:49,446] Frame 242400 @ 150.7 FPS | Updates 202: pg_loss 3019.337 | value_loss 120280.539 | mean_return 0.275
+[INFO:2023-05-02 17:26:57,235] Frame 243600 @ 154.1 FPS | Updates 203: pg_loss 15797.651 | value_loss 1964446.875 | mean_return 1.183
+[INFO:2023-05-02 17:27:04,914] Frame 244800 @ 156.3 FPS | Updates 204: pg_loss 1945.339 | value_loss 66171.609 | mean_return 0.342
+[INFO:2023-05-02 17:27:12,936] Frame 246000 @ 149.6 FPS | Updates 205: pg_loss 4647.544 | value_loss 153173.375 | mean_return 0.417
+[INFO:2023-05-02 17:27:20,939] Frame 247200 @ 149.9 FPS | Updates 206: pg_loss 4116.971 | value_loss 151391.750 | mean_return 0.392
+[INFO:2023-05-02 17:27:28,875] Frame 248400 @ 151.2 FPS | Updates 207: pg_loss 4044.193 | value_loss 165758.828 | mean_return 0.417
+[INFO:2023-05-02 17:27:36,920] Frame 249600 @ 149.2 FPS | Updates 208: pg_loss 3752.353 | value_loss 148906.469 | mean_return 0.375
+[INFO:2023-05-02 17:27:44,811] Frame 250800 @ 152.1 FPS | Updates 209: pg_loss 5951.575 | value_loss 211683.734 | mean_return 0.508
+[INFO:2023-05-02 17:27:52,661] Frame 252000 @ 152.9 FPS | Updates 210: pg_loss 10616.321 | value_loss 1410163.125 | mean_return 1.025
+[INFO:2023-05-02 17:28:01,365] Frame 253200 @ 137.9 FPS | Updates 211: pg_loss 3352.628 | value_loss 124159.242 | mean_return 0.350
+[INFO:2023-05-02 17:28:09,307] Frame 254400 @ 151.1 FPS | Updates 212: pg_loss 3518.322 | value_loss 143349.328 | mean_return 0.367
+[INFO:2023-05-02 17:28:17,423] Frame 255600 @ 147.9 FPS | Updates 213: pg_loss 3421.425 | value_loss 130058.742 | mean_return 0.392
+[INFO:2023-05-02 17:28:25,284] Frame 256800 @ 152.7 FPS | Updates 214: pg_loss 4619.691 | value_loss 226464.109 | mean_return 0.417
+[INFO:2023-05-02 17:28:32,978] Frame 258000 @ 156.0 FPS | Updates 215: pg_loss 3348.249 | value_loss 148114.047 | mean_return 0.342
+[INFO:2023-05-02 17:28:40,585] Frame 259200 @ 157.8 FPS | Updates 216: pg_loss 3863.813 | value_loss 148497.750 | mean_return 0.417
+[INFO:2023-05-02 17:28:48,188] Frame 260400 @ 157.8 FPS | Updates 217: pg_loss 5182.771 | value_loss 214164.172 | mean_return 0.542
+[INFO:2023-05-02 17:28:55,998] Frame 261600 @ 153.7 FPS | Updates 218: pg_loss 4912.884 | value_loss 247195.766 | mean_return 0.558
+[INFO:2023-05-02 17:29:03,566] Frame 262800 @ 158.6 FPS | Updates 219: pg_loss 14299.949 | value_loss 2066354.375 | mean_return 1.150
+[INFO:2023-05-02 17:29:11,317] Frame 264000 @ 154.8 FPS | Updates 220: pg_loss 771.239 | value_loss 45240.023 | mean_return 0.225
+[INFO:2023-05-02 17:29:18,955] Frame 265200 @ 157.1 FPS | Updates 221: pg_loss 3904.854 | value_loss 126854.141 | mean_return 0.375
+[INFO:2023-05-02 17:29:26,688] Frame 266400 @ 155.2 FPS | Updates 222: pg_loss 5306.251 | value_loss 319478.969 | mean_return 0.500
+[INFO:2023-05-02 17:29:34,488] Frame 267600 @ 153.9 FPS | Updates 223: pg_loss 16961.322 | value_loss 8866649.000 | mean_return 1.408
+[INFO:2023-05-02 17:29:42,274] Frame 268800 @ 154.1 FPS | Updates 224: pg_loss 5110.321 | value_loss 219931.453 | mean_return 0.467
+[INFO:2023-05-02 17:29:50,291] Frame 270000 @ 149.7 FPS | Updates 225: pg_loss 3935.407 | value_loss 163297.312 | mean_return 0.433
+[INFO:2023-05-02 17:29:58,062] Frame 271200 @ 154.4 FPS | Updates 226: pg_loss 4413.603 | value_loss 206025.719 | mean_return 0.475
+[INFO:2023-05-02 17:30:05,753] Frame 272400 @ 156.0 FPS | Updates 227: pg_loss 3086.097 | value_loss 106376.945 | mean_return 0.350
+[INFO:2023-05-02 17:30:13,374] Frame 273600 @ 157.5 FPS | Updates 228: pg_loss 5715.772 | value_loss 216116.891 | mean_return 0.500
+[INFO:2023-05-02 17:30:21,204]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:30:21,264] Frame 274800 @ 152.1 FPS | Updates 229: pg_loss 2566.824 | value_loss 153179.125 | mean_return 0.300
+[INFO:2023-05-02 17:30:29,461] Frame 276000 @ 146.4 FPS | Updates 230: pg_loss 5540.750 | value_loss 206745.047 | mean_return 0.533
+[INFO:2023-05-02 17:30:37,184] Frame 277200 @ 155.4 FPS | Updates 231: pg_loss 4009.732 | value_loss 219675.219 | mean_return 0.417
+[INFO:2023-05-02 17:30:44,603] Frame 278400 @ 161.7 FPS | Updates 232: pg_loss 4063.739 | value_loss 150383.125 | mean_return 0.442
+[INFO:2023-05-02 17:30:52,418] Frame 279600 @ 153.6 FPS | Updates 233: pg_loss 1642.037 | value_loss 100084.516 | mean_return 0.258
+[INFO:2023-05-02 17:31:00,691] Frame 280800 @ 145.1 FPS | Updates 234: pg_loss 12107.001 | value_loss 1081602.125 | mean_return 0.942
+[INFO:2023-05-02 17:31:10,210] Frame 282000 @ 126.1 FPS | Updates 235: pg_loss 9578.089 | value_loss 1724840.750 | mean_return 0.950
+[INFO:2023-05-02 17:31:18,277] Frame 283200 @ 148.8 FPS | Updates 236: pg_loss 1368.284 | value_loss 57116.234 | mean_return 0.233
+[INFO:2023-05-02 17:31:25,986] Frame 284400 @ 155.7 FPS | Updates 237: pg_loss 8223.422 | value_loss 444311.125 | mean_return 0.708
+[INFO:2023-05-02 17:31:33,799] Frame 285600 @ 153.6 FPS | Updates 238: pg_loss 3501.984 | value_loss 278116.188 | mean_return 0.450
+[INFO:2023-05-02 17:31:41,608] Frame 286800 @ 153.7 FPS | Updates 239: pg_loss 8370.903 | value_loss 921259.875 | mean_return 0.667
+[INFO:2023-05-02 17:31:49,310] Frame 288000 @ 155.8 FPS | Updates 240: pg_loss 21487.799 | value_loss 7497953.500 | mean_return 1.617
+[INFO:2023-05-02 17:31:57,142] Frame 289200 @ 153.2 FPS | Updates 241: pg_loss 4522.674 | value_loss 294601.969 | mean_return 0.542
+[INFO:2023-05-02 17:32:05,007] Frame 290400 @ 152.6 FPS | Updates 242: pg_loss 4987.059 | value_loss 199402.844 | mean_return 0.525
+[INFO:2023-05-02 17:32:12,976] Frame 291600 @ 150.6 FPS | Updates 243: pg_loss 9313.651 | value_loss 1335541.000 | mean_return 0.917
+[INFO:2023-05-02 17:32:20,727] Frame 292800 @ 154.8 FPS | Updates 244: pg_loss 5303.120 | value_loss 264600.000 | mean_return 0.500
+[INFO:2023-05-02 17:32:28,511] Frame 294000 @ 154.2 FPS | Updates 245: pg_loss 6293.446 | value_loss 301524.031 | mean_return 0.592
+[INFO:2023-05-02 17:32:36,206] Frame 295200 @ 156.0 FPS | Updates 246: pg_loss 5456.774 | value_loss 264873.938 | mean_return 0.750
+[INFO:2023-05-02 17:32:43,788] Frame 296400 @ 158.4 FPS | Updates 247: pg_loss 3816.376 | value_loss 177654.906 | mean_return 0.392
+[INFO:2023-05-02 17:32:51,446] Frame 297600 @ 156.7 FPS | Updates 248: pg_loss 3477.131 | value_loss 133714.156 | mean_return 0.417
+[INFO:2023-05-02 17:32:59,305] Frame 298800 @ 152.7 FPS | Updates 249: pg_loss 2888.167 | value_loss 118466.258 | mean_return 0.325
+[INFO:2023-05-02 17:33:07,012] Frame 300000 @ 155.7 FPS | Updates 250: pg_loss 4335.898 | value_loss 202551.234 | mean_return 0.467
+[INFO:2023-05-02 17:33:11,072] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:33:11,072] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 17:33:11,072] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:33:11,072] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:33:11,072] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:33:19,011] Frame 301200 @ 151.2 FPS | Updates 251: pg_loss 4850.793 | value_loss 207817.297 | mean_return 0.525
+[INFO:2023-05-02 17:33:26,923] Frame 302400 @ 151.7 FPS | Updates 252: pg_loss 3854.788 | value_loss 285990.031 | mean_return 0.475
+[INFO:2023-05-02 17:33:34,713] Frame 303600 @ 154.0 FPS | Updates 253: pg_loss 4241.109 | value_loss 198480.031 | mean_return 0.425
+[INFO:2023-05-02 17:33:42,312] Frame 304800 @ 157.9 FPS | Updates 254: pg_loss 13513.722 | value_loss 1671055.500 | mean_return 1.292
+[INFO:2023-05-02 17:33:49,917] Frame 306000 @ 157.8 FPS | Updates 255: pg_loss 1054.274 | value_loss 80190.734 | mean_return 0.208
+[INFO:2023-05-02 17:33:57,845] Frame 307200 @ 151.4 FPS | Updates 256: pg_loss 6470.583 | value_loss 282961.875 | mean_return 0.567
+[INFO:2023-05-02 17:34:05,649] Frame 308400 @ 153.8 FPS | Updates 257: pg_loss 1229.233 | value_loss 58045.926 | mean_return 0.267
+[INFO:2023-05-02 17:34:13,252] Frame 309600 @ 157.8 FPS | Updates 258: pg_loss 5968.296 | value_loss 194925.188 | mean_return 0.567
+[INFO:2023-05-02 17:34:21,379] Frame 310800 @ 147.7 FPS | Updates 259: pg_loss 2512.168 | value_loss 163128.984 | mean_return 0.325
+[INFO:2023-05-02 17:34:29,073] Frame 312000 @ 156.0 FPS | Updates 260: pg_loss 4958.525 | value_loss 149146.844 | mean_return 0.483
+[INFO:2023-05-02 17:34:37,118] Frame 313200 @ 149.2 FPS | Updates 261: pg_loss 2829.538 | value_loss 296531.438 | mean_return 0.383
+[INFO:2023-05-02 17:34:44,946] Frame 314400 @ 153.3 FPS | Updates 262: pg_loss 7782.544 | value_loss 296290.844 | mean_return 0.658
+[INFO:2023-05-02 17:34:52,913] Frame 315600 @ 150.6 FPS | Updates 263: pg_loss 10483.975 | value_loss 1699303.500 | mean_return 0.942
+[INFO:2023-05-02 17:35:00,810] Frame 316800 @ 152.0 FPS | Updates 264: pg_loss 4684.023 | value_loss 234923.938 | mean_return 0.458
+[INFO:2023-05-02 17:35:08,589] Frame 318000 @ 154.3 FPS | Updates 265: pg_loss 5069.137 | value_loss 352274.125 | mean_return 0.542
+[INFO:2023-05-02 17:35:16,343] Frame 319200 @ 154.8 FPS | Updates 266: pg_loss 5627.389 | value_loss 234320.078 | mean_return 0.567
+[INFO:2023-05-02 17:35:24,232]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:35:24,263] Frame 320400 @ 151.5 FPS | Updates 267: pg_loss 7032.489 | value_loss 443379.625 | mean_return 0.667
+[INFO:2023-05-02 17:35:32,126] Frame 321600 @ 152.6 FPS | Updates 268: pg_loss 4422.101 | value_loss 189083.328 | mean_return 0.492
+[INFO:2023-05-02 17:35:40,092] Frame 322800 @ 150.6 FPS | Updates 269: pg_loss 11449.348 | value_loss 2294789.500 | mean_return 1.025
+[INFO:2023-05-02 17:35:47,934] Frame 324000 @ 153.0 FPS | Updates 270: pg_loss 3883.322 | value_loss 174327.609 | mean_return 0.400
+[INFO:2023-05-02 17:35:55,700] Frame 325200 @ 154.5 FPS | Updates 271: pg_loss 6597.920 | value_loss 367560.656 | mean_return 0.600
+[INFO:2023-05-02 17:36:03,531] Frame 326400 @ 153.3 FPS | Updates 272: pg_loss 2379.474 | value_loss 124748.328 | mean_return 0.300
+[INFO:2023-05-02 17:36:11,508] Frame 327600 @ 150.4 FPS | Updates 273: pg_loss 2656.852 | value_loss 103821.969 | mean_return 0.308
+[INFO:2023-05-02 17:36:19,389] Frame 328800 @ 152.3 FPS | Updates 274: pg_loss 4472.162 | value_loss 221705.750 | mean_return 0.450
+[INFO:2023-05-02 17:36:27,115] Frame 330000 @ 155.3 FPS | Updates 275: pg_loss 5801.623 | value_loss 264818.625 | mean_return 0.583
+[INFO:2023-05-02 17:36:34,907] Frame 331200 @ 154.0 FPS | Updates 276: pg_loss 11763.727 | value_loss 2028187.625 | mean_return 1.017
+[INFO:2023-05-02 17:36:42,700] Frame 332400 @ 154.0 FPS | Updates 277: pg_loss 2535.524 | value_loss 103769.797 | mean_return 0.367
+[INFO:2023-05-02 17:36:50,432] Frame 333600 @ 155.2 FPS | Updates 278: pg_loss 5195.662 | value_loss 218235.516 | mean_return 0.467
+[INFO:2023-05-02 17:36:58,202] Frame 334800 @ 154.4 FPS | Updates 279: pg_loss 4084.177 | value_loss 173389.422 | mean_return 0.433
+[INFO:2023-05-02 17:37:06,069] Frame 336000 @ 152.6 FPS | Updates 280: pg_loss 2800.912 | value_loss 97589.016 | mean_return 0.425
+[INFO:2023-05-02 17:37:13,992] Frame 337200 @ 151.5 FPS | Updates 281: pg_loss 2521.160 | value_loss 97807.523 | mean_return 0.333
+[INFO:2023-05-02 17:37:21,708] Frame 338400 @ 155.5 FPS | Updates 282: pg_loss 8083.473 | value_loss 325555.969 | mean_return 0.700
+[INFO:2023-05-02 17:37:29,618] Frame 339600 @ 151.7 FPS | Updates 283: pg_loss 1624.440 | value_loss 104818.844 | mean_return 0.342
+[INFO:2023-05-02 17:37:37,371] Frame 340800 @ 154.8 FPS | Updates 284: pg_loss 4359.059 | value_loss 149628.047 | mean_return 0.433
+[INFO:2023-05-02 17:37:45,338] Frame 342000 @ 150.6 FPS | Updates 285: pg_loss 2772.859 | value_loss 125105.438 | mean_return 0.358
+[INFO:2023-05-02 17:37:53,070] Frame 343200 @ 155.2 FPS | Updates 286: pg_loss 7751.848 | value_loss 316353.031 | mean_return 0.667
+[INFO:2023-05-02 17:38:00,870] Frame 344400 @ 153.9 FPS | Updates 287: pg_loss 10042.467 | value_loss 2201906.750 | mean_return 0.917
+[INFO:2023-05-02 17:38:08,667] Frame 345600 @ 153.9 FPS | Updates 288: pg_loss 4941.478 | value_loss 180412.531 | mean_return 0.542
+[INFO:2023-05-02 17:38:16,700] Frame 346800 @ 149.4 FPS | Updates 289: pg_loss 723.425 | value_loss 45879.383 | mean_return 0.342
+[INFO:2023-05-02 17:38:24,570] Frame 348000 @ 152.5 FPS | Updates 290: pg_loss 5190.863 | value_loss 200484.984 | mean_return 0.500
+[INFO:2023-05-02 17:38:32,534] Frame 349200 @ 150.7 FPS | Updates 291: pg_loss 4209.961 | value_loss 255296.203 | mean_return 0.450
+[INFO:2023-05-02 17:38:40,286] Frame 350400 @ 154.8 FPS | Updates 292: pg_loss 6687.913 | value_loss 382899.812 | mean_return 0.600
+[INFO:2023-05-02 17:38:48,212] Frame 351600 @ 151.4 FPS | Updates 293: pg_loss 833.725 | value_loss 54118.059 | mean_return 0.283
+[INFO:2023-05-02 17:38:56,122] Frame 352800 @ 151.7 FPS | Updates 294: pg_loss 5671.204 | value_loss 297451.250 | mean_return 0.550
+[INFO:2023-05-02 17:39:03,835] Frame 354000 @ 155.6 FPS | Updates 295: pg_loss 5360.417 | value_loss 283250.250 | mean_return 0.708
+[INFO:2023-05-02 17:39:11,729] Frame 355200 @ 152.0 FPS | Updates 296: pg_loss 3078.079 | value_loss 165262.234 | mean_return 0.417
+[INFO:2023-05-02 17:39:19,937] Frame 356400 @ 146.2 FPS | Updates 297: pg_loss 4276.460 | value_loss 260949.422 | mean_return 0.558
+[INFO:2023-05-02 17:39:28,096] Frame 357600 @ 147.1 FPS | Updates 298: pg_loss 3836.134 | value_loss 217602.844 | mean_return 0.492
+[INFO:2023-05-02 17:39:36,012] Frame 358800 @ 151.6 FPS | Updates 299: pg_loss 6481.875 | value_loss 278106.562 | mean_return 0.642
+[INFO:2023-05-02 17:39:44,061] Frame 360000 @ 149.1 FPS | Updates 300: pg_loss 3635.228 | value_loss 286930.375 | mean_return 0.558
+[INFO:2023-05-02 17:39:48,483] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:39:48,483] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 17:39:48,483] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:39:48,483] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:39:48,483] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:39:56,745] Frame 361200 @ 145.3 FPS | Updates 301: pg_loss 6980.839 | value_loss 329634.844 | mean_return 0.700
+[INFO:2023-05-02 17:40:04,964] Frame 362400 @ 146.0 FPS | Updates 302: pg_loss 8184.522 | value_loss 641438.875 | mean_return 0.867
+[INFO:2023-05-02 17:40:13,093] Frame 363600 @ 147.6 FPS | Updates 303: pg_loss 4450.321 | value_loss 430370.000 | mean_return 0.525
+[INFO:2023-05-02 17:40:20,856] Frame 364800 @ 154.6 FPS | Updates 304: pg_loss 14011.999 | value_loss 2713433.500 | mean_return 1.133
+[INFO:2023-05-02 17:40:28,709]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:40:28,741] Frame 366000 @ 152.2 FPS | Updates 305: pg_loss 3186.998 | value_loss 138522.797 | mean_return 0.392
+[INFO:2023-05-02 17:40:36,621] Frame 367200 @ 152.3 FPS | Updates 306: pg_loss 4142.030 | value_loss 196207.078 | mean_return 0.442
+[INFO:2023-05-02 17:40:44,703] Frame 368400 @ 148.5 FPS | Updates 307: pg_loss 1457.952 | value_loss 67959.516 | mean_return 0.300
+[INFO:2023-05-02 17:40:52,546] Frame 369600 @ 153.0 FPS | Updates 308: pg_loss 5882.045 | value_loss 227007.188 | mean_return 0.583
+[INFO:2023-05-02 17:41:00,553] Frame 370800 @ 149.9 FPS | Updates 309: pg_loss 2720.801 | value_loss 170951.078 | mean_return 0.383
+[INFO:2023-05-02 17:41:08,452] Frame 372000 @ 151.9 FPS | Updates 310: pg_loss 5792.123 | value_loss 278906.688 | mean_return 0.583
+[INFO:2023-05-02 17:41:16,331] Frame 373200 @ 152.3 FPS | Updates 311: pg_loss 6725.518 | value_loss 591185.188 | mean_return 0.767
+[INFO:2023-05-02 17:41:24,133] Frame 374400 @ 153.8 FPS | Updates 312: pg_loss 6812.660 | value_loss 675170.938 | mean_return 0.825
+[INFO:2023-05-02 17:41:32,179] Frame 375600 @ 149.2 FPS | Updates 313: pg_loss 2760.973 | value_loss 211682.766 | mean_return 0.400
+[INFO:2023-05-02 17:41:39,933] Frame 376800 @ 154.8 FPS | Updates 314: pg_loss 6114.761 | value_loss 355067.094 | mean_return 0.625
+[INFO:2023-05-02 17:41:47,849] Frame 378000 @ 151.6 FPS | Updates 315: pg_loss 3464.296 | value_loss 275725.844 | mean_return 0.483
+[INFO:2023-05-02 17:41:55,862] Frame 379200 @ 149.8 FPS | Updates 316: pg_loss 4111.780 | value_loss 176721.547 | mean_return 0.508
+[INFO:2023-05-02 17:42:03,877] Frame 380400 @ 149.7 FPS | Updates 317: pg_loss 2642.050 | value_loss 111833.695 | mean_return 0.417
+[INFO:2023-05-02 17:42:11,587] Frame 381600 @ 155.6 FPS | Updates 318: pg_loss 7196.745 | value_loss 347613.219 | mean_return 0.742
+[INFO:2023-05-02 17:42:19,676] Frame 382800 @ 148.4 FPS | Updates 319: pg_loss -590.621 | value_loss 25637.809 | mean_return 0.092
+[INFO:2023-05-02 17:42:27,554] Frame 384000 @ 152.3 FPS | Updates 320: pg_loss 5240.516 | value_loss 198120.781 | mean_return 0.542
+[INFO:2023-05-02 17:42:35,392] Frame 385200 @ 153.1 FPS | Updates 321: pg_loss 1035.807 | value_loss 87305.125 | mean_return 0.233
+[INFO:2023-05-02 17:42:43,240] Frame 386400 @ 152.9 FPS | Updates 322: pg_loss 6576.048 | value_loss 355165.250 | mean_return 0.642
+[INFO:2023-05-02 17:42:51,196] Frame 387600 @ 150.8 FPS | Updates 323: pg_loss 4509.224 | value_loss 324917.188 | mean_return 0.517
+[INFO:2023-05-02 17:42:58,962] Frame 388800 @ 154.5 FPS | Updates 324: pg_loss 7307.645 | value_loss 598739.438 | mean_return 0.775
+[INFO:2023-05-02 17:43:06,836] Frame 390000 @ 152.4 FPS | Updates 325: pg_loss 4770.607 | value_loss 485288.625 | mean_return 0.850
+[INFO:2023-05-02 17:43:14,726] Frame 391200 @ 152.1 FPS | Updates 326: pg_loss 4168.604 | value_loss 217130.703 | mean_return 0.475
+[INFO:2023-05-02 17:43:22,661] Frame 392400 @ 151.2 FPS | Updates 327: pg_loss 3122.115 | value_loss 224833.031 | mean_return 0.558
+[INFO:2023-05-02 17:43:30,617] Frame 393600 @ 150.8 FPS | Updates 328: pg_loss 5537.238 | value_loss 355699.812 | mean_return 0.550
+[INFO:2023-05-02 17:43:38,349] Frame 394800 @ 155.2 FPS | Updates 329: pg_loss 4586.086 | value_loss 278073.188 | mean_return 0.592
+[INFO:2023-05-02 17:43:46,315] Frame 396000 @ 150.7 FPS | Updates 330: pg_loss 2078.545 | value_loss 170751.047 | mean_return 0.325
+[INFO:2023-05-02 17:43:53,969] Frame 397200 @ 156.8 FPS | Updates 331: pg_loss 15834.666 | value_loss 3134537.500 | mean_return 1.467
+[INFO:2023-05-02 17:44:01,915] Frame 398400 @ 151.0 FPS | Updates 332: pg_loss 3280.702 | value_loss 222006.672 | mean_return 0.475
+[INFO:2023-05-02 17:44:09,681] Frame 399600 @ 154.5 FPS | Updates 333: pg_loss 8410.469 | value_loss 554964.750 | mean_return 0.958
+[INFO:2023-05-02 17:44:17,918] Frame 400800 @ 145.7 FPS | Updates 334: pg_loss 8111.268 | value_loss 717398.250 | mean_return 0.867
+[INFO:2023-05-02 17:44:25,804] Frame 402000 @ 152.2 FPS | Updates 335: pg_loss 3457.966 | value_loss 260926.562 | mean_return 0.717
+[INFO:2023-05-02 17:44:33,856] Frame 403200 @ 149.0 FPS | Updates 336: pg_loss 2821.708 | value_loss 154178.703 | mean_return 0.408
+[INFO:2023-05-02 17:44:41,514] Frame 404400 @ 156.7 FPS | Updates 337: pg_loss 9349.126 | value_loss 451967.906 | mean_return 0.867
+[INFO:2023-05-02 17:44:49,245] Frame 405600 @ 155.2 FPS | Updates 338: pg_loss 8920.640 | value_loss 885573.812 | mean_return 1.225
+[INFO:2023-05-02 17:44:57,237] Frame 406800 @ 150.2 FPS | Updates 339: pg_loss 5503.672 | value_loss 555455.562 | mean_return 0.633
+[INFO:2023-05-02 17:45:05,064] Frame 408000 @ 153.3 FPS | Updates 340: pg_loss 13202.798 | value_loss 1899499.250 | mean_return 1.217
+[INFO:2023-05-02 17:45:12,901] Frame 409200 @ 153.1 FPS | Updates 341: pg_loss 4396.558 | value_loss 390262.125 | mean_return 1.342
+[INFO:2023-05-02 17:45:20,680] Frame 410400 @ 154.3 FPS | Updates 342: pg_loss 6471.569 | value_loss 485202.562 | mean_return 0.708
+[INFO:2023-05-02 17:45:28,522] Frame 411600 @ 153.0 FPS | Updates 343: pg_loss 3403.596 | value_loss 269328.062 | mean_return 0.475
+[INFO:2023-05-02 17:45:36,528]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:45:36,559] Frame 412800 @ 149.3 FPS | Updates 344: pg_loss 3044.791 | value_loss 182202.516 | mean_return 0.383
+[INFO:2023-05-02 17:45:44,392] Frame 414000 @ 153.2 FPS | Updates 345: pg_loss 4672.349 | value_loss 258204.500 | mean_return 0.558
+[INFO:2023-05-02 17:45:52,153] Frame 415200 @ 154.6 FPS | Updates 346: pg_loss 9572.381 | value_loss 1877338.375 | mean_return 0.958
+[INFO:2023-05-02 17:45:59,969] Frame 416400 @ 153.5 FPS | Updates 347: pg_loss 3821.729 | value_loss 238890.828 | mean_return 0.483
+[INFO:2023-05-02 17:46:07,784] Frame 417600 @ 153.6 FPS | Updates 348: pg_loss 2520.578 | value_loss 100981.961 | mean_return 0.392
+[INFO:2023-05-02 17:46:15,640] Frame 418800 @ 152.8 FPS | Updates 349: pg_loss 3928.490 | value_loss 228550.812 | mean_return 0.475
+[INFO:2023-05-02 17:46:23,564] Frame 420000 @ 151.5 FPS | Updates 350: pg_loss 4176.863 | value_loss 301819.188 | mean_return 0.458
+[INFO:2023-05-02 17:46:27,421] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:46:27,421] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 17:46:27,421] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:46:27,421] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:46:27,421] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:46:35,272] Frame 421200 @ 152.9 FPS | Updates 351: pg_loss 4145.917 | value_loss 153233.594 | mean_return 0.467
+[INFO:2023-05-02 17:46:43,193] Frame 422400 @ 151.5 FPS | Updates 352: pg_loss 2870.668 | value_loss 125939.797 | mean_return 0.383
+[INFO:2023-05-02 17:46:51,003] Frame 423600 @ 153.7 FPS | Updates 353: pg_loss 4070.302 | value_loss 281841.469 | mean_return 0.633
+[INFO:2023-05-02 17:46:58,814] Frame 424800 @ 153.6 FPS | Updates 354: pg_loss 2031.825 | value_loss 98515.141 | mean_return 0.375
+[INFO:2023-05-02 17:47:06,586] Frame 426000 @ 154.4 FPS | Updates 355: pg_loss 4284.509 | value_loss 220347.125 | mean_return 0.467
+[INFO:2023-05-02 17:47:14,583] Frame 427200 @ 150.1 FPS | Updates 356: pg_loss 3133.067 | value_loss 181320.234 | mean_return 0.400
+[INFO:2023-05-02 17:47:22,405] Frame 428400 @ 153.4 FPS | Updates 357: pg_loss 4938.234 | value_loss 327743.906 | mean_return 0.717
+[INFO:2023-05-02 17:47:30,400] Frame 429600 @ 150.1 FPS | Updates 358: pg_loss 3036.897 | value_loss 234720.047 | mean_return 0.367
+[INFO:2023-05-02 17:47:38,205] Frame 430800 @ 153.8 FPS | Updates 359: pg_loss 5051.734 | value_loss 239401.016 | mean_return 0.575
+[INFO:2023-05-02 17:47:46,150] Frame 432000 @ 151.0 FPS | Updates 360: pg_loss 1487.781 | value_loss 54901.168 | mean_return 0.300
+[INFO:2023-05-02 17:47:53,921] Frame 433200 @ 154.4 FPS | Updates 361: pg_loss 5709.726 | value_loss 263290.625 | mean_return 0.650
+[INFO:2023-05-02 17:48:01,887] Frame 434400 @ 150.6 FPS | Updates 362: pg_loss 1386.502 | value_loss 99327.391 | mean_return 0.383
+[INFO:2023-05-02 17:48:09,608] Frame 435600 @ 155.4 FPS | Updates 363: pg_loss 6647.458 | value_loss 382741.500 | mean_return 0.725
+[INFO:2023-05-02 17:48:18,613] Frame 436800 @ 133.3 FPS | Updates 364: pg_loss 1425.823 | value_loss 132840.562 | mean_return 0.308
+[INFO:2023-05-02 17:48:26,588] Frame 438000 @ 150.5 FPS | Updates 365: pg_loss 5069.069 | value_loss 330717.281 | mean_return 0.592
+[INFO:2023-05-02 17:48:34,423] Frame 439200 @ 153.2 FPS | Updates 366: pg_loss 5073.406 | value_loss 363114.031 | mean_return 0.658
+[INFO:2023-05-02 17:48:42,439] Frame 440400 @ 149.7 FPS | Updates 367: pg_loss 1204.754 | value_loss 74232.336 | mean_return 0.292
+[INFO:2023-05-02 17:48:50,210] Frame 441600 @ 154.4 FPS | Updates 368: pg_loss 6497.298 | value_loss 369979.688 | mean_return 0.683
+[INFO:2023-05-02 17:48:58,246] Frame 442800 @ 149.3 FPS | Updates 369: pg_loss 2421.690 | value_loss 180170.656 | mean_return 0.408
+[INFO:2023-05-02 17:49:05,965] Frame 444000 @ 155.5 FPS | Updates 370: pg_loss 6312.299 | value_loss 369427.000 | mean_return 0.717
+[INFO:2023-05-02 17:49:13,996] Frame 445200 @ 149.4 FPS | Updates 371: pg_loss 1175.137 | value_loss 72402.633 | mean_return 0.300
+[INFO:2023-05-02 17:49:21,831] Frame 446400 @ 153.2 FPS | Updates 372: pg_loss 6168.154 | value_loss 415792.031 | mean_return 0.675
+[INFO:2023-05-02 17:49:29,711] Frame 447600 @ 152.3 FPS | Updates 373: pg_loss 2019.584 | value_loss 228152.688 | mean_return 0.442
+[INFO:2023-05-02 17:49:37,754] Frame 448800 @ 149.2 FPS | Updates 374: pg_loss 1442.933 | value_loss 74678.648 | mean_return 0.283
+[INFO:2023-05-02 17:49:45,227] Frame 450000 @ 160.6 FPS | Updates 375: pg_loss 6804.150 | value_loss 352730.031 | mean_return 0.725
+[INFO:2023-05-02 17:49:53,107] Frame 451200 @ 152.3 FPS | Updates 376: pg_loss -706.430 | value_loss 27395.068 | mean_return 0.117
+[INFO:2023-05-02 17:50:00,633] Frame 452400 @ 159.5 FPS | Updates 377: pg_loss 4088.243 | value_loss 161355.203 | mean_return 0.517
+[INFO:2023-05-02 17:50:08,526] Frame 453600 @ 152.0 FPS | Updates 378: pg_loss -259.307 | value_loss 37955.809 | mean_return 0.208
+[INFO:2023-05-02 17:50:16,102] Frame 454800 @ 158.4 FPS | Updates 379: pg_loss 8786.762 | value_loss 575460.875 | mean_return 0.917
+[INFO:2023-05-02 17:50:23,842] Frame 456000 @ 155.1 FPS | Updates 380: pg_loss 2963.201 | value_loss 212894.531 | mean_return 0.558
+[INFO:2023-05-02 17:50:31,462] Frame 457200 @ 157.5 FPS | Updates 381: pg_loss 5470.901 | value_loss 366200.344 | mean_return 0.667
+[INFO:2023-05-02 17:50:39,025]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:50:39,056] Frame 458400 @ 158.0 FPS | Updates 382: pg_loss 7203.490 | value_loss 816081.875 | mean_return 1.133
+[INFO:2023-05-02 17:50:46,909] Frame 459600 @ 152.8 FPS | Updates 383: pg_loss 2414.340 | value_loss 142738.688 | mean_return 0.467
+[INFO:2023-05-02 17:50:54,567] Frame 460800 @ 156.7 FPS | Updates 384: pg_loss 7539.917 | value_loss 525246.562 | mean_return 0.883
+[INFO:2023-05-02 17:51:02,401] Frame 462000 @ 153.2 FPS | Updates 385: pg_loss 6870.342 | value_loss 1783775.250 | mean_return 1.175
+[INFO:2023-05-02 17:51:10,147] Frame 463200 @ 154.9 FPS | Updates 386: pg_loss 4626.263 | value_loss 628193.875 | mean_return 0.758
+[INFO:2023-05-02 17:51:17,663] Frame 464400 @ 159.7 FPS | Updates 387: pg_loss 4134.204 | value_loss 300118.906 | mean_return 0.583
+[INFO:2023-05-02 17:51:25,300] Frame 465600 @ 157.1 FPS | Updates 388: pg_loss 7500.883 | value_loss 849021.875 | mean_return 0.933
+[INFO:2023-05-02 17:51:33,073] Frame 466800 @ 154.4 FPS | Updates 389: pg_loss 3769.688 | value_loss 251926.953 | mean_return 0.675
+[INFO:2023-05-02 17:51:40,711] Frame 468000 @ 157.1 FPS | Updates 390: pg_loss 5244.027 | value_loss 376585.312 | mean_return 0.708
+[INFO:2023-05-02 17:51:48,343] Frame 469200 @ 157.2 FPS | Updates 391: pg_loss 5152.144 | value_loss 405208.500 | mean_return 0.775
+[INFO:2023-05-02 17:51:56,038] Frame 470400 @ 156.0 FPS | Updates 392: pg_loss 8086.416 | value_loss 1854208.000 | mean_return 1.025
+[INFO:2023-05-02 17:52:03,795] Frame 471600 @ 154.7 FPS | Updates 393: pg_loss 4445.167 | value_loss 283678.969 | mean_return 0.725
+[INFO:2023-05-02 17:52:11,571] Frame 472800 @ 154.3 FPS | Updates 394: pg_loss 5415.647 | value_loss 734381.812 | mean_return 0.858
+[INFO:2023-05-02 17:52:19,376] Frame 474000 @ 153.7 FPS | Updates 395: pg_loss 6609.937 | value_loss 965948.312 | mean_return 0.842
+[INFO:2023-05-02 17:52:27,193] Frame 475200 @ 153.5 FPS | Updates 396: pg_loss 7807.082 | value_loss 1165733.125 | mean_return 1.192
+[INFO:2023-05-02 17:52:35,107] Frame 476400 @ 151.6 FPS | Updates 397: pg_loss 959.807 | value_loss 134753.375 | mean_return 0.242
+[INFO:2023-05-02 17:52:42,815] Frame 477600 @ 155.7 FPS | Updates 398: pg_loss 7767.068 | value_loss 683101.438 | mean_return 1.000
+[INFO:2023-05-02 17:52:50,665] Frame 478800 @ 152.9 FPS | Updates 399: pg_loss 4069.354 | value_loss 729548.375 | mean_return 0.692
+[INFO:2023-05-02 17:52:58,636] Frame 480000 @ 150.6 FPS | Updates 400: pg_loss 4082.580 | value_loss 404433.594 | mean_return 0.617
+[INFO:2023-05-02 17:53:02,473] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:53:02,473] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 17:53:02,473] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:53:02,473] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:53:02,474] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:53:10,206] Frame 481200 @ 155.2 FPS | Updates 401: pg_loss 3716.725 | value_loss 312194.719 | mean_return 0.567
+[INFO:2023-05-02 17:53:18,123] Frame 482400 @ 151.6 FPS | Updates 402: pg_loss 5785.394 | value_loss 737314.500 | mean_return 0.892
+[INFO:2023-05-02 17:53:25,839] Frame 483600 @ 155.5 FPS | Updates 403: pg_loss 3675.827 | value_loss 274661.719 | mean_return 0.583
+[INFO:2023-05-02 17:53:33,363] Frame 484800 @ 159.5 FPS | Updates 404: pg_loss 6711.012 | value_loss 737882.625 | mean_return 0.958
+[INFO:2023-05-02 17:53:41,097] Frame 486000 @ 155.2 FPS | Updates 405: pg_loss 1244.970 | value_loss 112577.320 | mean_return 0.433
+[INFO:2023-05-02 17:53:48,692] Frame 487200 @ 158.0 FPS | Updates 406: pg_loss 8092.095 | value_loss 1246557.250 | mean_return 1.117
+[INFO:2023-05-02 17:53:56,352] Frame 488400 @ 156.7 FPS | Updates 407: pg_loss 7750.724 | value_loss 2459616.750 | mean_return 1.483
+[INFO:2023-05-02 17:54:04,219] Frame 489600 @ 152.5 FPS | Updates 408: pg_loss 3721.197 | value_loss 481435.156 | mean_return 0.775
+[INFO:2023-05-02 17:54:11,974] Frame 490800 @ 154.7 FPS | Updates 409: pg_loss 4267.640 | value_loss 399021.531 | mean_return 0.625
+[INFO:2023-05-02 17:54:20,405] Frame 492000 @ 142.3 FPS | Updates 410: pg_loss 4966.781 | value_loss 436332.344 | mean_return 0.792
+[INFO:2023-05-02 17:54:28,224] Frame 493200 @ 153.5 FPS | Updates 411: pg_loss 7591.172 | value_loss 2069655.500 | mean_return 1.083
+[INFO:2023-05-02 17:54:36,093] Frame 494400 @ 152.5 FPS | Updates 412: pg_loss 2100.142 | value_loss 192873.469 | mean_return 0.467
+[INFO:2023-05-02 17:54:43,743] Frame 495600 @ 156.9 FPS | Updates 413: pg_loss 6204.877 | value_loss 682576.125 | mean_return 0.967
+[INFO:2023-05-02 17:54:51,527] Frame 496800 @ 154.2 FPS | Updates 414: pg_loss 1101.083 | value_loss 158168.406 | mean_return 0.325
+[INFO:2023-05-02 17:54:59,314] Frame 498000 @ 154.1 FPS | Updates 415: pg_loss 1835.729 | value_loss 160725.969 | mean_return 0.417
+[INFO:2023-05-02 17:55:07,137] Frame 499200 @ 153.4 FPS | Updates 416: pg_loss 1853.065 | value_loss 172205.969 | mean_return 0.433
+[INFO:2023-05-02 17:55:14,911] Frame 500400 @ 154.4 FPS | Updates 417: pg_loss 4850.525 | value_loss 549964.875 | mean_return 0.767
+[INFO:2023-05-02 17:55:22,681] Frame 501600 @ 154.4 FPS | Updates 418: pg_loss 6139.185 | value_loss 937794.938 | mean_return 1.000
+[INFO:2023-05-02 17:55:30,440] Frame 502800 @ 154.7 FPS | Updates 419: pg_loss 3813.479 | value_loss 313639.844 | mean_return 0.633
+[INFO:2023-05-02 17:55:38,175] Frame 504000 @ 155.1 FPS | Updates 420: pg_loss 4889.991 | value_loss 638192.125 | mean_return 0.792
+[INFO:2023-05-02 17:55:45,987]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 17:55:46,019] Frame 505200 @ 153.0 FPS | Updates 421: pg_loss 2406.417 | value_loss 228979.672 | mean_return 0.417
+[INFO:2023-05-02 17:55:53,738] Frame 506400 @ 155.5 FPS | Updates 422: pg_loss 10235.692 | value_loss 2697581.250 | mean_return 1.300
+[INFO:2023-05-02 17:56:01,730] Frame 507600 @ 150.2 FPS | Updates 423: pg_loss 1164.809 | value_loss 100132.914 | mean_return 0.442
+[INFO:2023-05-02 17:56:09,463] Frame 508800 @ 155.2 FPS | Updates 424: pg_loss 5521.690 | value_loss 442328.188 | mean_return 0.808
+[INFO:2023-05-02 17:56:17,212] Frame 510000 @ 154.9 FPS | Updates 425: pg_loss 2364.758 | value_loss 291470.281 | mean_return 0.600
+[INFO:2023-05-02 17:56:25,121] Frame 511200 @ 151.7 FPS | Updates 426: pg_loss 2136.416 | value_loss 190362.375 | mean_return 0.383
+[INFO:2023-05-02 17:56:32,908] Frame 512400 @ 154.1 FPS | Updates 427: pg_loss 4352.042 | value_loss 372102.969 | mean_return 0.667
+[INFO:2023-05-02 17:56:40,741] Frame 513600 @ 153.2 FPS | Updates 428: pg_loss 1994.262 | value_loss 186620.250 | mean_return 0.450
+[INFO:2023-05-02 17:56:48,516] Frame 514800 @ 154.3 FPS | Updates 429: pg_loss 5954.036 | value_loss 442091.188 | mean_return 0.908
+[INFO:2023-05-02 17:56:56,271] Frame 516000 @ 154.8 FPS | Updates 430: pg_loss 6071.122 | value_loss 1728161.000 | mean_return 1.133
+[INFO:2023-05-02 17:57:04,171] Frame 517200 @ 151.9 FPS | Updates 431: pg_loss 3357.836 | value_loss 351662.281 | mean_return 0.525
+[INFO:2023-05-02 17:57:11,964] Frame 518400 @ 154.0 FPS | Updates 432: pg_loss 5696.356 | value_loss 607874.188 | mean_return 0.867
+[INFO:2023-05-02 17:57:19,727] Frame 519600 @ 154.6 FPS | Updates 433: pg_loss 4593.594 | value_loss 525378.688 | mean_return 0.700
+[INFO:2023-05-02 17:57:27,528] Frame 520800 @ 153.8 FPS | Updates 434: pg_loss 15081.808 | value_loss 10292571.000 | mean_return 1.783
+[INFO:2023-05-02 17:57:35,325] Frame 522000 @ 153.9 FPS | Updates 435: pg_loss 6288.718 | value_loss 558355.250 | mean_return 1.008
+[INFO:2023-05-02 17:57:43,235] Frame 523200 @ 151.7 FPS | Updates 436: pg_loss 1037.268 | value_loss 104175.789 | mean_return 0.350
+[INFO:2023-05-02 17:57:51,055] Frame 524400 @ 153.5 FPS | Updates 437: pg_loss 3258.319 | value_loss 284058.531 | mean_return 0.542
+[INFO:2023-05-02 17:57:58,952] Frame 525600 @ 152.0 FPS | Updates 438: pg_loss 4716.052 | value_loss 534326.312 | mean_return 0.692
+[INFO:2023-05-02 17:58:06,847] Frame 526800 @ 152.0 FPS | Updates 439: pg_loss 5234.908 | value_loss 422919.344 | mean_return 0.858
+[INFO:2023-05-02 17:58:14,670] Frame 528000 @ 153.4 FPS | Updates 440: pg_loss 5451.452 | value_loss 669574.562 | mean_return 0.900
+[INFO:2023-05-02 17:58:22,418] Frame 529200 @ 154.9 FPS | Updates 441: pg_loss 2918.065 | value_loss 235396.641 | mean_return 0.483
+[INFO:2023-05-02 17:58:30,198] Frame 530400 @ 154.2 FPS | Updates 442: pg_loss 4437.522 | value_loss 372626.938 | mean_return 0.683
+[INFO:2023-05-02 17:58:37,980] Frame 531600 @ 154.2 FPS | Updates 443: pg_loss 3859.333 | value_loss 343406.562 | mean_return 0.792
+[INFO:2023-05-02 17:58:45,705] Frame 532800 @ 155.3 FPS | Updates 444: pg_loss 8996.980 | value_loss 1300454.500 | mean_return 1.275
+[INFO:2023-05-02 17:58:53,673] Frame 534000 @ 150.6 FPS | Updates 445: pg_loss 5297.838 | value_loss 507194.062 | mean_return 0.933
+[INFO:2023-05-02 17:59:01,531] Frame 535200 @ 152.7 FPS | Updates 446: pg_loss 3882.768 | value_loss 305475.812 | mean_return 0.800
+[INFO:2023-05-02 17:59:09,351] Frame 536400 @ 153.5 FPS | Updates 447: pg_loss 6467.322 | value_loss 619333.875 | mean_return 0.967
+[INFO:2023-05-02 17:59:17,139] Frame 537600 @ 154.1 FPS | Updates 448: pg_loss 7810.371 | value_loss 835866.125 | mean_return 1.192
+[INFO:2023-05-02 17:59:25,048] Frame 538800 @ 151.7 FPS | Updates 449: pg_loss 4260.061 | value_loss 364022.875 | mean_return 0.675
+[INFO:2023-05-02 17:59:32,950] Frame 540000 @ 151.9 FPS | Updates 450: pg_loss 3515.240 | value_loss 381902.219 | mean_return 0.600
+[INFO:2023-05-02 17:59:36,779] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 17:59:36,780] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 17:59:36,780] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 17:59:36,780] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 17:59:36,780] ---------- END VALIDATION ----------
+[INFO:2023-05-02 17:59:44,748] Frame 541200 @ 150.6 FPS | Updates 451: pg_loss 2532.346 | value_loss 198330.281 | mean_return 0.483
+[INFO:2023-05-02 17:59:52,383] Frame 542400 @ 157.2 FPS | Updates 452: pg_loss 6233.542 | value_loss 648206.938 | mean_return 0.950
+[INFO:2023-05-02 18:00:00,245] Frame 543600 @ 152.6 FPS | Updates 453: pg_loss 4678.210 | value_loss 600462.938 | mean_return 0.742
+[INFO:2023-05-02 18:00:08,091] Frame 544800 @ 153.0 FPS | Updates 454: pg_loss 4505.525 | value_loss 435738.688 | mean_return 0.742
+[INFO:2023-05-02 18:00:15,901] Frame 546000 @ 153.7 FPS | Updates 455: pg_loss 2112.108 | value_loss 196977.766 | mean_return 0.425
+[INFO:2023-05-02 18:00:23,766] Frame 547200 @ 152.6 FPS | Updates 456: pg_loss 4903.446 | value_loss 346985.156 | mean_return 0.842
+[INFO:2023-05-02 18:00:31,723] Frame 548400 @ 150.8 FPS | Updates 457: pg_loss 3139.504 | value_loss 363699.469 | mean_return 0.700
+[INFO:2023-05-02 18:00:39,559] Frame 549600 @ 153.2 FPS | Updates 458: pg_loss 6195.350 | value_loss 653981.250 | mean_return 0.900
+[INFO:2023-05-02 18:00:47,513]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:00:47,562] Frame 550800 @ 149.9 FPS | Updates 459: pg_loss 3640.468 | value_loss 283062.000 | mean_return 0.625
+[INFO:2023-05-02 18:00:55,290] Frame 552000 @ 155.3 FPS | Updates 460: pg_loss 6683.330 | value_loss 620543.375 | mean_return 0.875
+[INFO:2023-05-02 18:01:02,979] Frame 553200 @ 156.1 FPS | Updates 461: pg_loss 6877.459 | value_loss 751735.750 | mean_return 1.042
+[INFO:2023-05-02 18:01:10,963] Frame 554400 @ 150.3 FPS | Updates 462: pg_loss 1181.083 | value_loss 99206.344 | mean_return 0.308
+[INFO:2023-05-02 18:01:18,650] Frame 555600 @ 156.1 FPS | Updates 463: pg_loss 6398.131 | value_loss 502525.656 | mean_return 0.908
+[INFO:2023-05-02 18:01:26,566] Frame 556800 @ 151.6 FPS | Updates 464: pg_loss 4277.412 | value_loss 1536436.500 | mean_return 0.658
+[INFO:2023-05-02 18:01:34,476] Frame 558000 @ 151.7 FPS | Updates 465: pg_loss 3498.363 | value_loss 269556.844 | mean_return 0.517
+[INFO:2023-05-02 18:01:42,208] Frame 559200 @ 155.1 FPS | Updates 466: pg_loss 6310.142 | value_loss 515342.969 | mean_return 0.992
+[INFO:2023-05-02 18:01:50,652] Frame 560400 @ 142.1 FPS | Updates 467: pg_loss 5804.316 | value_loss 739822.125 | mean_return 0.908
+[INFO:2023-05-02 18:01:58,525] Frame 561600 @ 152.4 FPS | Updates 468: pg_loss 4154.032 | value_loss 313994.406 | mean_return 0.642
+[INFO:2023-05-02 18:02:06,380] Frame 562800 @ 152.8 FPS | Updates 469: pg_loss 4546.035 | value_loss 557053.188 | mean_return 0.708
+[INFO:2023-05-02 18:02:14,095] Frame 564000 @ 155.6 FPS | Updates 470: pg_loss 8846.081 | value_loss 760439.875 | mean_return 1.167
+[INFO:2023-05-02 18:02:21,935] Frame 565200 @ 153.1 FPS | Updates 471: pg_loss 3457.948 | value_loss 465984.062 | mean_return 0.808
+[INFO:2023-05-02 18:02:29,835] Frame 566400 @ 151.9 FPS | Updates 472: pg_loss 2014.709 | value_loss 147648.578 | mean_return 0.367
+[INFO:2023-05-02 18:02:37,676] Frame 567600 @ 153.1 FPS | Updates 473: pg_loss 3886.418 | value_loss 209341.547 | mean_return 0.550
+[INFO:2023-05-02 18:02:44,921] Frame 568800 @ 165.6 FPS | Updates 474: pg_loss 8518.841 | value_loss 1479868.625 | mean_return 1.100
+[INFO:2023-05-02 18:02:52,403] Frame 570000 @ 160.4 FPS | Updates 475: pg_loss 9263.241 | value_loss 2221616.500 | mean_return 1.292
+[INFO:2023-05-02 18:03:00,378] Frame 571200 @ 150.5 FPS | Updates 476: pg_loss 1855.155 | value_loss 181783.969 | mean_return 0.358
+[INFO:2023-05-02 18:03:08,086] Frame 572400 @ 155.7 FPS | Updates 477: pg_loss 4800.201 | value_loss 267489.906 | mean_return 0.700
+[INFO:2023-05-02 18:03:17,748] Frame 573600 @ 124.2 FPS | Updates 478: pg_loss 18.623 | value_loss 35206.391 | mean_return 0.283
+[INFO:2023-05-02 18:03:25,176] Frame 574800 @ 161.6 FPS | Updates 479: pg_loss 4678.967 | value_loss 273241.875 | mean_return 0.608
+[INFO:2023-05-02 18:03:33,657] Frame 576000 @ 141.5 FPS | Updates 480: pg_loss 11534.974 | value_loss 2406493.500 | mean_return 1.408
+[INFO:2023-05-02 18:03:41,441] Frame 577200 @ 154.2 FPS | Updates 481: pg_loss 6595.020 | value_loss 1047816.625 | mean_return 0.867
+[INFO:2023-05-02 18:03:49,271] Frame 578400 @ 153.3 FPS | Updates 482: pg_loss 8351.641 | value_loss 614278.250 | mean_return 1.000
+[INFO:2023-05-02 18:03:56,987] Frame 579600 @ 155.5 FPS | Updates 483: pg_loss 10135.716 | value_loss 2049592.625 | mean_return 1.375
+[INFO:2023-05-02 18:04:04,732] Frame 580800 @ 155.0 FPS | Updates 484: pg_loss 3226.809 | value_loss 199425.016 | mean_return 0.508
+[INFO:2023-05-02 18:04:12,198] Frame 582000 @ 160.7 FPS | Updates 485: pg_loss 6457.276 | value_loss 439304.094 | mean_return 0.867
+[INFO:2023-05-02 18:04:20,114] Frame 583200 @ 151.6 FPS | Updates 486: pg_loss 1657.172 | value_loss 160869.547 | mean_return 0.483
+[INFO:2023-05-02 18:04:27,805] Frame 584400 @ 156.0 FPS | Updates 487: pg_loss 4191.246 | value_loss 304715.594 | mean_return 0.567
+[INFO:2023-05-02 18:04:35,646] Frame 585600 @ 153.0 FPS | Updates 488: pg_loss 6681.616 | value_loss 1773299.750 | mean_return 0.900
+[INFO:2023-05-02 18:04:43,482] Frame 586800 @ 153.1 FPS | Updates 489: pg_loss 2818.086 | value_loss 214305.953 | mean_return 0.442
+[INFO:2023-05-02 18:04:51,054] Frame 588000 @ 158.5 FPS | Updates 490: pg_loss 2609.095 | value_loss 181803.344 | mean_return 0.408
+[INFO:2023-05-02 18:04:58,626] Frame 589200 @ 158.5 FPS | Updates 491: pg_loss 6039.406 | value_loss 770561.312 | mean_return 0.808
+[INFO:2023-05-02 18:05:06,531] Frame 590400 @ 151.8 FPS | Updates 492: pg_loss 1342.587 | value_loss 109026.898 | mean_return 0.383
+[INFO:2023-05-02 18:05:14,188] Frame 591600 @ 156.7 FPS | Updates 493: pg_loss 3655.770 | value_loss 246341.453 | mean_return 0.592
+[INFO:2023-05-02 18:05:22,054] Frame 592800 @ 152.6 FPS | Updates 494: pg_loss 3009.975 | value_loss 319878.094 | mean_return 0.492
+[INFO:2023-05-02 18:05:29,690] Frame 594000 @ 157.2 FPS | Updates 495: pg_loss 1959.252 | value_loss 108292.078 | mean_return 0.425
+[INFO:2023-05-02 18:05:37,475] Frame 595200 @ 154.1 FPS | Updates 496: pg_loss 1994.387 | value_loss 154708.234 | mean_return 0.417
+[INFO:2023-05-02 18:05:45,208] Frame 596400 @ 155.2 FPS | Updates 497: pg_loss 3502.867 | value_loss 330908.094 | mean_return 0.592
+[INFO:2023-05-02 18:05:53,031]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:05:53,060] Frame 597600 @ 152.8 FPS | Updates 498: pg_loss 3107.857 | value_loss 212502.203 | mean_return 0.475
+[INFO:2023-05-02 18:06:00,768] Frame 598800 @ 155.7 FPS | Updates 499: pg_loss 16893.273 | value_loss 8728960.000 | mean_return 1.842
+[INFO:2023-05-02 18:06:08,687] Frame 600000 @ 151.5 FPS | Updates 500: pg_loss 2355.339 | value_loss 269444.688 | mean_return 0.483
+[INFO:2023-05-02 18:06:12,566] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 18:06:12,566] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 18:06:12,566] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 18:06:12,567] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 18:06:12,567] ---------- END VALIDATION ----------
+[INFO:2023-05-02 18:06:20,259] Frame 601200 @ 156.0 FPS | Updates 501: pg_loss 4301.419 | value_loss 271321.844 | mean_return 0.592
+[INFO:2023-05-02 18:06:28,152] Frame 602400 @ 152.0 FPS | Updates 502: pg_loss 2419.845 | value_loss 228177.516 | mean_return 0.508
+[INFO:2023-05-02 18:06:35,812] Frame 603600 @ 156.7 FPS | Updates 503: pg_loss 3038.109 | value_loss 198632.031 | mean_return 0.483
+[INFO:2023-05-02 18:06:43,553] Frame 604800 @ 155.0 FPS | Updates 504: pg_loss 4804.301 | value_loss 518057.938 | mean_return 0.700
+[INFO:2023-05-02 18:06:51,261] Frame 606000 @ 155.7 FPS | Updates 505: pg_loss 4104.792 | value_loss 380051.656 | mean_return 0.667
+[INFO:2023-05-02 18:06:59,201] Frame 607200 @ 151.2 FPS | Updates 506: pg_loss 3104.899 | value_loss 328536.281 | mean_return 0.583
+[INFO:2023-05-02 18:07:06,811] Frame 608400 @ 157.7 FPS | Updates 507: pg_loss 7488.689 | value_loss 932142.375 | mean_return 1.075
+[INFO:2023-05-02 18:07:14,742] Frame 609600 @ 151.3 FPS | Updates 508: pg_loss 353.332 | value_loss 73231.594 | mean_return 0.375
+[INFO:2023-05-02 18:07:22,450] Frame 610800 @ 155.7 FPS | Updates 509: pg_loss 3958.682 | value_loss 255170.719 | mean_return 0.592
+[INFO:2023-05-02 18:07:30,305] Frame 612000 @ 152.8 FPS | Updates 510: pg_loss 2207.514 | value_loss 267823.438 | mean_return 0.492
+[INFO:2023-05-02 18:07:38,354] Frame 613200 @ 149.1 FPS | Updates 511: pg_loss 2940.367 | value_loss 239213.609 | mean_return 0.492
+[INFO:2023-05-02 18:07:46,025] Frame 614400 @ 156.4 FPS | Updates 512: pg_loss 11218.510 | value_loss 1779059.875 | mean_return 1.458
+[INFO:2023-05-02 18:07:53,894] Frame 615600 @ 152.5 FPS | Updates 513: pg_loss 3795.697 | value_loss 903526.562 | mean_return 0.675
+[INFO:2023-05-02 18:08:01,501] Frame 616800 @ 157.8 FPS | Updates 514: pg_loss 3438.651 | value_loss 189691.219 | mean_return 0.550
+[INFO:2023-05-02 18:08:09,165] Frame 618000 @ 156.6 FPS | Updates 515: pg_loss 8381.305 | value_loss 1997844.500 | mean_return 1.158
+[INFO:2023-05-02 18:08:16,981] Frame 619200 @ 153.5 FPS | Updates 516: pg_loss 3880.510 | value_loss 470500.875 | mean_return 0.783
+[INFO:2023-05-02 18:08:24,873] Frame 620400 @ 152.1 FPS | Updates 517: pg_loss 2599.833 | value_loss 233207.734 | mean_return 0.483
+[INFO:2023-05-02 18:08:32,781] Frame 621600 @ 151.7 FPS | Updates 518: pg_loss 4960.935 | value_loss 435668.375 | mean_return 0.750
+[INFO:2023-05-02 18:08:40,531] Frame 622800 @ 154.9 FPS | Updates 519: pg_loss 9905.007 | value_loss 1985309.500 | mean_return 1.217
+[INFO:2023-05-02 18:08:48,490] Frame 624000 @ 150.8 FPS | Updates 520: pg_loss 1496.977 | value_loss 197833.062 | mean_return 0.400
+[INFO:2023-05-02 18:08:56,190] Frame 625200 @ 155.9 FPS | Updates 521: pg_loss 5551.248 | value_loss 364338.531 | mean_return 0.792
+[INFO:2023-05-02 18:09:04,210] Frame 626400 @ 149.6 FPS | Updates 522: pg_loss 1953.007 | value_loss 275043.094 | mean_return 0.517
+[INFO:2023-05-02 18:09:11,975] Frame 627600 @ 154.6 FPS | Updates 523: pg_loss 4707.693 | value_loss 278309.375 | mean_return 0.758
+[INFO:2023-05-02 18:09:19,756] Frame 628800 @ 154.2 FPS | Updates 524: pg_loss 1542.534 | value_loss 144673.531 | mean_return 0.442
+[INFO:2023-05-02 18:09:27,616] Frame 630000 @ 152.7 FPS | Updates 525: pg_loss 2437.989 | value_loss 195338.688 | mean_return 0.458
+[INFO:2023-05-02 18:09:35,426] Frame 631200 @ 153.7 FPS | Updates 526: pg_loss 4134.420 | value_loss 369350.594 | mean_return 0.667
+[INFO:2023-05-02 18:09:42,958] Frame 632400 @ 159.3 FPS | Updates 527: pg_loss 3515.764 | value_loss 293161.031 | mean_return 0.600
+[INFO:2023-05-02 18:09:50,521] Frame 633600 @ 158.7 FPS | Updates 528: pg_loss 7681.416 | value_loss 2026645.500 | mean_return 1.083
+[INFO:2023-05-02 18:09:58,128] Frame 634800 @ 157.8 FPS | Updates 529: pg_loss 1362.888 | value_loss 119019.383 | mean_return 0.358
+[INFO:2023-05-02 18:10:05,846] Frame 636000 @ 155.5 FPS | Updates 530: pg_loss 6590.659 | value_loss 989527.625 | mean_return 1.017
+[INFO:2023-05-02 18:10:13,627] Frame 637200 @ 154.2 FPS | Updates 531: pg_loss 10667.310 | value_loss 2494783.500 | mean_return 1.392
+[INFO:2023-05-02 18:10:21,538] Frame 638400 @ 151.7 FPS | Updates 532: pg_loss 2477.296 | value_loss 278822.969 | mean_return 0.475
+[INFO:2023-05-02 18:10:29,163] Frame 639600 @ 157.4 FPS | Updates 533: pg_loss 5461.508 | value_loss 429995.906 | mean_return 0.725
+[INFO:2023-05-02 18:10:36,804] Frame 640800 @ 157.1 FPS | Updates 534: pg_loss 4829.121 | value_loss 533157.938 | mean_return 0.717
+[INFO:2023-05-02 18:10:44,626] Frame 642000 @ 153.4 FPS | Updates 535: pg_loss 6540.691 | value_loss 1910995.375 | mean_return 0.867
+[INFO:2023-05-02 18:10:52,474] Frame 643200 @ 152.9 FPS | Updates 536: pg_loss 1287.060 | value_loss 116108.805 | mean_return 0.367
+[INFO:2023-05-02 18:11:00,195]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:11:00,232] Frame 644400 @ 154.7 FPS | Updates 537: pg_loss 4634.658 | value_loss 355648.375 | mean_return 0.667
+[INFO:2023-05-02 18:11:07,996] Frame 645600 @ 154.6 FPS | Updates 538: pg_loss 4784.730 | value_loss 538419.875 | mean_return 0.717
+[INFO:2023-05-02 18:11:15,754] Frame 646800 @ 154.7 FPS | Updates 539: pg_loss 3734.550 | value_loss 278702.156 | mean_return 0.650
+[INFO:2023-05-02 18:11:23,411] Frame 648000 @ 156.7 FPS | Updates 540: pg_loss 1967.105 | value_loss 190569.453 | mean_return 0.417
+[INFO:2023-05-02 18:11:31,033] Frame 649200 @ 157.5 FPS | Updates 541: pg_loss 7005.283 | value_loss 1638027.750 | mean_return 1.042
+[INFO:2023-05-02 18:11:38,735] Frame 650400 @ 155.8 FPS | Updates 542: pg_loss 3343.147 | value_loss 458657.938 | mean_return 0.575
+[INFO:2023-05-02 18:11:46,457] Frame 651600 @ 155.4 FPS | Updates 543: pg_loss 4723.793 | value_loss 333512.844 | mean_return 0.667
+[INFO:2023-05-02 18:11:54,408] Frame 652800 @ 150.9 FPS | Updates 544: pg_loss 1997.083 | value_loss 162388.062 | mean_return 0.508
+[INFO:2023-05-02 18:12:02,435] Frame 654000 @ 149.5 FPS | Updates 545: pg_loss 1632.047 | value_loss 159452.953 | mean_return 0.400
+[INFO:2023-05-02 18:12:10,383] Frame 655200 @ 151.0 FPS | Updates 546: pg_loss 6907.922 | value_loss 605676.125 | mean_return 0.992
+[INFO:2023-05-02 18:12:18,938] Frame 656400 @ 140.3 FPS | Updates 547: pg_loss 3159.519 | value_loss 236488.531 | mean_return 0.633
+[INFO:2023-05-02 18:12:26,890] Frame 657600 @ 150.9 FPS | Updates 548: pg_loss 7085.700 | value_loss 678066.875 | mean_return 0.958
+[INFO:2023-05-02 18:12:34,850] Frame 658800 @ 150.8 FPS | Updates 549: pg_loss 2654.470 | value_loss 317116.656 | mean_return 0.533
+[INFO:2023-05-02 18:12:42,659] Frame 660000 @ 153.7 FPS | Updates 550: pg_loss 4246.204 | value_loss 326296.562 | mean_return 0.625
+[INFO:2023-05-02 18:12:46,606] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 18:12:46,606] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 18:12:46,606] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 18:12:46,606] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 18:12:46,606] ---------- END VALIDATION ----------
+[INFO:2023-05-02 18:12:54,360] Frame 661200 @ 154.8 FPS | Updates 551: pg_loss 4702.444 | value_loss 420321.531 | mean_return 0.733
+[INFO:2023-05-02 18:13:02,174] Frame 662400 @ 153.6 FPS | Updates 552: pg_loss 7930.286 | value_loss 1940112.375 | mean_return 1.117
+[INFO:2023-05-02 18:13:09,821] Frame 663600 @ 156.9 FPS | Updates 553: pg_loss 3367.738 | value_loss 283224.969 | mean_return 0.558
+[INFO:2023-05-02 18:13:17,378] Frame 664800 @ 158.8 FPS | Updates 554: pg_loss 9458.200 | value_loss 2997940.250 | mean_return 1.192
+[INFO:2023-05-02 18:13:25,169] Frame 666000 @ 154.0 FPS | Updates 555: pg_loss 604.250 | value_loss 109397.734 | mean_return 0.367
+[INFO:2023-05-02 18:13:32,951] Frame 667200 @ 154.2 FPS | Updates 556: pg_loss 6717.785 | value_loss 1137228.250 | mean_return 0.825
+[INFO:2023-05-02 18:13:40,452] Frame 668400 @ 160.0 FPS | Updates 557: pg_loss 8882.098 | value_loss 1984276.125 | mean_return 1.217
+[INFO:2023-05-02 18:13:48,446] Frame 669600 @ 150.1 FPS | Updates 558: pg_loss 1841.542 | value_loss 255638.406 | mean_return 0.517
+[INFO:2023-05-02 18:13:55,982] Frame 670800 @ 159.2 FPS | Updates 559: pg_loss 6482.897 | value_loss 474889.938 | mean_return 0.858
+[INFO:2023-05-02 18:14:03,792] Frame 672000 @ 153.7 FPS | Updates 560: pg_loss 20465.582 | value_loss 11385366.000 | mean_return 2.283
+[INFO:2023-05-02 18:14:11,639] Frame 673200 @ 152.9 FPS | Updates 561: pg_loss 2251.064 | value_loss 236840.766 | mean_return 0.483
+[INFO:2023-05-02 18:14:19,630] Frame 674400 @ 150.2 FPS | Updates 562: pg_loss 3644.417 | value_loss 507464.969 | mean_return 0.742
+[INFO:2023-05-02 18:14:31,715] Frame 675600 @ 99.3 FPS | Updates 563: pg_loss 2570.833 | value_loss 293763.188 | mean_return 0.525
+[INFO:2023-05-02 18:14:40,349] Frame 676800 @ 139.0 FPS | Updates 564: pg_loss 4594.158 | value_loss 329267.750 | mean_return 0.717
+[INFO:2023-05-02 18:14:49,269] Frame 678000 @ 134.5 FPS | Updates 565: pg_loss 2843.490 | value_loss 311293.688 | mean_return 0.533
+[INFO:2023-05-02 18:14:57,162] Frame 679200 @ 152.1 FPS | Updates 566: pg_loss 6531.616 | value_loss 631596.562 | mean_return 0.892
+[INFO:2023-05-02 18:15:05,501] Frame 680400 @ 143.9 FPS | Updates 567: pg_loss 14505.011 | value_loss 9281684.000 | mean_return 1.800
+[INFO:2023-05-02 18:15:13,313] Frame 681600 @ 153.6 FPS | Updates 568: pg_loss 6478.582 | value_loss 512757.375 | mean_return 0.933
+[INFO:2023-05-02 18:15:20,956] Frame 682800 @ 157.0 FPS | Updates 569: pg_loss 3894.165 | value_loss 428398.625 | mean_return 0.942
+[INFO:2023-05-02 18:15:28,759] Frame 684000 @ 153.8 FPS | Updates 570: pg_loss 5269.953 | value_loss 445459.031 | mean_return 0.725
+[INFO:2023-05-02 18:15:36,807] Frame 685200 @ 149.1 FPS | Updates 571: pg_loss 7661.437 | value_loss 877593.938 | mean_return 1.083
+[INFO:2023-05-02 18:15:45,206] Frame 686400 @ 142.9 FPS | Updates 572: pg_loss 1449.742 | value_loss 216246.422 | mean_return 0.517
+[INFO:2023-05-02 18:15:53,110] Frame 687600 @ 151.8 FPS | Updates 573: pg_loss 7402.673 | value_loss 465361.312 | mean_return 0.900
+[INFO:2023-05-02 18:16:01,312]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:16:01,344] Frame 688800 @ 145.7 FPS | Updates 574: pg_loss 5974.522 | value_loss 1988850.750 | mean_return 1.058
+[INFO:2023-05-02 18:16:09,709] Frame 690000 @ 143.5 FPS | Updates 575: pg_loss 2889.136 | value_loss 307595.844 | mean_return 0.517
+[INFO:2023-05-02 18:16:21,430] Frame 691200 @ 102.4 FPS | Updates 576: pg_loss 9533.076 | value_loss 981929.875 | mean_return 1.208
+[INFO:2023-05-02 18:16:32,449] Frame 692400 @ 108.9 FPS | Updates 577: pg_loss 25516.537 | value_loss 19766670.000 | mean_return 3.025
+[INFO:2023-05-02 18:16:40,407] Frame 693600 @ 150.8 FPS | Updates 578: pg_loss 6144.024 | value_loss 650717.562 | mean_return 0.858
+[INFO:2023-05-02 18:16:49,483] Frame 694800 @ 132.2 FPS | Updates 579: pg_loss 9128.342 | value_loss 1833496.125 | mean_return 1.575
+[INFO:2023-05-02 18:16:57,741] Frame 696000 @ 145.3 FPS | Updates 580: pg_loss 3105.974 | value_loss 209824.297 | mean_return 0.550
+[INFO:2023-05-02 18:17:05,828] Frame 697200 @ 148.4 FPS | Updates 581: pg_loss 5703.742 | value_loss 577395.062 | mean_return 0.817
+[INFO:2023-05-02 18:17:13,975] Frame 698400 @ 147.3 FPS | Updates 582: pg_loss 8590.800 | value_loss 2807112.250 | mean_return 1.133
+[INFO:2023-05-02 18:17:21,981] Frame 699600 @ 149.9 FPS | Updates 583: pg_loss 4106.104 | value_loss 260139.312 | mean_return 0.742
+[INFO:2023-05-02 18:17:30,172] Frame 700800 @ 146.5 FPS | Updates 584: pg_loss 2127.609 | value_loss 309486.656 | mean_return 0.542
+[INFO:2023-05-02 18:17:38,115] Frame 702000 @ 151.1 FPS | Updates 585: pg_loss 3105.515 | value_loss 246473.828 | mean_return 0.458
+[INFO:2023-05-02 18:17:46,096] Frame 703200 @ 150.4 FPS | Updates 586: pg_loss 3603.340 | value_loss 233905.469 | mean_return 0.625
+[INFO:2023-05-02 18:17:53,905] Frame 704400 @ 153.7 FPS | Updates 587: pg_loss 2511.438 | value_loss 201366.328 | mean_return 0.425
+[INFO:2023-05-02 18:18:01,935] Frame 705600 @ 149.5 FPS | Updates 588: pg_loss 5141.395 | value_loss 320712.688 | mean_return 0.642
+[INFO:2023-05-02 18:18:09,851] Frame 706800 @ 151.6 FPS | Updates 589: pg_loss 5858.962 | value_loss 458432.781 | mean_return 1.025
+[INFO:2023-05-02 18:18:17,416] Frame 708000 @ 158.6 FPS | Updates 590: pg_loss 3812.672 | value_loss 249639.656 | mean_return 0.625
+[INFO:2023-05-02 18:18:25,169] Frame 709200 @ 154.8 FPS | Updates 591: pg_loss 3433.221 | value_loss 284629.562 | mean_return 0.650
+[INFO:2023-05-02 18:18:33,155] Frame 710400 @ 150.3 FPS | Updates 592: pg_loss 4736.800 | value_loss 437013.781 | mean_return 0.700
+[INFO:2023-05-02 18:18:40,955] Frame 711600 @ 153.9 FPS | Updates 593: pg_loss 8783.365 | value_loss 2099552.500 | mean_return 1.167
+[INFO:2023-05-02 18:18:48,898] Frame 712800 @ 151.1 FPS | Updates 594: pg_loss 1568.713 | value_loss 109422.406 | mean_return 0.433
+[INFO:2023-05-02 18:18:56,848] Frame 714000 @ 150.9 FPS | Updates 595: pg_loss 3542.176 | value_loss 302923.844 | mean_return 0.550
+[INFO:2023-05-02 18:19:04,339] Frame 715200 @ 160.2 FPS | Updates 596: pg_loss 8670.993 | value_loss 815294.000 | mean_return 1.125
+[INFO:2023-05-02 18:19:12,139] Frame 716400 @ 153.9 FPS | Updates 597: pg_loss 11033.295 | value_loss 3079530.750 | mean_return 1.667
+[INFO:2023-05-02 18:19:19,887] Frame 717600 @ 154.9 FPS | Updates 598: pg_loss 4725.203 | value_loss 367619.969 | mean_return 0.733
+[INFO:2023-05-02 18:19:27,799] Frame 718800 @ 151.7 FPS | Updates 599: pg_loss 3855.339 | value_loss 420562.719 | mean_return 0.692
+[INFO:2023-05-02 18:19:35,630] Frame 720000 @ 153.2 FPS | Updates 600: pg_loss 2010.696 | value_loss 163116.391 | mean_return 0.442
+[INFO:2023-05-02 18:19:39,524] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 18:19:39,524] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 18:19:39,524] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 18:19:39,524] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 18:19:39,524] ---------- END VALIDATION ----------
+[INFO:2023-05-02 18:19:47,315] Frame 721200 @ 154.1 FPS | Updates 601: pg_loss 10122.726 | value_loss 2036783.500 | mean_return 1.308
+[INFO:2023-05-02 18:19:55,237] Frame 722400 @ 151.5 FPS | Updates 602: pg_loss 1020.900 | value_loss 158676.906 | mean_return 0.283
+[INFO:2023-05-02 18:20:02,758] Frame 723600 @ 159.6 FPS | Updates 603: pg_loss 4972.563 | value_loss 363621.469 | mean_return 0.858
+[INFO:2023-05-02 18:20:10,556] Frame 724800 @ 153.9 FPS | Updates 604: pg_loss 4551.822 | value_loss 442752.031 | mean_return 0.817
+[INFO:2023-05-02 18:20:18,379] Frame 726000 @ 153.4 FPS | Updates 605: pg_loss 2499.062 | value_loss 207074.562 | mean_return 0.533
+[INFO:2023-05-02 18:20:25,874] Frame 727200 @ 160.1 FPS | Updates 606: pg_loss 8419.707 | value_loss 946698.625 | mean_return 1.092
+[INFO:2023-05-02 18:20:33,705] Frame 728400 @ 153.3 FPS | Updates 607: pg_loss 10889.279 | value_loss 3711528.500 | mean_return 1.767
+[INFO:2023-05-02 18:20:41,992] Frame 729600 @ 144.8 FPS | Updates 608: pg_loss 7539.705 | value_loss 1902217.125 | mean_return 1.008
+[INFO:2023-05-02 18:20:49,481] Frame 730800 @ 160.3 FPS | Updates 609: pg_loss 5232.234 | value_loss 526670.750 | mean_return 0.883
+[INFO:2023-05-02 18:20:57,065] Frame 732000 @ 158.2 FPS | Updates 610: pg_loss 3119.280 | value_loss 291057.062 | mean_return 0.575
+[INFO:2023-05-02 18:21:04,472]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:21:04,504] Frame 733200 @ 161.3 FPS | Updates 611: pg_loss 4391.071 | value_loss 335345.750 | mean_return 0.767
+[INFO:2023-05-02 18:21:12,252] Frame 734400 @ 154.9 FPS | Updates 612: pg_loss 3009.312 | value_loss 597811.438 | mean_return 0.633
+[INFO:2023-05-02 18:21:19,904] Frame 735600 @ 156.8 FPS | Updates 613: pg_loss 6318.957 | value_loss 535351.250 | mean_return 0.900
+[INFO:2023-05-02 18:21:27,846] Frame 736800 @ 151.1 FPS | Updates 614: pg_loss 2425.802 | value_loss 413781.969 | mean_return 0.533
+[INFO:2023-05-02 18:21:35,713] Frame 738000 @ 152.5 FPS | Updates 615: pg_loss 4716.065 | value_loss 364120.188 | mean_return 0.708
+[INFO:2023-05-02 18:21:43,558] Frame 739200 @ 153.0 FPS | Updates 616: pg_loss 6527.254 | value_loss 1507796.500 | mean_return 1.125
+[INFO:2023-05-02 18:21:51,346] Frame 740400 @ 154.1 FPS | Updates 617: pg_loss 2729.999 | value_loss 223775.422 | mean_return 0.550
+[INFO:2023-05-02 18:21:59,386] Frame 741600 @ 149.3 FPS | Updates 618: pg_loss 2833.017 | value_loss 325944.000 | mean_return 0.592
+[INFO:2023-05-02 18:22:07,185] Frame 742800 @ 153.9 FPS | Updates 619: pg_loss 2627.393 | value_loss 162393.422 | mean_return 0.458
+[INFO:2023-05-02 18:22:15,123] Frame 744000 @ 151.2 FPS | Updates 620: pg_loss 2825.830 | value_loss 199939.312 | mean_return 0.608
+[INFO:2023-05-02 18:22:22,605] Frame 745200 @ 160.4 FPS | Updates 621: pg_loss 6711.043 | value_loss 671134.000 | mean_return 1.017
+[INFO:2023-05-02 18:22:30,449] Frame 746400 @ 153.0 FPS | Updates 622: pg_loss 4828.672 | value_loss 1492503.375 | mean_return 0.775
+[INFO:2023-05-02 18:22:38,326] Frame 747600 @ 152.4 FPS | Updates 623: pg_loss 4475.636 | value_loss 237707.281 | mean_return 0.700
+[INFO:2023-05-02 18:22:45,908] Frame 748800 @ 158.3 FPS | Updates 624: pg_loss 4885.096 | value_loss 396495.188 | mean_return 0.717
+[INFO:2023-05-02 18:22:53,472] Frame 750000 @ 158.7 FPS | Updates 625: pg_loss 4068.686 | value_loss 301194.781 | mean_return 0.633
+[INFO:2023-05-02 18:23:01,151] Frame 751200 @ 156.3 FPS | Updates 626: pg_loss 1988.167 | value_loss 175734.266 | mean_return 0.408
+[INFO:2023-05-02 18:23:08,745] Frame 752400 @ 158.0 FPS | Updates 627: pg_loss 3217.854 | value_loss 222823.922 | mean_return 0.575
+[INFO:2023-05-02 18:23:16,332] Frame 753600 @ 158.2 FPS | Updates 628: pg_loss 1505.243 | value_loss 113371.859 | mean_return 0.383
+[INFO:2023-05-02 18:23:24,607] Frame 754800 @ 145.0 FPS | Updates 629: pg_loss 2780.556 | value_loss 213142.422 | mean_return 0.533
+[INFO:2023-05-02 18:23:33,073] Frame 756000 @ 141.8 FPS | Updates 630: pg_loss 6157.067 | value_loss 521848.156 | mean_return 0.908
+[INFO:2023-05-02 18:23:40,719] Frame 757200 @ 157.0 FPS | Updates 631: pg_loss 3315.595 | value_loss 384391.375 | mean_return 0.608
+[INFO:2023-05-02 18:23:48,549] Frame 758400 @ 153.3 FPS | Updates 632: pg_loss 4887.276 | value_loss 293064.375 | mean_return 0.817
+[INFO:2023-05-02 18:23:56,638] Frame 759600 @ 148.4 FPS | Updates 633: pg_loss 9161.213 | value_loss 1993925.750 | mean_return 1.142
+[INFO:2023-05-02 18:24:04,731] Frame 760800 @ 148.3 FPS | Updates 634: pg_loss 3271.665 | value_loss 292314.281 | mean_return 0.592
+[INFO:2023-05-02 18:24:12,406] Frame 762000 @ 156.4 FPS | Updates 635: pg_loss 2583.105 | value_loss 168852.641 | mean_return 0.483
+[INFO:2023-05-02 18:24:20,761] Frame 763200 @ 143.6 FPS | Updates 636: pg_loss 10625.003 | value_loss 2319557.000 | mean_return 1.158
+[INFO:2023-05-02 18:24:28,637] Frame 764400 @ 152.4 FPS | Updates 637: pg_loss 4254.878 | value_loss 397938.406 | mean_return 0.717
+[INFO:2023-05-02 18:24:36,471] Frame 765600 @ 153.2 FPS | Updates 638: pg_loss 2915.780 | value_loss 210280.453 | mean_return 0.458
+[INFO:2023-05-02 18:24:44,136] Frame 766800 @ 156.6 FPS | Updates 639: pg_loss 6939.147 | value_loss 634692.812 | mean_return 0.933
+[INFO:2023-05-02 18:24:52,134] Frame 768000 @ 150.0 FPS | Updates 640: pg_loss 1436.985 | value_loss 137581.578 | mean_return 0.492
+[INFO:2023-05-02 18:24:59,919] Frame 769200 @ 154.2 FPS | Updates 641: pg_loss 2659.221 | value_loss 135763.562 | mean_return 0.442
+[INFO:2023-05-02 18:25:07,582] Frame 770400 @ 156.6 FPS | Updates 642: pg_loss 3216.184 | value_loss 215273.703 | mean_return 0.550
+[INFO:2023-05-02 18:25:15,428] Frame 771600 @ 153.0 FPS | Updates 643: pg_loss 2401.941 | value_loss 165531.406 | mean_return 0.508
+[INFO:2023-05-02 18:25:22,865] Frame 772800 @ 161.3 FPS | Updates 644: pg_loss 7187.570 | value_loss 556878.188 | mean_return 0.958
+[INFO:2023-05-02 18:25:30,626] Frame 774000 @ 154.6 FPS | Updates 645: pg_loss -541.599 | value_loss 57331.883 | mean_return 0.208
+[INFO:2023-05-02 18:25:38,347] Frame 775200 @ 155.4 FPS | Updates 646: pg_loss 6806.068 | value_loss 466076.969 | mean_return 0.875
+[INFO:2023-05-02 18:25:46,029] Frame 776400 @ 156.2 FPS | Updates 647: pg_loss 3269.849 | value_loss 413601.688 | mean_return 0.792
+[INFO:2023-05-02 18:25:53,667] Frame 777600 @ 157.1 FPS | Updates 648: pg_loss 3108.868 | value_loss 224908.375 | mean_return 0.525
+[INFO:2023-05-02 18:26:01,231] Frame 778800 @ 158.7 FPS | Updates 649: pg_loss 4438.515 | value_loss 312496.656 | mean_return 0.625
+[INFO:2023-05-02 18:26:08,959]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:26:08,989] Frame 780000 @ 154.7 FPS | Updates 650: pg_loss 1198.746 | value_loss 129219.672 | mean_return 0.350
+[INFO:2023-05-02 18:26:13,146] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 18:26:13,146] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 18:26:13,146] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 18:26:13,146] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 18:26:13,146] ---------- END VALIDATION ----------
+[INFO:2023-05-02 18:26:20,952] Frame 781200 @ 153.7 FPS | Updates 651: pg_loss 4509.105 | value_loss 255556.344 | mean_return 0.683
+[INFO:2023-05-02 18:26:30,586] Frame 782400 @ 124.6 FPS | Updates 652: pg_loss 1076.720 | value_loss 94949.539 | mean_return 0.350
+[INFO:2023-05-02 18:26:38,240] Frame 783600 @ 156.8 FPS | Updates 653: pg_loss 3684.990 | value_loss 186986.625 | mean_return 0.608
+[INFO:2023-05-02 18:26:45,687] Frame 784800 @ 161.2 FPS | Updates 654: pg_loss 4753.076 | value_loss 558349.938 | mean_return 0.783
+[INFO:2023-05-02 18:26:53,300] Frame 786000 @ 157.6 FPS | Updates 655: pg_loss 3635.982 | value_loss 388657.688 | mean_return 0.633
+[INFO:2023-05-02 18:27:01,188] Frame 787200 @ 152.1 FPS | Updates 656: pg_loss 5497.037 | value_loss 815629.250 | mean_return 0.825
+[INFO:2023-05-02 18:27:09,001] Frame 788400 @ 153.6 FPS | Updates 657: pg_loss 7979.350 | value_loss 952459.938 | mean_return 1.142
+[INFO:2023-05-02 18:27:16,875] Frame 789600 @ 152.4 FPS | Updates 658: pg_loss 4448.871 | value_loss 467206.094 | mean_return 0.783
+[INFO:2023-05-02 18:27:24,835] Frame 790800 @ 150.8 FPS | Updates 659: pg_loss 2602.620 | value_loss 191049.547 | mean_return 0.592
+[INFO:2023-05-02 18:27:32,749] Frame 792000 @ 151.6 FPS | Updates 660: pg_loss 7459.002 | value_loss 1845593.875 | mean_return 1.033
+[INFO:2023-05-02 18:27:40,715] Frame 793200 @ 150.6 FPS | Updates 661: pg_loss 1620.641 | value_loss 115576.109 | mean_return 0.408
+[INFO:2023-05-02 18:27:48,654] Frame 794400 @ 151.2 FPS | Updates 662: pg_loss 4339.526 | value_loss 296044.031 | mean_return 0.717
+[INFO:2023-05-02 18:27:56,672] Frame 795600 @ 149.7 FPS | Updates 663: pg_loss 1370.132 | value_loss 109818.164 | mean_return 0.433
+[INFO:2023-05-02 18:28:04,484] Frame 796800 @ 153.6 FPS | Updates 664: pg_loss 3881.820 | value_loss 208731.766 | mean_return 0.600
+[INFO:2023-05-02 18:28:12,454] Frame 798000 @ 150.6 FPS | Updates 665: pg_loss 10330.892 | value_loss 2295926.500 | mean_return 1.308
+[INFO:2023-05-02 18:28:20,416] Frame 799200 @ 150.7 FPS | Updates 666: pg_loss 2068.268 | value_loss 179805.844 | mean_return 0.525
+[INFO:2023-05-02 18:28:28,296] Frame 800400 @ 152.3 FPS | Updates 667: pg_loss 6046.481 | value_loss 453097.250 | mean_return 0.825
+[INFO:2023-05-02 18:28:36,254] Frame 801600 @ 150.8 FPS | Updates 668: pg_loss 3603.547 | value_loss 283243.781 | mean_return 0.650
+[INFO:2023-05-02 18:28:44,254] Frame 802800 @ 150.0 FPS | Updates 669: pg_loss 6812.995 | value_loss 706298.188 | mean_return 0.925
+[INFO:2023-05-02 18:28:52,195] Frame 804000 @ 151.1 FPS | Updates 670: pg_loss 2932.180 | value_loss 206188.750 | mean_return 0.575
+[INFO:2023-05-02 18:29:00,148] Frame 805200 @ 150.9 FPS | Updates 671: pg_loss 5182.178 | value_loss 556522.750 | mean_return 0.800
+[INFO:2023-05-02 18:29:08,171] Frame 806400 @ 149.6 FPS | Updates 672: pg_loss 4779.955 | value_loss 947140.000 | mean_return 0.833
+[INFO:2023-05-02 18:29:15,924] Frame 807600 @ 154.8 FPS | Updates 673: pg_loss 5574.736 | value_loss 366127.031 | mean_return 0.717
+[INFO:2023-05-02 18:29:23,908] Frame 808800 @ 150.3 FPS | Updates 674: pg_loss 208.761 | value_loss 48387.090 | mean_return 0.367
+[INFO:2023-05-02 18:29:31,961] Frame 810000 @ 149.0 FPS | Updates 675: pg_loss 4405.841 | value_loss 309880.875 | mean_return 0.608
+[INFO:2023-05-02 18:29:39,980] Frame 811200 @ 149.7 FPS | Updates 676: pg_loss 9099.650 | value_loss 2386116.000 | mean_return 1.208
+[INFO:2023-05-02 18:29:47,835] Frame 812400 @ 152.8 FPS | Updates 677: pg_loss 4703.162 | value_loss 298479.375 | mean_return 0.683
+[INFO:2023-05-02 18:29:55,861] Frame 813600 @ 149.5 FPS | Updates 678: pg_loss 4392.410 | value_loss 1217640.625 | mean_return 0.817
+[INFO:2023-05-02 18:30:03,740] Frame 814800 @ 152.3 FPS | Updates 679: pg_loss 3680.989 | value_loss 240525.438 | mean_return 0.567
+[INFO:2023-05-02 18:30:11,504] Frame 816000 @ 154.6 FPS | Updates 680: pg_loss 5669.693 | value_loss 582485.812 | mean_return 0.833
+[INFO:2023-05-02 18:30:19,412] Frame 817200 @ 151.7 FPS | Updates 681: pg_loss 5632.970 | value_loss 838428.938 | mean_return 0.767
+[INFO:2023-05-02 18:30:27,297] Frame 818400 @ 152.1 FPS | Updates 682: pg_loss 5217.478 | value_loss 403683.656 | mean_return 0.733
+[INFO:2023-05-02 18:30:35,198] Frame 819600 @ 151.8 FPS | Updates 683: pg_loss 3050.606 | value_loss 295340.500 | mean_return 0.625
+[INFO:2023-05-02 18:30:43,175] Frame 820800 @ 150.4 FPS | Updates 684: pg_loss 3077.748 | value_loss 334650.375 | mean_return 0.542
+[INFO:2023-05-02 18:30:51,001] Frame 822000 @ 153.3 FPS | Updates 685: pg_loss 6421.977 | value_loss 547435.312 | mean_return 0.808
+[INFO:2023-05-02 18:30:58,953] Frame 823200 @ 150.9 FPS | Updates 686: pg_loss 7430.414 | value_loss 1091320.250 | mean_return 0.992
+[INFO:2023-05-02 18:31:06,979] Frame 824400 @ 149.5 FPS | Updates 687: pg_loss 1376.137 | value_loss 206148.688 | mean_return 0.358
+[INFO:2023-05-02 18:31:14,848]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:31:14,878] Frame 825600 @ 151.9 FPS | Updates 688: pg_loss 12381.271 | value_loss 2224591.250 | mean_return 1.425
+[INFO:2023-05-02 18:31:22,776] Frame 826800 @ 151.9 FPS | Updates 689: pg_loss 3077.550 | value_loss 386171.469 | mean_return 0.558
+[INFO:2023-05-02 18:31:30,721] Frame 828000 @ 151.1 FPS | Updates 690: pg_loss 6064.728 | value_loss 519532.469 | mean_return 0.950
+[INFO:2023-05-02 18:31:39,132] Frame 829200 @ 142.7 FPS | Updates 691: pg_loss 7049.525 | value_loss 885993.312 | mean_return 1.233
+[INFO:2023-05-02 18:31:47,451] Frame 830400 @ 144.3 FPS | Updates 692: pg_loss 5117.689 | value_loss 634266.812 | mean_return 0.908
+[INFO:2023-05-02 18:31:55,815] Frame 831600 @ 143.5 FPS | Updates 693: pg_loss 3959.041 | value_loss 251223.188 | mean_return 0.658
+[INFO:2023-05-02 18:32:04,510] Frame 832800 @ 138.0 FPS | Updates 694: pg_loss 8895.365 | value_loss 971141.062 | mean_return 1.350
+[INFO:2023-05-02 18:32:13,078] Frame 834000 @ 140.1 FPS | Updates 695: pg_loss 1828.243 | value_loss 243357.047 | mean_return 0.417
+[INFO:2023-05-02 18:32:20,958] Frame 835200 @ 152.3 FPS | Updates 696: pg_loss 2549.426 | value_loss 241178.641 | mean_return 0.558
+[INFO:2023-05-02 18:32:28,500] Frame 836400 @ 159.1 FPS | Updates 697: pg_loss 6295.559 | value_loss 543180.188 | mean_return 0.883
+[INFO:2023-05-02 18:32:36,230] Frame 837600 @ 155.2 FPS | Updates 698: pg_loss 9259.539 | value_loss 2242591.000 | mean_return 1.425
+[INFO:2023-05-02 18:32:44,048] Frame 838800 @ 153.5 FPS | Updates 699: pg_loss 3026.634 | value_loss 404344.688 | mean_return 0.550
+[INFO:2023-05-02 18:32:51,989] Frame 840000 @ 151.1 FPS | Updates 700: pg_loss 3165.773 | value_loss 269395.188 | mean_return 0.625
+[INFO:2023-05-02 18:32:56,347] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 18:32:56,347] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 18:32:56,347] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 18:32:56,348] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 18:32:56,348] ---------- END VALIDATION ----------
+[INFO:2023-05-02 18:33:04,671] Frame 841200 @ 144.2 FPS | Updates 701: pg_loss 15785.827 | value_loss 4338020.000 | mean_return 1.933
+[INFO:2023-05-02 18:33:12,423] Frame 842400 @ 154.8 FPS | Updates 702: pg_loss 363.516 | value_loss 125666.523 | mean_return 0.258
+[INFO:2023-05-02 18:33:20,316] Frame 843600 @ 152.0 FPS | Updates 703: pg_loss 4152.769 | value_loss 395085.938 | mean_return 0.742
+[INFO:2023-05-02 18:33:28,228] Frame 844800 @ 151.7 FPS | Updates 704: pg_loss 5628.831 | value_loss 449546.906 | mean_return 0.967
+[INFO:2023-05-02 18:33:36,228] Frame 846000 @ 150.0 FPS | Updates 705: pg_loss 4831.054 | value_loss 566797.312 | mean_return 0.892
+[INFO:2023-05-02 18:33:44,134] Frame 847200 @ 151.8 FPS | Updates 706: pg_loss 3528.383 | value_loss 267349.031 | mean_return 0.667
+[INFO:2023-05-02 18:33:51,889] Frame 848400 @ 154.8 FPS | Updates 707: pg_loss 3394.431 | value_loss 268258.531 | mean_return 0.675
+[INFO:2023-05-02 18:33:59,691] Frame 849600 @ 153.8 FPS | Updates 708: pg_loss 6760.545 | value_loss 573630.312 | mean_return 1.092
+[INFO:2023-05-02 18:34:07,506] Frame 850800 @ 153.6 FPS | Updates 709: pg_loss 3107.248 | value_loss 306209.750 | mean_return 0.650
+[INFO:2023-05-02 18:34:15,644] Frame 852000 @ 147.5 FPS | Updates 710: pg_loss 2945.474 | value_loss 291932.781 | mean_return 0.567
+[INFO:2023-05-02 18:34:23,529] Frame 853200 @ 152.2 FPS | Updates 711: pg_loss 3458.915 | value_loss 333402.344 | mean_return 0.650
+[INFO:2023-05-02 18:34:31,476] Frame 854400 @ 151.0 FPS | Updates 712: pg_loss 2287.337 | value_loss 157246.656 | mean_return 0.617
+[INFO:2023-05-02 18:34:39,193] Frame 855600 @ 155.5 FPS | Updates 713: pg_loss 4059.651 | value_loss 462419.281 | mean_return 0.700
+[INFO:2023-05-02 18:34:47,263] Frame 856800 @ 148.7 FPS | Updates 714: pg_loss 4664.738 | value_loss 850591.562 | mean_return 0.783
+[INFO:2023-05-02 18:34:55,186] Frame 858000 @ 151.5 FPS | Updates 715: pg_loss 2561.354 | value_loss 211974.031 | mean_return 0.642
+[INFO:2023-05-02 18:35:03,176] Frame 859200 @ 150.2 FPS | Updates 716: pg_loss 2484.449 | value_loss 292515.375 | mean_return 0.567
+[INFO:2023-05-02 18:35:10,932] Frame 860400 @ 154.7 FPS | Updates 717: pg_loss 7398.725 | value_loss 669399.625 | mean_return 1.042
+[INFO:2023-05-02 18:35:18,743] Frame 861600 @ 153.6 FPS | Updates 718: pg_loss 18320.408 | value_loss 10522330.000 | mean_return 2.267
+[INFO:2023-05-02 18:35:26,409] Frame 862800 @ 156.5 FPS | Updates 719: pg_loss 3159.181 | value_loss 320763.531 | mean_return 0.525
+[INFO:2023-05-02 18:35:34,335] Frame 864000 @ 151.4 FPS | Updates 720: pg_loss 3804.733 | value_loss 395330.188 | mean_return 0.725
+[INFO:2023-05-02 18:35:42,290] Frame 865200 @ 150.9 FPS | Updates 721: pg_loss 3257.748 | value_loss 306014.906 | mean_return 0.608
+[INFO:2023-05-02 18:35:50,245] Frame 866400 @ 150.9 FPS | Updates 722: pg_loss 9241.849 | value_loss 2101631.000 | mean_return 1.342
+[INFO:2023-05-02 18:35:58,289] Frame 867600 @ 149.2 FPS | Updates 723: pg_loss 5214.140 | value_loss 804144.438 | mean_return 0.917
+[INFO:2023-05-02 18:36:06,141] Frame 868800 @ 152.8 FPS | Updates 724: pg_loss 5055.511 | value_loss 432604.062 | mean_return 0.808
+[INFO:2023-05-02 18:36:14,077] Frame 870000 @ 151.2 FPS | Updates 725: pg_loss 14318.851 | value_loss 9445016.000 | mean_return 1.675
+[INFO:2023-05-02 18:36:21,922]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:36:21,965] Frame 871200 @ 152.1 FPS | Updates 726: pg_loss 8688.834 | value_loss 2004808.625 | mean_return 1.225
+[INFO:2023-05-02 18:36:29,896] Frame 872400 @ 151.3 FPS | Updates 727: pg_loss 3869.465 | value_loss 444784.531 | mean_return 0.675
+[INFO:2023-05-02 18:36:37,616] Frame 873600 @ 155.5 FPS | Updates 728: pg_loss 9627.700 | value_loss 1773104.500 | mean_return 1.375
+[INFO:2023-05-02 18:36:45,563] Frame 874800 @ 151.0 FPS | Updates 729: pg_loss -556.482 | value_loss 68817.914 | mean_return 0.200
+[INFO:2023-05-02 18:36:53,290] Frame 876000 @ 155.3 FPS | Updates 730: pg_loss 6408.734 | value_loss 458173.125 | mean_return 0.858
+[INFO:2023-05-02 18:37:02,268] Frame 877200 @ 133.7 FPS | Updates 731: pg_loss -210.160 | value_loss 72095.805 | mean_return 0.267
+[INFO:2023-05-02 18:37:11,416] Frame 878400 @ 131.2 FPS | Updates 732: pg_loss 2876.133 | value_loss 209258.812 | mean_return 0.517
+[INFO:2023-05-02 18:37:19,321] Frame 879600 @ 151.8 FPS | Updates 733: pg_loss 5774.657 | value_loss 457789.844 | mean_return 0.858
+[INFO:2023-05-02 18:37:27,032] Frame 880800 @ 155.6 FPS | Updates 734: pg_loss 2843.186 | value_loss 365738.750 | mean_return 0.608
+[INFO:2023-05-02 18:37:34,773] Frame 882000 @ 155.0 FPS | Updates 735: pg_loss 4320.849 | value_loss 347392.906 | mean_return 0.658
+[INFO:2023-05-02 18:37:42,548] Frame 883200 @ 154.3 FPS | Updates 736: pg_loss 11540.494 | value_loss 3319356.750 | mean_return 1.642
+[INFO:2023-05-02 18:37:50,341] Frame 884400 @ 154.0 FPS | Updates 737: pg_loss 3638.630 | value_loss 459753.688 | mean_return 0.775
+[INFO:2023-05-02 18:37:58,049] Frame 885600 @ 155.7 FPS | Updates 738: pg_loss 5499.788 | value_loss 461444.094 | mean_return 0.800
+[INFO:2023-05-02 18:38:06,001] Frame 886800 @ 150.9 FPS | Updates 739: pg_loss 3042.766 | value_loss 380649.062 | mean_return 0.817
+[INFO:2023-05-02 18:38:13,701] Frame 888000 @ 155.9 FPS | Updates 740: pg_loss 5691.857 | value_loss 421164.594 | mean_return 0.783
+[INFO:2023-05-02 18:38:21,531] Frame 889200 @ 153.3 FPS | Updates 741: pg_loss 7996.891 | value_loss 2155250.750 | mean_return 0.992
+[INFO:2023-05-02 18:38:29,517] Frame 890400 @ 150.3 FPS | Updates 742: pg_loss 1504.559 | value_loss 185610.234 | mean_return 0.558
+[INFO:2023-05-02 18:38:37,120] Frame 891600 @ 157.8 FPS | Updates 743: pg_loss 4707.604 | value_loss 291451.312 | mean_return 0.658
+[INFO:2023-05-02 18:38:45,020] Frame 892800 @ 151.9 FPS | Updates 744: pg_loss 3738.170 | value_loss 352480.844 | mean_return 0.792
+[INFO:2023-05-02 18:38:52,789] Frame 894000 @ 154.5 FPS | Updates 745: pg_loss 3962.926 | value_loss 313171.781 | mean_return 0.625
+[INFO:2023-05-02 18:39:00,604] Frame 895200 @ 153.6 FPS | Updates 746: pg_loss 6637.104 | value_loss 1021013.062 | mean_return 0.908
+[INFO:2023-05-02 18:39:08,367] Frame 896400 @ 154.6 FPS | Updates 747: pg_loss 5813.900 | value_loss 991739.625 | mean_return 0.858
+[INFO:2023-05-02 18:39:16,336] Frame 897600 @ 150.6 FPS | Updates 748: pg_loss 3396.513 | value_loss 308059.844 | mean_return 0.583
+[INFO:2023-05-02 18:39:24,033] Frame 898800 @ 155.9 FPS | Updates 749: pg_loss 3760.261 | value_loss 274365.562 | mean_return 0.642
+[INFO:2023-05-02 18:39:31,863] Frame 900000 @ 153.2 FPS | Updates 750: pg_loss 5809.741 | value_loss 868305.438 | mean_return 0.908
+[INFO:2023-05-02 18:39:35,741] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 18:39:35,741] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 18:39:35,742] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 18:39:35,742] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 18:39:35,742] ---------- END VALIDATION ----------
+[INFO:2023-05-02 18:39:43,481] Frame 901200 @ 155.1 FPS | Updates 751: pg_loss 3677.403 | value_loss 290496.781 | mean_return 0.658
+[INFO:2023-05-02 18:39:51,135] Frame 902400 @ 156.8 FPS | Updates 752: pg_loss 3224.043 | value_loss 290763.344 | mean_return 0.592
+[INFO:2023-05-02 18:39:58,882] Frame 903600 @ 154.9 FPS | Updates 753: pg_loss 3083.736 | value_loss 243905.406 | mean_return 0.592
+[INFO:2023-05-02 18:40:06,597] Frame 904800 @ 155.6 FPS | Updates 754: pg_loss 5766.494 | value_loss 393249.625 | mean_return 0.875
+[INFO:2023-05-02 18:40:14,295] Frame 906000 @ 155.9 FPS | Updates 755: pg_loss 2341.970 | value_loss 317519.438 | mean_return 0.467
+[INFO:2023-05-02 18:40:22,136] Frame 907200 @ 153.1 FPS | Updates 756: pg_loss 1546.071 | value_loss 134119.109 | mean_return 0.442
+[INFO:2023-05-02 18:40:29,876] Frame 908400 @ 155.0 FPS | Updates 757: pg_loss 5023.924 | value_loss 301010.906 | mean_return 0.775
+[INFO:2023-05-02 18:40:37,726] Frame 909600 @ 152.9 FPS | Updates 758: pg_loss 8008.574 | value_loss 937139.438 | mean_return 1.075
+[INFO:2023-05-02 18:40:45,956] Frame 910800 @ 145.8 FPS | Updates 759: pg_loss 6091.210 | value_loss 429842.812 | mean_return 0.900
+[INFO:2023-05-02 18:40:53,910] Frame 912000 @ 150.9 FPS | Updates 760: pg_loss 2016.829 | value_loss 188986.953 | mean_return 0.467
+[INFO:2023-05-02 18:41:01,739] Frame 913200 @ 153.3 FPS | Updates 761: pg_loss 10359.297 | value_loss 2764524.000 | mean_return 1.283
+[INFO:2023-05-02 18:41:09,536] Frame 914400 @ 153.9 FPS | Updates 762: pg_loss 4984.234 | value_loss 448080.812 | mean_return 0.808
+[INFO:2023-05-02 18:41:17,082] Frame 915600 @ 159.0 FPS | Updates 763: pg_loss 4097.995 | value_loss 320813.875 | mean_return 0.683
+[INFO:2023-05-02 18:41:24,821]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:41:24,853] Frame 916800 @ 154.4 FPS | Updates 764: pg_loss 814.377 | value_loss 107495.625 | mean_return 0.325
+[INFO:2023-05-02 18:41:32,584] Frame 918000 @ 155.2 FPS | Updates 765: pg_loss 4338.672 | value_loss 366665.250 | mean_return 0.683
+[INFO:2023-05-02 18:41:40,446] Frame 919200 @ 152.6 FPS | Updates 766: pg_loss 4769.790 | value_loss 537835.000 | mean_return 0.783
+[INFO:2023-05-02 18:41:48,386] Frame 920400 @ 151.1 FPS | Updates 767: pg_loss 9463.993 | value_loss 2196665.500 | mean_return 1.442
+[INFO:2023-05-02 18:41:56,358] Frame 921600 @ 150.5 FPS | Updates 768: pg_loss 1222.937 | value_loss 204202.438 | mean_return 0.417
+[INFO:2023-05-02 18:42:04,135] Frame 922800 @ 154.3 FPS | Updates 769: pg_loss 4774.130 | value_loss 315320.531 | mean_return 0.650
+[INFO:2023-05-02 18:42:12,015] Frame 924000 @ 152.3 FPS | Updates 770: pg_loss 2604.646 | value_loss 238297.422 | mean_return 0.583
+[INFO:2023-05-02 18:42:19,799] Frame 925200 @ 154.2 FPS | Updates 771: pg_loss 10277.875 | value_loss 2509390.000 | mean_return 1.167
+[INFO:2023-05-02 18:42:27,714] Frame 926400 @ 151.6 FPS | Updates 772: pg_loss 1121.429 | value_loss 184507.719 | mean_return 0.392
+[INFO:2023-05-02 18:42:35,274] Frame 927600 @ 158.7 FPS | Updates 773: pg_loss 12472.449 | value_loss 3124125.500 | mean_return 2.100
+[INFO:2023-05-02 18:42:43,190] Frame 928800 @ 151.6 FPS | Updates 774: pg_loss 974.164 | value_loss 209031.969 | mean_return 0.483
+[INFO:2023-05-02 18:42:50,935] Frame 930000 @ 155.0 FPS | Updates 775: pg_loss 5536.352 | value_loss 380251.875 | mean_return 0.742
+[INFO:2023-05-02 18:42:58,778] Frame 931200 @ 153.0 FPS | Updates 776: pg_loss 12497.314 | value_loss 3475259.500 | mean_return 1.458
+[INFO:2023-05-02 18:43:06,574] Frame 932400 @ 153.9 FPS | Updates 777: pg_loss 3086.730 | value_loss 261974.859 | mean_return 0.517
+[INFO:2023-05-02 18:43:14,566] Frame 933600 @ 150.2 FPS | Updates 778: pg_loss 18202.338 | value_loss 4782496.000 | mean_return 1.883
+[INFO:2023-05-02 18:43:22,311] Frame 934800 @ 154.9 FPS | Updates 779: pg_loss 9409.613 | value_loss 5653606.500 | mean_return 1.283
+[INFO:2023-05-02 18:43:29,882] Frame 936000 @ 158.5 FPS | Updates 780: pg_loss 4710.378 | value_loss 500346.312 | mean_return 0.725
+[INFO:2023-05-02 18:43:37,489] Frame 937200 @ 157.7 FPS | Updates 781: pg_loss 3882.648 | value_loss 323866.250 | mean_return 0.658
+[INFO:2023-05-02 18:43:45,295] Frame 938400 @ 153.7 FPS | Updates 782: pg_loss 4641.752 | value_loss 349455.531 | mean_return 0.792
+[INFO:2023-05-02 18:43:53,169] Frame 939600 @ 152.4 FPS | Updates 783: pg_loss 4933.437 | value_loss 416447.031 | mean_return 0.750
+[INFO:2023-05-02 18:44:00,944] Frame 940800 @ 154.3 FPS | Updates 784: pg_loss 1252.151 | value_loss 133085.703 | mean_return 0.383
+[INFO:2023-05-02 18:44:08,439] Frame 942000 @ 160.1 FPS | Updates 785: pg_loss 2577.922 | value_loss 185261.750 | mean_return 0.517
+[INFO:2023-05-02 18:44:16,784] Frame 943200 @ 143.8 FPS | Updates 786: pg_loss 3857.881 | value_loss 565797.625 | mean_return 0.683
+[INFO:2023-05-02 18:44:24,640] Frame 944400 @ 152.8 FPS | Updates 787: pg_loss 3564.921 | value_loss 349072.688 | mean_return 0.658
+[INFO:2023-05-02 18:44:32,759] Frame 945600 @ 147.8 FPS | Updates 788: pg_loss 4733.217 | value_loss 632974.688 | mean_return 0.708
+[INFO:2023-05-02 18:44:40,911] Frame 946800 @ 147.2 FPS | Updates 789: pg_loss 3556.441 | value_loss 229211.516 | mean_return 0.700
+[INFO:2023-05-02 18:44:48,848] Frame 948000 @ 151.2 FPS | Updates 790: pg_loss 3319.883 | value_loss 220439.109 | mean_return 0.600
+[INFO:2023-05-02 18:44:56,424] Frame 949200 @ 158.4 FPS | Updates 791: pg_loss 5025.583 | value_loss 457639.000 | mean_return 0.775
+[INFO:2023-05-02 18:45:04,414] Frame 950400 @ 150.2 FPS | Updates 792: pg_loss 2119.498 | value_loss 243362.328 | mean_return 0.467
+[INFO:2023-05-02 18:45:12,129] Frame 951600 @ 155.5 FPS | Updates 793: pg_loss 5302.428 | value_loss 454130.062 | mean_return 0.750
+[INFO:2023-05-02 18:45:19,934] Frame 952800 @ 153.8 FPS | Updates 794: pg_loss 4289.767 | value_loss 423738.781 | mean_return 0.725
+[INFO:2023-05-02 18:45:27,765] Frame 954000 @ 153.2 FPS | Updates 795: pg_loss 1558.037 | value_loss 179044.125 | mean_return 0.450
+[INFO:2023-05-02 18:45:35,551] Frame 955200 @ 154.1 FPS | Updates 796: pg_loss 3664.976 | value_loss 269423.031 | mean_return 0.608
+[INFO:2023-05-02 18:45:43,359] Frame 956400 @ 153.7 FPS | Updates 797: pg_loss 5121.526 | value_loss 730022.000 | mean_return 0.875
+[INFO:2023-05-02 18:45:51,154] Frame 957600 @ 154.0 FPS | Updates 798: pg_loss 5451.317 | value_loss 491215.594 | mean_return 0.792
+[INFO:2023-05-02 18:45:59,103] Frame 958800 @ 151.0 FPS | Updates 799: pg_loss 2294.216 | value_loss 298969.188 | mean_return 0.492
+[INFO:2023-05-02 18:46:07,011] Frame 960000 @ 151.8 FPS | Updates 800: pg_loss 2374.128 | value_loss 260903.781 | mean_return 0.450
+[INFO:2023-05-02 18:46:10,959] ---------- BEGIN VALIDATION ----------
+[INFO:2023-05-02 18:46:10,959] Steps taken over each of 5 episodes: 201, 201, 201, 201, 201
+[INFO:2023-05-02 18:46:10,959] Total return after 5 episodes: 350.000
+[INFO:2023-05-02 18:46:10,959] Mean return for each episode: 70.000, (std: 0.000)
+[INFO:2023-05-02 18:46:10,959] ---------- END VALIDATION ----------
+[INFO:2023-05-02 18:46:18,604] Frame 961200 @ 157.0 FPS | Updates 801: pg_loss 7195.848 | value_loss 500799.000 | mean_return 1.000
+[INFO:2023-05-02 18:46:26,529]
+*** Saving checkpoint to trained/a2c_lstm.pt ***
+[INFO:2023-05-02 18:46:26,559] Frame 962400 @ 150.8 FPS | Updates 802: pg_loss 2740.300 | value_loss 288231.562 | mean_return 0.658
+[INFO:2023-05-02 18:46:36,526] Frame 963600 @ 120.4 FPS | Updates 803: pg_loss 3694.474 | value_loss 302623.031 | mean_return 0.667
+[INFO:2023-05-02 18:46:44,485] Frame 964800 @ 150.8 FPS | Updates 804: pg_loss 3272.327 | value_loss 302249.812 | mean_return 0.633
+[INFO:2023-05-02 18:46:52,325] Frame 966000 @ 153.1 FPS | Updates 805: pg_loss 4159.594 | value_loss 394829.781 | mean_return 0.725
+[INFO:2023-05-02 18:47:00,046] Frame 967200 @ 155.4 FPS | Updates 806: pg_loss 1862.351 | value_loss 163883.203 | mean_return 0.475
+[INFO:2023-05-02 18:47:08,372] Frame 968400 @ 144.1 FPS | Updates 807: pg_loss 4957.083 | value_loss 372672.844 | mean_return 0.742
+[INFO:2023-05-02 18:47:16,119] Frame 969600 @ 154.9 FPS | Updates 808: pg_loss 8796.784 | value_loss 2293924.000 | mean_return 1.167
+[INFO:2023-05-02 18:47:23,796] Frame 970800 @ 156.3 FPS | Updates 809: pg_loss 4779.355 | value_loss 813599.625 | mean_return 0.717
+[INFO:2023-05-02 18:47:31,570] Frame 972000 @ 154.4 FPS | Updates 810: pg_loss 4754.547 | value_loss 702762.938 | mean_return 0.767
+[INFO:2023-05-02 18:47:39,131] Frame 973200 @ 158.7 FPS | Updates 811: pg_loss 4844.290 | value_loss 500384.219 | mean_return 0.767
+[INFO:2023-05-02 18:47:46,940] Frame 974400 @ 153.7 FPS | Updates 812: pg_loss 1043.751 | value_loss 114309.320 | mean_return 0.375
+[INFO:2023-05-02 18:47:54,503] Frame 975600 @ 158.7 FPS | Updates 813: pg_loss 3972.025 | value_loss 220631.531 | mean_return 0.642
+[INFO:2023-05-02 18:48:02,330] Frame 976800 @ 153.3 FPS | Updates 814: pg_loss 2475.847 | value_loss 350136.562 | mean_return 0.483
+[INFO:2023-05-02 18:48:10,134] Frame 978000 @ 153.8 FPS | Updates 815: pg_loss 5614.042 | value_loss 535042.938 | mean_return 0.967
+[INFO:2023-05-02 18:48:17,966] Frame 979200 @ 153.2 FPS | Updates 816: pg_loss 19077.320 | value_loss 9929747.000 | mean_return 2.417
+[INFO:2023-05-02 18:48:25,036] Frame 980400 @ 169.7 FPS | Updates 817: pg_loss 2420.542 | value_loss 280393.406 | mean_return 0.433
+[INFO:2023-05-02 18:48:32,606] Frame 981600 @ 158.5 FPS | Updates 818: pg_loss 5528.283 | value_loss 458876.938 | mean_return 0.833
+[INFO:2023-05-02 18:48:40,264] Frame 982800 @ 156.7 FPS | Updates 819: pg_loss 7866.110 | value_loss 925618.125 | mean_return 1.142
+[INFO:2023-05-02 18:48:48,115] Frame 984000 @ 152.9 FPS | Updates 820: pg_loss 2724.660 | value_loss 365486.219 | mean_return 0.742
+[INFO:2023-05-02 18:48:55,835] Frame 985200 @ 155.5 FPS | Updates 821: pg_loss 4268.475 | value_loss 325688.125 | mean_return 0.625
+[INFO:2023-05-02 18:49:03,643] Frame 986400 @ 153.7 FPS | Updates 822: pg_loss 15100.615 | value_loss 4579564.500 | mean_return 1.867
+[INFO:2023-05-02 18:49:11,453] Frame 987600 @ 153.6 FPS | Updates 823: pg_loss 6897.601 | value_loss 848820.062 | mean_return 1.150
+[INFO:2023-05-02 18:49:19,316] Frame 988800 @ 152.6 FPS | Updates 824: pg_loss 4075.661 | value_loss 349192.281 | mean_return 0.742
+[INFO:2023-05-02 18:49:27,028] Frame 990000 @ 155.6 FPS | Updates 825: pg_loss 6265.073 | value_loss 701804.438 | mean_return 1.042
+[INFO:2023-05-02 18:49:34,774] Frame 991200 @ 154.9 FPS | Updates 826: pg_loss 14614.268 | value_loss 9706338.000 | mean_return 1.883
+[INFO:2023-05-02 18:49:42,694] Frame 992400 @ 151.5 FPS | Updates 827: pg_loss 3040.275 | value_loss 513634.969 | mean_return 0.875
+[INFO:2023-05-02 18:49:50,343] Frame 993600 @ 156.9 FPS | Updates 828: pg_loss 7799.932 | value_loss 710219.250 | mean_return 1.350
+[INFO:2023-05-02 18:49:58,281] Frame 994800 @ 151.2 FPS | Updates 829: pg_loss 1591.247 | value_loss 246001.969 | mean_return 0.525
+[INFO:2023-05-02 18:50:05,624] Frame 996000 @ 163.4 FPS | Updates 830: pg_loss 6424.009 | value_loss 463668.656 | mean_return 0.825
+[INFO:2023-05-02 18:50:13,396] Frame 997200 @ 154.4 FPS | Updates 831: pg_loss 8208.350 | value_loss 1111214.750 | mean_return 1.242
+[INFO:2023-05-02 18:50:20,879] Frame 998400 @ 160.4 FPS | Updates 832: pg_loss 2459.117 | value_loss 155103.531 | mean_return 0.583
+[INFO:2023-05-02 18:50:28,661] Frame 999600 @ 154.2 FPS | Updates 833: pg_loss 1628.586 | value_loss 182019.312 | mean_return 0.383
+[INFO:2023-05-02 18:50:36,329] Frame 1000800 @ 156.5 FPS | Updates 834: pg_loss 4278.950 | value_loss 241517.141 | mean_return 0.725
+============================== TRAINING FINISHED ==============================
+Time taken: 110.6 minutes
