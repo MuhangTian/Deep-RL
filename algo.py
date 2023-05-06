@@ -422,6 +422,7 @@ class DeepQLearning(AbstractAlgorithm):
             return random.randint(0,self.naction-1)
         else:
             with torch.no_grad():       # with 1-epsilon, taken greedy action
+                state = state.to(self.device)
                 return self.Q_network(state.unsqueeze(0)).max(dim = 1).indices.item()
     
     def update_most_recent_observation(self, frame: torch.Tensor):
@@ -472,7 +473,7 @@ class DeepQLearning(AbstractAlgorithm):
                 action = random.randint(0,self.naction-1)     # random action to produce more frames to generate initial state
                 env_output = env.step(action)
                 self.update_most_recent_observation(self.preprocess(env_output[0]))
-            state = torch.stack(self.most_recent_observation, dim=0).unsqueeze(0).to(self.args.device)    # stack the frames to form a single state
+            state = torch.stack(self.most_recent_observation, dim=0).unsqueeze(0)    # stack the frames to form a single state
             
             done, timestep, reward_total, loss_total = False, 1, 0, 0
             while not done:
@@ -484,7 +485,7 @@ class DeepQLearning(AbstractAlgorithm):
                 timestep += 1
                 self.epsilon = max(self.epsilon - self.epsilon_decay, 0.1)   # decay epsilon
                 self.update_most_recent_observation(next_frame)
-                next_state = torch.stack(self.most_recent_observation, dim=0).unsqueeze(0).to(self.args.device)
+                next_state = torch.stack(self.most_recent_observation, dim=0).unsqueeze(0)
                 
                 # store experience in replay buffer
                 experience = utils.Transition(state=state, action=action, next_state=next_state, reward=reward, done=done)
