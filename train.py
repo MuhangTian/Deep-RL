@@ -37,7 +37,7 @@ if __name__ == "__main__":
     parser.add_argument("--total_frames", default=1_000_000, type=int, help="total environment frames to train for")
     parser.add_argument("--batch_size", default=32, type=int, help="learner batch size.")
     parser.add_argument("--unroll_length", default=150, type=int, help="unroll length (time dimension)")
-    parser.add_argument("--hidden_dim", default=256, type=int, help="policy net hidden dim")
+    parser.add_argument("--hidden_dim", default=512, type=int, help="policy net hidden dim")
     parser.add_argument("--discounting", default=0.99, type=float, help="discounting factor")
     parser.add_argument("--learning_rate", default=0.00025, type=float, help="Learning rate")
     parser.add_argument("--grad_norm_clipping", default=10.0, type=float, help="Global gradient norm clip.")

@@ -14,4 +14,4 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate RL
 
-srun python train.py --save_path "trained/gpu/dql_KungFu.pt" --env "ALE/KungFuMaster-v5"
+srun python train.py --save_path "trained/gpu/dqn_kungfu.pt" --env "ALE/KungFuMaster-v5"
