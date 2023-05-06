@@ -1,26 +1,23 @@
 import argparse
 import logging
 import os
+import random
 
 import gymnasium as gym
 import numpy as np
 import torch
-import random
 
 import utils
-from algo import ActorCritic, DeepQLearning, VanillaPolicyGradient
-from model import ActorNetworkCNN, ActorNetworkLSTM, PolicyNetwork, QNetwork
+from algo import DeepQLearning, VanillaPolicyGradient
+from model import PolicyNetwork, QNetwork
 
 num_threads = os.cpu_count()
 ALGO = {
     'vpg': VanillaPolicyGradient,
-    'a2c': ActorCritic,
     'dql': DeepQLearning,
 }
 MODEL = {
     'pn': PolicyNetwork,
-    'an_cnn': ActorNetworkCNN,
-    'an_lstm': ActorNetworkLSTM,
     'qn': QNetwork,
 }
 torch.set_num_threads(num_threads)
