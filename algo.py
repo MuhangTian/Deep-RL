@@ -15,13 +15,6 @@ from torch.distributions import Categorical
 import utils
 from model import CriticNetworkCNN, CriticNetworkLSTM
 
-try:        # use wandb to log stuff if we have it, else don't
-    import wandb
-    wandb = False
-    project_name = "RL-implementation"
-except:
-    wandb = False
-
 
 class AbstractAlgorithm(abc.ABC):
     """
@@ -288,11 +281,11 @@ class ActorCritic(AbstractAlgorithm):
         return stats, envs, observations, prev_state, prev_state_value
     
     def train(self):
-        if wandb:
-            wandb.init(project=project_name, entity='muhang-tian')
         args = self.args
         T = args.unroll_length
         B = args.batch_size
+        wandb = self.args.wandb
+        del self.args.wandb
 
         args.device = torch.device("cpu")
         env = gym.make(args.env)
@@ -462,10 +455,10 @@ class DeepQLearning(AbstractAlgorithm):
     def train(self):
         timer = timeit.default_timer
         last_checkpoint_time = timer()
-        if wandb:
-            wandb.init(project=project_name, entity='muhang-tian')
         # NOTE: frame skipping only applies to training, not evaluation/validation
         # validation/evaluation is still one frame per step
+        wandb = self.args.wandb
+        del self.args.wandb
         env = utils.SkipFrameWrapper(gym.make(self.args.env), skip=self.frame_skipping_interval)
         self.naction = env.action_space.n
         self.initialize_networks(env.action_space.n)

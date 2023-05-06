@@ -22,13 +22,13 @@ def get_done(env, start_lives):
 
 def get_device():
     if torch.cuda.is_available():
-        print('************* Using CUDA *************')
+        logging.info('************* Using CUDA *************')
         return torch.device('cuda')
     elif torch.has_mps:
-        print('************* Using MPS *************')
+        logging.info('************* Using MPS *************')
         return torch.device('mps')
     else:
-        print('************* Using CPU *************')
+        logging.info('************* Using CPU *************')
         return torch.device('cpu')
 
 def preprocess_observation(obs, mode='simple', new_size=(84, 84)):

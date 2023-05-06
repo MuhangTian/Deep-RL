@@ -26,7 +26,6 @@ MODEL = {
 torch.set_num_threads(num_threads)
 logging.basicConfig(format=(
         "[%(levelname)s:%(asctime)s] " "%(message)s"), level=logging.INFO)
-logging.info(f"Using {num_threads} threads for torch")
 
 
 if __name__ == "__main__":
@@ -58,13 +57,25 @@ if __name__ == "__main__":
     parser.add_argument("--epsilon_decay_frames", type=int, default=1_000_000, help="number of frames to decay epsilon from epsilon_start to epsilon_end (linearly)")
     parser.add_argument("--target_update_frequency", type=int, default=10_000, help="number of learning network updates between target network updates")
     
+    parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
+    
     torch.manual_seed(59006)
     np.random.seed(59006)
     random.seed(59006)   # python's random library, control randomness used in experience replay (only matter for DQL)
     args = parser.parse_args()
+    try:        # use wandb to log stuff if we have it, else don't
+        import wandb
+        if args.nolog:
+            wandb = False    
+        else:
+            wandb.init(project="RL-implementation", entity='muhang-tian')
+    except:
+        wandb = False
     args.device = utils.get_device()
     args.start_nlives = gym.make(args.env).ale.lives()
+    args.wandb = wandb 
     logging.info(args)
+    logging.info(f"Using {num_threads} threads for torch")
     
     if args.mode == "train":
         model = MODEL[args.model]
