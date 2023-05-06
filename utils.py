@@ -16,9 +16,9 @@ Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward', 'done'))
 
 
-def get_done(env, start_lives):
-    '''to determine whether an episode is done'''
-    return env.ale.lives() != start_lives
+# def get_done(env, start_lives):
+#     '''to determine whether an episode is done'''
+#     return env.ale.lives() != start_lives
 
 def get_device():
     if torch.cuda.is_available():
@@ -92,12 +92,13 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
         
         observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0).to(args.device)      # 1 x 1 x ic x iH x iW
         prev_state = None
-        step, ep_total_reward = 0, 0
+        step, ep_total_reward, done = 0, 0, False
         # play until the agent dies or we exceed 50000 observations
-        while env.ale.lives() == 3 and step < 50000:
+        while not done and step < 50000:
             action, prev_state = model.get_action(observation, prev_state)
             env_output = env.step(action)
             ep_total_reward += env_output[1]
+            done = env_output[2]
             observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0).to(args.device)
             step += 1
             if render:
@@ -145,7 +146,6 @@ class SkipFrameWrapper(gym.Wrapper):
     def __init__(self, env: Env, skip: int = 4):
         super().__init__(env)
         self.skip = skip
-        self.start_lives = env.ale.lives()
     
     def step(self, action):
         total_reward = 0.0
@@ -153,7 +153,7 @@ class SkipFrameWrapper(gym.Wrapper):
         for _ in range(self.skip):
             env_output = self.env.step(action)
             total_reward += env_output[1]
-            done = get_done(self.env, self.start_lives)
+            done = env_output[2]
             obs = env_output[0]
             if done:
                 break

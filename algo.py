@@ -422,7 +422,7 @@ class DeepQLearning(AbstractAlgorithm):
             return random.randint(0,self.naction-1)
         else:
             with torch.no_grad():       # with 1-epsilon, taken greedy action
-                state = state.to(self.device)
+                state = state.to(self.args.device)
                 return self.Q_network(state.unsqueeze(0)).max(dim = 1).indices.item()
     
     def update_most_recent_observation(self, frame: torch.Tensor):
