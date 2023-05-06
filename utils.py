@@ -43,7 +43,7 @@ def preprocess_observation(obs, mode='simple', new_size=(84, 84)):
 
         return resized_image_tensor.unsqueeze(0)
 
-def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
+def validate(model, render:bool=False, nepisodes=5, mode='simple'):
     """
     Evaluates the performance of the given agent on the Ms. Pac-Man Atari game using a specified number of episodes, and returns the average reward and number of steps taken per episode.
 
@@ -55,8 +55,6 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
         Whether to render the game during validation. Defaults to False.
     nepisodes : int, optional
         The number of episodes to play for evaluation. Defaults to 5.
-    wandb : bool, optional
-        Whether to log results to Weights & Biases. Defaults to False.
     mode : str, optional
         The image preprocessing mode to use before feeding image to the model. Can be 'simple' or 'resize'. Defaults to 'simple'.
     """
@@ -91,10 +89,6 @@ def validate(model, render:bool=False, nepisodes=5, wandb=False, mode='simple'):
                 time.sleep(0.02)        # sleep for 0.02 seconds to slow down the rendering
         steps_alive.append(step)
         reward_arr.append(ep_total_reward)
-    
-    if wandb:           # log into wandb if using it
-        wandb.log({"Mean Reward (Validation)": np.mean(reward_arr),
-                   'std Reward (Validation)': np.std(reward_arr)})
     
     logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
     logging.info("Steps taken over each of {:d} episodes: {}".format(

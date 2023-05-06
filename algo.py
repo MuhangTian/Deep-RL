@@ -15,13 +15,6 @@ from torch.distributions import Categorical
 import utils
 from model import CriticNetworkCNN, CriticNetworkLSTM
 
-try:        # use wandb to log stuff if we have it, else don't
-    import wandb
-    # wandb = False
-    project_name = "RL-implementation"
-except:
-    wandb = False
-
 
 class AbstractAlgorithm(abc.ABC):
     """
@@ -304,8 +297,6 @@ class DeepQLearning(AbstractAlgorithm):
     def train(self):
         timer = timeit.default_timer
         last_checkpoint_time = timer()
-        if wandb:
-            wandb.init(project=project_name, entity='muhang-tian')
         # NOTE: frame skipping only applies to training, not evaluation/validation
         # validation/evaluation is still one frame per step
         env = utils.SkipFrameWrapper(gym.make(self.args.env), skip=self.frame_skipping_interval)
@@ -377,10 +368,7 @@ class DeepQLearning(AbstractAlgorithm):
                     last_checkpoint_time = timer()
                 
             if not not_filled and episode > 0 and episode % self.args.eval_every == 0:        # perform validation step after some number of episodes
-                utils.validate(self.Q_network, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
+                utils.validate(self.Q_network, self.args.render, nepisodes=5, mode='resize')
                 self.Q_network.train()
             
             logging.info(f"Episode: {episode+1} | Timesteps Played: {timestep} | Mean Loss: {loss_total/timestep:.3f} | Mean Reward: {reward_total/timestep:.3f} | Target Updates: {target_updates}")
-            if wandb:
-                if not not_filled:
-                    wandb.log({"Episode": episode+1, "Timesteps Played": timestep, "Mean Loss": loss_total/timestep, "Mean Reward": reward_total/timestep, "Target Updates": target_updates, "Epsilon": self.epsilon, "Network Updates": network_updates})
