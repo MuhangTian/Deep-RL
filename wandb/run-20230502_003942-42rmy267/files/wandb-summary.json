@@ -1,1 +1,0 @@
-{"pg_loss": 2268.931396484375, "value_loss": 535974.25, "mean_return": 1.921875, "Updates": 1563, "_timestamp": 1683005512.208252, "_runtime": 3129.2233970165253, "_step": 1593, "validation/mean_return": 70.0, "validation/std_return": 0.0, "_wandb": {"runtime": 3128}}

@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/mt361/Desktop/RL-Bandits/train.py", line 54, in <module>
-    algo.train()
-  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 322, in train
-    stats, envs, observations, prev_state = self.algo_step(
-  File "/Users/mt361/Desktop/RL-Bandits/algo.py", line 215, in algo_step
-    observations = torch.stack( # bsz x ic x iH x iW -> bsz x 1 x ic x iH x iW
-TypeError: expected Tensor as element 0 in argument 0, but got NoneType

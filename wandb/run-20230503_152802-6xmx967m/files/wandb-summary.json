@@ -1,1 +1,0 @@
-{"validation/mean_return": 106.0, "validation/std_return": 13.564659966250536, "_timestamp": 1683142174.9235148, "_runtime": 91.9671778678894, "_step": 2, "Episode": 272, "Timesteps Played": 185, "Mean Loss": 9.677553202021187, "Mean Reward": 0.5945945945945946, "Target Updates": 0, "Epsilon": 0.9549154000014843, "Network Updates": 95, "_wandb": {"runtime": 94}}

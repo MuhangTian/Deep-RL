@@ -1,1 +1,0 @@
-{"Episode": 387, "Timesteps Played": 219, "Mean Loss": 23.206943884559962, "Mean Reward": 0.684931506849315, "Target Updates": 2, "Epsilon": 0.9338824000021768, "Network Updates": 23465, "_timestamp": 1683122018.42416, "_runtime": 2064.855766057968, "_step": 115, "_wandb": {"runtime": 2069}}
