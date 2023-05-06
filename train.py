@@ -62,6 +62,8 @@ if __name__ == "__main__":
     np.random.seed(59006)
     random.seed(59006)   # python's random library, control randomness used in experience replay (only matter for DQL)
     args = parser.parse_args()
+    args.device = utils.get_device()
+    args.start_nlives = gym.make(args.env).ale.lives()
     logging.info(args)
     
     if args.mode == "train":
@@ -80,4 +82,4 @@ if __name__ == "__main__":
         model.load_state_dict(checkpoint["model_state_dict"])       # load model weights
         model = model
 
-        utils.validate(model, render=args.render, nepisodes=100, mode='resize')      # evaluate with 100 episodes
+        utils.validate(model, args, render=args.render, nepisodes=100, mode='resize')      # evaluate with 100 episodes

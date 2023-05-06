@@ -17,7 +17,7 @@ from model import CriticNetworkCNN, CriticNetworkLSTM
 
 try:        # use wandb to log stuff if we have it, else don't
     import wandb
-    # wandb = False
+    wandb = False
     project_name = "RL-implementation"
 except:
     wandb = False
@@ -426,10 +426,10 @@ class DeepQLearning(AbstractAlgorithm):
     def epsilon_greedy(self, state: torch.Tensor):
         '''perform epsilon greedy action selection'''
         if torch.rand(1).item() < self.epsilon:     # with prob. epsilon, take random action
-            return random.randint(0,8)
+            return random.randint(0,self.naction-1)
         else:
             with torch.no_grad():       # with 1-epsilon, taken greedy action
-                return self.Q_network(state.unsqueeze(0)).argmax(1).item()
+                return self.Q_network(state.unsqueeze(0)).max(dim = 1).indices.item()
     
     def update_most_recent_observation(self, frame: torch.Tensor):
         '''store frames that are most recently observed'''
@@ -446,6 +446,8 @@ class DeepQLearning(AbstractAlgorithm):
     def initialize_networks(self, naction):
         self.Q_network = self.model(naction, self.args)
         self.Q_target = self.model(naction, self.args)
+        self.Q_network.to(self.args.device)
+        self.Q_target.to(self.args.device)
         self.Q_target.load_state_dict(self.Q_network.state_dict())      # same initial weights
         self.optimizer = torch.optim.Adam(self.Q_network.parameters(), lr=self.args.learning_rate)
     
@@ -465,6 +467,7 @@ class DeepQLearning(AbstractAlgorithm):
         # NOTE: frame skipping only applies to training, not evaluation/validation
         # validation/evaluation is still one frame per step
         env = utils.SkipFrameWrapper(gym.make(self.args.env), skip=self.frame_skipping_interval)
+        self.naction = env.action_space.n
         self.initialize_networks(env.action_space.n)
         
         network_updates, target_updates = 0, 0
@@ -473,10 +476,10 @@ class DeepQLearning(AbstractAlgorithm):
             frame = self.preprocess(env.reset(seed=590060+episode)[0])
             self.update_most_recent_observation(frame)
             for _ in range(self.frames_per_state-1):
-                action = random.randint(0,8)     # random action to produce more frames to generate initial state
+                action = random.randint(0,self.naction-1)     # random action to produce more frames to generate initial state
                 env_output = env.step(action)
                 self.update_most_recent_observation(self.preprocess(env_output[0]))
-            state = torch.stack(self.most_recent_observation, dim=0).unsqueeze(0)    # stack the frames to form a single state
+            state = torch.stack(self.most_recent_observation, dim=0).unsqueeze(0).to(self.args.device)    # stack the frames to form a single state
             
             done, timestep, reward_total, loss_total = False, 1, 0, 0
             while not done:
@@ -488,7 +491,7 @@ class DeepQLearning(AbstractAlgorithm):
                 timestep += 1
                 self.epsilon = max(self.epsilon - self.epsilon_decay, 0.1)   # decay epsilon
                 self.update_most_recent_observation(next_frame)
-                next_state = torch.stack(self.most_recent_observation, dim=0).unsqueeze(0)
+                next_state = torch.stack(self.most_recent_observation, dim=0).unsqueeze(0).to(self.args.device)
                 
                 # store experience in replay buffer
                 experience = utils.Transition(state=state, action=action, next_state=next_state, reward=reward, done=done)
@@ -504,11 +507,11 @@ class DeepQLearning(AbstractAlgorithm):
                     not_filled = False
                 
                 # batchify the experineces
-                replay_states = torch.stack([experience.state for experience in minibatch])
-                replay_next_states = torch.stack([experience.next_state for experience in minibatch])
-                replay_rewards = torch.tensor([experience.reward for experience in minibatch], dtype=torch.float)
-                replay_dones = torch.tensor([experience.done for experience in minibatch], dtype=torch.float)
-                replay_actions = torch.tensor([experience.action for experience in minibatch], dtype=torch.long)
+                replay_states = torch.stack([experience.state for experience in minibatch]).to(self.args.device)
+                replay_next_states = torch.stack([experience.next_state for experience in minibatch]).to(self.args.device)
+                replay_rewards = torch.tensor([experience.reward for experience in minibatch], dtype=torch.float).to(self.args.device)
+                replay_dones = torch.tensor([experience.done for experience in minibatch], dtype=torch.float).to(self.args.device)
+                replay_actions = torch.tensor([experience.action for experience in minibatch], dtype=torch.long).to(self.args.device)
                 
                 # calculate loss
                 q_next_values = self.Q_target(replay_next_states).max(dim=1).values.detach()
@@ -533,21 +536,10 @@ class DeepQLearning(AbstractAlgorithm):
                     last_checkpoint_time = timer()
                 
             if not not_filled and episode > 0 and episode % self.args.eval_every == 0:        # perform validation step after some number of episodes
-                utils.validate(self.Q_network, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
+                utils.validate(self.Q_network, self.args, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
                 self.Q_network.train()
             
             logging.info(f"Episode: {episode+1} | Timesteps Played: {timestep} | Mean Loss: {loss_total/timestep:.3f} | Mean Reward: {reward_total/timestep:.3f} | Target Updates: {target_updates}")
             if wandb:
                 if not not_filled:
                     wandb.log({"Episode": episode+1, "Timesteps Played": timestep, "Mean Loss": loss_total/timestep, "Mean Reward": reward_total/timestep, "Target Updates": target_updates, "Epsilon": self.epsilon, "Network Updates": network_updates})
-
-
-class PPO(AbstractAlgorithm):
-    def __init__(self, args, model) -> None:
-        super().__init__(args, model)
-    
-    def algo_step(self, stepidx: int, model: nn.Module, optimizer, scheduler, envs: list, observations: list, prev_state, bsz: int):
-        pass
-    
-    def train(self):
-        pass

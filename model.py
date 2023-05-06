@@ -176,6 +176,7 @@ class CriticNetworkLSTM(nn.Module):
 class QNetwork(nn.Module):
     def __init__(self, naction, args) -> None:
         super().__init__()
+        self.naction = naction
         self.iH, self.iW, self.iC = 84, 84, 1
         self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)
         self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=2)
@@ -202,9 +203,9 @@ class QNetwork(nn.Module):
     def get_action(self, x, prev_state):
         logits = self(x)
         if torch.rand(1).item() < 0.05:     # epsilon-greedy with epsilon=0.05
-            action = random.randint(0,8)
+            action = random.randint(0,self.naction-1)
         else:
-            action = logits.argmax().item()
+            action = logits.max(dim=1).indices.item()
         
         return action, prev_state
         
