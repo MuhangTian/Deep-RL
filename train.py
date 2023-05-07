@@ -1,27 +1,30 @@
 import argparse
 import logging
 import os
+import random
 
 import gymnasium as gym
 import numpy as np
 import torch
-import random
 
 import utils
-from algo import ActorCritic, DeepQLearning, VanillaPolicyGradient
-from model import ActorNetworkCNN, ActorNetworkLSTM, PolicyNetwork, QNetwork
+from algo import (ActorCritic, DeepQLearning, ProximalPolicyOptimization,
+                  VanillaPolicyGradient)
+from model import ActorNetworkCNN, ActorNetworkLSTM, PolicyNetwork, QNetwork, ActorCriticNetwork
 
 num_threads = os.cpu_count()
 ALGO = {
     'vpg': VanillaPolicyGradient,
     'a2c': ActorCritic,
     'dql': DeepQLearning,
+    'ppo': ProximalPolicyOptimization,
 }
 MODEL = {
     'pn': PolicyNetwork,
     'an_cnn': ActorNetworkCNN,
     'an_lstm': ActorNetworkLSTM,
     'qn': QNetwork,
+    'ac': ActorCriticNetwork,
 }
 torch.set_num_threads(num_threads)
 logging.basicConfig(format=(
@@ -31,12 +34,12 @@ logging.basicConfig(format=(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--env", type=str, default="ALE/MsPacman-v5", help="gym environment")
-    parser.add_argument("--model", type=str, default="qn", help="model to use")
-    parser.add_argument("--algo", type=str, default="dql", help="algorithm to use")
+    parser.add_argument("--model", type=str, default="ac", help="model to use")
+    parser.add_argument("--algo", type=str, default="ppo", help="algorithm to use")
     parser.add_argument("--mode", default="train", choices=["train", "valid",], help="training or validation mode")
     parser.add_argument("--total_frames", default=1_000_000, type=int, help="total environment frames to train for")
-    parser.add_argument("--batch_size", default=32, type=int, help="learner batch size.")
-    parser.add_argument("--unroll_length", default=150, type=int, help="unroll length (time dimension)")
+    parser.add_argument("--batch_size", default=16, type=int, help="learner batch size.")
+    parser.add_argument("--unroll_length", default=128, type=int, help="unroll length (time dimension)")
     parser.add_argument("--hidden_dim", default=512, type=int, help="policy net hidden dim")
     parser.add_argument("--discounting", default=0.99, type=float, help="discounting factor")
     parser.add_argument("--learning_rate", default=0.00025, type=float, help="Learning rate")
@@ -56,6 +59,12 @@ if __name__ == "__main__":
     parser.add_argument("--epsilon_end", type=float, default=0.1, help="minimum exploration rate")
     parser.add_argument("--epsilon_decay_frames", type=int, default=1_000_000, help="number of frames to decay epsilon from epsilon_start to epsilon_end (linearly)")
     parser.add_argument("--target_update_frequency", type=int, default=10_000, help="number of learning network updates between target network updates")
+    # ------------------------------------------------- PPO Specific -------------------------------------------------
+    parser.add_argument("--lam", type=float, default=0.95, help="lambda to calculate GAE")
+    parser.add_argument("--clip_epsilon", type=float, default=0.1, help="epsilon to clip ratio for surrogate loss function")
+    parser.add_argument("--entropy_coef", type=float, default=0.01, help="entropy coefficient for loss function")
+    parser.add_argument("--value_coef", type=float, default=1, help="value coefficient for loss function")
+    parser.add_argument("--epochs", type=int, default=3, help="number of epochs to train for")
     
     parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
     

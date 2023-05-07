@@ -6,11 +6,13 @@ import timeit
 
 import gymnasium as gym
 import matplotlib.pyplot as plt
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as T
 from torch.distributions import Categorical
+from torch.utils.data import DataLoader
 
 import utils
 from model import CriticNetworkCNN, CriticNetworkLSTM
@@ -537,3 +539,197 @@ class DeepQLearning(AbstractAlgorithm):
             if wandb:
                 if not not_filled:
                     wandb.log({"Episode": episode+1, "Timesteps Played": timestep, "Mean Loss": loss_total/timestep, "Mean Reward": reward_total/timestep, "Target Updates": target_updates, "Epsilon": self.epsilon, "Network Updates": network_updates})
+
+    
+class ProximalPolicyOptimization(AbstractAlgorithm):
+    def __init__(self, args, model) -> None:
+        super().__init__(args, model)
+        self.model = model
+        self.lam = self.args.lam        # lambda for GAE
+        self.gamma = self.args.discounting
+        self.bsz = self.args.batch_size
+        self.T = self.args.unroll_length
+        self.clip_epsilon = self.args.clip_epsilon
+        self.epochs = self.args.epochs
+        self.entropy_coef = self.args.entropy_coef
+        self.value_coef = self.args.value_coef
+    
+    def preprocess(self, obs, size=(84, 84), mode='resize') -> torch.Tensor:
+        if mode == 'simple':
+            return torch.from_numpy(obs).permute(2, 0, 1)/255.0     # just do normalize
+        elif mode == 'resize':      # resize, to grey scale, then normalize
+            image_tensor = torch.tensor(obs).float()
+            image_tensor = image_tensor.permute(2, 0, 1)
+            # Resize image using torch.nn.functional.interpolate
+            image_tensor = image_tensor.unsqueeze(0) # Add a batch dimension
+            transform = T.Compose([
+                T.Grayscale(),              # Convert to grayscale to save memory
+                T.Resize(size, interpolation=T.InterpolationMode.BILINEAR, antialias=True)  # resize smaller to save memory
+            ])
+            resized_image_tensor = transform(image_tensor)
+            resized_image_tensor = resized_image_tensor.squeeze() # Remove the extra dimension
+            resized_image_tensor /= 255.0   # Normalize the pixel values to [0, 1] range
+
+            return resized_image_tensor
+        else:
+            raise ValueError(f"Invalid mode: {mode}")
+    
+    def checkpoint(self):
+        if self.args.save_path is None:
+            return
+        logging.info(f"\n{'*'*3} Saving checkpoint to {self.args.save_path} {'*'*3}\n")
+        torch.save({"model_state_dict": self.ac_network.state_dict(),
+                    "optimizer_state_dict": self.optimizer.state_dict(),
+                    "args": self.args}, self.args.save_path)
+    
+    def initialize_networks(self, naction):
+        self.ac_network = self.model(naction, self.args).to(self.args.device)
+        self.optimizer = torch.optim.Adam(self.ac_network.parameters(), lr=self.args.learning_rate)
+    
+    def collect_samples(self, envs, observations) -> tuple:
+        """
+        collect samples using current policy for self.T steps
+
+        Parameters
+        ----------
+        envs
+            environments, of number self.bsz
+        observations
+            initial observation/states
+
+        Returns
+        -------
+        tuple
+            probs, rewards, actions, curr_values, entropys, not_end, not_terminated
+        """
+        not_terminated = torch.ones(self.bsz) # agent is still alive
+        probs, rewards, curr_values, entropys, not_ends = [], [], [], [], []
+        for t in range(self.T):     # collect samples for unroll_length steps
+            prob_t, value_t = self.ac_network(observations)         # use old parameter as policy
+            curr_values.append(value_t.squeeze().to('cpu'))
+            
+            # sample actions
+            prob_t = prob_t.squeeze(1).to('cpu')
+            distribution = Categorical(probs=prob_t)
+            actions_t = distribution.sample()
+            entropy_t = distribution.entropy()
+            entropys.append(entropy_t)
+            selected_prob_t = prob_t.squeeze(1).gather(-1, actions_t.unsqueeze(1))     # get log probability of selected actions
+            probs.append(selected_prob_t)
+            
+            envs_outputs = envs.step(actions_t)
+            rewards_t = torch.tensor(envs_outputs[1])
+            
+            # if we lose a life, zero out all subsequent rewards
+            still_alive = torch.tensor(~envs_outputs[2]).float()
+            not_ends.append(still_alive)
+            not_terminated.mul_(still_alive)
+            rewards.append(rewards_t*not_terminated)
+            observations = torch.stack([self.preprocess(obs) for obs in envs_outputs[0]], dim=0).unsqueeze(1).to(self.args.device)
+        
+        return probs, rewards, curr_values, entropys, not_ends, not_terminated, observations
+    
+    def calculate_GAE_and_vloss(self, rewards: list, curr_values: list, not_ends: list) -> tuple:
+        """
+        calculate generalized advantage estimation (to guide policy) and value loss (to train value network/head)
+
+        Parameters
+        ----------
+        rewards : list
+            list of rewards collected from collect_samples()
+        curr_values : list
+            list of value estimation collected from collect_samples()
+        not_end : list
+            list of indicators indicating whether the episode is NOT terminated (1 if not terminated, 0 otherwise)
+        """
+        advantage_t = torch.zeros((self.bsz, ))
+        advantages = [advantage_t]
+        value_loss = [torch.tensor(0.0)]
+        v_target = curr_values[-1]*(not_ends[-1])
+        for t in reversed(range(self.T-1)):
+            delta_t = rewards[t] + self.gamma*curr_values[t+1]*(not_ends[t]) - curr_values[t]       # calculate advantage
+            advantage_t = delta_t + self.gamma*self.lam*advantage_t*(not_ends[t])
+            advantages.insert(0, advantage_t)
+            
+            v_target = rewards[t] + self.gamma*v_target       # calculate value loss
+            v_loss = torch.sum((v_target - curr_values[t])**2)
+            value_loss.insert(0, v_loss)
+        
+        return advantages, value_loss
+        
+    def algo_step(self, stepidx: int, envs: list, observations: list):
+        if envs is None:
+            envs = gym.vector.make(self.args.env, self.bsz)         # create vectorized environments
+            observations = envs.reset(seed=stepidx)[0]
+            observations = torch.stack([self.preprocess(obs) for obs in observations], dim=0).unsqueeze(1).to(self.args.device)
+        
+        probs, rewards, curr_values, entropys, not_ends, not_terminated, observations = self.collect_samples(envs, observations)     # collect samples for unroll_length steps
+        advantages, value_loss = self.calculate_GAE_and_vloss(rewards, curr_values, not_ends)
+        
+        if not hasattr(self, 'old_probs'):
+            self.old_probs = old_probs = [p.detach() for p in probs]                 # save old probs for calculating ratio
+        else:
+            old_probs = self.old_probs
+            self.old_probs = [p.detach() for p in probs]
+        
+        probs = torch.cat(probs, dim=1).to(self.args.device)            # shape: (bsz, T)
+        old_probs = torch.cat(old_probs, dim=1).to(self.args.device)
+        advantages = torch.stack(advantages).to(torch.float32).permute(1,0).to(self.args.device)
+        entropys = torch.stack(entropys).permute(1,0).to(self.args.device)
+        value_loss = torch.stack(value_loss).to(torch.float32).to(self.args.device)
+        
+        ratio = torch.exp(torch.log(probs) - torch.log(old_probs)).squeeze()      # ratio of new policy over old policy
+        policy_loss = torch.min(ratio*advantages, torch.clip(ratio, 1-self.clip_epsilon, 1+self.clip_epsilon)*advantages)     # clipped surrogate objective
+        policy_loss = torch.mean(policy_loss)
+        value_loss = torch.mean(value_loss)
+        entropy_bonus = torch.sum(entropys)
+        
+        loss = -policy_loss + self.value_coef*value_loss - self.entropy_coef*entropy_bonus          # negate since maximize is equivalent to minimize the negation
+        self.optimizer.zero_grad()
+        loss.backward()
+        nn.utils.clip_grad_norm_(self.ac_network.parameters(), self.args.grad_norm_clipping)
+        self.optimizer.step()
+        
+        stats = {
+            'surrogate_loss': loss.item(),
+            'entropy_bonus': entropy_bonus.item(),
+            'value_loss': value_loss.item(),
+            'policy_loss': -policy_loss.item(),
+            'mean_return': sum(r.mean() for r in rewards)/len(rewards),
+        }
+        # reset when all environments are terminated
+        if not_terminated.sum().item() == 0:
+            observations = envs.reset(seed=stepidx)[0]
+            observations = torch.stack([self.preprocess(obs) for obs in observations], dim=0).unsqueeze(1).to(self.args.device)
+        
+        return stats, envs, observations
+    
+    def train(self):
+        timer = timeit.default_timer
+        last_checkpoint_time = timer()
+        wandb = self.args.wandb
+        del self.args.wandb
+        self.naction = gym.make(self.args.env).action_space.n
+        self.initialize_networks(self.naction)
+        
+        frame, updates, envs, observations = 0, 0, None, None
+        while frame < self.args.total_frames:
+            start_time = timer()
+            start_frame = frame
+            stats, envs, observations = self.algo_step(frame, envs, observations)
+            frame += self.T*self.bsz # here steps means number of observations
+            updates += 1
+            
+            if timer() - last_checkpoint_time > self.args.min_to_save * 60:      # checkpoint to store model
+                self.checkpoint()
+                last_checkpoint_time = timer()
+
+            fps = (frame - start_frame) / (timer() - start_time)            # calculate frame per second
+            if wandb:
+                wandb.log({"Policy Gradient Loss": stats['policy_loss'], "Value Loss": stats['value_loss'], "Mean Return": stats["mean_return"], 'Updates': updates, "Entropy Bonus": stats['entropy_bonus'], "Surrogate Loss": stats['surrogate_loss']})
+                
+            logging.info("Frame {:d} @ {:.1f} FPS | sur_loss {:.3f} | value_loss {:.3f} | pg_loss {:.3f} | mean_return {:.3f}".format(frame, fps, updates, stats['surrogate_loss'], stats['value_loss'], stats['policy_loss'], stats["mean_return"]))
+            
+            if frame > 0 and updates % self.args.eval_every == 0:        # perform validation step after some number of steps
+                utils.validate(self.ac_network, self.args, self.args.render, nepisodes=5, wandb=wandb, mode='resize')
+                self.ac_network.train()

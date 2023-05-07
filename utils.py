@@ -7,6 +7,7 @@ import gymnasium as gym
 import numpy as np
 import torch
 import torchvision.transforms as T
+from torch.utils.data import Dataset
 from gymnasium.core import Env
 
 logging.basicConfig(format=(
@@ -158,4 +159,21 @@ class SkipFrameWrapper(gym.Wrapper):
             if done:
                 break
         return obs, total_reward, done
+
+
+class TrajectorySamples(Dataset):
+    def __init__(self, **kwargs) -> None:
+        super().__init__()
+        self.old_probs = kwargs["old_probs"]
+        self.observations_arr = kwargs["observations_arr"]
+        self.entropys = kwargs["entropys"]
+        self.advantages = kwargs["advantages"]
+        self.value_loss = kwargs["value_loss"]
+        assert len(self.observations_arr) == len(self.entropys) == len(self.advantages) == len(self.value_loss) == len(self.old_probs)
+    
+    def __len__(self):
+        return len(self.old_probs)
+    
+    def __getitem__(self, index) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+        return self.old_probs[index], self.observations_arr[index], self.entropys[index], self.advantages[index], self.value_loss[index]
         
