@@ -5,7 +5,7 @@
 #SBATCH --gpus-per-task=1
 #SBATCH --partition=compsci-gpu
 #SBATCH --exclude=linux[1-40]
-#SBATCH --mem=200G
+#SBATCH --mem=50G
 #SBATCH --mail-user=muhang.tian@duke.edu
 #SBATCH --output=None
 #SBATCH --mail-type=END

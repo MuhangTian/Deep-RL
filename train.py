@@ -68,7 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("--total_epochs", type=int, default=500_000, help='total epochs to train for')
     parser.add_argument("--nactors", type=int, default=16, help="number of actors to use")
     
-    parser.add_argument("--nolog", action="store_true", default=True, help="disable wandb")
+    parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
     
     torch.manual_seed(59006)
     np.random.seed(59006)

@@ -549,7 +549,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         self.gamma = self.args.discounting
         self.bsz = self.args.batch_size
         self.T = self.args.unroll_length
-        self.clip_epsilon = self.args.clip_epsilon
+        self.initial_clip_epsilon = self.args.clip_epsilon
         self.epochs = self.args.epochs
         self.entropy_coef = self.args.entropy_coef
         self.value_coef = self.args.value_coef
@@ -646,6 +646,9 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         mean_total_loss, mean_policy_loss, mean_value_loss, mean_entropy, kl_divergence = 0.0, 0.0, 0.0, 0.0, 0.0
         for epoch in range(self.epochs):
             for i, (bsz_old_probs, bsz_obs, bsz_advantages, bsz_vtargets, bsz_actions) in enumerate(data_loader):
+                self.clip_epsilon = self.initial_clip_epsilon*self.clip_epsilon_decay_rate      # anneal clip epsilon
+                self.clip_epsilon_decay_rate = max(self.clip_epsilon_decay_rate - 1/self.args.total_epochs, 0)
+                
                 # move to corret device, and detach (since they are created from old policy network which doesn't need to train)
                 bsz_old_probs = bsz_old_probs.to(self.args.device)
                 bsz_obs = bsz_obs.to(self.args.device)
@@ -678,9 +681,6 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 nn.utils.clip_grad_norm_(self.ac_network.parameters(), self.args.grad_norm_clipping)
                 self.optimizer.step()
                 self.scheduler.step()           # anneal learning rate
-                
-                self.clip_epsilon = self.clip_epsilon*self.clip_epsilon_decay_rate      # anneal clip epsilon
-                self.clip_epsilon_decay_rate = max(self.clip_epsilon_decay_rate - 1/self.args.total_epochs, 0)
         
         return mean_total_loss, mean_entropy, mean_value_loss, mean_policy_loss, kl_divergence
         
