@@ -705,7 +705,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
             'value_loss': mean_value_loss/divisor,
             'policy_loss': mean_policy_loss/divisor,
             'kl_divergence': kl_divergence/divisor,
-            'mean_return': sum(r.mean() for r in rewards)/len(rewards),
+            'mean_return': sum(r.mean().item() for r in rewards)/len(rewards),
         }
         
         # reset when all environments are terminated
