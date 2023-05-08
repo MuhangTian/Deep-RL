@@ -166,14 +166,14 @@ class TrajectorySamples(Dataset):
         super().__init__()
         self.old_probs = kwargs["old_probs"]
         self.observations_arr = kwargs["observations_arr"]
-        self.entropys = kwargs["entropys"]
         self.advantages = kwargs["advantages"]
-        self.value_loss = kwargs["value_loss"]
-        assert len(self.observations_arr) == len(self.entropys) == len(self.advantages) == len(self.value_loss) == len(self.old_probs)
+        self.vtarget_arr = kwargs["vtarget_arr"]
+        self.actions_arr = kwargs["actions_arr"]
+        assert len(self.old_probs) == len(self.observations_arr) == len(self.advantages) == len(self.vtarget_arr) == len(self.actions_arr)
     
     def __len__(self):
         return len(self.old_probs)
     
     def __getitem__(self, index) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
-        return self.old_probs[index], self.observations_arr[index], self.entropys[index], self.advantages[index], self.value_loss[index]
+        return self.old_probs[index], self.observations_arr[index], self.advantages[index], self.vtarget_arr[index], self.actions_arr[index]
         

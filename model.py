@@ -226,12 +226,13 @@ class ActorCriticNetwork(nn.Module):
         self.value_fc2 = nn.Linear(512, 1)
     
     def forward(self, X):
-        bsz, T = X.size()[:2]
+        nactors, T = X.size()[:2]
 
-        Z = F.relu(self.conv1(X.view(-1, self.iC, self.iH, self.iW)))
+        Z = X.reshape(-1, self.iC, self.iH, self.iW)
+        Z = F.relu(self.conv1(Z))
         Z = F.relu(self.conv2(Z))
         Z = F.relu(self.conv3(Z))
-        Z = Z.view(bsz*T, -1)
+        Z = Z.view(nactors*T, -1)
         
         policy_logit = F.relu(self.policy_fc1(Z))       # this is policy head
         policy_logit = self.policy_fc2(policy_logit)

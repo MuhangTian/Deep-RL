@@ -37,8 +37,8 @@ if __name__ == "__main__":
     parser.add_argument("--model", type=str, default="ac", help="model to use")
     parser.add_argument("--algo", type=str, default="ppo", help="algorithm to use")
     parser.add_argument("--mode", default="train", choices=["train", "valid",], help="training or validation mode")
-    parser.add_argument("--total_frames", default=1_000_000, type=int, help="total environment frames to train for")
-    parser.add_argument("--batch_size", default=16, type=int, help="learner batch size.")
+    parser.add_argument("--total_frames", default=1_000_000_000, type=int, help="total environment frames to train for")
+    parser.add_argument("--batch_size", default=32, type=int, help="learner batch size.")
     parser.add_argument("--unroll_length", default=128, type=int, help="unroll length (time dimension)")
     parser.add_argument("--hidden_dim", default=512, type=int, help="policy net hidden dim")
     parser.add_argument("--discounting", default=0.99, type=float, help="discounting factor")
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_path", type=str, default='trained/dql.pt', help="save model here")
     parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
-    parser.add_argument("--eval_every", default=50, type=int, help="eval every this many updates")
+    parser.add_argument("--eval_every", default=60, type=int, help="eval every this many updates")
     parser.add_argument("--render", action="store_true", default=False, help="render game-play at validation time")
     # -------------------------------------------- Deep Q Learning Specific --------------------------------------------
     parser.add_argument("--episodes", type=int, default=250_000, help="episodes to train for")
@@ -61,12 +61,14 @@ if __name__ == "__main__":
     parser.add_argument("--target_update_frequency", type=int, default=10_000, help="number of learning network updates between target network updates")
     # ------------------------------------------------- PPO Specific -------------------------------------------------
     parser.add_argument("--lam", type=float, default=0.95, help="lambda to calculate GAE")
-    parser.add_argument("--clip_epsilon", type=float, default=0.1, help="epsilon to clip ratio for surrogate loss function")
+    parser.add_argument("--clip_epsilon", type=float, default=0.2, help="epsilon to clip ratio for surrogate loss function")
     parser.add_argument("--entropy_coef", type=float, default=0.01, help="entropy coefficient for loss function")
     parser.add_argument("--value_coef", type=float, default=1, help="value coefficient for loss function")
     parser.add_argument("--epochs", type=int, default=3, help="number of epochs to train for")
+    parser.add_argument("--total_epochs", type=int, default=500_000, help='total epochs to train for')
+    parser.add_argument("--nactors", type=int, default=16, help="number of actors to use")
     
-    parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
+    parser.add_argument("--nolog", action="store_true", default=True, help="disable wandb")
     
     torch.manual_seed(59006)
     np.random.seed(59006)
