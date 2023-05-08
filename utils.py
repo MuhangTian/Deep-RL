@@ -16,6 +16,7 @@ logging.basicConfig(format=(
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward', 'done'))
 
+SEED = 1122
 
 # def get_done(env, start_lives):
 #     '''to determine whether an episode is done'''
@@ -75,8 +76,8 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
         The image preprocessing mode to use before feeding image to the model. Can be 'simple' or 'resize'. Defaults to 'simple'.
     """
     assert hasattr(model, "get_action")
-    torch.manual_seed(590060)
-    np.random.seed(590060)
+    torch.manual_seed(SEED)
+    np.random.seed(SEED)
     # NOTE: seed for python's random library is set in train.py, it's not set in here since this function will be called
     # during training, and I want to avoid to setting seeds since that may create patterns in samples generated in experience replay
     
@@ -89,9 +90,9 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
         logging.info(f"Validating episode {i+1}...")
         render_mode = "human"  if render else None
         env = gym.make(args.env, render_mode=render_mode)      # NOTE: modify render functionality for better graphics
-        obs = env.reset(seed=590060+i)[0]       # use a different seed for each separate episode
+        obs = env.reset(seed=SEED+i)[0]       # use a different seed for each separate episode
         
-        observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0).to(args.device)      # 1 x 1 x ic x iH x iW
+        observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0)      # 1 x 1 x ic x iH x iW
         prev_state = None
         step, ep_total_reward, done = 0, 0, False
         # play until the agent dies or we exceed 50000 observations
@@ -100,7 +101,7 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
             env_output = env.step(action)
             ep_total_reward += env_output[1]
             done = env_output[2]
-            observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0).to(args.device)
+            observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0)
             step += 1
             if render:
                 time.sleep(0.02)        # sleep for 0.02 seconds to slow down the rendering

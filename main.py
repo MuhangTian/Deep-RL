@@ -70,13 +70,13 @@ if __name__ == "__main__":
     
     parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
     
-    torch.manual_seed(59006)
-    np.random.seed(59006)
-    random.seed(59006)   # python's random library, control randomness used in experience replay (only matter for DQL)
+    torch.manual_seed(utils.SEED)
+    np.random.seed(utils.SEED)
+    random.seed(utils.SEED)   # python's random library, control randomness used in experience replay (only matter for DQL)
     args = parser.parse_args()
     try:        # use wandb to log stuff if we have it, else don't
         import wandb
-        if args.nolog:
+        if args.nolog or args.render:
             wandb = False    
         else:
             wandb.init(project="RL-implementation", entity='muhang-tian')
@@ -94,7 +94,7 @@ if __name__ == "__main__":
         algo.train()
     else:
         assert args.load_path is not None, "must load saved model!"
-        checkpoint = torch.load(args.load_path)
+        checkpoint = torch.load(args.load_path, map_location=torch.device('cpu'))
         saved_args = checkpoint["args"]
         env = gym.make(args.env)
         naction = env.action_space.n

@@ -469,7 +469,7 @@ class DeepQLearning(AbstractAlgorithm):
         network_updates, target_updates = 0, 0
         for episode in range(self.args.episodes):
             # initialize first state using multiple frames
-            frame = self.preprocess(env.reset(seed=590060+episode)[0])
+            frame = self.preprocess(env.reset(seed=utils.SEED+episode)[0])
             self.update_most_recent_observation(frame)
             for _ in range(self.frames_per_state-1):
                 action = random.randint(0,self.naction-1)     # random action to produce more frames to generate initial state
