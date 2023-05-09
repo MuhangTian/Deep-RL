@@ -215,31 +215,36 @@ class ActorCriticNetwork(nn.Module):
         super().__init__()
         self.naction = naction
         self.iH, self.iW, self.iC = 84, 84, 1
-        self.conv1 = nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=4, stride=2)
-        self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=1)
-        
-        self.policy_fc1 = nn.Linear(3136, 512)          # policy head
-        self.policy_fc2 = nn.Linear(512, naction)
-        
-        self.value_fc1 = nn.Linear(3136, 512)       # value head
-        self.value_fc2 = nn.Linear(512, 1)
+        # DEBUG: need to figure out what to do when with a batch size and when frames are stacked together 
+        # TODO: add proper intialization
+        self.conv_net = nn.Sequential(
+            nn.Conv2d(self.iC, 32, kernel_size=8, stride=4),
+            nn.ReLU(),
+            nn.Conv2d(32, 64, kernel_size=4, stride=2),
+            nn.ReLU(),
+            nn.Conv2d(64, 64, kernel_size=3, stride=1),
+            nn.ReLU(),
+            nn.Flatten(),
+        )
+        self.policy_head = nn.Sequential(
+            nn.Linear(3136, 512),
+            nn.ReLU(),
+            nn.Linear(512, naction),
+        )
+        self.value_head = nn.Sequential(
+            nn.Linear(3136, 512),
+            nn.ReLU(),
+            nn.Linear(512, 1),
+        )
     
     def forward(self, X):
         nactors, T = X.size()[:2]
 
         Z = X.reshape(-1, self.iC, self.iH, self.iW)
-        Z = F.relu(self.conv1(Z))
-        Z = F.relu(self.conv2(Z))
-        Z = F.relu(self.conv3(Z))
-        Z = Z.view(nactors*T, -1)
+        Z = self.conv_net(Z)                            # extracted features from CNN
         
-        policy_logit = F.relu(self.policy_fc1(Z))       # this is policy head
-        policy_logit = self.policy_fc2(policy_logit)
-        policy_logit = F.softmax(policy_logit, dim=-1)
-        
-        value_logit = F.relu(self.value_fc1(Z))         # this is value head
-        value_logit = self.value_fc2(value_logit)
+        policy_logit = self.policy_head(Z)              # this is policy head
+        value_logit = self.value_head(Z)                # this is value head
 
         return policy_logit, value_logit
     
@@ -250,4 +255,26 @@ class ActorCriticNetwork(nn.Module):
             action = Categorical(probs=policy_logits.to('cpu').squeeze(1)).sample()
         
         return action, prev_state
+    
+    def get_action_and_value(self, X, action=None):
+        """
+        get action and value, since policy is pi(a|s), it's stochastic, so we call sample() based on parameterized distribution
+
+        Parameters
+        ----------
+        X : torch.Tensor
+            input
+        action : actions to take, optional
+
+        Returns
+        -------
+        tuple
+            action, log_probs, value, entropy
+        """
+        policy_logit, value_logit = self(X)
+        distribution = Categorical(logits=policy_logit.to('cpu'))
+        if action is None:
+            action = distribution.sample()
+        # DEBUG: doesn't work when in minibatchs (the training loop)
+        return action, distribution.log_prob(action), value_logit, distribution.entropy()
         

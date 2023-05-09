@@ -16,7 +16,7 @@ num_threads = os.cpu_count()
 ALGO = {
     'vpg': VanillaPolicyGradient,
     'a2c': ActorCritic,
-    'dql': DeepQLearning,
+    'dqn': DeepQLearning,
     'ppo': ProximalPolicyOptimization,
 }
 MODEL = {
@@ -34,8 +34,8 @@ logging.basicConfig(format=(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--env", type=str, default="ALE/MsPacman-v5", help="gym environment")
-    parser.add_argument("--model", type=str, default="ac", help="model to use")
-    parser.add_argument("--algo", type=str, default="ppo", help="algorithm to use")
+    parser.add_argument("--model", type=str, default="qn", help="model to use")
+    parser.add_argument("--algo", type=str, default="dqn", help="algorithm to use")
     parser.add_argument("--mode", default="train", choices=["train", "valid",], help="training or validation mode")
     parser.add_argument("--total_frames", default=1_000_000_000, type=int, help="total environment frames to train for")
     parser.add_argument("--batch_size", default=32, type=int, help="learner batch size.")
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     parser.add_argument("--hidden_dim", default=512, type=int, help="policy net hidden dim")
     parser.add_argument("--discounting", default=0.99, type=float, help="discounting factor")
     parser.add_argument("--learning_rate", default=0.00025, type=float, help="Learning rate")
-    parser.add_argument("--grad_norm_clipping", default=10.0, type=float, help="Global gradient norm clip.")
+    parser.add_argument("--grad_norm_clipping", default=0.5, type=float, help="Global gradient norm clip.")
     parser.add_argument("--save_path", type=str, default='trained/dql.pt', help="save model here")
     parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("--total_epochs", type=int, default=500_000, help='total epochs to train for')
     parser.add_argument("--nactors", type=int, default=16, help="number of actors to use")
     
-    parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
+    parser.add_argument("--nolog", action="store_true", default=True, help="disable wandb")
     
     torch.manual_seed(utils.SEED)
     np.random.seed(utils.SEED)

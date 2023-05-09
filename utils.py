@@ -103,8 +103,6 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
             done = env_output[2]
             observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0)
             step += 1
-            if render:
-                time.sleep(0.02)        # sleep for 0.02 seconds to slow down the rendering
         steps_alive.append(step)
         reward_arr.append(ep_total_reward)
     

@@ -590,7 +590,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         self.ac_network = self.model(naction, self.args).to(self.args.device)
         self.old_ac_network = self.model(naction, self.args).to(self.args.device)
         self.old_ac_network.load_state_dict(self.ac_network.state_dict())
-        self.optimizer = torch.optim.Adam(self.ac_network.parameters(), lr=self.args.learning_rate)
+        self.optimizer = torch.optim.Adam(self.ac_network.parameters(), lr=self.args.learning_rate, eps=1e-5)
         self.scheduler = torch.optim.lr_scheduler.LambdaLR(self.optimizer, lr_lambda)
         
         self.clip_epsilon_decay_rate = 1
@@ -601,19 +601,14 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         """
         with torch.no_grad():       # no need to keep track of computation graph since using old policy
             not_terminated = torch.ones(self.nactors) # agent is still alive
-            old_probs, rewards, old_values, not_ends, actions, obs_arr = [], [], [], [], [], []
+            old_log_probs, rewards, old_values, not_ends, actions, obs_arr = [], [], [], [], [], []
             for t in range(self.T):     # collect samples for unroll_length steps
-                prob_t, value_t = self.old_ac_network(observations)         # use old parameter as policy
-                obs_arr.append(observations)
-                old_values.append(value_t.squeeze().to('cpu'))
+                actions_t, log_probs_t, values_t, _ = self.old_ac_network.get_action_and_value(observations)         # use old parameter as policy
                 
-                # sample actions
-                prob_t = prob_t.squeeze(1).to('cpu')
-                distribution = Categorical(probs=prob_t)
-                actions_t = distribution.sample()
-                selected_prob_t = prob_t.squeeze(1).gather(-1, actions_t.unsqueeze(1))     # get log probability of selected actions
-                old_probs.append(selected_prob_t.squeeze())
-                actions.append(actions_t.view(-1, 1).squeeze()) # bsz x 1
+                obs_arr.append(observations)                            # store current observation
+                old_values.append(values_t.squeeze().to('cpu'))
+                old_log_probs.append(log_probs_t.squeeze())                 # store selected action log probability pi(a_t|s_t)
+                actions.append(actions_t.view(-1, 1).squeeze()) # store selected action
                 
                 envs_outputs = envs.step(actions_t)
                 rewards_t = torch.tensor(envs_outputs[1])
@@ -622,10 +617,10 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 still_alive = torch.tensor(~envs_outputs[2]).float()
                 not_ends.append(still_alive)
                 not_terminated.mul_(still_alive)        # if dead, record as dead
-                rewards.append(rewards_t*not_terminated)
-                observations = torch.stack([self.preprocess(obs) for obs in envs_outputs[0]], dim=0).unsqueeze(1).to(self.args.device)
+                rewards.append(rewards_t*not_terminated)            # record reward if still alive
+                observations = torch.stack([self.preprocess(obs) for obs in envs_outputs[0]], dim=0).unsqueeze(1).to(self.args.device)          # transitin to next state
         
-        return old_probs, rewards, old_values, not_ends, actions, not_terminated, obs_arr, observations
+        return old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_arr, observations
     
     def calculate_GAE_and_vtarget(self, rewards: list, old_values: list, not_ends: list) -> tuple:
         advantage_t = torch.zeros((self.nactors, ))
@@ -645,27 +640,26 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
     def train_epochs(self, data_loader: DataLoader) -> tuple[float, float, float, float, float]:
         mean_total_loss, mean_policy_loss, mean_value_loss, mean_entropy, kl_divergence = 0.0, 0.0, 0.0, 0.0, 0.0
         for epoch in range(self.epochs):
-            for i, (bsz_old_probs, bsz_obs, bsz_advantages, bsz_vtargets, bsz_actions) in enumerate(data_loader):
+            for i, (bsz_old_log_probs, bsz_obs, bsz_advantages, bsz_vtargets, bsz_actions) in enumerate(data_loader):
                 self.clip_epsilon = self.initial_clip_epsilon*self.clip_epsilon_decay_rate      # anneal clip epsilon
                 self.clip_epsilon_decay_rate = max(self.clip_epsilon_decay_rate - 1/self.args.total_epochs, 0)
                 
                 # move to corret device, and detach (since they are created from old policy network which doesn't need to train)
-                bsz_old_probs = bsz_old_probs.to(self.args.device)
+                bsz_old_log_probs = bsz_old_log_probs.to(self.args.device)
                 bsz_obs = bsz_obs.to(self.args.device)
                 bsz_advantages = bsz_advantages.to(torch.float32).to(self.args.device)
                 bsz_vtargets = bsz_vtargets.to(torch.float32).to(self.args.device)
                 
                 bsz_obs = bsz_obs.permute(1,0,2,3,4).squeeze()
-                probs, values = self.ac_network(bsz_obs)
-                probs = probs.view(self.bsz, self.nactors, -1)
-                values = values.view(self.bsz, self.nactors, -1)
-                distribution = Categorical(probs=probs.to('cpu'))
+                _, log_probs_t, values_t, entropys_t = self.ac_network.get_action_and_value(bsz_obs, bsz_actions.squeeze(1))
                 
-                log_probs = distribution.log_prob(bsz_actions.squeeze(1)).to(self.args.device)
                 bsz_old_log_probs = torch.log(bsz_old_probs)
                 ratio = torch.exp(log_probs - bsz_old_log_probs)
+                bsz_advantages = (bsz_advantages - bsz_advantages.mean())/(bsz_advantages.std() + 1e-8)      # normalize advantages
                 policy_loss = torch.min(ratio*bsz_advantages, torch.clip(ratio, 1-self.clip_epsilon, 1+self.clip_epsilon)*bsz_advantages)     # clipped surrogate objective
                 policy_loss = -policy_loss.mean()
+                # TODO: check if this is correct, is there a better way to calculate v_target?
+                # TODO: should we do value function clipping?
                 value_loss = F.mse_loss(bsz_vtargets, values.squeeze())
                 entropy_bonus = distribution.entropy().mean()
                 total_loss = policy_loss + self.value_coef*value_loss - self.entropy_coef*entropy_bonus
@@ -686,14 +680,15 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         
     def algo_step(self, stepidx: int, envs: list, observations: list):
         if envs is None:
-            envs = gym.vector.make(self.args.env, self.nactors)         # create vectorized environments for nactors
+            # DEBUG: need a better way to create environments for atari games (skipping, no-op, stacking...etc), do it with utils.create_atari_envs()
+            envs = gym.vector.make(self.args.env, self.nactors, asynchronous=False)         # create vectorized environments for nactors
             observations = envs.reset(seed=stepidx)[0]
             observations = torch.stack([self.preprocess(obs) for obs in observations], dim=0).unsqueeze(1).to(self.args.device)
         
-        old_probs, rewards, old_values, not_ends, actions, not_terminated, obs_arr, observations = self.collect_samples(envs, observations)     # collect samples for unroll_length steps
+        old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_arr, observations = self.collect_samples(envs, observations)     # collect samples for unroll_length steps
         advantages, v_target = self.calculate_GAE_and_vtarget(rewards, old_values, not_ends)
         
-        samples = utils.TrajectorySamples(old_probs=old_probs, observations_arr=obs_arr, advantages=advantages, vtarget_arr=v_target, actions_arr=actions)
+        samples = utils.TrajectorySamples(old_probs=old_log_probs, observations_arr=obs_arr, advantages=advantages, vtarget_arr=v_target, actions_arr=actions)
         data_loader = DataLoader(samples, batch_size=self.bsz, shuffle=True)
         
         mean_total_loss, mean_entropy, mean_value_loss, mean_policy_loss, kl_divergence = self.train_epochs(data_loader)
