@@ -239,7 +239,7 @@ class ActorCriticNetwork(nn.Module):
     
     def forward(self, X):
         nactors, T = X.size()[:2]
-
+        # DEBUG: need to figure out what to do when with a batch size and when frames are stacked together 
         X = X.reshape(-1, self.iC, self.iH, self.iW)
         hidden_features = self.conv_net(X)                            # extracted features from CNN
         
