@@ -19,10 +19,6 @@ Transition = namedtuple('Transition',
 
 SEED = 1122
 
-# def get_done(env, start_lives):
-#     '''to determine whether an episode is done'''
-#     return env.ale.lives() != start_lives
-
 def get_device():
     if torch.cuda.is_available():
         logging.info('************* Using CUDA *************')
