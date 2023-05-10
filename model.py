@@ -1,11 +1,18 @@
 '''To store models (which are building blocks for learning algorithms)'''
 import random
 
+import numpy as np
 import torch
 from torch import nn
 from torch.distributions import Categorical
 from torch.nn import functional as F
 
+
+def layer_init(layer, std=np.sqrt(2), bias_const=0.0):
+    '''apply orthogonal initialization to the weights of a layer, reference: https://arxiv.org/abs/1312.6120'''
+    torch.nn.init.orthogonal_(layer.weight, std)
+    torch.nn.init.constant_(layer.bias, bias_const)
+    return layer
 
 class PolicyNetwork(nn.Module):
     def __init__(self, naction, args):
@@ -214,37 +221,30 @@ class ActorCriticNetwork(nn.Module):
     def __init__(self, naction, args) -> None:
         super().__init__()
         self.naction = naction
-        self.iH, self.iW, self.iC = 84, 84, 1
+        self.iH, self.iW, self.iC = 84, 84, args.frames_per_state
         # DEBUG: need to figure out what to do when with a batch size and when frames are stacked together 
-        # TODO: add proper intialization
         self.conv_net = nn.Sequential(
-            nn.Conv2d(self.iC, 32, kernel_size=8, stride=4),
+            layer_init(nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)),
             nn.ReLU(),
-            nn.Conv2d(32, 64, kernel_size=4, stride=2),
+            layer_init(nn.Conv2d(32, 64, kernel_size=4, stride=2)),
             nn.ReLU(),
-            nn.Conv2d(64, 64, kernel_size=3, stride=1),
+            layer_init(nn.Conv2d(64, 64, kernel_size=3, stride=1)),
             nn.ReLU(),
             nn.Flatten(),
-        )
-        self.policy_head = nn.Sequential(
-            nn.Linear(3136, 512),
+            layer_init(nn.Linear(3136, 512)),
             nn.ReLU(),
-            nn.Linear(512, naction),
         )
-        self.value_head = nn.Sequential(
-            nn.Linear(3136, 512),
-            nn.ReLU(),
-            nn.Linear(512, 1),
-        )
+        self.policy_head = layer_init(nn.Linear(512, naction), std=0.01)
+        self.value_head = layer_init(nn.Linear(512, 1), std=1)
     
     def forward(self, X):
         nactors, T = X.size()[:2]
 
-        Z = X.reshape(-1, self.iC, self.iH, self.iW)
-        Z = self.conv_net(Z)                            # extracted features from CNN
+        X = X.reshape(-1, self.iC, self.iH, self.iW)
+        hidden_features = self.conv_net(X)                            # extracted features from CNN
         
-        policy_logit = self.policy_head(Z)              # this is policy head
-        value_logit = self.value_head(Z)                # this is value head
+        policy_logit = self.policy_head(hidden_features)              # this is policy head
+        value_logit = self.value_head(hidden_features)                # this is value head
 
         return policy_logit, value_logit
     

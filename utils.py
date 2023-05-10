@@ -7,8 +7,9 @@ import gymnasium as gym
 import numpy as np
 import torch
 import torchvision.transforms as T
-from torch.utils.data import Dataset
 from gymnasium.core import Env
+from gymnasium.wrappers import AtariPreprocessing, FrameStack
+from torch.utils.data import Dataset
 
 logging.basicConfig(format=(
         "[%(levelname)s:%(asctime)s] " "%(message)s"), level=logging.INFO)
@@ -158,6 +159,35 @@ class SkipFrameWrapper(gym.Wrapper):
             if done:
                 break
         return obs, total_reward, done
+
+
+class AtariGameEnv(gym.Wrapper):
+    def __init__(self, env_name: str, num_stack_frame: int=4, terminal_on_life_loss: bool=True) -> None:
+        assert 'v5' in env_name, 'Please use envs with v5!'
+        env = gym.make(env_name, frameskip=1, repeat_action_probability=0.0)                # frame skip is done in next step, don't repeat actions
+        env = AtariPreprocessing(env, scale_obs=True, terminal_on_life_loss=terminal_on_life_loss)           # normalize and rescale, end episode if life lost
+        env = FrameStack(env, num_stack_frame)
+        super().__init__(env)
+        
+    def __preprocess_output(self, env_output: tuple) -> tuple:
+        obs = env_output[0]._frames
+        obs = torch.tensor(obs)
+        env_output = list(env_output)
+        env_output[0] = obs
+        
+        return tuple(env_output)
+    
+    def reset(self, seed: int=None) -> tuple:
+        env_output = self.env.reset(seed=seed)
+        env_output = self.__preprocess_output(env_output)
+        
+        return env_output
+    
+    def step(self, action: int) -> tuple:
+        env_output = self.env.step(action)
+        env_output = self.__preprocess_output(env_output)
+        
+        return env_output
 
 
 class TrajectorySamples(Dataset):
