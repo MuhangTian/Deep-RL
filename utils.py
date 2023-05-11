@@ -10,7 +10,6 @@ import torchvision.transforms as T
 from gymnasium.core import Env
 from gymnasium.wrappers import AtariPreprocessing, FrameStack
 from torch.utils.data import Dataset
-from stable_baselines3.common.atari_wrappers import ClipRewardEnv
 
 logging.basicConfig(format=(
         "[%(levelname)s:%(asctime)s] " "%(message)s"), level=logging.INFO)
