@@ -725,5 +725,5 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
             logging.info(f"Epoch {epochs:d} | sur_loss {stats['surrogate_loss']:.3f} | value_loss {stats['value_loss']:.3f} | pg_loss {stats['policy_loss']:.3f} | KL: {stats['kl_divergence']:.3f}| mean_return {stats['mean_return']:.3f}")
             
             if epochs > 0 and epochs % self.args.eval_every == 0:        # perform validation step after some number of steps
-                utils.validate_atari(self.ac_network, self.args.env, self.args.render, nepisodes=5, wandb=wandb, device=self.args.device)
+                utils.validate_atari(self.ac_network, self.args.env, self.args.render, nepisodes=1, wandb=wandb, device=self.args.device)
                 self.ac_network.train()
