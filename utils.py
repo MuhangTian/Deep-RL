@@ -86,10 +86,15 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
     for i in range(nepisodes):
         logging.info(f"Validating episode {i+1}...")
         render_mode = "human"  if render else None
-        env = gym.make(args.env, render_mode=render_mode)      # NOTE: modify render functionality for better graphics
-        obs = env.reset(seed=SEED+i)[0]       # use a different seed for each separate episode
+        if mode == 'atari':
+            env = gym.make(args.env, render_mode=render_mode, frameskip=1, repeat_action_probability=0.0)
+            env = AtariPreprocessing(env, scale_obs=True, terminal_on_life_loss=True)
+        else:
+            env = gym.make(args.env, render_mode=render_mode)      # NOTE: modify render functionality for better graphics
+            
+        observation = torch.tensor(env.reset(seed=SEED+i)[0])       # use a different seed for each separate episode
         
-        observation = preprocess_observation(obs, mode=mode).unsqueeze(0).unsqueeze(0)      # 1 x 1 x ic x iH x iW
+        # observation = preprocess_observation(observation, mode=mode).unsqueeze(0).unsqueeze(0)      # 1 x 1 x ic x iH x iW
         prev_state = None
         step, ep_total_reward, done = 0, 0, False
         # play until the agent dies or we exceed 50000 observations
@@ -98,7 +103,7 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
             env_output = env.step(action)
             ep_total_reward += env_output[1]
             done = env_output[2]
-            observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0)
+            # observation = preprocess_observation(env_output[0], mode=mode).unsqueeze(0).unsqueeze(0)
             step += 1
         steps_alive.append(step)
         reward_arr.append(ep_total_reward)
@@ -114,9 +119,47 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
     logging.info(f"Mean return for each episode: {np.mean(reward_arr):.3f}, (std: {np.std(reward_arr):.3f})")
     logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
 
+def validate_atari(model, env_name, render, nepisodes, wandb, device):
+        assert hasattr(model, "get_action")
+        torch.manual_seed(SEED)
+        np.random.seed(SEED)
+        model.eval()        # turn into eval mode
+        if render:
+            nepisodes = 1       # only render one episode if render is True
+
+        steps_alive, reward_arr = [], []        # to store each episode's reward and steps taken
+        for i in range(nepisodes):
+            logging.info(f"Validating episode {i+1}...")
+            render_mode = "human"  if render else None
+            env = AtariGameEnv(env_name, render_mode=render_mode)
+            observation = torch.tensor(env.reset(seed=SEED+i)[0]).to(device)       # use a different seed for each separate episode
+            prev_state = None
+            step, ep_total_reward, done = 0, 0, False
+            # play until the agent dies or we exceed 50000 observations
+            while not done and step < 50000:
+                action, prev_state = model.get_action(observation, prev_state)
+                env_output = env.step(action)
+                ep_total_reward += env_output[1]
+                done = env_output[2]
+                observation = env_output[0].to(device)
+                step += 1
+            steps_alive.append(step)
+            reward_arr.append(ep_total_reward)
+        
+        if wandb:           # log into wandb if using it
+            wandb.log({"Mean Reward (Validation)": np.mean(reward_arr),
+                    'std Reward (Validation)': np.std(reward_arr)})
+        
+        logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
+        logging.info("Steps taken over each of {:d} episodes: {}".format(
+            nepisodes, ", ".join(str(step) for step in steps_alive)))
+        logging.info("Total return after {:d} episodes: {:.3f}".format(nepisodes, np.sum(reward_arr)))
+        logging.info(f"Mean return for each episode: {np.mean(reward_arr):.3f}, (std: {np.std(reward_arr):.3f})")
+        logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
+
 
 class ReplayBuffer:
-    '''a simple replay buffer implemented using deque'''
+    '''a simple replay buffer implemented using deque, for DQN'''
     def __init__(self, size: int) -> None:
         self.memory = deque([], maxlen=size)
     
@@ -158,15 +201,15 @@ class SkipFrameWrapper(gym.Wrapper):
 
 
 class AtariGameEnv(gym.Wrapper):
-    def __init__(self, env_name: str, num_stack_frame: int=4, terminal_on_life_loss: bool=True) -> None:
+    def __init__(self, env_name: str, num_stack_frame: int=4, terminal_on_life_loss: bool=True, render_mode: str=None) -> None:
         assert 'v5' in env_name, 'Please use envs with v5!'
-        env = gym.make(env_name, frameskip=1, repeat_action_probability=0.0)                # frame skip is done in next step, don't repeat actions
+        env = gym.make(env_name, frameskip=1, repeat_action_probability=0.0, render_mode=render_mode)                # frame skip is done in next step, don't repeat actions
         env = AtariPreprocessing(env, scale_obs=True, terminal_on_life_loss=terminal_on_life_loss)           # normalize and rescale, end episode if life lost
         env = FrameStack(env, num_stack_frame)
         super().__init__(env)
         
     def __preprocess_output(self, env_output: tuple) -> tuple:
-        obs = env_output[0]._frames
+        obs = np.asarray(env_output[0]._frames)
         obs = torch.tensor(obs)
         env_output = list(env_output)
         env_output[0] = obs
@@ -187,6 +230,7 @@ class AtariGameEnv(gym.Wrapper):
 
 
 class TrajectorySamples(Dataset):
+    '''sampler for PPO, to sample from the transitions played by old policy'''
     def __init__(self, **kwargs) -> None:
         super().__init__()
         self.old_probs = kwargs["old_probs"]

@@ -222,7 +222,6 @@ class ActorCriticNetwork(nn.Module):
         super().__init__()
         self.naction = naction
         self.iH, self.iW, self.iC = 84, 84, args.frames_per_state
-        # DEBUG: need to figure out what to do when with a batch size and when frames are stacked together 
         self.conv_net = nn.Sequential(
             layer_init(nn.Conv2d(self.iC, 32, kernel_size=8, stride=4)),
             nn.ReLU(),
@@ -238,11 +237,8 @@ class ActorCriticNetwork(nn.Module):
         self.value_head = layer_init(nn.Linear(512, 1), std=1)
     
     def forward(self, X):
-        nactors, T = X.size()[:2]
-        # DEBUG: need to figure out what to do when with a batch size and when frames are stacked together 
         X = X.reshape(-1, self.iC, self.iH, self.iW)
         hidden_features = self.conv_net(X)                            # extracted features from CNN
-        
         policy_logit = self.policy_head(hidden_features)              # this is policy head
         value_logit = self.value_head(hidden_features)                # this is value head
 
@@ -252,7 +248,7 @@ class ActorCriticNetwork(nn.Module):
         '''get action, since policy is pi(a|s), it's stochastic, so we call sample() based on parameterized distribution'''
         with torch.no_grad():
             policy_logits, _ = self(x)
-            action = Categorical(probs=policy_logits.to('cpu').squeeze(1)).sample()
+            action = Categorical(logits=policy_logits.to('cpu')).sample()
         
         return action, prev_state
     
@@ -275,6 +271,6 @@ class ActorCriticNetwork(nn.Module):
         distribution = Categorical(logits=policy_logit.to('cpu'))
         if action is None:
             action = distribution.sample()
-        # DEBUG: doesn't work when in minibatchs (the training loop)
+
         return action, distribution.log_prob(action), value_logit, distribution.entropy()
         
