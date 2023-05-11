@@ -64,7 +64,7 @@ if __name__ == "__main__":
     parser.add_argument("--clip_epsilon", type=float, default=0.1, help="epsilon to clip ratio for surrogate loss function")
     parser.add_argument("--entropy_coef", type=float, default=0.01, help="entropy coefficient for loss function")
     parser.add_argument("--value_coef", type=float, default=1, help="value coefficient for loss function")
-    parser.add_argument("--epochs", type=int, default=3, help="number of epochs to train for")
+    parser.add_argument("--epochs", type=int, default=4, help="number of epochs to train for")
     parser.add_argument("--total_epochs", type=int, default=500_000, help='total epochs to train for')
     parser.add_argument("--nactors", type=int, default=8, help="number of actors to use")
     parser.add_argument("--target_kl", type=float, default=0.015, help="number of actors to use")
