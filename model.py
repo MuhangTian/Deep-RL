@@ -248,7 +248,7 @@ class ActorCriticNetwork(nn.Module):
         '''get action, since policy is pi(a|s), it's stochastic, so we call sample() based on parameterized distribution'''
         with torch.no_grad():
             policy_logits, _ = self(x)
-            action = Categorical(logits=policy_logits.to('cpu')).sample()
+            action = Categorical(logits=policy_logits).sample()
         
         return action, prev_state
     
