@@ -635,22 +635,23 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 value_loss = F.mse_loss(bsz_vtargets, new_values)
                 entropy_bonus = new_entropys.mean()
                 total_loss = policy_loss + self.value_coef*value_loss - self.entropy_coef*entropy_bonus
+                kl = (bsz_old_log_probs - new_log_probs).mean().item()
+                
+                if kl > 1.5*self.target_kl:
+                    logging.log(logging.WARN, f"*** Early stopping due to reaching max KL divergence {self.target_kl} ***")
+                    break
                 
                 mean_total_loss.append(total_loss.item())
                 mean_policy_loss.append(policy_loss.item())
                 mean_value_loss.append(value_loss.item())
                 mean_entropy.append(entropy_bonus.item())
-                mean_kl.append((bsz_old_log_probs - new_log_probs).mean().item())          # use Monte Carlo estimate of KL divergence
+                mean_kl.append(kl)          # use Monte Carlo estimate of KL divergence
                 
                 self.optimizer.zero_grad()
                 total_loss.backward()
                 nn.utils.clip_grad_norm_(self.ac_network.parameters(), self.args.grad_norm_clipping)
                 self.optimizer.step()
                 self.scheduler.step()           # anneal learning rate
-            
-            if np.mean(mean_kl) > 1.5*self.target_kl:
-                logging.log(logging.WARN, f"*** Early stopping due to reaching max KL divergence {self.target_kl} ***")
-                break
         
         return mean_total_loss, mean_entropy, mean_value_loss, mean_policy_loss, mean_kl
         
