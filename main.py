@@ -69,7 +69,7 @@ if __name__ == "__main__":
     parser.add_argument("--nactors", type=int, default=8, help="number of actors to use")
     parser.add_argument("--target_kl", type=float, default=0.015, help="number of actors to use")
     
-    parser.add_argument("--nolog", action="store_true", default=True, help="disable wandb")
+    parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
     
     torch.manual_seed(utils.SEED)
     np.random.seed(utils.SEED)
