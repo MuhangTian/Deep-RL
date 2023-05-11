@@ -578,14 +578,24 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         """
         with torch.no_grad():       # no need to keep track of computation graph since using old policy
             not_terminated = torch.ones(self.nactors).to(self.args.device) # agent is still alive
-            old_log_probs, rewards, old_values, not_ends, actions, obs_arr = [], [], [], [], [], []
+            # old_log_probs, rewards, old_values, not_ends, actions, obs_arr = [], [], [], [], [], []
+            old_log_probs = torch.zeros((self.T, self.nactors)).to(self.args.device)
+            rewards = torch.zeros((self.T, self.nactors)).to(self.args.device)
+            old_values = torch.zeros((self.T, self.nactors)).to(self.args.device)
+            not_ends = torch.zeros((self.T, self.nactors)).to(self.args.device)
+            actions = torch.zeros((self.T, self.nactors)).to('cpu')
+            obs_tensor = torch.zeros((self.T, self.nactors, 1, 4, 84, 84)).to(self.args.device)
             for t in range(self.T):     # collect samples for unroll_length steps
                 actions_t, log_probs_t, values_t, _ = self.ac_network.get_action_and_value(observations)         # use old parameter as policy
                 
-                obs_arr.append(observations)
-                old_values.append(values_t.squeeze())
-                old_log_probs.append(log_probs_t.squeeze().to(self.args.device))
-                actions.append(actions_t.view(-1, 1).squeeze())
+                # obs_arr.append(observations)
+                # old_values.append(values_t.squeeze())
+                # old_log_probs.append(log_probs_t.squeeze().to(self.args.device))
+                # actions.append(actions_t.view(-1, 1).squeeze())
+                obs_tensor[t] = observations
+                old_values[t] = values_t.squeeze()
+                old_log_probs[t] = log_probs_t.squeeze()
+                actions[t] = actions_t.view(-1, 1).squeeze()
                 
                 envs_outputs = tuple(env.step(actions_t[b].item()) for b, env in enumerate(envs))
                 self.global_step += self.nactors
@@ -593,28 +603,34 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 
                 # if we lose a life, zero out all subsequent rewards
                 still_alive = (~torch.tensor([eo[2] for eo in envs_outputs])).float().to(self.args.device)
-                not_ends.append(still_alive)
+                # not_ends.append(still_alive)
+                not_ends[t] = still_alive
                 not_terminated.mul_(still_alive)        # if dead, record as dead
-                rewards.append(rewards_t*not_terminated)            # record reward if still alive
+                # rewards.append(rewards_t*not_terminated)            # record reward if still alive
+                rewards[t] = rewards_t*not_terminated
                 observations = torch.stack([eo[0] for eo in envs_outputs], dim=0).unsqueeze(1).to(self.args.device)          # transitin to next state
         
-        return old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_arr, observations, envs
+        return old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_tensor, observations, envs
     
-    def calculate_GAE_and_vtarget(self, rewards: list, old_values: list, not_ends: list) -> tuple:
+    def calculate_GAE_and_vtarget(self, rewards: torch.Tensor, old_values: torch.Tensor, not_ends: torch.Tensor) -> tuple:
         with torch.no_grad():   # no need to keep track of computation graph since using values collected from old policy
             advantage_t = torch.zeros((self.nactors, )).to(self.args.device)
-            advantages = [advantage_t.to(self.args.device)]
+            advantages = torch.zeros((self.T, self.nactors)).to(self.args.device)
             v_target = old_values[-1]*(not_ends[-1])
-            v_target_arr = [v_target]
+            v_target_tensor = torch.zeros((self.T, self.nactors)).to(self.args.device)
+            v_target_tensor[-1] = v_target
             for t in reversed(range(self.T-1)):
                 delta_t = rewards[t] + self.gamma*old_values[t+1]*(not_ends[t+1]) - old_values[t]       # calculate GAE (generalized advantage estimation: https://arxiv.org/pdf/1506.02438.pdf)
                 advantage_t = delta_t + self.gamma*self.lam*advantage_t*(not_ends[t+1])
-                advantages.insert(0, advantage_t)
+                # advantages.insert(0, advantage_t)
+                advantages[t] = advantage_t
                 
-                v_target = advantage_t + old_values[t]                  # this is equivalent to TD(lambda), see P297 in Sutton's book
-                v_target_arr.insert(0, v_target)
+                # v_target = advantage_t + old_values[t]                  # this is equivalent to TD(lambda), see P297 in Sutton's book
+                # # v_target_arr.insert(0, v_target)
+                # v_target_tensor[t] = v_target
+            v_target_tensor = advantages + old_values
             
-        return advantages, v_target_arr
+        return advantages, v_target_tensor
     
     def train_epochs(self, data_loader: DataLoader) -> tuple[float, float, float, float, float]:
         mean_total_loss, mean_policy_loss, mean_value_loss, mean_entropy, mean_kl = [], [], [], [], []
@@ -657,10 +673,10 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
             observations = [env.reset(seed=stepidx)[0] for env in envs]
             observations = torch.stack([obs for obs in observations], dim=0).unsqueeze(1).to(self.args.device)
         
-        old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_arr, observations, envs = self.collect_samples(envs, observations)     # collect samples for unroll_length steps
+        old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_tensor, observations, envs = self.collect_samples(envs, observations)     # collect samples for unroll_length steps
         advantages, v_target = self.calculate_GAE_and_vtarget(rewards, old_values, not_ends)
         
-        samples = utils.TrajectorySamples(old_probs=old_log_probs, observations_arr=obs_arr, advantages=advantages, vtarget_arr=v_target, actions_arr=actions)
+        samples = utils.TrajectorySamples(old_probs=old_log_probs, obs=obs_tensor, advantages=advantages, vtargets=v_target, actions=actions)
         data_loader = DataLoader(samples, batch_size=self.bsz, shuffle=True)
         
         mean_total_loss, mean_entropy, mean_value_loss, mean_policy_loss, kl_mean = self.train_epochs(data_loader)

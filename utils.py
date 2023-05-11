@@ -234,15 +234,15 @@ class TrajectorySamples(Dataset):
     def __init__(self, **kwargs) -> None:
         super().__init__()
         self.old_probs = kwargs["old_probs"]
-        self.observations_arr = kwargs["observations_arr"]
+        self.obs = kwargs["obs"]
         self.advantages = kwargs["advantages"]
-        self.vtarget_arr = kwargs["vtarget_arr"]
-        self.actions_arr = kwargs["actions_arr"]
-        assert len(self.old_probs) == len(self.observations_arr) == len(self.advantages) == len(self.vtarget_arr) == len(self.actions_arr)
+        self.vtargets = kwargs["vtargets"]
+        self.actions = kwargs["actions"]
+        assert self.old_probs.shape[0] == self.obs.shape[0] == self.advantages.shape[0] == self.vtargets.shape[0] == self.actions.shape[0], "All inputs must have the same number of samples!"
     
     def __len__(self):
-        return len(self.old_probs)
+        return self.old_probs.shape[0]
     
     def __getitem__(self, index) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
-        return self.old_probs[index], self.observations_arr[index], self.advantages[index], self.vtarget_arr[index], self.actions_arr[index]
+        return self.old_probs[index], self.obs[index], self.advantages[index], self.vtargets[index], self.actions[index]
         

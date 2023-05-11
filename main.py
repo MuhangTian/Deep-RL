@@ -33,7 +33,7 @@ logging.basicConfig(format=(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--env", type=str, default="ALE/MsPacman-v5", help="gym environment")
+    parser.add_argument("--env", type=str, default="ALE/Breakout-v5", help="gym environment")
     parser.add_argument("--model", type=str, default="ac", help="model to use")
     parser.add_argument("--algo", type=str, default="ppo", help="algorithm to use")
     parser.add_argument("--mode", default="train", choices=["train", "valid",], help="training or validation mode")
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("--total_epochs", type=int, default=500_000, help='total epochs to train for')
     parser.add_argument("--nactors", type=int, default=8, help="number of actors to use")
     
-    parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
+    parser.add_argument("--nolog", action="store_true", default=True, help="disable wandb")
     
     torch.manual_seed(utils.SEED)
     np.random.seed(utils.SEED)
