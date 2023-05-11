@@ -147,8 +147,7 @@ def validate_atari(model, env_name, render, nepisodes, wandb=None, device='cpu')
             reward_arr.append(ep_total_reward)
         
         if wandb:           # log into wandb if using it
-            wandb.log({"Mean Reward (Validation)": np.mean(reward_arr),
-                    'std Reward (Validation)': np.std(reward_arr)})
+            wandb.log({"Validation/Mean Reward": np.mean(reward_arr), 'Validation/std Reward': np.std(reward_arr)})
         
         logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
         logging.info("Steps taken over each of {:d} episodes: {}".format(
@@ -257,11 +256,12 @@ class TrajectorySamples(Dataset):
         self.advantages = kwargs["advantages"]
         self.vtargets = kwargs["vtargets"]
         self.actions = kwargs["actions"]
-        assert self.old_probs.shape[0] == self.obs.shape[0] == self.advantages.shape[0] == self.vtargets.shape[0] == self.actions.shape[0], "All inputs must have the same number of samples!"
+        self.old_values = kwargs["old_values"]
+        assert self.old_probs.shape[0] == self.obs.shape[0] == self.advantages.shape[0] == self.vtargets.shape[0] == self.actions.shape[0] == self.old_values.shape[0], "All inputs must have the same number of samples!"
     
     def __len__(self):
         return self.old_probs.shape[0]
     
     def __getitem__(self, index) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
-        return self.old_probs[index], self.obs[index], self.advantages[index], self.vtargets[index], self.actions[index]
+        return self.old_probs[index], self.old_values[index], self.obs[index], self.advantages[index], self.vtargets[index], self.actions[index]
         

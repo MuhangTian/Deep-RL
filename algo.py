@@ -571,12 +571,9 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         
         return tuple(env_output)
     
-    def initialize_networks(self, naction):
-        def lr_lambda(epoch):
-            return 1 - epoch/self.args.total_epochs
+    def initialize_ppo(self, naction):
         self.ac_network = self.model(naction, self.args).to(self.args.device)
         self.optimizer = torch.optim.Adam(self.ac_network.parameters(), lr=self.args.learning_rate, eps=1e-5)
-        self.scheduler = torch.optim.lr_scheduler.LambdaLR(self.optimizer, lr_lambda)
         self.clip_epsilon_decay_rate = 1
         self.global_step = 0
     
@@ -609,8 +606,10 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         
         return old_log_probs, rewards, old_values, not_ends, actions, obs_tensor, observations, still_alive, envs
     
-    def calculate_GAE_and_vtarget(self, rewards: torch.Tensor, old_values: torch.Tensor, not_ends: torch.Tensor, observations: torch.Tensor, still_alive: torch.Tensor) -> tuple:
-        '''calculate GAE (generalized advantage estimation: https://arxiv.org/pdf/1506.02438.pdf) and TD target, which is TD(\lambda))'''
+    def calculate_GAE_and_vtarget(self, rewards: torch.Tensor, old_values: torch.Tensor, not_ends: torch.Tensor, observations: torch.Tensor, still_alive: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        """
+        calculate GAE (generalized advantage estimation: https://arxiv.org/pdf/1506.02438.pdf) and TD target, which is TD(\lambda))
+        """
         with torch.no_grad():   # no need to keep track of computation graph since using values collected from old policy
             _, _, next_state_value, _ = self.ac_network.get_action_and_value(observations)              # bootstrap from last state
             advantage_t = 0
@@ -634,12 +633,12 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         """perform training for some epochs based on data sampled using the old policy"""
         total_surrogate_loss, total_policy_loss, total_value_loss, total_entropy, total_kl = 0, 0, 0, 0, 0
         for _ in range(self.epochs):
-            for _, (bsz_old_log_probs, bsz_obs, bsz_advantages, bsz_vtargets, bsz_actions) in enumerate(data_loader):
+            for _, (bsz_old_log_probs, bsz_old_values, bsz_obs, bsz_advantages, bsz_vtargets, bsz_actions) in enumerate(data_loader):
                 self.clip_epsilon = self.initial_clip_epsilon*self.clip_epsilon_decay_rate      # anneal clip epsilon
                 # self.clip_epsilon_decay_rate = max(self.clip_epsilon_decay_rate - 1/self.args.total_epochs, 0)
                 
                 # flatten in order to calculate in batches
-                bsz_actions, bsz_old_log_probs, bsz_advantages, bsz_vtargets = bsz_actions.flatten(), bsz_old_log_probs.flatten(), bsz_advantages.flatten(), bsz_vtargets.flatten()
+                bsz_actions, bsz_old_log_probs, bsz_advantages, bsz_vtargets, bsz_old_values = bsz_actions.flatten(), bsz_old_log_probs.flatten(), bsz_advantages.flatten(), bsz_vtargets.flatten(), bsz_old_values.flatten()
                 _, new_log_probs, new_values, new_entropys = self.ac_network.get_action_and_value(bsz_obs, bsz_actions)       # flatten action to 1D
                 new_values = new_values.squeeze()
                 ratio = torch.exp(new_log_probs - bsz_old_log_probs)                                        # calculate ratio
@@ -648,7 +647,12 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 # calculate loss
                 policy_loss = torch.min(ratio*bsz_advantages, torch.clip(ratio, 1-self.clip_epsilon, 1+self.clip_epsilon)*bsz_advantages)     # clipped surrogate objective
                 policy_loss = -policy_loss.mean()
-                value_loss = F.mse_loss(bsz_vtargets, new_values)
+                
+                v_unclipped = (bsz_vtargets - new_values)**2      # clip value loss, intuition is to ensure value network is not overfitting to bsz_vtargets in each epoch
+                v_clipped = bsz_old_values + torch.clip(new_values - bsz_old_values, -self.clip_epsilon, self.clip_epsilon)
+                v_clipped = (bsz_vtargets - v_clipped)**2
+                value_loss = 0.5*torch.max(v_unclipped, v_clipped).mean()
+                
                 entropy_bonus = new_entropys.mean()
                 total_loss = policy_loss + self.value_coef*value_loss - self.entropy_coef*entropy_bonus
                 
@@ -662,7 +666,6 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 total_loss.backward()
                 nn.utils.clip_grad_norm_(self.ac_network.parameters(), self.args.grad_norm_clipping)
                 self.optimizer.step()
-                self.scheduler.step()           # anneal learning rate
         
         return total_surrogate_loss, total_entropy, total_value_loss, total_policy_loss, total_kl
         
@@ -678,7 +681,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         advantages, v_target = self.calculate_GAE_and_vtarget(rewards, old_values, not_ends, observations, still_alive)
         
         # prepare loader based on sampled data
-        samples = utils.TrajectorySamples(old_probs=old_log_probs, obs=obs_tensor, advantages=advantages, vtargets=v_target, actions=actions)
+        samples = utils.TrajectorySamples(old_probs=old_log_probs, old_values=old_values, obs=obs_tensor, advantages=advantages, vtargets=v_target, actions=actions)
         data_loader = DataLoader(samples, batch_size=self.bsz, shuffle=True)
         
         # perform training using minibatches
@@ -702,10 +705,13 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         wandb = self.args.wandb
         del self.args.wandb
         self.naction = gym.make(self.args.env).action_space.n
-        self.initialize_networks(self.naction)
+        self.initialize_ppo(self.naction)
         
         epochs, envs, observations, still_alive = 0, None, None, None
-        while epochs < self.args.total_epochs:
+        total_steps = self.args.total_frames // (self.T*self.nactors)
+        for i in range(1, total_steps+1):
+            frac = 1.0 - (i - 1.0) / total_steps            # anneal learning rate linearly
+            self.optimizer.param_groups[0]["lr"] = frac * self.args.learning_rate
             start_time = timer()
             stats, envs, observations, still_alive = self.algo_step(epochs, envs, observations, still_alive)
             sps = (self.T*self.nactors) / (timer()-start_time)
@@ -717,13 +723,13 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
             
             if wandb:
                 wandb.log({
-                    "Mean Policy Gradient Loss": stats['policy_loss'], "Mean Value Loss": stats['value_loss'], "Mean Return": stats["mean_return"], 
-                    'Epochs': epochs, "Entropy Bonus": stats['entropy_bonus'], "Mean Surrogate Loss": stats['surrogate_loss'], 'Mean KL Divergence': stats['kl_divergence'],
-                    "Clip Epsilon": self.clip_epsilon, "Learning Rate": self.optimizer.param_groups[0]['lr'], 'Global Step': self.global_step, "Samples Per Second": sps,
+                    "PPO/Mean Policy Gradient Loss": stats['policy_loss'], "PPO/Mean Value Loss": stats['value_loss'], "PPO/Mean Return": stats["mean_return"], 
+                    'PPO/Epochs': epochs, "PPO/Entropy Bonus": stats['entropy_bonus'], "PPO/Mean Surrogate Loss": stats['surrogate_loss'], 'PPO/Mean KL Divergence': stats['kl_divergence'],
+                    "PPO/Clip Epsilon": self.clip_epsilon, "PPO/Learning Rate": self.optimizer.param_groups[0]['lr'], 'PPO/Global Step': self.global_step, "PPO/Samples Per Second": sps,
                 })
                 
             logging.info(f"Epoch {epochs:d} | sur_loss {stats['surrogate_loss']:.3f} | value_loss {stats['value_loss']:.3f} | pg_loss {stats['policy_loss']:.3f} | KL: {stats['kl_divergence']:.3f}| mean_return {stats['mean_return']:.3f}")
             
             if epochs > 0 and epochs % self.args.eval_every == 0:        # perform validation step after some number of steps
-                utils.validate_atari(self.ac_network, self.args.env, self.args.render, nepisodes=1, wandb=wandb, device=self.args.device)
+                utils.validate_atari(self.ac_network, self.args.env, self.args.render, nepisodes=10, wandb=wandb, device=self.args.device)
                 self.ac_network.train()
