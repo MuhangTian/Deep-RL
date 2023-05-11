@@ -563,6 +563,14 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                     "optimizer_state_dict": self.optimizer.state_dict(),
                     "args": self.args}, self.args.save_path)
     
+    def __preprocess_output(self, env_output: tuple) -> tuple:
+        obs = np.asarray(env_output[0])
+        obs = torch.tensor(obs)
+        env_output = list(env_output)
+        env_output[0] = obs
+        
+        return tuple(env_output)
+    
     def initialize_networks(self, naction):
         def lr_lambda(epoch):
             return 1 - epoch/self.args.total_epochs
@@ -572,52 +580,53 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         self.clip_epsilon_decay_rate = 1
         self.global_step = 0
     
-    def collect_samples(self, envs, observations) -> tuple:
+    def collect_samples(self, envs, observations, still_alive) -> tuple:
         """
         collect samples using current policy for self.T steps with self.nactors actors
         """
         with torch.no_grad():       # no need to keep track of computation graph since using old policy
-            not_terminated = torch.ones(self.nactors).to(self.args.device) # agent is still alive
             old_log_probs = torch.zeros((self.T, self.nactors)).to(self.args.device)
             rewards = torch.zeros((self.T, self.nactors)).to(self.args.device)
             old_values = torch.zeros((self.T, self.nactors)).to(self.args.device)
             not_ends = torch.zeros((self.T, self.nactors)).to(self.args.device)
             actions = torch.zeros((self.T, self.nactors)).to(self.args.device)
-            obs_tensor = torch.zeros((self.T, self.nactors, 1, 4, 84, 84)).to(self.args.device)
+            obs_tensor = torch.zeros((self.T, self.nactors, 4, 84, 84)).to(self.args.device)
             for t in range(self.T):     # collect samples for unroll_length steps
                 actions_t, log_probs_t, values_t, _ = self.ac_network.get_action_and_value(observations)         # use old parameter as policy
-                
                 obs_tensor[t] = observations
+                not_ends[t] = still_alive
                 old_values[t] = values_t.squeeze()
                 old_log_probs[t] = log_probs_t.squeeze()
                 actions[t] = actions_t.view(-1, 1).squeeze()
                 
-                envs_outputs = tuple(env.step(actions_t[b].item()) for b, env in enumerate(envs))
+                envs_outputs = self.__preprocess_output(envs.step(actions_t))
                 self.global_step += self.nactors
-                rewards_t = torch.tensor([eo[1] for eo in envs_outputs]).to(self.args.device)
+                rewards_t = torch.tensor(envs_outputs[1]).to(self.args.device)
                 
-                # if we lose a life, zero out all subsequent rewards
-                still_alive = (~torch.tensor([eo[2] for eo in envs_outputs])).float().to(self.args.device)
-                not_ends[t] = still_alive
-                not_terminated.mul_(still_alive)        # if dead, record as dead
-                rewards[t] = rewards_t*not_terminated
-                observations = torch.stack([eo[0] for eo in envs_outputs], dim=0).unsqueeze(1).to(self.args.device)          # transitin to next state
+                rewards[t] = rewards_t
+                observations = envs_outputs[0].to(self.args.device)          # transitin to next state
+                still_alive = (~torch.tensor(envs_outputs[2])).float().to(self.args.device)
         
-        return old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_tensor, observations, envs
+        return old_log_probs, rewards, old_values, not_ends, actions, obs_tensor, observations, still_alive, envs
     
-    def calculate_GAE_and_vtarget(self, rewards: torch.Tensor, old_values: torch.Tensor, not_ends: torch.Tensor) -> tuple:
+    def calculate_GAE_and_vtarget(self, rewards: torch.Tensor, old_values: torch.Tensor, not_ends: torch.Tensor, observations: torch.Tensor, still_alive: torch.Tensor) -> tuple:
+        '''calculate GAE (generalized advantage estimation: https://arxiv.org/pdf/1506.02438.pdf) and TD target, which is TD(\lambda))'''
         with torch.no_grad():   # no need to keep track of computation graph since using values collected from old policy
-            advantage_t = torch.zeros((self.nactors, )).to(self.args.device)
+            _, _, next_state_value, _ = self.ac_network.get_action_and_value(observations)              # bootstrap from last state
+            advantage_t = 0
             advantages = torch.zeros((self.T, self.nactors)).to(self.args.device)
-            v_target = old_values[-1]*(not_ends[-1])
             v_target_tensor = torch.zeros((self.T, self.nactors)).to(self.args.device)
-            v_target_tensor[-1] = v_target
-            for t in reversed(range(self.T-1)):
-                delta_t = rewards[t] + self.gamma*old_values[t+1]*(not_ends[t+1]) - old_values[t]       # calculate GAE (generalized advantage estimation: https://arxiv.org/pdf/1506.02438.pdf)
-                advantage_t = delta_t + self.gamma*self.lam*advantage_t*(not_ends[t+1])
+            for t in reversed(range(self.T)):
+                if t == self.T-1:
+                    next_value = next_state_value.squeeze()
+                    next_not_ends = still_alive
+                else:
+                    next_value = old_values[t+1]
+                    next_not_ends = not_ends[t+1]
+                delta_t = rewards[t] + self.gamma*next_value*(next_not_ends) - old_values[t]       
+                advantage_t = delta_t + self.gamma*self.lam*advantage_t*(next_not_ends)
                 advantages[t] = advantage_t
-                
-            v_target_tensor = advantages + old_values
+            v_target_tensor = advantages + old_values           # TD(\lambda)
             
         return advantages, v_target_tensor
     
@@ -627,7 +636,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         for _ in range(self.epochs):
             for _, (bsz_old_log_probs, bsz_obs, bsz_advantages, bsz_vtargets, bsz_actions) in enumerate(data_loader):
                 self.clip_epsilon = self.initial_clip_epsilon*self.clip_epsilon_decay_rate      # anneal clip epsilon
-                self.clip_epsilon_decay_rate = max(self.clip_epsilon_decay_rate - 1/self.args.total_epochs, 0)
+                # self.clip_epsilon_decay_rate = max(self.clip_epsilon_decay_rate - 1/self.args.total_epochs, 0)
                 
                 # flatten in order to calculate in batches
                 bsz_actions, bsz_old_log_probs, bsz_advantages, bsz_vtargets = bsz_actions.flatten(), bsz_old_log_probs.flatten(), bsz_advantages.flatten(), bsz_vtargets.flatten()
@@ -657,16 +666,16 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         
         return total_surrogate_loss, total_entropy, total_value_loss, total_policy_loss, total_kl
         
-    def algo_step(self, stepidx: int, envs: list, observations: torch.Tensor):
+    def algo_step(self, stepidx: int, envs: list, observations: torch.Tensor, still_alive: torch.Tensor):
         """subroutine for self.train(), implements the "inner loop" based on PPO algorithm in paper: https://arxiv.org/abs/1707.06347"""
         if envs is None:
-            envs = [utils.AtariGameEnv(env_name=self.args.env) for _ in range(self.nactors)]
-            observations = [env.reset(seed=stepidx)[0] for env in envs]
-            observations = torch.stack([obs for obs in observations], dim=0).unsqueeze(1).to(self.args.device)
+            envs = gym.vector.SyncVectorEnv([utils.make_atari_env(self.args.env, utils.SEED+i) for i in range(self.nactors)])
+            observations = self.__preprocess_output(envs.reset(seed=stepidx))[0].to(self.args.device)
+            still_alive = torch.ones(self.nactors).to(self.args.device)
         
         # sample data and calculate TD target and GAE
-        old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_tensor, observations, envs = self.collect_samples(envs, observations)     # collect samples for unroll_length steps
-        advantages, v_target = self.calculate_GAE_and_vtarget(rewards, old_values, not_ends)
+        old_log_probs, rewards, old_values, not_ends, actions, obs_tensor, observations, still_alive, envs = self.collect_samples(envs, observations, still_alive)     # collect samples for unroll_length steps
+        advantages, v_target = self.calculate_GAE_and_vtarget(rewards, old_values, not_ends, observations, still_alive)
         
         # prepare loader based on sampled data
         samples = utils.TrajectorySamples(old_probs=old_log_probs, obs=obs_tensor, advantages=advantages, vtargets=v_target, actions=actions)
@@ -681,16 +690,10 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
             'value_loss': total_value_loss/divisor,
             'policy_loss': total_policy_loss/divisor,
             'kl_divergence': total_kl/divisor,
-            'mean_return': sum(r.mean().item() for r in rewards)/len(rewards),
+            'mean_return': rewards.mean().item(),
         }
         
-        # reset any environments that have ended
-        for i in range(self.nactors):
-            if not_terminated[i].item() == 0:
-                obs = envs[i].reset(seed=stepidx+i)[0]
-                observations[i].copy_(obs)
-        
-        return stats, envs, observations
+        return stats, envs, observations, still_alive
     
     def train(self):
         """Function to start training PPO while logging data to wandb (if needed)"""
@@ -701,10 +704,10 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         self.naction = gym.make(self.args.env).action_space.n
         self.initialize_networks(self.naction)
         
-        epochs, envs, observations = 0, None, None
+        epochs, envs, observations, still_alive = 0, None, None, None
         while epochs < self.args.total_epochs:
             start_time = timer()
-            stats, envs, observations = self.algo_step(epochs, envs, observations)
+            stats, envs, observations, still_alive = self.algo_step(epochs, envs, observations, still_alive)
             sps = (self.T*self.nactors) / (timer()-start_time)
             epochs += self.epochs
             

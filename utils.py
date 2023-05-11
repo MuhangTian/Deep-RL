@@ -10,6 +10,7 @@ import torchvision.transforms as T
 from gymnasium.core import Env
 from gymnasium.wrappers import AtariPreprocessing, FrameStack
 from torch.utils.data import Dataset
+from stable_baselines3.common.atari_wrappers import ClipRewardEnv
 
 logging.basicConfig(format=(
         "[%(levelname)s:%(asctime)s] " "%(message)s"), level=logging.INFO)
@@ -198,16 +199,24 @@ class SkipFrameWrapper(gym.Wrapper):
             if done:
                 break
         return obs, total_reward, done
-
+    
+def make_atari_env(env_name, seed):
+    assert 'v5' in env_name
+    def make():
+        env = AtariGameEnv(env_name)
+        env.seed(seed)
+        return env
+    return make
 
 class AtariGameEnv(gym.Wrapper):
     def __init__(self, env_name: str, num_stack_frame: int=4, terminal_on_life_loss: bool=True, render_mode: str=None) -> None:
         assert 'v5' in env_name, 'Please use envs with v5!'
         env = gym.make(env_name, frameskip=1, repeat_action_probability=0.0, render_mode=render_mode)                # frame skip is done in next step, don't repeat actions
+        env = ClipRewardEnv(env)        # clip reward to {-1, 0, 1}
         env = AtariPreprocessing(env, scale_obs=True, terminal_on_life_loss=terminal_on_life_loss)           # normalize and rescale, end episode if life lost
         env = FrameStack(env, num_stack_frame)
         super().__init__(env)
-        
+    
     def __preprocess_output(self, env_output: tuple) -> tuple:
         obs = np.asarray(env_output[0]._frames)
         obs = torch.tensor(obs)
@@ -227,6 +236,17 @@ class AtariGameEnv(gym.Wrapper):
         env_output = self.__preprocess_output(env_output)
         
         return env_output
+        
+
+class ClipRewardEnv(gym.RewardWrapper):
+    """
+    Clip the reward to {+1, 0, -1} by its sign.
+    """
+    def __init__(self, env: gym.Env) -> None:
+        super().__init__(env)
+
+    def reward(self, reward: float) -> float:
+        return np.sign(reward)
 
 
 class TrajectorySamples(Dataset):
