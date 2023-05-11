@@ -554,7 +554,6 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         self.entropy_coef = self.args.entropy_coef
         self.value_coef = self.args.value_coef
         self.nactors = self.args.nactors
-        self.target_kl = self.args.target_kl
     
     def checkpoint(self):
         if self.args.save_path is None:
@@ -571,6 +570,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         self.optimizer = torch.optim.Adam(self.ac_network.parameters(), lr=self.args.learning_rate, eps=1e-5)
         self.scheduler = torch.optim.lr_scheduler.LambdaLR(self.optimizer, lr_lambda)
         self.clip_epsilon_decay_rate = 1
+        self.global_step = 0
     
     def collect_samples(self, envs, observations) -> tuple:
         """
@@ -588,6 +588,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 actions.append(actions_t.view(-1, 1).squeeze())
                 
                 envs_outputs = tuple(env.step(actions_t[b].item()) for b, env in enumerate(envs))
+                self.global_step += self.nactors
                 rewards_t = torch.tensor([eo[1] for eo in envs_outputs]).to(self.args.device)
                 
                 # if we lose a life, zero out all subsequent rewards
@@ -635,17 +636,12 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 value_loss = F.mse_loss(bsz_vtargets, new_values)
                 entropy_bonus = new_entropys.mean()
                 total_loss = policy_loss + self.value_coef*value_loss - self.entropy_coef*entropy_bonus
-                kl = (bsz_old_log_probs - new_log_probs).mean().item()
-                
-                if kl > 1.5*self.target_kl:
-                    logging.log(logging.WARN, f"*** Early stopping due to reaching max KL divergence {self.target_kl} ***")
-                    break
                 
                 mean_total_loss.append(total_loss.item())
                 mean_policy_loss.append(policy_loss.item())
                 mean_value_loss.append(value_loss.item())
                 mean_entropy.append(entropy_bonus.item())
-                mean_kl.append(kl)          # use Monte Carlo estimate of KL divergence
+                mean_kl.append((bsz_old_log_probs - new_log_probs).mean().item())          # use Monte Carlo estimate of KL divergence
                 
                 self.optimizer.zero_grad()
                 total_loss.backward()
@@ -707,7 +703,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 wandb.log({
                     "Policy Gradient Loss": stats['policy_loss'], "Value Loss": stats['value_loss'], "Mean Return": stats["mean_return"], 
                     'Epochs': epochs, "Entropy Bonus": stats['entropy_bonus'], "Surrogate Loss": stats['surrogate_loss'], 'KL Divergence': stats['kl_divergence'],
-                    "Clip Epsilon": self.clip_epsilon, "Learning Rate": self.optimizer.param_groups[0]['lr'],
+                    "Clip Epsilon": self.clip_epsilon, "Learning Rate": self.optimizer.param_groups[0]['lr'], 'Global Step': self.global_step,
                 })
                 
             logging.info(f"Epoch {epochs:d} | sur_loss {stats['surrogate_loss']:.3f} | value_loss {stats['value_loss']:.3f} | pg_loss {stats['policy_loss']:.3f} | KL: {stats['kl_divergence']:.3f}| mean_return {stats['mean_return']:.3f}")
