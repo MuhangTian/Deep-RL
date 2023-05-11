@@ -119,7 +119,7 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
     logging.info(f"Mean return for each episode: {np.mean(reward_arr):.3f}, (std: {np.std(reward_arr):.3f})")
     logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
 
-def validate_atari(model, env_name, render, nepisodes, wandb, device):
+def validate_atari(model, env_name, render, nepisodes, wandb=None, device='cpu'):
         assert hasattr(model, "get_action")
         torch.manual_seed(SEED)
         np.random.seed(SEED)

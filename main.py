@@ -36,7 +36,7 @@ if __name__ == "__main__":
     parser.add_argument("--env", type=str, default="ALE/Breakout-v5", help="gym environment")
     parser.add_argument("--model", type=str, default="ac", help="model to use")
     parser.add_argument("--algo", type=str, default="ppo", help="algorithm to use")
-    parser.add_argument("--mode", default="train", choices=["train", "valid",], help="training or validation mode")
+    parser.add_argument("--mode", default="valid", choices=["train", "valid",], help="training or validation mode")
     parser.add_argument("--total_frames", default=1_000_000_000, type=int, help="total environment frames to train for")
     parser.add_argument("--batch_size", default=32, type=int, help="learner batch size.")
     parser.add_argument("--unroll_length", default=128, type=int, help="unroll length (time dimension)")
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("--learning_rate", default=0.00025, type=float, help="Learning rate")
     parser.add_argument("--grad_norm_clipping", default=0.5, type=float, help="Global gradient norm clip.")
     parser.add_argument("--save_path", type=str, default='trained/dql.pt', help="save model here")
-    parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
+    parser.add_argument("--load_path", type=str, default='trained/gpu/ppo_breakout.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
     parser.add_argument("--eval_every", default=16, type=int, help="eval every this many updates")
     parser.add_argument("--render", action="store_true", default=False, help="render game-play at validation time")
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     try:        # use wandb to log stuff if we have it, else don't
         import wandb
-        if args.nolog or args.render:
+        if args.nolog or args.render or args.mode == "valid":
             wandb = False    
         else:
             wandb.init(project="RL-implementation", entity='muhang-tian', name=f"{args.algo.upper()}_{args.env}")
@@ -102,6 +102,5 @@ if __name__ == "__main__":
         del env        
         model = MODEL[args.model](naction, saved_args)              # initialize model with saved args
         model.load_state_dict(checkpoint["model_state_dict"])       # load model weights
-        model = model
 
-        utils.validate(model, args, render=args.render, nepisodes=100, mode='resize')      # evaluate with 100 episodes
+        utils.validate_atari(model, args.env, render=args.render, nepisodes=100)      # evaluate with 100 episodes
