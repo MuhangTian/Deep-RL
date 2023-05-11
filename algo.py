@@ -578,20 +578,15 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         """
         with torch.no_grad():       # no need to keep track of computation graph since using old policy
             not_terminated = torch.ones(self.nactors).to(self.args.device) # agent is still alive
-            # old_log_probs, rewards, old_values, not_ends, actions, obs_arr = [], [], [], [], [], []
             old_log_probs = torch.zeros((self.T, self.nactors)).to(self.args.device)
             rewards = torch.zeros((self.T, self.nactors)).to(self.args.device)
             old_values = torch.zeros((self.T, self.nactors)).to(self.args.device)
             not_ends = torch.zeros((self.T, self.nactors)).to(self.args.device)
-            actions = torch.zeros((self.T, self.nactors)).to('cpu')
+            actions = torch.zeros((self.T, self.nactors)).to(self.args.device)
             obs_tensor = torch.zeros((self.T, self.nactors, 1, 4, 84, 84)).to(self.args.device)
             for t in range(self.T):     # collect samples for unroll_length steps
                 actions_t, log_probs_t, values_t, _ = self.ac_network.get_action_and_value(observations)         # use old parameter as policy
                 
-                # obs_arr.append(observations)
-                # old_values.append(values_t.squeeze())
-                # old_log_probs.append(log_probs_t.squeeze().to(self.args.device))
-                # actions.append(actions_t.view(-1, 1).squeeze())
                 obs_tensor[t] = observations
                 old_values[t] = values_t.squeeze()
                 old_log_probs[t] = log_probs_t.squeeze()
@@ -603,10 +598,8 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 
                 # if we lose a life, zero out all subsequent rewards
                 still_alive = (~torch.tensor([eo[2] for eo in envs_outputs])).float().to(self.args.device)
-                # not_ends.append(still_alive)
                 not_ends[t] = still_alive
                 not_terminated.mul_(still_alive)        # if dead, record as dead
-                # rewards.append(rewards_t*not_terminated)            # record reward if still alive
                 rewards[t] = rewards_t*not_terminated
                 observations = torch.stack([eo[0] for eo in envs_outputs], dim=0).unsqueeze(1).to(self.args.device)          # transitin to next state
         
@@ -622,18 +615,15 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
             for t in reversed(range(self.T-1)):
                 delta_t = rewards[t] + self.gamma*old_values[t+1]*(not_ends[t+1]) - old_values[t]       # calculate GAE (generalized advantage estimation: https://arxiv.org/pdf/1506.02438.pdf)
                 advantage_t = delta_t + self.gamma*self.lam*advantage_t*(not_ends[t+1])
-                # advantages.insert(0, advantage_t)
                 advantages[t] = advantage_t
                 
-                # v_target = advantage_t + old_values[t]                  # this is equivalent to TD(lambda), see P297 in Sutton's book
-                # # v_target_arr.insert(0, v_target)
-                # v_target_tensor[t] = v_target
             v_target_tensor = advantages + old_values
             
         return advantages, v_target_tensor
     
     def train_epochs(self, data_loader: DataLoader) -> tuple[float, float, float, float, float]:
-        mean_total_loss, mean_policy_loss, mean_value_loss, mean_entropy, mean_kl = [], [], [], [], []
+        """perform training for some epochs based on data sampled using the old policy"""
+        total_surrogate_loss, total_policy_loss, total_value_loss, total_entropy, total_kl = 0, 0, 0, 0, 0
         for _ in range(self.epochs):
             for _, (bsz_old_log_probs, bsz_obs, bsz_advantages, bsz_vtargets, bsz_actions) in enumerate(data_loader):
                 self.clip_epsilon = self.initial_clip_epsilon*self.clip_epsilon_decay_rate      # anneal clip epsilon
@@ -642,7 +632,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 # flatten in order to calculate in batches
                 bsz_actions, bsz_old_log_probs, bsz_advantages, bsz_vtargets = bsz_actions.flatten(), bsz_old_log_probs.flatten(), bsz_advantages.flatten(), bsz_vtargets.flatten()
                 _, new_log_probs, new_values, new_entropys = self.ac_network.get_action_and_value(bsz_obs, bsz_actions)       # flatten action to 1D
-                new_log_probs, new_values = new_log_probs.to(self.args.device), new_values.squeeze()                          # some sanity check
+                new_values = new_values.squeeze()
                 ratio = torch.exp(new_log_probs - bsz_old_log_probs)                                        # calculate ratio
                 bsz_advantages = (bsz_advantages - bsz_advantages.mean())/(bsz_advantages.std() + 1e-8)      # normalize advantages
                 
@@ -653,11 +643,11 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 entropy_bonus = new_entropys.mean()
                 total_loss = policy_loss + self.value_coef*value_loss - self.entropy_coef*entropy_bonus
                 
-                mean_total_loss.append(total_loss.item())
-                mean_policy_loss.append(policy_loss.item())
-                mean_value_loss.append(value_loss.item())
-                mean_entropy.append(entropy_bonus.item())
-                mean_kl.append((bsz_old_log_probs - new_log_probs).mean().item())          # use Monte Carlo estimate of KL divergence
+                total_surrogate_loss += total_loss.item()
+                total_policy_loss += policy_loss.item()
+                total_value_loss += value_loss.item()
+                total_entropy += entropy_bonus.item()
+                total_kl += (bsz_old_log_probs - new_log_probs).mean().item()
                 
                 self.optimizer.zero_grad()
                 total_loss.backward()
@@ -665,28 +655,32 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 self.optimizer.step()
                 self.scheduler.step()           # anneal learning rate
         
-        return mean_total_loss, mean_entropy, mean_value_loss, mean_policy_loss, mean_kl
+        return total_surrogate_loss, total_entropy, total_value_loss, total_policy_loss, total_kl
         
-    def algo_step(self, stepidx: int, envs: list, observations: list):
+    def algo_step(self, stepidx: int, envs: list, observations: torch.Tensor):
+        """subroutine for self.train(), implements the "inner loop" based on PPO algorithm in paper: https://arxiv.org/abs/1707.06347"""
         if envs is None:
             envs = [utils.AtariGameEnv(env_name=self.args.env) for _ in range(self.nactors)]
             observations = [env.reset(seed=stepidx)[0] for env in envs]
             observations = torch.stack([obs for obs in observations], dim=0).unsqueeze(1).to(self.args.device)
         
+        # sample data and calculate TD target and GAE
         old_log_probs, rewards, old_values, not_ends, actions, not_terminated, obs_tensor, observations, envs = self.collect_samples(envs, observations)     # collect samples for unroll_length steps
         advantages, v_target = self.calculate_GAE_and_vtarget(rewards, old_values, not_ends)
         
+        # prepare loader based on sampled data
         samples = utils.TrajectorySamples(old_probs=old_log_probs, obs=obs_tensor, advantages=advantages, vtargets=v_target, actions=actions)
         data_loader = DataLoader(samples, batch_size=self.bsz, shuffle=True)
         
-        mean_total_loss, mean_entropy, mean_value_loss, mean_policy_loss, kl_mean = self.train_epochs(data_loader)
-        
+        # perform training using minibatches
+        total_surrogate_loss, total_entropy, total_value_loss, total_policy_loss, total_kl = self.train_epochs(data_loader)
+        divisor = int(self.epochs*self.T/self.bsz)
         stats = {
-            'surrogate_loss': np.mean(mean_total_loss),
-            'entropy_bonus': np.mean(mean_entropy),
-            'value_loss': np.mean(mean_value_loss),
-            'policy_loss': np.mean(mean_policy_loss),
-            'kl_divergence': np.mean(kl_mean),
+            'surrogate_loss': total_surrogate_loss/divisor,
+            'entropy_bonus': total_entropy/divisor,
+            'value_loss': total_value_loss/divisor,
+            'policy_loss': total_policy_loss/divisor,
+            'kl_divergence': total_kl/divisor,
             'mean_return': sum(r.mean().item() for r in rewards)/len(rewards),
         }
         
@@ -699,6 +693,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         return stats, envs, observations
     
     def train(self):
+        """Function to start training PPO while logging data to wandb (if needed)"""
         timer = timeit.default_timer
         last_checkpoint_time = timer()
         wandb = self.args.wandb
@@ -708,18 +703,20 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         
         epochs, envs, observations = 0, None, None
         while epochs < self.args.total_epochs:
+            start_time = timer()
             stats, envs, observations = self.algo_step(epochs, envs, observations)
+            sps = (self.T*self.nactors) / (timer()-start_time)
             epochs += self.epochs
             
             if timer() - last_checkpoint_time > self.args.min_to_save * 60:      # checkpoint to store model
                 self.checkpoint()
                 last_checkpoint_time = timer()
-                
+            
             if wandb:
                 wandb.log({
-                    "Policy Gradient Loss": stats['policy_loss'], "Value Loss": stats['value_loss'], "Mean Return": stats["mean_return"], 
-                    'Epochs': epochs, "Entropy Bonus": stats['entropy_bonus'], "Surrogate Loss": stats['surrogate_loss'], 'KL Divergence': stats['kl_divergence'],
-                    "Clip Epsilon": self.clip_epsilon, "Learning Rate": self.optimizer.param_groups[0]['lr'], 'Global Step': self.global_step,
+                    "Mean Policy Gradient Loss": stats['policy_loss'], "Mean Value Loss": stats['value_loss'], "Mean Return": stats["mean_return"], 
+                    'Epochs': epochs, "Entropy Bonus": stats['entropy_bonus'], "Mean Surrogate Loss": stats['surrogate_loss'], 'Mean KL Divergence': stats['kl_divergence'],
+                    "Clip Epsilon": self.clip_epsilon, "Learning Rate": self.optimizer.param_groups[0]['lr'], 'Global Step': self.global_step, "Samples Per Second": sps,
                 })
                 
             logging.info(f"Epoch {epochs:d} | sur_loss {stats['surrogate_loss']:.3f} | value_loss {stats['value_loss']:.3f} | pg_loss {stats['policy_loss']:.3f} | KL: {stats['kl_divergence']:.3f}| mean_return {stats['mean_return']:.3f}")

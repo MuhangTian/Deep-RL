@@ -268,7 +268,7 @@ class ActorCriticNetwork(nn.Module):
             action, log_probs, value, entropy
         """
         policy_logit, value_logit = self(X)
-        distribution = Categorical(logits=policy_logit.to('cpu'))
+        distribution = Categorical(logits=policy_logit)
         if action is None:
             action = distribution.sample()
 

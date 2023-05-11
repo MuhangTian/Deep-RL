@@ -47,7 +47,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_path", type=str, default='trained/dql.pt', help="save model here")
     parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
-    parser.add_argument("--eval_every", default=4, type=int, help="eval every this many updates")
+    parser.add_argument("--eval_every", default=16, type=int, help="eval every this many updates")
     parser.add_argument("--render", action="store_true", default=False, help="render game-play at validation time")
     # -------------------------------------------- Deep Q Learning Specific --------------------------------------------
     parser.add_argument("--episodes", type=int, default=250_000, help="episodes to train for")
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("--total_epochs", type=int, default=500_000, help='total epochs to train for')
     parser.add_argument("--nactors", type=int, default=8, help="number of actors to use")
     
-    parser.add_argument("--nolog", action="store_true", default=True, help="disable wandb")
+    parser.add_argument("--nolog", action="store_true", default=False, help="disable wandb")
     
     torch.manual_seed(utils.SEED)
     np.random.seed(utils.SEED)
@@ -79,7 +79,7 @@ if __name__ == "__main__":
         if args.nolog or args.render:
             wandb = False    
         else:
-            wandb.init(project="RL-implementation", entity='muhang-tian')
+            wandb.init(project="RL-implementation", entity='muhang-tian', name=f"{args.algo.upper()}_{args.env}")
     except:
         wandb = False
     args.device = utils.get_device()

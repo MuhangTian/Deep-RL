@@ -132,7 +132,7 @@ def validate_atari(model, env_name, render, nepisodes, wandb, device):
             logging.info(f"Validating episode {i+1}...")
             render_mode = "human"  if render else None
             env = AtariGameEnv(env_name, render_mode=render_mode)
-            observation = torch.tensor(env.reset(seed=SEED+i)[0]).to(device)       # use a different seed for each separate episode
+            observation = env.reset(seed=SEED+i)[0].to(device)       # use a different seed for each separate episode
             prev_state = None
             step, ep_total_reward, done = 0, 0, False
             # play until the agent dies or we exceed 50000 observations
