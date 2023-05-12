@@ -87,7 +87,7 @@ if __name__ == "__main__":
             )
     except:
         wandb = False
-    args.save_path = f"trained/gpu/{args.algo.upper()}_{args.env}_{int(time.time())}.pt"
+    args.save_path = f"trained/gpu/{args.algo.upper()}_{int(time.time())}.pt"
     args.device = utils.get_device()
     args.start_nlives = gym.make(args.env).ale.lives()
     args.wandb = wandb 
