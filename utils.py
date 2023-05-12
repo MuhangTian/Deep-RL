@@ -218,23 +218,13 @@ class AtariGameEnv(gym.Wrapper):
         env = FrameStack(env, num_stack_frame)
         super().__init__(env)
     
-    def __preprocess_output(self, env_output: tuple) -> tuple:
-        obs = np.asarray(env_output[0]._frames)
-        obs = torch.tensor(obs)
-        env_output = list(env_output)
-        env_output[0] = obs
-        
-        return tuple(env_output)
-    
     def reset(self, **kwargs) -> tuple:
         env_output = self.env.reset(**kwargs)
-        env_output = self.__preprocess_output(env_output)
         
         return env_output
     
     def step(self, action: int) -> tuple:
         env_output = self.env.step(action)
-        env_output = self.__preprocess_output(env_output)
         
         return env_output
 

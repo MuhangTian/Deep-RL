@@ -564,8 +564,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                     "args": self.args}, self.args.save_path)
     
     def __preprocess_output(self, env_output: tuple) -> tuple:
-        obs = np.asarray(env_output[0])
-        obs = torch.tensor(obs)
+        obs = torch.tensor(env_output[0])
         env_output = list(env_output)
         env_output[0] = obs
         
