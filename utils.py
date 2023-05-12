@@ -209,7 +209,8 @@ def make_atari_env(env_name, seed):
 class AtariGameEnv(gym.Wrapper):
     def __init__(self, env_name: str, num_stack_frame: int=4, terminal_on_life_loss: bool=True, render_mode: str=None, rescale_reward=True) -> None:
         assert 'v5' in env_name, 'Please use envs with v5!'
-        env = gym.make(env_name, frameskip=1, repeat_action_probability=0.0, render_mode=render_mode)                # frame skip is done in next step, don't repeat actions
+        env = gym.make(env_name, frameskip=1, repeat_action_probability=0.0, render_mode=render_mode)
+        env = FireResetEnv(env)
         if rescale_reward:
             env = ClipRewardEnv(env)        # clip reward to {-1, 0, 1}
         env = AtariPreprocessing(env, scale_obs=True, terminal_on_life_loss=terminal_on_life_loss)           # normalize and rescale, end episode if life lost
@@ -224,8 +225,8 @@ class AtariGameEnv(gym.Wrapper):
         
         return tuple(env_output)
     
-    def reset(self, seed: int=None) -> tuple:
-        env_output = self.env.reset(seed=seed)
+    def reset(self, **kwargs) -> tuple:
+        env_output = self.env.reset(**kwargs)
         env_output = self.__preprocess_output(env_output)
         
         return env_output
@@ -235,6 +236,24 @@ class AtariGameEnv(gym.Wrapper):
         env_output = self.__preprocess_output(env_output)
         
         return env_output
+
+
+class FireResetEnv(gym.Wrapper):
+    def __init__(self, env: Env):
+        super().__init__(env)
+        assert env.unwrapped.get_action_meanings()[1] == 'FIRE', 'Please use envs with FIRE action!'
+        assert len(env.unwrapped.get_action_meanings()) >= 3, 'Please use envs with at least 3 actions!'
+    
+    def reset(self, **kwargs) -> np.ndarray:
+        self.env.reset(**kwargs)
+        env_output = self.env.step(1)
+        if env_output[2]:
+            self.env.reset(**kwargs)
+        env_output = self.env.step(2)
+        if env_output[2]:
+            self.env.reset(**kwargs)
+            
+        return env_output[0], env_output[-1]
         
 
 class ClipRewardEnv(gym.RewardWrapper):
