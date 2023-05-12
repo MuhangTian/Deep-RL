@@ -210,7 +210,8 @@ class AtariGameEnv(gym.Wrapper):
     def __init__(self, env_name: str, num_stack_frame: int=4, terminal_on_life_loss: bool=True, render_mode: str=None, rescale_reward=True) -> None:
         assert 'v5' in env_name, 'Please use envs with v5!'
         env = gym.make(env_name, frameskip=1, repeat_action_probability=0.0, render_mode=render_mode)
-        env = FireResetEnv(env)
+        if env.unwrapped.get_action_meanings()[1] == 'FIRE' and len(env.unwrapped.get_action_meanings()) >= 3:
+            env = FireResetEnv(env)
         if rescale_reward:
             env = ClipRewardEnv(env)        # clip reward to {-1, 0, 1}
         env = AtariPreprocessing(env, scale_obs=True, terminal_on_life_loss=terminal_on_life_loss)           # normalize and rescale, end episode if life lost

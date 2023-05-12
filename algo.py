@@ -631,7 +631,6 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
     
     def train_epochs(self, data_loader: DataLoader) -> tuple[float, float, float, float, float]:
         """perform training for some epochs based on data sampled using the old policy"""
-        total_surrogate_loss, total_policy_loss, total_value_loss, total_entropy, total_kl = 0, 0, 0, 0, 0
         for _ in range(self.epochs):
             for _, (bsz_old_log_probs, bsz_old_values, bsz_obs, bsz_advantages, bsz_vtargets, bsz_actions) in enumerate(data_loader):
                 self.clip_epsilon = self.initial_clip_epsilon*self.clip_epsilon_decay_rate      # anneal clip epsilon
@@ -655,19 +654,13 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 
                 entropy_bonus = new_entropys.mean()
                 total_loss = policy_loss + self.value_coef*value_loss - self.entropy_coef*entropy_bonus
-                
-                total_surrogate_loss += total_loss.item()
-                total_policy_loss += policy_loss.item()
-                total_value_loss += value_loss.item()
-                total_entropy += entropy_bonus.item()
-                total_kl += (bsz_old_log_probs - new_log_probs).mean().item()
-                
+                    
                 self.optimizer.zero_grad()
                 total_loss.backward()
                 nn.utils.clip_grad_norm_(self.ac_network.parameters(), self.args.grad_norm_clipping)
                 self.optimizer.step()
         
-        return total_surrogate_loss, total_entropy, total_value_loss, total_policy_loss, total_kl
+        return total_loss, entropy_bonus, value_loss, policy_loss, (bsz_old_log_probs - new_log_probs).mean()
         
     def algo_step(self, stepidx: int, envs: list, observations: torch.Tensor, still_alive: torch.Tensor):
         """subroutine for self.train(), implements the "inner loop" based on PPO algorithm in paper: https://arxiv.org/abs/1707.06347"""
@@ -685,14 +678,13 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
         data_loader = DataLoader(samples, batch_size=self.bsz, shuffle=True)
         
         # perform training using minibatches
-        total_surrogate_loss, total_entropy, total_value_loss, total_policy_loss, total_kl = self.train_epochs(data_loader)
-        divisor = int(self.epochs*self.T/self.bsz)
+        surrogate_loss, entropy, value_loss, policy_loss, kl_divergence = self.train_epochs(data_loader)
         stats = {
-            'surrogate_loss': total_surrogate_loss/divisor,
-            'entropy_bonus': total_entropy/divisor,
-            'value_loss': total_value_loss/divisor,
-            'policy_loss': total_policy_loss/divisor,
-            'kl_divergence': total_kl/divisor,
+            'surrogate_loss': surrogate_loss.item(),
+            'entropy_bonus': entropy.item(),
+            'value_loss': value_loss.item(),
+            'policy_loss': policy_loss.item(),
+            'kl_divergence': kl_divergence.item(),
             'mean_return': rewards.mean().item(),
         }
         
@@ -723,10 +715,11 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
             
             if wandb:
                 wandb.log({
-                    "PPO/Mean Policy Gradient Loss": stats['policy_loss'], "PPO/Mean Value Loss": stats['value_loss'], "PPO/Mean Return": stats["mean_return"], 
-                    'PPO/Epochs': epochs, "PPO/Entropy Bonus": stats['entropy_bonus'], "PPO/Mean Surrogate Loss": stats['surrogate_loss'], 'PPO/Mean KL Divergence': stats['kl_divergence'],
+                    "PPO/Policy Gradient Loss": stats['policy_loss'], "PPO/Value Loss": stats['value_loss'], "PPO/Mean Return": stats["mean_return"], 
+                    'PPO/Epochs': epochs, "PPO/Entropy Bonus": stats['entropy_bonus'], "PPO/Surrogate Loss": stats['surrogate_loss'], 'PPO/Approx KL Divergence': stats['kl_divergence'],
                     "PPO/Clip Epsilon": self.clip_epsilon, "PPO/Learning Rate": self.optimizer.param_groups[0]['lr'], 'PPO/Global Step': self.global_step, "PPO/Samples Per Second": sps,
-                })
+                }, step=self.global_step,
+                )
                 
             logging.info(f"Epoch {epochs:d} | sur_loss {stats['surrogate_loss']:.3f} | value_loss {stats['value_loss']:.3f} | pg_loss {stats['policy_loss']:.3f} | KL: {stats['kl_divergence']:.3f}| mean_return {stats['mean_return']:.3f}")
             
