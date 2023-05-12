@@ -119,7 +119,7 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
     logging.info(f"Mean return for each episode: {np.mean(reward_arr):.3f}, (std: {np.std(reward_arr):.3f})")
     logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
 
-def validate_atari(model, env_name, render, nepisodes, wandb=None, device='cpu'):
+def validate_atari(model, env_name, render, nepisodes, wandb=None, device='cpu', rescale_reward=False):
         assert hasattr(model, "get_action")
         torch.manual_seed(SEED)
         np.random.seed(SEED)
@@ -131,7 +131,7 @@ def validate_atari(model, env_name, render, nepisodes, wandb=None, device='cpu')
         for i in range(nepisodes):
             logging.info(f"Validating episode {i+1}...")
             render_mode = "human"  if render else None
-            env = AtariGameEnv(env_name, render_mode=render_mode)
+            env = AtariGameEnv(env_name, render_mode=render_mode, rescale_reward=rescale_reward)
             observation = env.reset(seed=SEED+i)[0].to(device)       # use a different seed for each separate episode
             prev_state = None
             step, ep_total_reward, done = 0, 0, False
@@ -207,10 +207,11 @@ def make_atari_env(env_name, seed):
     return make
 
 class AtariGameEnv(gym.Wrapper):
-    def __init__(self, env_name: str, num_stack_frame: int=4, terminal_on_life_loss: bool=True, render_mode: str=None) -> None:
+    def __init__(self, env_name: str, num_stack_frame: int=4, terminal_on_life_loss: bool=True, render_mode: str=None, rescale_reward=True) -> None:
         assert 'v5' in env_name, 'Please use envs with v5!'
         env = gym.make(env_name, frameskip=1, repeat_action_probability=0.0, render_mode=render_mode)                # frame skip is done in next step, don't repeat actions
-        env = ClipRewardEnv(env)        # clip reward to {-1, 0, 1}
+        if rescale_reward:
+            env = ClipRewardEnv(env)        # clip reward to {-1, 0, 1}
         env = AtariPreprocessing(env, scale_obs=True, terminal_on_life_loss=terminal_on_life_loss)           # normalize and rescale, end episode if life lost
         env = FrameStack(env, num_stack_frame)
         super().__init__(env)
