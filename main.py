@@ -6,6 +6,8 @@ import random
 import gymnasium as gym
 import numpy as np
 import torch
+import time
+import torch.multiprocessing as mp
 
 import utils
 from algo import (ActorCritic, DeepQLearning, ProximalPolicyOptimization,
@@ -37,14 +39,13 @@ if __name__ == "__main__":
     parser.add_argument("--model", type=str, default="ac", help="model to use")
     parser.add_argument("--algo", type=str, default="ppo", help="algorithm to use")
     parser.add_argument("--mode", default="train", choices=["train", "valid",], help="training or validation mode")
-    parser.add_argument("--total_frames", default=10_000_000, type=int, help="total environment frames to train for")
+    parser.add_argument("--total_frames", default=100_000_000, type=int, help="total environment frames to train for")
     parser.add_argument("--batch_size", default=32, type=int, help="learner batch size.")
     parser.add_argument("--unroll_length", default=128, type=int, help="unroll length (time dimension)")
     parser.add_argument("--hidden_dim", default=512, type=int, help="policy net hidden dim")
     parser.add_argument("--discounting", default=0.99, type=float, help="discounting factor")
     parser.add_argument("--learning_rate", default=0.00025, type=float, help="Learning rate")
     parser.add_argument("--grad_norm_clipping", default=0.5, type=float, help="Global gradient norm clip.")
-    parser.add_argument("--save_path", type=str, default='trained/dql.pt', help="save model here")
     parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
     parser.add_argument("--eval_every", default=40, type=int, help="eval every this many updates")
@@ -72,15 +73,21 @@ if __name__ == "__main__":
     torch.manual_seed(utils.SEED)
     np.random.seed(utils.SEED)
     random.seed(utils.SEED)   # python's random library, control randomness used in experience replay (only matter for DQL)
+    torch.backends.cudnn.deterministic = True
     args = parser.parse_args()
     try:        # use wandb to log stuff if we have it, else don't
         import wandb
         if args.nolog or args.render or args.mode == "valid":
             wandb = False    
         else:
-            wandb.init(project="RL-implementation", entity='muhang-tian', name=f"{args.algo.upper()}_{args.env}")
+            wandb.init(
+                project="RL-implementation", entity='muhang-tian', 
+                name=f"{args.algo.upper()}_{args.env}_{int(time.time())}",
+                config=args
+            )
     except:
         wandb = False
+    args.save_path = f"trained/gpu/{args.algo.upper()}_{args.env}_{int(time.time())}.pt"
     args.device = utils.get_device()
     args.start_nlives = gym.make(args.env).ale.lives()
     args.wandb = wandb 

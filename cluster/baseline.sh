@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=PPO-KungFu
+#SBATCH --job-name=Baseline
 #SBATCH --time=10-00:00:00
 #SBATCH --ntasks=1
 #SBATCH --gpus-per-task=1
@@ -14,4 +14,4 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate RL
 
-srun python main.py --env "ALE/KungFuMaster-v5" --value_coef 1
+srun python ppo_atari.py --seed 1

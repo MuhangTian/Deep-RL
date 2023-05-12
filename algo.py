@@ -564,7 +564,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                     "args": self.args}, self.args.save_path)
     
     def __preprocess_output(self, env_output: tuple) -> tuple:
-        obs = torch.tensor(env_output[0])
+        obs = torch.tensor(np.asarray(env_output[0]))
         env_output = list(env_output)
         env_output[0] = obs
         
@@ -650,6 +650,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 v_clipped = bsz_old_values + torch.clip(new_values - bsz_old_values, -self.clip_epsilon, self.clip_epsilon)
                 v_clipped = (bsz_vtargets - v_clipped)**2
                 value_loss = 0.5*torch.max(v_unclipped, v_clipped).mean()
+                approx_kl = ((ratio - 1) - (new_log_probs - bsz_old_log_probs)).mean()
                 
                 entropy_bonus = new_entropys.mean()
                 total_loss = policy_loss + self.value_coef*value_loss - self.entropy_coef*entropy_bonus
@@ -659,7 +660,7 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 nn.utils.clip_grad_norm_(self.ac_network.parameters(), self.args.grad_norm_clipping)
                 self.optimizer.step()
         
-        return total_loss, entropy_bonus, value_loss, policy_loss, (bsz_old_log_probs - new_log_probs).mean()
+        return total_loss, entropy_bonus, value_loss, policy_loss, approx_kl
         
     def algo_step(self, stepidx: int, envs: list, observations: torch.Tensor, still_alive: torch.Tensor):
         """subroutine for self.train(), implements the "inner loop" based on PPO algorithm in paper: https://arxiv.org/abs/1707.06347"""
@@ -720,8 +721,8 @@ class ProximalPolicyOptimization(AbstractAlgorithm):
                 }, step=self.global_step,
                 )
                 
-            logging.info(f"Epoch {epochs:d} | sur_loss {stats['surrogate_loss']:.3f} | value_loss {stats['value_loss']:.3f} | pg_loss {stats['policy_loss']:.3f} | KL: {stats['kl_divergence']:.3f}| mean_return {stats['mean_return']:.3f}")
+            logging.info(f"Epoch {epochs:d} @ SPS {sps:.1f} | sur_loss {stats['surrogate_loss']:.3f} | value_loss {stats['value_loss']:.3f} | pg_loss {stats['policy_loss']:.3f} | KL: {stats['kl_divergence']:.3f}| mean_return {stats['mean_return']:.3f}")
             
             if epochs > 0 and epochs % self.args.eval_every == 0:        # perform validation step after some number of steps
-                utils.validate_atari(self.ac_network, self.args.env, self.args.render, nepisodes=10, wandb=wandb, device=self.args.device)
+                utils.validate_atari(self.ac_network, self.args.env, self.args.render, nepisodes=1, wandb=wandb, device=self.args.device)
                 self.ac_network.train()

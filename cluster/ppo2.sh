@@ -14,4 +14,4 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate RL
 
-srun python main.py --save_path "trained/gpu/ppo_pacman.pt" --env "ALE/MsPacman-v5" --value_coef 0.5
+srun python main.py --env "ALE/MsPacman-v5" --value_coef 1

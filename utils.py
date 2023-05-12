@@ -120,41 +120,50 @@ def validate(model, args, render:bool=False, nepisodes=5, wandb=False, mode='sim
     logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
 
 def validate_atari(model, env_name, render, nepisodes, wandb=None, device='cpu', rescale_reward=False):
-        assert hasattr(model, "get_action")
-        torch.manual_seed(SEED)
-        np.random.seed(SEED)
-        model.eval()        # turn into eval mode
-        if render:
-            nepisodes = 1       # only render one episode if render is True
+    assert hasattr(model, "get_action")
+    torch.manual_seed(SEED)
+    np.random.seed(SEED)
+    model.eval()        # turn into eval mode
+    if render:
+        nepisodes = 1       # only render one episode if render is True
 
-        steps_alive, reward_arr = [], []        # to store each episode's reward and steps taken
-        for i in range(nepisodes):
-            logging.info(f"Validating episode {i+1}...")
-            render_mode = "human"  if render else None
-            env = AtariGameEnv(env_name, render_mode=render_mode, rescale_reward=rescale_reward)
-            observation = env.reset(seed=SEED+i)[0].to(device)       # use a different seed for each separate episode
-            prev_state = None
-            step, ep_total_reward, done = 0, 0, False
-            # play until the agent dies or we exceed 50000 observations
-            while not done and step < 50000:
-                action, prev_state = model.get_action(observation, prev_state)
-                env_output = env.step(action)
-                ep_total_reward += env_output[1]
-                done = env_output[2]
-                observation = env_output[0].to(device)
-                step += 1
-            steps_alive.append(step)
-            reward_arr.append(ep_total_reward)
-        
-        if wandb:           # log into wandb if using it
-            wandb.log({"Validation/Mean Reward": np.mean(reward_arr), 'Validation/std Reward': np.std(reward_arr)})
-        
-        logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
-        logging.info("Steps taken over each of {:d} episodes: {}".format(
-            nepisodes, ", ".join(str(step) for step in steps_alive)))
-        logging.info("Total return after {:d} episodes: {:.3f}".format(nepisodes, np.sum(reward_arr)))
-        logging.info(f"Mean return for each episode: {np.mean(reward_arr):.3f}, (std: {np.std(reward_arr):.3f})")
-        logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
+    steps_alive, reward_arr = [], []        # to store each episode's reward and steps taken
+    for i in range(nepisodes):
+        logging.info(f"Validating episode {i+1}...")
+        render_mode = "human"  if render else None
+        env = AtariGameEnv(env_name, render_mode=render_mode, rescale_reward=rescale_reward)
+        env_output = env.reset(seed=SEED+i)
+        obs = torch.tensor(np.asarray(env_output[0]))
+        env_output = list(env_output)
+        env_output[0] = obs
+        env_output = tuple(env_output)
+        observation = env_output[0].to(device)       # use a different seed for each separate episode
+        prev_state = None
+        step, ep_total_reward, done = 0, 0, False
+        # play until the agent dies or we exceed 50000 observations
+        while not done and step < 50000:
+            action, prev_state = model.get_action(observation, prev_state)
+            env_output = env.step(action)
+            obs = torch.tensor(np.asarray(env_output[0]))
+            env_output = list(env_output)
+            env_output[0] = obs
+            env_output = tuple(env_output)
+            ep_total_reward += env_output[1]
+            done = env_output[2]
+            observation = env_output[0].to(device)
+            step += 1
+        steps_alive.append(step)
+        reward_arr.append(ep_total_reward)
+    
+    if wandb:           # log into wandb if using it
+        wandb.log({"Validation/Mean Reward": np.mean(reward_arr), 'Validation/std Reward': np.std(reward_arr)})
+    
+    logging.info(f"{'-'*10} BEGIN VALIDATION {'-'*10}")
+    logging.info("Steps taken over each of {:d} episodes: {}".format(
+        nepisodes, ", ".join(str(step) for step in steps_alive)))
+    logging.info("Total return after {:d} episodes: {:.3f}".format(nepisodes, np.sum(reward_arr)))
+    logging.info(f"Mean return for each episode: {np.mean(reward_arr):.3f}, (std: {np.std(reward_arr):.3f})")
+    logging.info(f"{'-'*10} END VALIDATION {'-'*10}")
 
 
 class ReplayBuffer:
