@@ -14,4 +14,4 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate RL
 
-srun python main.py --env "ALE/Breakout-v5" --value_coef 1 --lam 0.8 --entropy_coef 0.1
+srun python main.py --env ALE/Breakout-v5 --value_coef 1 --lam 0.95 --entropy_coef 0.05

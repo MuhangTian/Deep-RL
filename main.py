@@ -2,17 +2,18 @@ import argparse
 import logging
 import os
 import random
+import time
 
 import gymnasium as gym
 import numpy as np
 import torch
-import time
 import torch.multiprocessing as mp
 
 import utils
 from algo import (ActorCritic, DeepQLearning, ProximalPolicyOptimization,
                   VanillaPolicyGradient)
-from model import ActorNetworkCNN, ActorNetworkLSTM, PolicyNetwork, QNetwork, ActorCriticNetwork
+from model import (ActorCriticNetwork, ActorNetworkCNN, ActorNetworkLSTM,
+                   PolicyNetwork, QNetwork)
 
 num_threads = os.cpu_count()
 ALGO = {
@@ -75,19 +76,19 @@ if __name__ == "__main__":
     random.seed(utils.SEED)   # python's random library, control randomness used in experience replay (only matter for DQL)
     torch.backends.cudnn.deterministic = True
     args = parser.parse_args()
+    args.run_id = int(time.time())
     try:        # use wandb to log stuff if we have it, else don't
         import wandb
         if args.nolog or args.render or args.mode == "valid":
             wandb = False    
         else:
             wandb.init(
-                project="RL-implementation", entity='muhang-tian', 
-                name=f"{args.algo.upper()}_{args.env}_{int(time.time())}",
-                config=args
+                project="RL-implementation", entity='muhang-tian', name=f"{args.algo}_{args.env}_{args.run_id}",
+                save_code=True, config=args, monitor_gym=True,
             )
     except:
         wandb = False
-    args.save_path = f"trained/gpu/{args.algo.upper()}_{int(time.time())}.pt"
+    args.save_path = f"trained/gpu/{args.algo.upper()}_{args.run_id}.pt"
     args.device = utils.get_device()
     args.start_nlives = gym.make(args.env).ale.lives()
     args.wandb = wandb 
