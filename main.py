@@ -47,7 +47,7 @@ if __name__ == "__main__":
     parser.add_argument("--discounting", default=0.99, type=float, help="discounting factor")
     parser.add_argument("--learning_rate", default=0.00025, type=float, help="Learning rate")
     parser.add_argument("--grad_norm_clipping", default=0.5, type=float, help="Global gradient norm clip.")
-    parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
+    parser.add_argument("--load_path", type=str, default='trained/atari/ppo_1684040852.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
     parser.add_argument("--eval_every", default=200, type=int, help="eval every this many updates")
     parser.add_argument("--render", action="store_true", default=False, help="render game-play at validation time")
