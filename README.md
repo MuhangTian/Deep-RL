@@ -2,6 +2,7 @@
 Experiments relevant to RL and bandit algorithms to get a better understanding of the code implementation.
 
 ## Project Strucutre
+* All runs are initiated with `main.py`
 * `algo` contains my own implementation of some algorithms like DQN and PPO
 * `model` folder contains the neural network architectures used in the learning algorithms (which are stored in `algo`)
 * `trained` contains trained agents stored in `.pt` format using PyTorch
