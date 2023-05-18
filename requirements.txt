@@ -21,11 +21,12 @@ fonttools==4.39.3
 gitdb==4.0.10
 GitPython==3.1.31
 glfw==2.5.9
+gym==0.21.0
 gymnasium==0.28.1
 idna==3.4
 imageio==2.28.0
 imageio-ffmpeg==0.4.8
-importlib-metadata==6.6.0
+importlib-metadata==4.13.0
 importlib-resources==5.12.0
 jax==0.3.24
 jax-jumpy==1.0.0
@@ -38,7 +39,6 @@ MarkupSafe==2.1.2
 matplotlib==3.7.1
 moviepy==1.0.3
 mpmath==1.3.0
-mujoco==2.3.5
 mujoco-py==2.1.2.14
 networkx==3.1
 numpy==1.24.3
@@ -67,6 +67,7 @@ setproctitle==1.3.2
 Shimmy==0.2.1
 six==1.16.0
 smmap==5.0.0
+stable-baselines3==1.8.0
 swig==4.1.1
 sympy==1.11.1
 threadpoolctl==3.1.0
@@ -76,5 +77,5 @@ tqdm==4.65.0
 typing_extensions==4.5.0
 tzdata==2023.3
 urllib3==1.26.15
-wandb==0.15.0
+wandb==0.15.2
 zipp==3.15.0
