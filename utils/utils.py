@@ -23,9 +23,9 @@ def get_device():
     if torch.cuda.is_available():
         logging.info('************* Using CUDA *************')
         return torch.device('cuda')
-    elif torch.has_mps:
-        logging.info('************* Using MPS *************')
-        return torch.device('mps')
+    # elif torch.has_mps:
+    #     logging.info('************* Using MPS *************')
+    #     return torch.device('mps')
     else:
         logging.info('************* Using CPU *************')
         return torch.device('cpu')

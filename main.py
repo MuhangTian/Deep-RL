@@ -9,7 +9,7 @@ import numpy as np
 import torch
 import torch.multiprocessing as mp
 
-import utils
+import utils.utils as utils
 from algo import (ActorCritic, DeepQLearning, ProximalPolicyOptimization,
                   VanillaPolicyGradient)
 from model import (ActorCriticNetwork, ActorNetworkCNN, ActorNetworkLSTM,
