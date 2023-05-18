@@ -49,7 +49,7 @@ if __name__ == "__main__":
     parser.add_argument("--grad_norm_clipping", default=0.5, type=float, help="Global gradient norm clip.")
     parser.add_argument("--load_path", type=str, default='trained/dql.pt', help="load model from here")
     parser.add_argument("--min_to_save", default=5, type=int, help="save every this many minutes")
-    parser.add_argument("--eval_every", default=40, type=int, help="eval every this many updates")
+    parser.add_argument("--eval_every", default=200, type=int, help="eval every this many updates")
     parser.add_argument("--render", action="store_true", default=False, help="render game-play at validation time")
     # -------------------------------------------- Deep Q Learning Specific --------------------------------------------
     parser.add_argument("--episodes", type=int, default=250_000, help="episodes to train for")
@@ -83,12 +83,12 @@ if __name__ == "__main__":
             wandb = False    
         else:
             wandb.init(
-                project="RL-implementation", entity='muhang-tian', name=f"{args.algo}_{args.env}_{args.run_id}",
+                project="RL-implementation", entity='muhang-tian', name=f"{args.algo.upper()}: {args.env}_{args.run_id}",
                 save_code=True, config=args, monitor_gym=True,
             )
     except:
         wandb = False
-    args.save_path = f"trained/gpu/{args.algo.upper()}_{args.run_id}.pt"
+    args.save_path = f"trained/gpu/{args.algo}_{args.run_id}.pt"
     args.device = utils.get_device()
     args.start_nlives = gym.make(args.env).ale.lives()
     args.wandb = wandb 
