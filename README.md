@@ -1,6 +1,4 @@
 # RL & Bandits
-Experiments relevant to RL and bandit algorithms to get a better understanding of the code implementation.
-
 ## Project Strucutre
 * All runs are initiated with `main.py`
 * `algo` contains my own implementation of some algorithms like DQN and PPO
